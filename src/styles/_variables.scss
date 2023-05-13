@@ -1,0 +1,17 @@
+$text-primary: rgba(255, 255, 255, 0.81);
+$text-secondary: rgb(127, 127, 127);
+$background-primary: rgb(25, 25, 25);
+$background-secondary: rgb(47, 47, 47);
+$border-color: rgba(255, 255, 255, 0.282);
+$icon-filter: invert(100%) sepia(38%) saturate(3131%) hue-rotate(141deg) brightness(96%)
+  contrast(86%);
+
+$text-primary-light: #121212;
+$text-secondary-light: rgb(47, 47, 47);
+$background-primary-light: #ffff;
+$background-secondary-light: #f6f5f4;
+$border-color-light: rgb(180, 180, 180);
+$icon-filter-light: invert(0%) sepia(38%) saturate(3131%) hue-rotate(141deg)
+  brightness(96%) contrast(86%);
+
+$shadow: rgb(15 15 15 / 15%) 0px 0px 0px 2px, rgb(15 15 15 / 15%) 0px 3px 6px;
