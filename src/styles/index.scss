@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,8 +6,8 @@
 }
 
 :root {
-  font-family: inter-var, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial,
-    sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: inter-var, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+    'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
   line-height: 1.5;
 
   color-scheme: light dark;
@@ -42,6 +42,6 @@ input {
   box-shadow: $shadow;
 }
 
-input[type="submit"] {
+input[type='submit'] {
   cursor: pointer;
 }

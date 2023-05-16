@@ -30,7 +30,7 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ username: email, password }),
+        body: JSON.stringify({ username: email, password, userType: 'admin' }),
       });
 
       if (!response.ok) {
@@ -46,9 +46,10 @@ const Login = () => {
       console.log(err);
     }
 
-    setEmail('');
-    setPassword('');
-    setCredentialsError('');
+    // TODO test whether this part needed
+    // setEmail('');
+    // setPassword('');
+    // setCredentialsError('');
   };
 
   return (

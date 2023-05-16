@@ -16,6 +16,7 @@ type Inputs = {
 };
 
 // TODO may need to reset form but i don't think so
+// TODO remove default values
 const SignupForm = () => {
   const navigate = useNavigate();
   const { updateUser } = useUserContext();
