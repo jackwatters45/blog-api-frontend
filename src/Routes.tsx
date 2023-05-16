@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './components/auth/Login';
-import Signup from './components/auth/signup/SignupRHF';
+import Signup from './components/auth/signup/Signup';
 import Home from './components/Home';
 import { useContext, useEffect } from 'react';
 import { UserContext } from './context/UserContext';

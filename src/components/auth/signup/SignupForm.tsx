@@ -65,7 +65,11 @@ const SignupForm = () => {
             maxLength: { value: 20, message: "First name can't exceed 20 characters" },
           })}
         />
-        {errors.firstName && <span className="error">{errors.firstName.message}</span>}
+        {errors.firstName && (
+          <ul className="error">
+            <li>{errors.firstName.message}</li>
+          </ul>
+        )}
       </div>
       <div>
         <label htmlFor="lastName">Last Name:</label>
@@ -79,7 +83,11 @@ const SignupForm = () => {
             maxLength: { value: 30, message: "Last name can't exceed 30 characters" },
           })}
         />
-        {errors.lastName && <span className="error">{errors.lastName.message}</span>}
+        {errors.lastName && (
+          <ul className="error">
+            <li>{errors.lastName.message}</li>
+          </ul>
+        )}
       </div>
       <div>
         <label htmlFor="email">Email:</label>
@@ -91,7 +99,7 @@ const SignupForm = () => {
           {...register('email', { required: true, validate: validateEmailHooks })}
         />
         {errors.email && errors.email.message && (
-          <span className="error">{formatErrors(errors.email.message)}</span>
+          <ul className="error">{formatErrors(errors.email.message)}</ul>
         )}
       </div>
       <div>
@@ -106,7 +114,11 @@ const SignupForm = () => {
             maxLength: { value: 20, message: "Username can't exceed 20 characters" },
           })}
         />
-        {errors.username && <span className="error">{errors.username.message}</span>}
+        {errors.username && (
+          <ul className="error">
+            <li>{errors.username.message}</li>
+          </ul>
+        )}
       </div>
       <div>
         <label htmlFor="password">Password:</label>
@@ -120,11 +132,9 @@ const SignupForm = () => {
         {errors.password && errors.password.message ? (
           <ul className="error">{formatErrors(errors.password.message)}</ul>
         ) : (
-          <ul>
+          <ul className="instructions">
             {passwordRequirements.map((requirement, index) => (
-              <li key={index} style={{ fontSize: 12 }}>
-                {requirement}
-              </li>
+              <li key={index}>{requirement}</li>
             ))}
           </ul>
         )}
@@ -147,11 +157,17 @@ const SignupForm = () => {
           })}
         />
         {errors.confirmPassword && (
-          <span className="error">{errors.confirmPassword.message}</span>
+          <ul className="error">
+            <li>{errors.confirmPassword.message}</li>
+          </ul>
         )}
       </div>
       <input type="submit" value="Sign Up" />
-      {credentialsError && <p className="error">{credentialsError}</p>}
+      {credentialsError && (
+        <ul className="error">
+          <li>{credentialsError}</li>
+        </ul>
+      )}
     </form>
   );
 };
