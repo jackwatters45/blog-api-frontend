@@ -1,16 +1,22 @@
-# vite-react-ts-linting
+# blog-admin-frontend
 
-## Install
+## Notes
 
-degit jackwatters45/vite-react-ts-linting
-npm install
+- for this project - avoid using libraries
+- user frontend -> use libraries when needed
+- i think form error is unused
 
-## Getting Started
+## TODO
 
-- replaced title and icon in index.html
-- replace name in package.json
+- sign up etc set up
 
-## Todo
+  - Need to check if user is admin
+  - admin can create other admin
+    - create user form that is the same as signup but includes a user type and is only accessible to admin
+    - gonna need to figure out how to add different levels of security
 
-- look into rome eventually (not sure if it's ready yet)
-- add some details to package.json
+- make sure default router set up good
+- eventually remove signup -> adjust so that this is admin and other one is both viewing and editing
+- actually plan out the components
+  - figma?
+- secured endpoint test out

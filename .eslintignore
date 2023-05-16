@@ -3,3 +3,6 @@ dist/
 .prettierrc.js
 .eslintrc.cjs
 env.d.ts
+vite.config.ts
+types/
+```
