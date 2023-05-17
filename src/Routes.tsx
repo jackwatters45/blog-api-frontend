@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Signup from './components/auth/signup/Signup';
-import Home from './components/Home';
+import Dashboard from './components/Dashboard';
 import { useContext, useEffect } from 'react';
 import { UserContext } from './context/UserContext';
 
@@ -18,9 +18,9 @@ const RoutesComponent = () => {
     <Routes>
       <Route
         path="/"
-        element={userContext?.user ? <Home /> : <Navigate to={'/login'} />}
+        element={userContext?.user ? <Dashboard /> : <Navigate to={'/login'} />}
       />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>

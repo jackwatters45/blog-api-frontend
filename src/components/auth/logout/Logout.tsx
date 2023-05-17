@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+import StyledButton from '../../../styles/styledComponents/StyledButton';
+
 const Logout = () => {
   const navigate = useNavigate();
 
@@ -22,8 +24,7 @@ const Logout = () => {
 
   return (
     <div>
-      <h2>Logout</h2>
-      <button onClick={handleLogout}>Logout</button>
+      <StyledButton onClick={handleLogout}>Logout</StyledButton>
     </div>
   );
 };

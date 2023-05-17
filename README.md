@@ -6,11 +6,8 @@
 - user frontend -> use libraries when needed
 - i think form error is unused
 
-## TODO
+- Need to check if user is admin
 
-- sign up etc set up
-
-  - Need to check if user is admin
   - admin can create other admin
     - create user form that is the same as signup but includes a user type and is only accessible to admin
     - gonna need to figure out how to add different levels of security
@@ -20,3 +17,21 @@
 - actually plan out the components
   - figma?
 - secured endpoint test out
+
+## Needs
+
+- Normal
+
+  - create posts
+  - view posts
+
+- Admin View
+
+  - delete
+  - edit
+
+- profile dropdown
+  - logout
+  - profile
+
+shmedium

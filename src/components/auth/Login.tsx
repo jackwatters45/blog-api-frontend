@@ -41,7 +41,7 @@ const Login = () => {
       const { user } = responseData;
       updateUser(user);
 
-      navigate('/home');
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
