@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Signup from './components/auth/signup/Signup';
 import Dashboard from './components/Dashboard';
@@ -16,13 +16,11 @@ const RoutesComponent = () => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={userContext?.user ? <Dashboard /> : <Navigate to={'/login'} />}
-      />
       <Route path="/" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/admin" element={<h1>404</h1>} />
+      <Route path="/write" element={<h1>404</h1>} />
     </Routes>
   );
 };

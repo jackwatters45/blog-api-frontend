@@ -3,7 +3,7 @@ import IUser from '../../types/user.d';
 
 export interface IUserContext {
   user: IUser | null;
-  updateUser: (newUser: IUser) => void;
+  updateUser: (newUser: IUser | null) => void;
 }
 
 interface UserProviderProps {
@@ -18,7 +18,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<null | IUser>(null);
 
   // Function to update the user
-  const updateUser = (newUser: IUser) => {
+  const updateUser = (newUser: IUser | null) => {
     console.log('updating user');
     setUser(newUser);
   };

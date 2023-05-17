@@ -4,6 +4,7 @@ import { mdiAccountHardHat, mdiPencilBoxOutline } from '@mdi/js';
 import { useUserContext } from '../../context/UserContext';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom';
 
 const StyledNav = styled.nav`
   display: grid;
@@ -16,7 +17,8 @@ const StyledNav = styled.nav`
 
 const StyledH1 = styled.h1`
   font-size: 1.3rem;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  cursor: pointer;
 `;
 
 const StyledNavOptions = styled.div`
@@ -30,25 +32,38 @@ const StyledHr = styled.hr`
   background-color: ;
 `;
 
+// profile dropdown (make dropdown hook npm package)
 const Nav = () => {
   const { user } = useUserContext();
+
   return (
     <>
       <StyledNav>
-        <StyledH1>Home</StyledH1>
+        <Link to="/">
+          <StyledH1>SCHMEDIUM</StyledH1>
+        </Link>
         <SearchBar />
         {/* Make own component below */}
         <StyledNavOptions>
           {user ? (
             <>
               {user.userType === 'admin' && (
-                <NavOption icon={mdiAccountHardHat} text="Admin" size={0.9} />
+                <NavOption icon={mdiAccountHardHat} text="Admin" to="/admin" size={0.8} />
               )}
-              <NavOption icon={mdiPencilBoxOutline} text="Write" size={0.9} />
+              <NavOption icon={mdiPencilBoxOutline} text="Write" to="/write" size={0.8} />
               <ProfileDropdown />
             </>
           ) : (
-            ''
+            <>
+              <NavOption
+                icon={mdiPencilBoxOutline}
+                text="Write"
+                to="/signup"
+                size={0.8}
+              />
+              <NavOption text="Sign up" to="/signup" />
+              <NavOption text="Log in" to="/login" />
+            </>
           )}
         </StyledNavOptions>
         {/* <Logout /> */}

@@ -5,6 +5,7 @@ import { mdiMagnify } from '@mdi/js';
 const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
+  max-width: 600px;
 `;
 
 const SearchIcon = styled.span`

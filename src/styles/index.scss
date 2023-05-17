@@ -23,11 +23,10 @@
 a {
   color: inherit;
   cursor: pointer;
+  text-decoration: none;
 }
 
-a:hover {
-  opacity: 0.7;
-}
+
 
 li {
   list-style: none;
@@ -49,4 +48,3 @@ input[type='submit'] {
 body.modal-open {
   overflow: hidden; /* see "modal-open" in Modal.tsx */
 }
-

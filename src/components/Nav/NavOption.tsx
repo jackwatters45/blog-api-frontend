@@ -1,9 +1,11 @@
 import Icon from '@mdi/react';
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 type Props = {
-  icon: string;
-  text: string;
+  icon?: string;
+  text?: string;
+  to: string;
   size?: number;
 };
 
@@ -14,12 +16,14 @@ const StyledNavOption = styled.div`
   cursor: pointer;
 `;
 
-const NavOption = ({ icon, text, size }: Props) => {
+const NavOption = ({ icon, text, size, to }: Props) => {
   return (
-    <StyledNavOption>
-      <Icon path={icon} size={size ?? 1} />
-      <p>{text}</p>
-    </StyledNavOption>
+    <Link to={to}>
+      <StyledNavOption>
+        {icon && <Icon path={icon} size={size ?? 0.9} />}
+        {text && <p>{text}</p>}
+      </StyledNavOption>
+    </Link>
   );
 };
 

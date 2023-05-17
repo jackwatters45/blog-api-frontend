@@ -1,12 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import StyledButton from '../../../styles/styledComponents/StyledButton';
+import { useUserContext } from '../../context/UserContext';
 
 const Logout = () => {
   const navigate = useNavigate();
 
+  const { updateUser } = useUserContext();
+
   const handleLogout = async () => {
+    // clear user from state
+
+    updateUser(null);
+
     // TODO
     // remove session
 
@@ -22,11 +28,7 @@ const Logout = () => {
     navigate('/login');
   };
 
-  return (
-    <div>
-      <StyledButton onClick={handleLogout}>Logout</StyledButton>
-    </div>
-  );
+  return <button onClick={handleLogout}>Logout</button>;
 };
 
 export default Logout;

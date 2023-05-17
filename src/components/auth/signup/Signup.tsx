@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SignupForm from './SignupForm';
 
 const Signup = () => {
@@ -6,7 +7,7 @@ const Signup = () => {
       <nav>
         <h1>Sign up</h1>
         <p>
-          Or <a href="/login">sign in to your existing account</a>
+          Or <Link to="/login">sign in to your existing account</Link>
         </p>
       </nav>
       <SignupForm />

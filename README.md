@@ -34,4 +34,8 @@
   - logout
   - profile
 
-shmedium
+## Next
+
+- home - content
+
+- Admin stuff
