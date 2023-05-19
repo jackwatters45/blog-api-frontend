@@ -1,13 +1,13 @@
-declare interface IUser {
-  id: number;
+interface IUser {
+  id: string;
   userType: string;
   firstName: string;
   lastName: string;
   username: string;
   email: string;
   password: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default IUser;
