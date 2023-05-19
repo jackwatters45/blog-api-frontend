@@ -22,6 +22,7 @@ const SearchInput = styled.input`
   outline: none;
   padding: 4px;
   font-size: 14px;
+  background: rgb(47, 47, 47);
 `;
 
 const SearchBar = () => {

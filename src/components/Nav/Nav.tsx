@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import NavOption from './NavOption';
 import { mdiAccountHardHat, mdiPencilBoxOutline } from '@mdi/js';
 import { useUserContext } from '../../context/UserContext';
-import ProfileDropdown from './ProfileDropdown';
+import ProfileButton from './ProfileButton';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
 
@@ -29,10 +29,10 @@ const StyledNavOptions = styled.div`
 const StyledHr = styled.hr`
   height: 0.5px;
   border: none;
-  background-color: ;
+  background-color: ${({ theme }) => theme.colors.borderColor};
 `;
 
-// profile dropdown (make dropdown hook npm package)
+// TODO profile dropdown (make dropdown hook npm package)
 const Nav = () => {
   const { user } = useUserContext();
 
@@ -51,7 +51,7 @@ const Nav = () => {
                 <NavOption icon={mdiAccountHardHat} text="Admin" to="/admin" size={0.8} />
               )}
               <NavOption icon={mdiPencilBoxOutline} text="Write" to="/write" size={0.8} />
-              <ProfileDropdown />
+              <ProfileButton />
             </>
           ) : (
             <>
@@ -66,7 +66,6 @@ const Nav = () => {
             </>
           )}
         </StyledNavOptions>
-        {/* <Logout /> */}
       </StyledNav>
       <StyledHr />
     </>
