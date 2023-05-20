@@ -52,7 +52,7 @@ const PopularPosts = () => {
             return (
               <li key={index}>
                 <StyledPostInfo>
-                  <Link to={`/author/${authorId}`}>
+                  <Link to={`/users/${authorId}`}>
                     <StyledUsername>
                       {getAuthorFullName(author as Partial<IUser>)}
                     </StyledUsername>

@@ -51,7 +51,7 @@ const PostPreview = ({
       <div>
         <StyledDateAuthorDiv>
           {authorId ? (
-            <Link to={`/author/${authorId}`}>{getAuthorFullName(author)}</Link>
+            <Link to={`/users/${authorId}`}>{getAuthorFullName(author)}</Link>
           ) : (
             <p>Unknown</p>
           )}
@@ -64,14 +64,17 @@ const PostPreview = ({
         <Link to={`/post/${_id}`}>
           <p>{formatContent(content)}</p>
         </Link>
-        <StyledTagsSection>
-          <Link to={`/post/${_id}`}>
-            <StyledTags>
-              {!!tags?.length &&
-                tags.map((tag, index) => <StyledTag key={index}>{tag}</StyledTag>)}
-            </StyledTags>
-          </Link>
-        </StyledTagsSection>
+        {!!tags?.length && (
+          <StyledTagsSection>
+            <Link to={`/post/${_id}`}>
+              <StyledTags>
+                {tags.map((tag, index) => (
+                  <StyledTag key={index}>{tag}</StyledTag>
+                ))}
+              </StyledTags>
+            </Link>
+          </StyledTagsSection>
+        )}
       </div>
       <StyledHrHorizontal />
     </>

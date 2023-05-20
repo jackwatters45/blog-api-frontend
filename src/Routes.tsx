@@ -4,6 +4,8 @@ import Signup from './components/auth/signup/Signup';
 import Dashboard from './components/home/Dashboard';
 import { useContext, useEffect } from 'react';
 import { UserContext } from './context/UserContext';
+import Post from './components/Post/Post';
+import NavLayout from './NavLayout';
 
 const RoutesComponent = () => {
   const userContext = useContext(UserContext);
@@ -16,7 +18,22 @@ const RoutesComponent = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route
+        path="/"
+        element={
+          <NavLayout>
+            <Dashboard />
+          </NavLayout>
+        }
+      />
+      <Route
+        path="/post/:id"
+        element={
+          <NavLayout>
+            <Post />
+          </NavLayout>
+        }
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/admin" element={<h1>404</h1>} />

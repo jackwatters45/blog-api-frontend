@@ -48,7 +48,7 @@ const PopularAuthors = () => {
             } = author;
             return (
               <li key={index}>
-                <Link to={`/author/${_id}`}>
+                <Link to={`/users/${_id}`}>
                   <StyledUserInfo>
                     <StyledUserFullName>
                       {firstName} {lastName}

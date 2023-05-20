@@ -25,6 +25,10 @@ export const formatDate = (date: string) => {
   const dateObj = new Date(date);
   const month = dateObj.toLocaleString('default', { month: 'long' });
   const day = dateObj.getDate();
+
+  if (new Date().getFullYear() === dateObj.getFullYear())
+    return `${month} ${day}, ${dateObj.getFullYear()}`;
+
   return `${month} ${day}`;
 };
 

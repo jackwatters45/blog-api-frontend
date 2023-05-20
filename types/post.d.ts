@@ -8,6 +8,7 @@ interface IPost {
   published: boolean;
   tags?: string[];
   likes?: Partial<IUser[]> | string[];
+  comments?: Partial<IUser[]> | string[];
   url?: string;
   createdAt: string;
   updatedAt: string;
