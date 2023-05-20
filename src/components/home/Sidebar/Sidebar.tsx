@@ -6,11 +6,15 @@ const StyledSidebar = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 350px;
+  min-width: 250px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 const Sidebar = () => {
   return (
-    <StyledSidebar>
+    <StyledSidebar className="sidebar">
       <PopularPosts />
       <PopularAuthors />
     </StyledSidebar>

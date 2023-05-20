@@ -14,6 +14,11 @@ const StyledNav = styled.nav`
   height: 4rem;
   padding: 0 2rem;
   gap: 4vw;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -27,7 +32,6 @@ const StyledNavOptions = styled.div`
   gap: 2vw;
 `;
 
-// TODO profile dropdown (make dropdown hook npm package)
 const Nav = () => {
   const { user } = useUserContext();
 

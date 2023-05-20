@@ -6,6 +6,10 @@ const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
   max-width: 600px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SearchIcon = styled.span`
