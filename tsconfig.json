@@ -4,7 +4,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -14,7 +13,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "esModuleInterop": false,
-
     /* Linting */
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,5 +21,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

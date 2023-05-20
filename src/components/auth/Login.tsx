@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import '../../styles/auth.scss';
+import '../../styles/scss/auth.scss';
 import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 

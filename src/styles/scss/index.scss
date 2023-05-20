@@ -26,8 +26,6 @@ a {
   text-decoration: none;
 }
 
-
-
 li {
   list-style: none;
 }
@@ -47,4 +45,12 @@ input[type='submit'] {
 
 body.modal-open {
   overflow: hidden; /* see "modal-open" in Modal.tsx */
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
 }

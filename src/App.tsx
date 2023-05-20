@@ -1,8 +1,10 @@
-import './styles/index.scss';
+import './styles/scss/index.scss';
 import { BrowserRouter } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { styled, ThemeProvider } from 'styled-components';
 import { UserProvider } from './context/UserContext';
 import Routes from './Routes';
+import { ModalProvider } from 'react-hook-modal-pure';
+import theme from './styles/styledComponents/theme';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -13,11 +15,15 @@ const AppContainer = styled.div`
 function App() {
   return (
     <UserProvider>
-      <BrowserRouter>
-        <AppContainer>
-          <Routes />
-        </AppContainer>
-      </BrowserRouter>
+      <ModalProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <AppContainer>
+              <Routes />
+            </AppContainer>
+          </BrowserRouter>
+        </ThemeProvider>
+      </ModalProvider>
     </UserProvider>
   );
 }

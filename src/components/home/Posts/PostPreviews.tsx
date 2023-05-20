@@ -51,7 +51,7 @@ const PostPreview = ({
       <div>
         <StyledDateAuthorDiv>
           {authorId ? (
-            <Link to={`/author/${authorId}`}>{`${getAuthorFullName(author)}`}</Link>
+            <Link to={`/author/${authorId}`}>{getAuthorFullName(author)}</Link>
           ) : (
             <p>Unknown</p>
           )}
