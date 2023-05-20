@@ -5,6 +5,7 @@ import { useUserContext } from '../../context/UserContext';
 import ProfileButton from './ProfileButton';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
+import { StyledHrHorizontal } from '../../styles/styledComponents/StyledHr';
 
 const StyledNav = styled.nav`
   display: grid;
@@ -24,12 +25,6 @@ const StyledH1 = styled.h1`
 const StyledNavOptions = styled.div`
   display: flex;
   gap: 2vw;
-`;
-
-const StyledHr = styled.hr`
-  height: 0.5px;
-  border: none;
-  background-color: ${({ theme }) => theme.colors.borderColor};
 `;
 
 // TODO profile dropdown (make dropdown hook npm package)
@@ -67,7 +62,7 @@ const Nav = () => {
           )}
         </StyledNavOptions>
       </StyledNav>
-      <StyledHr />
+      <StyledHrHorizontal />
     </>
   );
 };
