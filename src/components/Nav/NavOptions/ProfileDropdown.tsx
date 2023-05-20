@@ -1,7 +1,7 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useUserContext } from '../../context/UserContext';
+import { useUserContext } from '../../../context/UserContext';
 import Cookies from 'js-cookie';
 
 const Container = styled.div`

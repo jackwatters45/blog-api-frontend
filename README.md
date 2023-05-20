@@ -17,9 +17,6 @@
 
 ## Next
 
-- dashboard responsive
-- reorganize
-
 - post view
 - author view
 - topic view -> add topic route
@@ -37,8 +34,12 @@
   - add save ability
 
 - Sidebar
+
   - topics
     - for now just popular posts
     - popular authors
   - eventually
     - filter by topics
+
+- Nav
+  - when media query is hit, nav should be a hamburger menu
