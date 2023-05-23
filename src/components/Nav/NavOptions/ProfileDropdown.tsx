@@ -31,13 +31,13 @@ type Props = {
 const ProfileDropdown = ({ useModalParams }: Props) => {
   const modalProps = useModal(useModalParams);
 
-  const { updateUser } = useUserContext();
+  const { updateUser, user } = useUserContext();
 
   const navigate = useNavigate();
 
-  const handleClickProfile = () => navigate('/profile');
+  const handleClickProfile = () => navigate(`/user/${user?._id}`);
 
-  const handleClickYourPosts = () => navigate('/my-posts');
+  const handleClickYourPosts = () => navigate(`/user/${user?._id}/posts`);
 
   const handleClickLogout = async () => {
     updateUser(null);
