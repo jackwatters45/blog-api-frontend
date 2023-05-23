@@ -1,8 +1,7 @@
 import { styled } from 'styled-components';
-import PostPreviews from '../Previews/PostPreviews';
+import PostPreviews from './PostPreviews';
 import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
-import ITopic from '../../../types/topic';
 
 const StyledPostsContainer = styled.div`
   display: flex;
@@ -19,21 +18,21 @@ const StyledNoPostsMessage = styled.p`
 
 interface Props {
   postsProp?: IPost[];
-  selectedTopic?: ITopic;
+  selectedFilter?: boolean;
 }
 
-const Posts = ({ postsProp, selectedTopic }: Props) => {
+const Posts = ({ postsProp, selectedFilter }: Props) => {
   const [posts, setPosts] = useState<IPost[] | undefined>(undefined);
 
   useEffect(() => {
-    if (selectedTopic) return setPosts(postsProp);
-    const fetchPosts = async () => {
+    if (selectedFilter) return setPosts(postsProp);
+    const fetchPostsNew = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`);
       const data = await res.json();
       setPosts(data);
     };
-    fetchPosts();
-  }, [selectedTopic, postsProp]);
+    fetchPostsNew();
+  }, [selectedFilter, postsProp]);
 
   return (
     <StyledPostsContainer>

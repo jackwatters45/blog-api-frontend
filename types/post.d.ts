@@ -1,5 +1,10 @@
 import IUser from './user';
 
+export interface ILike {
+  userId: string;
+  date: string;
+}
+
 interface IPost {
   _id: string;
   title: string;
@@ -7,7 +12,8 @@ interface IPost {
   author: Partial<IUser> | string;
   published: boolean;
   tags?: string[];
-  likes?: Partial<IUser[]> | string[];
+  topic?: string;
+  likes?: ILike[];
   comments?: Partial<IUser[]> | string[];
   url?: string;
   createdAt: string;

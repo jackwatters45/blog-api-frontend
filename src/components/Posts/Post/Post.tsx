@@ -7,8 +7,11 @@ import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
 import {
   TagSidebar,
   TagsSidebar,
-} from '../../../styles/styledComponents/TopicComponents';
+} from '../../../styles/styledComponents/HelperComponents';
 import Nav from '../../Nav/Nav';
+import { useUserContext } from '../../../context/UserContext';
+import Likes from '../components/Likes';
+import useLikes from '../../../utils/custom/useLikes';
 
 const StyledPostContainer = styled.main`
   display: flex;
@@ -45,21 +48,17 @@ const LikesAndComments = styled.div`
   align-items: center;
   font-size: 0.8rem;
   color: {({ theme }) => theme.colors.textSecondary};
-
-  > * {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
 `;
 
 const Content = styled.p`
   margin: 2rem 0;
 `;
 
-// TODO smaller components
+// TODO comments (see likes)
 const Post = () => {
   const { id } = useParams();
+
+  const { user } = useUserContext();
 
   const [post, setPost] = useState<IPost | null>(null);
 
@@ -70,11 +69,12 @@ const Post = () => {
       setPost(data);
     };
     fetchPost();
-  }, [id]);
+  }, [id, user]);
+
+  const useLikesProps = useLikes(post as IPost, user);
 
   if (!post) return null;
-
-  const { title, content, author, tags, createdAt, likes, comments } = post;
+  const { title, content, author, tags, createdAt, comments } = post;
   return (
     <>
       <Nav />
@@ -86,6 +86,7 @@ const Post = () => {
           </StyledAuthor>
           <BottomRowInfo>
             <TagsSidebar>
+              {/* TODO tags crap */}
               {!!tags?.length &&
                 tags.map((tag, index) => (
                   <TagSidebar key={index} to={''}>
@@ -98,10 +99,7 @@ const Post = () => {
                 <p>💬</p>
                 <p>{comments?.length}</p>
               </button>
-              <button>
-                <p>❤️</p>
-                <p>{likes?.length}</p>
-              </button>
+              <Likes {...useLikesProps} />
             </LikesAndComments>
           </BottomRowInfo>
         </StyledPostInfoContainer>
