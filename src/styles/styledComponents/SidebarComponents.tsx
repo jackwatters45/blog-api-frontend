@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const SidebarHeader = styled.h2`
@@ -38,4 +39,11 @@ export const SidebarTags = styled.ul`
   font-size: 0.8rem;
   margin-left: 0.5rem;
   color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const SeeAllLink = styled(Link)`
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-decoration: underline;
 `;
