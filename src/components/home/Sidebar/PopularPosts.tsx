@@ -7,74 +7,57 @@ import {
   SidebarList,
   SidebarItemUsername,
   SidebarTags,
+  SeeAllLink,
 } from '../../../styles/styledComponents/SidebarComponents';
-import { useEffect, useState } from 'react';
-import IPost from '../../../../types/post.d';
+import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
-import {
-  formatDate,
-  getAuthorFullName,
-  getAuthorId,
-} from '../../../utils/formatPostData';
-import IUser from '../../../../types/user.d';
+import { formatDate, getUserFullName, getUserId } from '../../../utils/formattingHelpers';
+import IUser from '../../../../types/user';
+import { useSidebarContext } from '../../../context/SidebarContext';
 
-const StyledH2 = styled(SidebarHeader)``;
-const StyledPostList = styled(SidebarList)``;
-const StyledPostInfo = styled(SidebarInfoFirstRow)``;
-const StyledPostTitle = styled(SidebarItemTitle)``;
-const StyledUsername = styled(SidebarItemUsername)``;
-const StyledTags = styled(SidebarTags)``;
 const StyledDate = styled(SidebarItemUsername)`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 const PopularPosts = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const getPopularPosts = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular`);
-      const data = await res.json();
-      console.log(data);
-      setPosts(data);
-    };
-    getPopularPosts();
-  }, []);
+  const { posts } = useSidebarContext();
 
   return (
     <div>
-      <StyledH2>Popular Posts</StyledH2>
+      <SidebarHeader>Popular Posts</SidebarHeader>
       <StyledHrHorizontal />
-      <StyledPostList>
+      <SidebarList>
         {!!posts.length &&
-          posts.map((post: Partial<IPost>, index: number) => {
+          posts.slice(0, 3).map((post: Partial<IPost>, index: number) => {
             const { _id, title, author, tags, createdAt } = post;
-            const authorId = getAuthorId(author as Partial<IUser>);
+            const authorId = getUserId(author as Partial<IUser>);
             return (
               <li key={index}>
-                <StyledPostInfo>
-                  <Link to={`/users/${authorId}`}>
-                    <StyledUsername>
-                      {getAuthorFullName(author as Partial<IUser>)}
-                    </StyledUsername>
+                <SidebarInfoFirstRow>
+                  <Link to={`/user/${authorId}`}>
+                    <SidebarItemUsername>
+                      {getUserFullName(author as Partial<IUser>)}
+                    </SidebarItemUsername>
                   </Link>
                   <p>•</p>
                   <Link to={`/post/${_id}`}>
                     <StyledDate>{formatDate(createdAt as string)}</StyledDate>
                   </Link>
-                </StyledPostInfo>
+                </SidebarInfoFirstRow>
                 <Link to={`/post/${_id}`}>
-                  <StyledPostTitle>{title}</StyledPostTitle>
-                  <StyledTags>
+                  <SidebarItemTitle>{title}</SidebarItemTitle>
+                  <SidebarTags>
                     {!!tags?.length &&
                       tags?.map((tag: string, index: number) => (
                         <li key={index}>#{tag}</li>
                       ))}
-                  </StyledTags>
+                  </SidebarTags>
                 </Link>
               </li>
             );
           })}
-      </StyledPostList>
+      </SidebarList>
+      <SeeAllLink to={`/explore-posts`}>See the full list</SeeAllLink>
     </div>
   );
 };

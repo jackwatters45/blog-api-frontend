@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import IUser from '../../../../types/user.d';
+import { PopularAuthors } from '../../../../types/user';
 import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
 import {
+  SeeAllLink,
   SidebarAdditionalInfo,
   SidebarHeader,
   SidebarInfoFirstRow,
@@ -11,56 +10,38 @@ import {
   SidebarItemUsername,
   SidebarList,
 } from '../../../styles/styledComponents/SidebarComponents';
-
-const StyledH2 = styled(SidebarHeader)``;
-const StyledUserList = styled(SidebarList)``;
-const StyledUserInfo = styled(SidebarInfoFirstRow)``;
-const StyledUserFullName = styled(SidebarItemTitle)``;
-const StyledUsername = styled(SidebarItemUsername)``;
-const StyledLikesCount = styled(SidebarAdditionalInfo)``;
-
-interface PopularAuthors {
-  user: Partial<IUser>;
-  likesCount: number;
-}
+import { useSidebarContext } from '../../../context/SidebarContext';
 
 const PopularAuthors = () => {
-  const [authors, setAuthors] = useState([]);
-  useEffect(() => {
-    const getPopularAuthors = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/popular`);
-      const data = await res.json();
-      setAuthors(data);
-    };
-    getPopularAuthors();
-  }, []);
+  const { authors } = useSidebarContext();
 
   return (
     <div>
-      <StyledH2>Popular Authors</StyledH2>
+      <SidebarHeader>Popular Authors</SidebarHeader>
       <StyledHrHorizontal />
-      <StyledUserList>
+      <SidebarList>
         {!!authors.length &&
-          authors.map((author: PopularAuthors, index: number) => {
+          authors.slice(0, 5).map((author: PopularAuthors, index: number) => {
             const {
               likesCount,
               user: { _id, username, firstName, lastName },
             } = author;
             return (
               <li key={index}>
-                <Link to={`/users/${_id}`}>
-                  <StyledUserInfo>
-                    <StyledUserFullName>
+                <Link to={`/user/${_id}`}>
+                  <SidebarInfoFirstRow>
+                    <SidebarItemTitle>
                       {firstName} {lastName}
-                    </StyledUserFullName>
-                    <StyledUsername>@{username}</StyledUsername>
-                  </StyledUserInfo>
-                  <StyledLikesCount>{likesCount} Likes</StyledLikesCount>
+                    </SidebarItemTitle>
+                    <SidebarItemUsername>@{username}</SidebarItemUsername>
+                  </SidebarInfoFirstRow>
+                  <SidebarAdditionalInfo>{likesCount} Likes</SidebarAdditionalInfo>
                 </Link>
               </li>
             );
           })}
-      </StyledUserList>
+      </SidebarList>
+      <SeeAllLink to={`/explore-authors`}>See the full list</SeeAllLink>
     </div>
   );
 };
