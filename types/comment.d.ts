@@ -5,8 +5,8 @@ interface IComment {
   _id: string;
   content: string;
   author: string | Partial<IUser>;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   post: string | Partial<IPost>;
 }
 

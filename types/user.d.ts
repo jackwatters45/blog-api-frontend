@@ -1,3 +1,7 @@
+export interface PopularAuthors {
+  user: Partial<IUser>;
+  likesCount: number;
+}
 interface IUser {
   _id: string;
   userType: string;
@@ -9,6 +13,9 @@ interface IUser {
   password: string;
   createdAt: string;
   updatedAt: string;
+  followers: Partial<IUser[]> | string[];
+  following: Partial<IUser[]> | string[];
+  description?: string;
 }
 
 export default IUser;
