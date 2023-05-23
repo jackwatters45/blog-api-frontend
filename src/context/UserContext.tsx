@@ -19,7 +19,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   // Function to update the user
   const updateUser = (newUser: IUser | null) => {
-    console.log('updating user');
     setUser(newUser);
   };
 
