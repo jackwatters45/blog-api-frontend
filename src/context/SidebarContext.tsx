@@ -21,12 +21,12 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [topics, setTopics] = useState([]);
   useEffect(() => {
     const getPopularPosts = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular?limit=3`);
       return await res.json();
     };
 
     const getPopularAuthors = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/popular`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/popular?limit=5`);
       return await res.json();
     };
 
@@ -44,7 +44,6 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
         ]);
         setPosts(posts);
         setAuthors(authors);
-        console.log(topics);
         setTopics(topics);
       } catch (err) {
         console.error(err);

@@ -1,4 +1,3 @@
-import IPost from '../../../../types/post';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate } from 'react-router';
 import { Dispatch, SetStateAction } from 'react';
@@ -7,7 +6,7 @@ import { styled } from 'styled-components';
 type Props = {
   hasUserLiked: boolean;
   likesCount: number;
-  post: IPost;
+  _id: string;
   setLikesCount: Dispatch<SetStateAction<number>>;
   setHasUserLiked: Dispatch<SetStateAction<boolean>>;
 };
@@ -23,11 +22,10 @@ const LikeButton = styled.button`
 const Likes = ({
   hasUserLiked,
   likesCount,
-  post,
   setLikesCount,
   setHasUserLiked,
+  _id,
 }: Props) => {
-  const { _id } = post;
   const { user } = useUserContext();
 
   const navigate = useNavigate();

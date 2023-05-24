@@ -28,7 +28,7 @@ const PopularPosts = () => {
       <StyledHrHorizontal />
       <SidebarList>
         {!!posts.length &&
-          posts.slice(0, 3).map((post: Partial<IPost>, index: number) => {
+          posts.map((post: Partial<IPost>, index: number) => {
             const { _id, title, author, tags, createdAt } = post;
             const authorId = getUserId(author as Partial<IUser>);
             return (

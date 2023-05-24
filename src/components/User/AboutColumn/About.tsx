@@ -80,6 +80,17 @@ const About = ({ user }: Props) => {
     });
   };
 
+  const handleUnfollow = async () => {
+    setFollowerCount(followers?.length - 1);
+    await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/unfollow`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+  };
+
   return (
     <RightColumn>
       {img && (
@@ -95,7 +106,7 @@ const About = ({ user }: Props) => {
         <StyledFollowButton onClick={handleFollow}>+Follow</StyledFollowButton>
       </FollowersContainer>
       {description && <StyledDescription>{description}</StyledDescription>}
-      {!!following && <Following following={following} />}
+      {!!following.length && <Following following={following} />}
     </RightColumn>
   );
 };

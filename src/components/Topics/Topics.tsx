@@ -4,7 +4,7 @@ import {
   StyledH1,
   StyledTags,
   StyledTag,
-} from '../../styles/styledComponents/TopicComponents';
+} from '../../styles/styledComponents/HelperComponents';
 import Nav from '../Nav/Nav';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { useEffect, useState } from 'react';
@@ -71,7 +71,7 @@ const Topics = () => {
                 </StyledTag>
               );
             })}
-            <Posts postsProp={posts} selectedTopic={selectedTopic} />
+            <Posts postsProp={posts} selectedFilter={!!selectedTopic} />
           </StyledTags>
         </StyledContentContainer>
         <Sidebar />

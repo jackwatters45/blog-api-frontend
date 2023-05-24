@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
-import { isAlreadyLiked } from '../likesHelpers';
-import IPost from '../../../types/post';
-import IUser from '../../../types/user';
+import { ILike } from '../../../types/post';
 
-const useLikes = (post: IPost, user: IUser | null) => {
+const isAlreadyLiked = (likes: ILike[], currentUserId: string) => {
+  if (!likes) throw new Error('Post like array does not exist');
+  return likes.some(({ userId }) => userId === currentUserId);
+};
+
+const useLikes = (likes: ILike[], userId: string | undefined) => {
   const [likesCount, setLikesCount] = useState<number>(0);
   const [hasUserLiked, setHasUserLiked] = useState<boolean>(false);
 
   useEffect(() => {
     const setupLikes = () => {
-      if (!post) return;
-      setLikesCount(post.likes?.length ?? 0);
-      if (user) setHasUserLiked(isAlreadyLiked(post, user));
+      setLikesCount(likes?.length ?? 0);
+      if (userId) setHasUserLiked(isAlreadyLiked(likes, userId));
     };
     setupLikes();
-  }, [post, user]);
+  }, [likes, userId]);
 
-  return { likesCount, hasUserLiked, setLikesCount, setHasUserLiked, post };
+  return { likesCount, hasUserLiked, setLikesCount, setHasUserLiked };
 };
 
 export default useLikes;

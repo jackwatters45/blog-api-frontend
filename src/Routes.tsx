@@ -8,6 +8,7 @@ import Post from './components/Posts/Post/Post';
 import User from './components/User/User';
 import NotFoundPage from './components/Errors/NotFoundPage';
 import Topics from './components/Topics/Topics';
+import PopularPosts from './components/Posts/PopularPosts';
 
 const RoutesComponent = () => {
   const userContext = useContext(UserContext);
@@ -21,6 +22,7 @@ const RoutesComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
+      <Route path="/explore-posts" element={<PopularPosts />} />
       <Route path="/post/:id" element={<Post />} />
 
       <Route path="/user/:id" element={<User />}>

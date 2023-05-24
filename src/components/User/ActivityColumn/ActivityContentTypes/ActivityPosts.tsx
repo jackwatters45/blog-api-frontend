@@ -1,5 +1,5 @@
 import IPost from '../../../../../types/post';
-import PostPreview from '../../../Previews/PostPreviews';
+import PostPreview from '../../../Posts/PostPreviews';
 
 type Props = {
   posts: IPost[] | string[];

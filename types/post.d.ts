@@ -1,5 +1,5 @@
 import IUser from './user';
-
+import IComment from './comment';
 export interface ILike {
   userId: string;
   date: string;
@@ -14,7 +14,7 @@ interface IPost {
   tags?: string[];
   topic?: string;
   likes?: ILike[];
-  comments?: Partial<IUser[]> | string[];
+  comments?: IComment[] | string[];
   url?: string;
   createdAt: string;
   updatedAt: string;

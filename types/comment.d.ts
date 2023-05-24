@@ -4,7 +4,7 @@ import IPost from './post';
 interface IComment {
   _id: string;
   content: string;
-  author: string | Partial<IUser>;
+  author: Partial<IUser>; // string |
   createdAt: string;
   updatedAt: string;
   post: string | Partial<IPost>;

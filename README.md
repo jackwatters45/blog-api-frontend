@@ -3,24 +3,38 @@
 ## Next
 
 - commits
+- comments
+  - scroll to comments from button
+  - make input look better
+- user unfollow
+- reorganize helpers
+  - check that user helpers aren't taking in a full user when they only need the id etc
+- remove unnecessary string[] from models
+- add optional limits for relevant controller funcs
 
+- popular time range
 - explore
-
-  - users
   - posts
+  - users
+- still meh responsive
+
+- Create post (check eventually section before doing)
+
+  - add imgs
 
 - Admin stuff
-  - create other admin
-  - delete
-  - edit
-- Create post
+  - view unpublished posts
+  - own page
+    - create other admin
+    - topics
+  - on top of other pages
+    - delete
 - settings?
 
 ## Eventually
 
 - General
 
-  - figure out how to make sidebar render better (fetch more efficiently)
   - interface vs type consistency
   - handle posts and users deleted (maybe comments too)
   - stupid scrollbar
@@ -30,6 +44,7 @@
 - Posts
 
   - rich text editor
+    - for post content and comments
   - figure out good min content length
   - add imgs
   - calculate read time
@@ -37,6 +52,11 @@
   - add save ability
   - comments
     - 'pagination'
+    - improve
+      - reply likes etc
+      - delete
+      - edit
+  - add topic
 
 - Sidebar
 
@@ -63,6 +83,7 @@
 
   - 'pagination'
   - view following
+  - add likes
 
 - Admin
 

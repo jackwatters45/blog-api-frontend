@@ -1,5 +1,5 @@
 import IComment from '../../../../../types/comment';
-import CommentPreview from '../../../Previews/CommentPreview';
+import CommentPreview from '../../../Posts/components/Comments/CommentPreview';
 
 type Props = {
   comments: IComment[] | string[];

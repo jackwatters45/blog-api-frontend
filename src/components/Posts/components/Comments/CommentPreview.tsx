@@ -1,15 +1,15 @@
 import { styled } from 'styled-components';
-import IComment from '../../../types/comment';
-import { StyledHrHorizontal } from '../../styles/styledComponents/StyledHr';
+import IComment from '../../../../../types/comment';
+import { StyledHrHorizontal } from '../../../../styles/styledComponents/StyledHr';
 import { Link } from 'react-router-dom';
-import IUser from '../../../types/user';
+import IUser from '../../../../../types/user';
 import {
   getUserFullName,
   formatContent,
   formatDate,
   getUserId,
-} from '../../utils/formattingHelpers';
-import IPost from '../../../types/post';
+} from '../../../../utils/formattingHelpers';
+import IPost from '../../../../../types/post';
 
 const Container = styled.div`
   margin: 2rem 0;
@@ -36,7 +36,6 @@ type Props = {
 
 const CommentPreview = ({ comment }: Props) => {
   const { content, updatedAt, author, post } = comment;
-  console.log(comment);
 
   const { _id: postId, title, author: postAuthor } = post as IPost;
   const authorId = getUserId(author);

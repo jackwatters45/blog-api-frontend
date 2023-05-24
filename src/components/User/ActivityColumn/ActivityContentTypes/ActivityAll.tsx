@@ -1,7 +1,7 @@
 import IPost from '../../../../../types/post';
 import IComment from '../../../../../types/comment';
-import PostPreview from '../../../Previews/PostPreviews';
-import CommentPreview from '../../../Previews/CommentPreview';
+import PostPreview from '../../../Posts/PostPreviews';
+import CommentPreview from '../../../Posts/components/Comments/CommentPreview';
 
 type Props = {
   posts: IPost[] | string[];

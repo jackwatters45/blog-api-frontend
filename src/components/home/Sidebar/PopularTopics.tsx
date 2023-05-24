@@ -6,7 +6,7 @@ import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
 import {
   TagSidebar,
   TagsSidebar,
-} from '../../../styles/styledComponents/TopicComponents';
+} from '../../../styles/styledComponents/HelperComponents';
 import { PopularTopics } from '../../../../types/topic';
 import { useSidebarContext } from '../../../context/SidebarContext';
 

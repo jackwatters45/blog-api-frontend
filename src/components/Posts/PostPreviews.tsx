@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import IPost from '../../../types/post';
+import IPost, { ILike } from '../../../types/post';
 import { StyledHrHorizontal } from '../../styles/styledComponents/StyledHr';
 import {
   getUserFullName,
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Likes from './components/Likes';
 import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../utils/custom/useLikes';
+import CommentsButton from './components/Comments/CommentsButton';
 
 type Props = {
   post: IPost;
@@ -62,13 +63,13 @@ const StyledTag = styled.li`
 `;
 
 const PostPreview = ({ post }: Props) => {
-  const { title, content, createdAt, author, _id, tags } = post;
+  const { title, content, createdAt, author, _id, tags, likes, comments } = post;
 
   const authorId = getUserId(author);
 
   const { user } = useUserContext();
 
-  const useLikesProps = useLikes(post, user);
+  const useLikesProps = useLikes(likes as ILike[], user?._id);
 
   return (
     <>
@@ -90,8 +91,8 @@ const PostPreview = ({ post }: Props) => {
         </Link>
         <BottomRow>
           <LikesAndComments>
-            comments
-            <Likes {...useLikesProps} />
+            <CommentsButton commentsCount={comments?.length as number} />
+            <Likes {...useLikesProps} _id={_id} />
           </LikesAndComments>
 
           {!!tags?.length && (
