@@ -8,23 +8,24 @@ const StyledForm = styled.form`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto;
-  margin: 1rem 2rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  margin: 1rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid ${({ theme }) => theme.colors.textPrimary};
+  box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 const StyledInput = styled.input`
-  padding: 0.5rem;
-  border-radius: 0;
-  background: transparent;
-  border: none;
   box-shadow: none;
+  padding: 0.5rem;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  background: none;
 `;
 
 const StyledButton = styled.input`
   background: transparent;
   border: none;
   box-shadow: none;
-  border-left: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border-left: 1px solid ${({ theme }) => theme.colors.textPrimary};
   border-radius: 0;
   padding: 0.5rem 1rem;
 `;

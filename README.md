@@ -2,14 +2,9 @@
 
 ## Next
 
-- commits
-- comments
-  - scroll to comments from button
-  - make input look better
-- user unfollow
+- backend commits
 - reorganize helpers
   - check that user helpers aren't taking in a full user when they only need the id etc
-- remove unnecessary string[] from models
 - add optional limits for relevant controller funcs
 
 - popular time range
@@ -57,6 +52,7 @@
       - delete
       - edit
   - add topic
+  - scroll to comments from button
 
 - Sidebar
 

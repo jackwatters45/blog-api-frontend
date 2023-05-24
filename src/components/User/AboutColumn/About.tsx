@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { formatDate, getUserFullName } from '../../../utils/formattingHelpers';
 import { useState } from 'react';
 import Following from './Following';
-import { useParams } from 'react-router-dom';
+import Follow from './Follow';
 
 const RightColumn = styled.div`
   display: flex;
@@ -49,12 +49,6 @@ const StyledFollowerCount = styled.p`
   font-size: 0.9rem;
 `;
 
-const StyledFollowButton = styled.button`
-  font-size: 0.8rem;
-  text-decoration: underline;
-  font-weight: 700;
-`;
-
 const StyledDescription = styled.p`
   font-size: 0.8rem;
 `;
@@ -64,32 +58,10 @@ type Props = {
 };
 
 const About = ({ user }: Props) => {
-  const { id } = useParams();
   const { username, createdAt, followers, description, following } = user;
   const img = 'https://via.placeholder.com/100';
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
-  const handleFollow = async () => {
-    setFollowerCount(followers?.length + 1);
-    await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/follow`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
-  };
-
-  const handleUnfollow = async () => {
-    setFollowerCount(followers?.length - 1);
-    await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/unfollow`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
-  };
 
   return (
     <RightColumn>
@@ -103,7 +75,7 @@ const About = ({ user }: Props) => {
       <StyledJoined>Joined {formatDate(createdAt)}</StyledJoined>
       <FollowersContainer>
         <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
-        <StyledFollowButton onClick={handleFollow}>+Follow</StyledFollowButton>
+        <Follow followers={followers as string[]} setFollowerCount={setFollowerCount} />
       </FollowersContainer>
       {description && <StyledDescription>{description}</StyledDescription>}
       {!!following.length && <Following following={following} />}

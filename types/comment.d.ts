@@ -4,10 +4,10 @@ import IPost from './post';
 interface IComment {
   _id: string;
   content: string;
-  author: Partial<IUser>; // string |
+  author: Partial<IUser>;
   createdAt: string;
   updatedAt: string;
-  post: string | Partial<IPost>;
+  post: Partial<IPost>;
 }
 
 export default IComment;
