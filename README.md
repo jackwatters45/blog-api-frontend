@@ -2,8 +2,6 @@
 
 ## Next
 
-- reorganize helpers
-  - check that user helpers aren't taking in a full user when they only need the id etc
 - add optional limits for relevant controller funcs
 
 - popular time range

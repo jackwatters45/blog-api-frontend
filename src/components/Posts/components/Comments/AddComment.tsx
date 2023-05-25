@@ -63,14 +63,17 @@ const AddComment = ({ setComments, postId }: Props) => {
     setComments((prev) => [...(prev as IComment[]), newComment]);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/comments`, {
-        method: 'POST',
-        body: JSON.stringify({ content: comment, post: postId }),
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/posts/${postId}/comments`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ content: comment }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
         },
-        credentials: 'include',
-      });
+      );
 
       if (!response.ok) {
         setComments((prev) => prev?.filter((comment) => comment._id !== 'tempId'));
