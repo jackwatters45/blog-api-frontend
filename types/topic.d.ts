@@ -1,5 +1,7 @@
-export interface PopularTopics {
-  topicDetails: ITopic;
+export interface PopularTopics extends ITopic {
+  [key: string]: any;
+  totalPosts: number;
+  totalLikes: number;
 }
 
 interface ITopic {

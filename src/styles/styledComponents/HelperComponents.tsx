@@ -8,14 +8,18 @@ export const TagSidebar = styled(Link)`
   font-size: 0.9rem;
 `;
 
-export const TagsSidebar = styled.div`
+const Tags = styled.div`
   display: flex;
   gap: 0.5rem;
   margin: 1rem 0;
   flex-wrap: wrap;
 `;
 
-export const StyledTags = styled(TagsSidebar)`
+export const TagsSidebar = styled(Tags)`
+  max-width: 300px;
+`;
+
+export const StyledTags = styled(Tags)`
   gap: 1rem;
   margin: 1rem auto;
   justify-content: center;

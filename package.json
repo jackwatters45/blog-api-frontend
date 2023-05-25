@@ -23,6 +23,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,cjs}": [
+      "npm run lint:fix",
       "npm run format"
     ],
     "*.{md,html,css,json,yml}": "prettier --write"

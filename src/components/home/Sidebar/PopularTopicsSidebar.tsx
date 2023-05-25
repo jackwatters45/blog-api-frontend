@@ -7,7 +7,6 @@ import {
   TagSidebar,
   TagsSidebar,
 } from '../../../styles/styledComponents/HelperComponents';
-import { PopularTopics } from '../../../../types/topic';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
 const PopularTopicsSidebar = () => {
@@ -20,10 +19,8 @@ const PopularTopicsSidebar = () => {
 
       <TagsSidebar>
         {!!topics.length &&
-          topics.slice(0, 10).map((topic: PopularTopics, index: number) => {
-            const {
-              topicDetails: { _id, name },
-            } = topic;
+          topics.slice(0, 10).map((topic, index: number) => {
+            const { _id, name } = topic;
             return (
               <TagSidebar key={index} to={`/topic/${_id}`}>
                 {name}

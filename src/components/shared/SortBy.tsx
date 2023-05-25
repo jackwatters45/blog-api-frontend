@@ -26,30 +26,28 @@ const StyledSelect = styled.select`
 `;
 
 type Props = {
-  timeRange: string;
-  handleSelectRange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  label?: string;
+  sortBy: string;
+  handleSelectSortBy: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const TimeRange = ({ timeRange, handleSelectRange }: Props) => {
+const SortBy = ({ sortBy, handleSelectSortBy, label }: Props) => {
   return (
     <Container>
-      <StyledLabel htmlFor="timeRange">Time Range:</StyledLabel>
+      <StyledLabel htmlFor="sortBy">{label ?? 'Sort By:'}</StyledLabel>
       <SelectWrapper>
         <StyledSelect
-          name="timeRange"
-          id="timeRange"
-          value={timeRange}
-          onChange={handleSelectRange}
+          name="sortBy"
+          id="sortBy"
+          value={sortBy}
+          onChange={handleSelectSortBy}
         >
-          <option value="allTime">All Time</option>
-          <option value="lastYear">This Year</option>
-          <option value="lastMonth">This Month</option>
-          <option value="lastWeek">This Week</option>
-          <option value="lastDay">Today</option>
+          <option value="totalPosts">Total Posts</option>
+          <option value="totalLikes">Total Likes</option>
         </StyledSelect>
       </SelectWrapper>
     </Container>
   );
 };
 
-export default TimeRange;
+export default SortBy;

@@ -6,9 +6,10 @@ import {
 import Sidebar from '../Home/Sidebar/Sidebar';
 import Posts from './Posts';
 import { styled } from 'styled-components';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import TimeRange from '../shared/TimeRange';
+import useTimeRange from '../../custom/useTimeRange';
 
 const StyledMain = styled.main`
   display: flex;
@@ -25,10 +26,7 @@ const StyledMain = styled.main`
 const PopularPosts = () => {
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
 
-  const [timeRange, setTimeRange] = useState<string>('lastWeek');
-  const handleSelectRange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTimeRange(e.target.value);
-  };
+  const { timeRange, handleSelectRange } = useTimeRange();
 
   useEffect(() => {
     const fetchPostsPopular = async () => {
@@ -36,7 +34,6 @@ const PopularPosts = () => {
         `${import.meta.env.VITE_API_URL}/posts/popular?timeRange=${timeRange}`,
       );
       const data = await res.json();
-      console.log(data);
       setPosts(data);
     };
     fetchPostsPopular();

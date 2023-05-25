@@ -2,15 +2,13 @@
 
 ## Next
 
-- explore
-  - posts
-  - users
+- post when author null
 - still meh responsive
 - clean up eventually section
 
 - Create post
-
   - add imgs
+- add images to everything else
 
 - Admin stuff
   - view unpublished posts
@@ -47,6 +45,7 @@
       - reply likes etc
       - delete
       - edit
+    - sort by option?
   - add topic
   - scroll to comments from button
 
@@ -81,52 +80,5 @@
 - gonna need to figure out how to add different levels of security
 - secured endpoint test out
 
-## fix sidebar rerender
-
-If the sidebar component is responsible for fetching data and you want to prevent it from fetching data each time it's rendered, you might consider fetching the data at a higher level component and then passing the data down as props. In this case, the data fetch would happen only when the parent component is mounted.
-
-However, if this isn't feasible or desirable for your specific application, you could also use a state management library like Redux or a context to cache the data. The fetch would then only occur the first time, and subsequent renders of the sidebar would use the cached data.
-
-Here is a basic example using the React Context API:
-
-```jsx
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// Create a new context
-const SidebarDataContext = createContext();
-
-// Provider component
-export const SidebarDataProvider = ({ children }) => {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('/your-data-url').then((response) => {
-      response.json().then(setData);
-    });
-  }, []);
-
-  return (
-    <SidebarDataContext.Provider value={data}>{children}</SidebarDataContext.Provider>
-  );
-};
-
-// Sidebar component
-const Sidebar = () => {
-  const data = useContext(SidebarDataContext);
-
-  // Render your sidebar using the data
-};
-
-// In your top-level component
-const App = () => {
-  return (
-    <SidebarDataProvider>
-      <SomeComponent />
-      <AnotherComponent />
-      <Sidebar />
-    </SidebarDataProvider>
-  );
-};
-```
-
-In this example, the `SidebarDataProvider` component fetches the data when it's mounted and provides it to all child components via a context. The `Sidebar` component uses the `useContext` hook to access the data. With this setup, the data fetch will only occur once, when the `SidebarDataProvider` component is first mounted.
+- topics
+  - make sure time range and sortBy work

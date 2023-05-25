@@ -1,27 +1,3 @@
-// import IUser from '../../types/user.d';
-
-// const checkIfUserPopulatedAndValid = (user: Partial<IUser> | string | null) => {
-//   if (typeof user === 'string')
-//     throw new Error('Author as a string is not allowed for this function.');
-//   return user && user._id && user.firstName && user.lastName;
-// };
-
-// export const getUserFullName = (user:  Partial<IUser>) => {
-// // export const getUserFullName = (user: null | string | Partial<IUser>) => {
-//   // const isUserValid = checkIfUserPopulatedAndValid(user);
-//   // if (!isUserValid) return 'Unknown';
-//   const { firstName, lastName } = user as IUser;
-//   return `${firstName} ${lastName}`;
-// };
-
-// export const getUserId = (user: Partial<IUser> | string | null) => {
-//   const isUserValid = checkIfUserPopulatedAndValid(user);
-//   if (!isUserValid) return false;
-
-//   const { _id } = user as IUser;
-//   return _id;
-// };
-
 export const formatDate = (date: string) => {
   const dateObj = new Date(date);
   const month = dateObj.toLocaleString('default', { month: 'long' });
@@ -38,4 +14,13 @@ export const formatContent = (content: string) => {
   return content;
 };
 
-export const getTitleCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+export const getTitleCase = (str: string) =>
+  str
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+
+export const camelToTitleCase = (str: string) => {
+  const result = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+  return getTitleCase(result);
+};

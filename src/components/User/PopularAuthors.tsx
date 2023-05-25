@@ -5,10 +5,11 @@ import {
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { styled } from 'styled-components';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TimeRange from '../shared/TimeRange';
 import IUser from '../../../types/user';
 import Users from './Users';
+import useTimeRange from '../../custom/useTimeRange';
 
 const StyledMain = styled.main`
   display: flex;
@@ -26,10 +27,7 @@ const StyledMain = styled.main`
 const PopularAuthors = () => {
   const [users, setUsers] = useState<undefined | IUser[]>(undefined);
 
-  const [timeRange, setTimeRange] = useState<string>('lastWeek');
-  const handleSelectRange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTimeRange(e.target.value);
-  };
+  const { timeRange, handleSelectRange } = useTimeRange();
 
   useEffect(() => {
     const fetchAuthorsPopular = async () => {
