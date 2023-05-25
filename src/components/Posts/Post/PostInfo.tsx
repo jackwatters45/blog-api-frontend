@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { formatDate } from '../../../utils/formattingHelpers';
+import { formatDate } from '../../shared/formattingHelpers';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   TagSidebar,
   TagsSidebar,
 } from '../../../styles/styledComponents/HelperComponents';
-import Likes from '../components/Likes';
+import Likes from '../../shared/Likes';
 import CommentsButton from '../components/Comments/CommentsButton';
 import IPost, { ILike } from '../../../../types/post';
-import useLikes from '../../../utils/custom/useLikes';
+import useLikes from '../../../custom/useLikes';
 import { useUserContext } from '../../../context/UserContext';
 
 const StyledPostInfoContainer = styled.div`
@@ -52,7 +52,8 @@ const PostInfo = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id as string);
 
-  const { firstName, lastName } = author;
+  const firstName = author?.firstName;
+  const lastName = author?.lastName;
 
   return (
     <>

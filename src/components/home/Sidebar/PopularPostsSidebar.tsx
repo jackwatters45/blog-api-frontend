@@ -11,15 +11,14 @@ import {
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
-import { formatDate } from '../../../utils/formattingHelpers';
-import IUser from '../../../../types/user';
+import { formatDate } from '../../shared/formattingHelpers';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
 const StyledDate = styled(SidebarItemUsername)`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
-const PopularPosts = () => {
+const PopularPostsSidebar = () => {
   const { posts } = useSidebarContext();
 
   return (
@@ -30,16 +29,23 @@ const PopularPosts = () => {
         {!!posts.length &&
           posts.map((post: Partial<IPost>, index: number) => {
             const { _id, title, author, tags, createdAt } = post;
-            const { firstName, lastName, _id: authorId } = author as Partial<IUser>;
+
+            const authorId = author?._id;
+            const firstName = author?.firstName;
+            const lastName = author?.lastName;
 
             return (
               <li key={index}>
                 <SidebarInfoFirstRow>
-                  <Link to={`/user/${authorId}`}>
-                    <SidebarItemUsername>
-                      {firstName} {lastName}
-                    </SidebarItemUsername>
-                  </Link>
+                  {authorId ? (
+                    <Link to={`/user/${authorId}`}>
+                      <SidebarItemUsername>
+                        {firstName} {lastName}
+                      </SidebarItemUsername>
+                    </Link>
+                  ) : (
+                    <SidebarItemUsername>Unknown</SidebarItemUsername>
+                  )}
                   <p>•</p>
                   <Link to={`/post/${_id}`}>
                     <StyledDate>{formatDate(createdAt as string)}</StyledDate>
@@ -63,4 +69,4 @@ const PopularPosts = () => {
   );
 };
 
-export default PopularPosts;
+export default PopularPostsSidebar;

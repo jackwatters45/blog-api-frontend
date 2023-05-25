@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import IComment from '../../../types/comment';
+import IComment from '../../types/comment';
 
 // if comments put users comments at the top (with different background)
 const isAlreadyCommented = (comments: IComment[], userId: string) => {

@@ -10,7 +10,7 @@ import {
 import { PopularTopics } from '../../../../types/topic';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
-const PopularTopics = () => {
+const PopularTopicsSidebar = () => {
   const { topics } = useSidebarContext();
 
   return (
@@ -37,4 +37,4 @@ const PopularTopics = () => {
   );
 };
 
-export default PopularTopics;
+export default PopularTopicsSidebar;

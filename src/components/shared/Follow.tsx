@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { styled } from 'styled-components';
-import { useUserContext } from '../../../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 
 const StyledFollowButton = styled.button`
   font-size: 0.8rem;

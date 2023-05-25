@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { PopularTopics } from '../../types/topic';
-import { PopularAuthors } from '../../types/user';
+import { IPopularAuthors } from '../../types/user';
 import IPost from '../../types/post';
 
 export interface SidebarContext {
   posts: IPost[];
-  authors: PopularAuthors[];
+  authors: IPopularAuthors[];
   topics: PopularTopics[];
 }
 

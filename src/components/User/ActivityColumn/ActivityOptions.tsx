@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { getTitleCase } from '../../../utils/formattingHelpers';
+import { getTitleCase } from '../../shared/formattingHelpers';
 import { css, styled } from 'styled-components';
 
 const Container = styled.div`

@@ -1,4 +1,4 @@
-import { useUserContext } from '../../../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';

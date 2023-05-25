@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { styled } from 'styled-components';
-import theme from '../../../styles/styledComponents/theme';
+import theme from '../../styles/styledComponents/theme';
 
 const Container = styled.form`
   display: flex;
@@ -24,15 +24,11 @@ const StyledSelect = styled.select`
   border: none;
   border-right: 0.5rem solid transparent;
 `;
-
-const TimeRange = () => {
-  const [timeRange, setTimeRange] = useState<string>('lastWeek');
-  const handleSelectRange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTimeRange(e.target.value);
-  };
-
-  console.log(theme);
-
+type Props = {
+  timeRange: string;
+  handleSelectRange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+const TimeRange = ({ timeRange, handleSelectRange }: Props) => {
   return (
     <Container>
       <StyledLabel htmlFor="timeRange">Time Range:</StyledLabel>

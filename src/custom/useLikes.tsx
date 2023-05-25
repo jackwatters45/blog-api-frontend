@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ILike } from '../../../types/post';
+import { ILike } from '../../types/post';
 
 const isAlreadyLiked = (likes: ILike[], currentUserId: string) => {
   if (!likes) throw new Error('Post like array does not exist');

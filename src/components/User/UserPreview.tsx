@@ -1,8 +1,8 @@
-import { styled } from 'styled-components';
-import IUser from '../../../../types/user';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
-import Follow from '../../shared/Follow';
 import { useState } from 'react';
+import IUser, { IPopularAuthors } from '../../../types/user';
+import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
+import { styled } from 'styled-components';
+import Follow from '../shared/Follow';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
@@ -22,7 +22,9 @@ const LeftColumn = styled(Link)`
   gap: 0.5rem;
 `;
 
-const StyledFollowerCount = styled.p`
+const StyledFollowerAndLikes = styled.div`
+  display: flex;
+  gap: 0.5rem;
   font-size: 0.95rem;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
@@ -32,11 +34,12 @@ const StyledDescription = styled.p`
 `;
 
 type Props = {
-  author: Partial<IUser> | string;
+  user: IUser;
 };
 
-const Profile = ({ author }: Props) => {
-  const { firstName, followers, description, _id } = author as IUser;
+const UserPreview = ({ user }: Props) => {
+  const { firstName, lastName, followers, description, _id, likesCountInTimeRange } =
+    user as IPopularAuthors;
   const img = 'https://via.placeholder.com/100';
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
@@ -53,8 +56,14 @@ const Profile = ({ author }: Props) => {
           />
         )}
         <LeftColumn to={`/user/${_id}`}>
-          <h3>Written by {firstName}</h3>
-          <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
+          <h3>
+            {firstName} {lastName}
+          </h3>
+          <StyledFollowerAndLikes>
+            <p>{followerCount} Followers</p>
+            <p>•</p>
+            <p>{likesCountInTimeRange} Likes</p>
+          </StyledFollowerAndLikes>
           {description && <StyledDescription>{description}</StyledDescription>}
         </LeftColumn>
         <Follow
@@ -67,4 +76,4 @@ const Profile = ({ author }: Props) => {
   );
 };
 
-export default Profile;
+export default UserPreview;

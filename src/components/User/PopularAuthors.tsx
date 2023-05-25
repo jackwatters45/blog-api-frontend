@@ -4,11 +4,11 @@ import {
   StyledH1,
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
-import Posts from './Posts';
 import { styled } from 'styled-components';
 import { ChangeEvent, useEffect, useState } from 'react';
-import IPost from '../../../types/post';
 import TimeRange from '../shared/TimeRange';
+import IUser from '../../../types/user';
+import Users from './Users';
 
 const StyledMain = styled.main`
   display: flex;
@@ -22,8 +22,9 @@ const StyledMain = styled.main`
     padding: 1rem 50px;
 `;
 
-const PopularPosts = () => {
-  const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
+// make topic page use popular aspect so its similar
+const PopularAuthors = () => {
+  const [users, setUsers] = useState<undefined | IUser[]>(undefined);
 
   const [timeRange, setTimeRange] = useState<string>('lastWeek');
   const handleSelectRange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -31,15 +32,15 @@ const PopularPosts = () => {
   };
 
   useEffect(() => {
-    const fetchPostsPopular = async () => {
+    const fetchAuthorsPopular = async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/posts/popular?timeRange=${timeRange}`,
+        `${import.meta.env.VITE_API_URL}/users/popular?timeRange=${timeRange}&limit=10`,
       );
       const data = await res.json();
       console.log(data);
-      setPosts(data);
+      setUsers(data);
     };
-    fetchPostsPopular();
+    fetchAuthorsPopular();
   }, [timeRange]);
 
   return (
@@ -47,9 +48,9 @@ const PopularPosts = () => {
       <Nav />
       <StyledMain>
         <StyledContentContainer>
-          <StyledH1>Explore Popular Posts</StyledH1>
+          <StyledH1>Explore Popular Authors</StyledH1>
           <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
-          <Posts postsProp={posts} selectedFilter={true} />
+          <Users usersProp={users} selectedFilter={true} />
         </StyledContentContainer>
         <Sidebar />
       </StyledMain>
@@ -57,4 +58,4 @@ const PopularPosts = () => {
   );
 };
 
-export default PopularPosts;
+export default PopularAuthors;

@@ -1,16 +1,12 @@
 import { styled } from 'styled-components';
 import IPost, { ILike } from '../../../types/post';
 import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
-import { formatContent, formatDate } from '../../utils/formattingHelpers';
+import { formatContent, formatDate } from '../shared/formattingHelpers';
 import { Link } from 'react-router-dom';
-import Likes from './components/Likes';
+import Likes from '../shared/Likes';
 import { useUserContext } from '../../context/UserContext';
-import useLikes from '../../utils/custom/useLikes';
+import useLikes from '../../custom/useLikes';
 import CommentsButton from './components/Comments/CommentsButton';
-
-type Props = {
-  post: IPost;
-};
 
 const Container = styled.div`
   margin: 2rem 0;
@@ -57,6 +53,10 @@ const StyledTag = styled.li`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
+type Props = {
+  post: IPost;
+};
+
 const PostPreview = ({
   post: { title, content, createdAt, author, _id, tags, likes, comments },
 }: Props) => {
@@ -64,7 +64,9 @@ const PostPreview = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
-  const { firstName, lastName, _id: authorId } = author;
+  const authorId = author?._id;
+  const firstName = author?.firstName;
+  const lastName = author?.lastName;
 
   return (
     <>

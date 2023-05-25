@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import PopularAuthors from './PopularAuthors';
-import PopularPosts from './PopularPosts';
-import PopularTopics from './PopularTopics';
+import PopularAuthors from './PopularAuthorsSidebar';
+import PopularPostsSidebar from './PopularPostsSidebar';
+import PopularTopics from './PopularTopicsSidebar';
 
 const StyledSidebar = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const StyledSidebar = styled.div`
 const Sidebar = () => {
   return (
     <StyledSidebar className="sidebar">
-      <PopularPosts />
+      <PopularPostsSidebar />
       <PopularAuthors />
       <PopularTopics />
     </StyledSidebar>

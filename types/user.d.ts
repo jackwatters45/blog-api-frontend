@@ -1,7 +1,8 @@
-export interface PopularAuthors {
-  user: Partial<IUser>;
+export interface IPopularAuthors extends IUser {
   likesCount: number;
+  likesCountInTimeRange: number;
 }
+
 interface IUser {
   _id: string;
   userType: string;

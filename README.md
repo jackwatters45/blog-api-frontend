@@ -2,15 +2,13 @@
 
 ## Next
 
-- add optional limits for relevant controller funcs
-
-- popular time range
 - explore
   - posts
   - users
 - still meh responsive
+- clean up eventually section
 
-- Create post (check eventually section before doing)
+- Create post
 
   - add imgs
 
@@ -32,6 +30,7 @@
   - stupid scrollbar
   - add loading
   - display count on pages (explore-topics etc)
+  - deleted users considerations
 
 - Posts
 
@@ -53,7 +52,6 @@
 
 - Sidebar
 
-  - add timing to filters (top from last week, month, year, all time)
   - likes or following? (to posts)
 
 - Nav

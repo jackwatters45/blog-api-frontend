@@ -3,7 +3,7 @@ import IComment from '../../../../../types/comment';
 import { StyledHrHorizontal } from '../../../../styles/styledComponents/theme';
 import { Link } from 'react-router-dom';
 import IUser from '../../../../../types/user';
-import { formatContent, formatDate } from '../../../../utils/formattingHelpers';
+import { formatContent, formatDate } from '../../../shared/formattingHelpers';
 import IPost from '../../../../../types/post';
 
 const Container = styled.div`

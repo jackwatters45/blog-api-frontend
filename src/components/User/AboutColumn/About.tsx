@@ -1,9 +1,9 @@
 import IUser from '../../../../types/user.d';
 import { styled } from 'styled-components';
-import { formatDate } from '../../../utils/formattingHelpers';
+import { formatDate } from '../../shared/formattingHelpers';
 import { useState } from 'react';
 import Following from './Following';
-import Follow from './Follow';
+import Follow from '../../shared/Follow';
 
 const RightColumn = styled.div`
   display: flex;
