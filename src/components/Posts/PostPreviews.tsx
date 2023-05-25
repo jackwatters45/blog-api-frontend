@@ -1,12 +1,7 @@
 import { styled } from 'styled-components';
 import IPost, { ILike } from '../../../types/post';
-import { StyledHrHorizontal } from '../../styles/styledComponents/StyledHr';
-import {
-  getUserFullName,
-  formatContent,
-  formatDate,
-  getUserId,
-} from '../../utils/formattingHelpers';
+import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
+import { formatContent, formatDate } from '../../utils/formattingHelpers';
 import { Link } from 'react-router-dom';
 import Likes from './components/Likes';
 import { useUserContext } from '../../context/UserContext';
@@ -62,21 +57,23 @@ const StyledTag = styled.li`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
-const PostPreview = ({ post }: Props) => {
-  const { title, content, createdAt, author, _id, tags, likes, comments } = post;
-
-  const authorId = getUserId(author);
-
+const PostPreview = ({
+  post: { title, content, createdAt, author, _id, tags, likes, comments },
+}: Props) => {
   const { user } = useUserContext();
 
   const useLikesProps = useLikes(likes as ILike[], user?._id);
+
+  const { firstName, lastName, _id: authorId } = author;
 
   return (
     <>
       <Container>
         <StyledDateAuthorDiv>
           {authorId ? (
-            <Link to={`/user/${authorId}`}>{getUserFullName(author)}</Link>
+            <Link to={`/user/${authorId}`}>
+              {firstName} {lastName}
+            </Link>
           ) : (
             <p>Unknown</p>
           )}

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IUser from '../../../types/user.d';
 import { styled } from 'styled-components';
-import { getUserFullName } from '../../utils/formattingHelpers';
 import IPost from '../../../types/post.d';
 import About from './AboutColumn/About';
 import Activity from './ActivityColumn/Activity';
@@ -50,13 +49,14 @@ const User = () => {
 
   const { user: userInfo, comments, posts } = user;
 
-  const name = getUserFullName(userInfo);
+  const { firstName, lastName } = userInfo;
+
   return (
     <>
       <Nav />
       <StyledUserContainer>
         <About user={userInfo} />
-        <Activity comments={comments} posts={posts} name={name} />
+        <Activity comments={comments} posts={posts} name={`${firstName} ${lastName}`} />
       </StyledUserContainer>
     </>
   );

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { formatDate, getUserFullName } from '../../../utils/formattingHelpers';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
+import { formatDate } from '../../../utils/formattingHelpers';
+import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   TagSidebar,
   TagsSidebar,
@@ -45,19 +45,21 @@ type Props = {
   post: IPost;
 };
 
-const PostInfo = ({ post }: Props) => {
+const PostInfo = ({
+  post: { title, author, createdAt, tags, _id: id, likes, comments },
+}: Props) => {
   const { user } = useUserContext();
-  const userId = user?._id as string;
 
-  const { title, author, createdAt, tags, _id: id } = post;
-  const useLikesProps = useLikes(post?.likes as ILike[], userId);
+  const useLikesProps = useLikes(likes as ILike[], user?._id as string);
+
+  const { firstName, lastName } = author;
 
   return (
     <>
       <StyledPostInfoContainer>
         <StyledH1>{title}</StyledH1>
         <StyledAuthor to={`/user/${id}`}>
-          {getUserFullName(author)} • {formatDate(createdAt)}
+          {firstName} {lastName} • {formatDate(createdAt)}
         </StyledAuthor>
         <BottomRowInfo>
           <TagsSidebar>
@@ -70,7 +72,7 @@ const PostInfo = ({ post }: Props) => {
               ))}
           </TagsSidebar>
           <LikesAndComments>
-            <CommentsButton commentsCount={post?.comments?.length as number} />
+            <CommentsButton commentsCount={comments?.length as number} />
             <Likes {...useLikesProps} _id={id as string} />
           </LikesAndComments>
         </BottomRowInfo>

@@ -1,4 +1,4 @@
-import { arrToString } from './stringArr';
+import { arrToString } from './formHelpers';
 
 function checkValidationErrorsEmail(email: string) {
   const errors = [];

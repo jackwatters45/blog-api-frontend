@@ -1,14 +1,9 @@
 import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
-import { StyledHrHorizontal } from '../../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../../styles/styledComponents/theme';
 import { Link } from 'react-router-dom';
 import IUser from '../../../../../types/user';
-import {
-  getUserFullName,
-  formatContent,
-  formatDate,
-  getUserId,
-} from '../../../../utils/formattingHelpers';
+import { formatContent, formatDate } from '../../../../utils/formattingHelpers';
 import IPost from '../../../../../types/post';
 
 const Container = styled.div`
@@ -35,17 +30,25 @@ type Props = {
 };
 
 const CommentPreview = ({ comment }: Props) => {
-  const { content, updatedAt, author, post } = comment;
+  const { content, updatedAt, author: commenter, post } = comment;
+  const {
+    _id: commenterId,
+    firstName: commenterFirstName,
+    lastName: commenterLastName,
+  } = commenter as IUser;
 
   const { _id: postId, title, author: postAuthor } = post as IPost;
-  const authorId = getUserId(author);
+
+  const { firstName: posterFirstName, lastName: posterLastName } = postAuthor as IUser;
 
   return (
     <>
       <Container>
         <StyledDateAuthorDiv>
-          {authorId ? (
-            <Link to={`/user/${authorId}`}>{getUserFullName(author as IUser)}</Link>
+          {commenterId ? (
+            <Link to={`/user/${commenterId}`}>
+              {commenterFirstName} {commenterLastName}
+            </Link>
           ) : (
             <p>Unknown</p>
           )}
@@ -58,7 +61,7 @@ const CommentPreview = ({ comment }: Props) => {
         <StyledPostInfo>
           On post:{' '}
           <Link to={`/post/${postId}`}>
-            {title} by {getUserFullName(postAuthor)}
+            {title} by {posterFirstName} {posterLastName}
           </Link>
         </StyledPostInfo>
       </Container>

@@ -1,6 +1,6 @@
 import IUser from '../../../../types/user.d';
 import { styled } from 'styled-components';
-import { formatDate, getUserFullName } from '../../../utils/formattingHelpers';
+import { formatDate } from '../../../utils/formattingHelpers';
 import { useState } from 'react';
 import Following from './Following';
 import Follow from './Follow';
@@ -57,8 +57,9 @@ type Props = {
   user: IUser;
 };
 
-const About = ({ user }: Props) => {
-  const { username, createdAt, followers, description, following } = user;
+const About = ({
+  user: { username, createdAt, followers, description, following, firstName, lastName },
+}: Props) => {
   const img = 'https://via.placeholder.com/100';
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
@@ -69,7 +70,9 @@ const About = ({ user }: Props) => {
         <img src={img} style={{ height: '100px', width: '100px' }} alt="Placeholder" />
       )}
       <StyledNameContainer>
-        <StyledName>{getUserFullName(user)}</StyledName>
+        <StyledName>
+          {firstName} {lastName}
+        </StyledName>
         <StyledUsername>@{username}</StyledUsername>
       </StyledNameContainer>
       <StyledJoined>Joined {formatDate(createdAt)}</StyledJoined>

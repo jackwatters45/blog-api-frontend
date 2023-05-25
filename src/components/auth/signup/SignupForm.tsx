@@ -1,10 +1,10 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { validateEmailHooks } from '../../../utils/validateEmail';
-import { validatePasswordHooks } from '../../../utils/validatePassword';
+import { validateEmailHooks } from '../utils/validateEmail';
+import { validatePasswordHooks } from '../utils/validatePassword';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
-import { formatErrors, passwordRequirements } from '../../../utils/formatErrors';
+import { formatErrors, passwordRequirements } from '../utils/formHelpers';
 
 type Inputs = {
   firstName: string;

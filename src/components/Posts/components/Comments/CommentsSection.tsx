@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
-import { StyledHrHorizontal } from '../../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../../styles/styledComponents/theme';
 import AddComment from './AddComment';
 import { useState } from 'react';
-import { formatDate, getUserId } from '../../../../utils/formattingHelpers';
+import { formatDate } from '../../../../utils/formattingHelpers';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
@@ -63,14 +63,14 @@ const CommentsSection = ({ comments: initialComments, postId }: Props) => {
         <h2>Comments ({comments?.length ?? 0})</h2>
         <AddComment setComments={setComments} postId={postId} />
         {comments?.map(({ content, updatedAt, author, _id }) => {
-          const { firstName, lastName } = author;
+          const { firstName, lastName, _id: authorId } = author;
           return (
             <CommentContainer key={_id}>
-              <Link to={`/user/${getUserId(author)}`}>
+              <Link to={`/user/${authorId}`}>
                 <StyledCommentImg src={img} alt="user icon" />
               </Link>
               <CommentInfo>
-                <StyledLink to={`/user/${getUserId(author)}`}>
+                <StyledLink to={`/user/${authorId}`}>
                   {firstName} {lastName}
                 </StyledLink>
                 <StyledDate>{formatDate(updatedAt)}</StyledDate>

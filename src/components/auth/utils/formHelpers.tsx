@@ -12,3 +12,7 @@ export const passwordRequirements = [
   'Password must contain at least one digit.',
   'Password must contain at least one special character (@, $, !, %, *, ?, &).',
 ];
+
+export const arrToString = (arr: string[]) => arr.join(';');
+
+export const stringToArr = (str: string) => str.split(';');

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import IUser from '../../../../types/user.d';
 import { styled } from 'styled-components';
-import { getUserFullName } from '../../../utils/formattingHelpers';
 
 const Container = styled.div`
   display: flex;
@@ -39,15 +38,17 @@ const Following = ({ following }: Props) => {
     <Container>
       <StyledHeader>Following</StyledHeader>
       {following.slice(0, 5).map((user) => {
-        if (typeof user === 'string') return null;
+        const { _id, firstName, lastName } = user as IUser;
         return (
-          <UserContainer key={user?._id} to={`/user/${user?._id}`}>
+          <UserContainer key={_id} to={`/user/${_id}`}>
             <img
               src="https://via.placeholder.com/20"
               style={{ height: '1rem', width: '1rem' }}
               alt="Placeholder"
             />
-            <StyledUser>{getUserFullName(user as IUser)}</StyledUser>
+            <StyledUser>
+              {firstName} {lastName}
+            </StyledUser>
           </UserContainer>
         );
       })}

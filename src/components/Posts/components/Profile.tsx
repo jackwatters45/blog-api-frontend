@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import IUser from '../../../../types/user';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import Follow from '../../User/AboutColumn/Follow';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';

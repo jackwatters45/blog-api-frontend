@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import { StyledHrHorizontal } from '../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
 import NavOptions from './NavOptions/NavOptions';
 
 const StyledNav = styled.nav`

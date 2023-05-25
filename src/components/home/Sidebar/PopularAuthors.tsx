@@ -1,6 +1,6 @@
 import { PopularAuthors } from '../../../../types/user';
 import { Link } from 'react-router-dom';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SeeAllLink,
   SidebarAdditionalInfo,

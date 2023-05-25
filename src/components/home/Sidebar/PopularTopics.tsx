@@ -2,7 +2,7 @@ import {
   SidebarHeader,
   SeeAllLink,
 } from '../../../styles/styledComponents/SidebarComponents';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   TagSidebar,
   TagsSidebar,

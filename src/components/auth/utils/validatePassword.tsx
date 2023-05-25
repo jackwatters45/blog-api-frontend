@@ -1,4 +1,4 @@
-import { arrToString } from './stringArr';
+import { arrToString } from './formHelpers';
 
 function checkValidationErrorsPassword(password: string) {
   const errors = [];

@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/StyledHr';
+import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SidebarHeader,
   SidebarInfoFirstRow,
@@ -11,7 +11,7 @@ import {
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
-import { formatDate, getUserFullName, getUserId } from '../../../utils/formattingHelpers';
+import { formatDate } from '../../../utils/formattingHelpers';
 import IUser from '../../../../types/user';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
@@ -30,13 +30,14 @@ const PopularPosts = () => {
         {!!posts.length &&
           posts.map((post: Partial<IPost>, index: number) => {
             const { _id, title, author, tags, createdAt } = post;
-            const authorId = getUserId(author as Partial<IUser>);
+            const { firstName, lastName, _id: authorId } = author as Partial<IUser>;
+
             return (
               <li key={index}>
                 <SidebarInfoFirstRow>
                   <Link to={`/user/${authorId}`}>
                     <SidebarItemUsername>
-                      {getUserFullName(author as Partial<IUser>)}
+                      {firstName} {lastName}
                     </SidebarItemUsername>
                   </Link>
                   <p>•</p>
