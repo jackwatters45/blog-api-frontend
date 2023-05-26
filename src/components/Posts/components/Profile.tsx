@@ -9,11 +9,15 @@ const Container = styled.div`
   display: flex;
   gap: 2rem;
   margin: 2rem 0;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 const StyledImg = styled.img`
   align-self: center;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 const LeftColumn = styled(Link)`

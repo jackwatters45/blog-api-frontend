@@ -11,12 +11,13 @@ import Nav from '../Nav/Nav';
 const StyledUserContainer = styled.main`
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
   max-width: 1200px;
-  padding: 3rem 100px;
+  width: 100%;
+  padding: 3rem 75px;
   margin: 0 auto;
-  gap: 50px;
+  gap: 75px;
 
   @media screen and (max-width: 768px) {
     padding: 1rem 50px;

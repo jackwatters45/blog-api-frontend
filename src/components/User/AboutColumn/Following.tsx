@@ -7,6 +7,10 @@ const Container = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 2rem;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 0;
+  }
 `;
 
 const StyledHeader = styled.strong`

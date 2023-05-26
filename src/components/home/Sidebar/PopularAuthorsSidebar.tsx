@@ -4,6 +4,7 @@ import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SeeAllLink,
   SidebarAdditionalInfo,
+  SidebarContainer,
   SidebarHeader,
   SidebarInfoFirstRow,
   SidebarItemTitle,
@@ -16,12 +17,13 @@ const PopularAuthorsSidebar = () => {
   const { authors } = useSidebarContext();
 
   return (
-    <div>
+    <SidebarContainer>
       <SidebarHeader>Popular Authors</SidebarHeader>
       <StyledHrHorizontal />
       <SidebarList>
         {!!authors.length &&
           authors.slice(0, 5).map((author: IPopularAuthors, index: number) => {
+            if (!author) return null;
             const { likesCount, _id, username, firstName, lastName } = author;
             return (
               <li key={index}>
@@ -39,7 +41,7 @@ const PopularAuthorsSidebar = () => {
           })}
       </SidebarList>
       <SeeAllLink to={`/explore-authors`}>See the full list</SeeAllLink>
-    </div>
+    </SidebarContainer>
   );
 };
 

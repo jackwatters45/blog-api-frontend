@@ -23,7 +23,10 @@ export const StyledTags = styled(Tags)`
   gap: 1rem;
   margin: 1rem auto;
   justify-content: center;
-  padding: 0 50px;
+
+  @media screen and (min-width: 1024px) {
+    padding: 0 50px;
+  }
 `;
 
 export const StyledTag = styled(TagSidebar)`
@@ -32,8 +35,8 @@ export const StyledTag = styled(TagSidebar)`
 
 export const StyledMain = styled.main`
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
+  justify-content: space-evenly;
+  padding: 1rem 75px;
   margin: 0 auto;
   max-width: 1000px;
   gap: 50px;

@@ -14,7 +14,11 @@ const StyledPostContainer = styled.main`
   flex-direction: column;
   max-width: 800px;
   margin: 0 auto;
-  padding: 3rem 0;
+  padding: 3rem 50px;
+
+  @media (max-width: 640px) {
+    padding: 3rem 25px;
+  }
 `;
 
 const Content = styled.p`
@@ -45,7 +49,7 @@ const Post = () => {
       <StyledPostContainer>
         <PostInfo post={post} />
         <Content>{content}</Content>
-        <Profile author={author} />
+        {author && <Profile author={author} />}
         <CommentsSection comments={comments as IComment[]} postId={_id} />
       </StyledPostContainer>
     </>

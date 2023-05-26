@@ -14,6 +14,10 @@ const Container = styled.div`
 
 const StyledImg = styled.img`
   align-self: center;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 const LeftColumn = styled(Link)`

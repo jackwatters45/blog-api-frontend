@@ -8,6 +8,7 @@ import {
   SidebarItemUsername,
   SidebarTags,
   SeeAllLink,
+  SidebarContainer,
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const PopularPostsSidebar = () => {
   const { posts } = useSidebarContext();
 
   return (
-    <div>
+    <SidebarContainer>
       <SidebarHeader>Popular Posts</SidebarHeader>
       <StyledHrHorizontal />
       <SidebarList>
@@ -65,7 +66,7 @@ const PopularPostsSidebar = () => {
           })}
       </SidebarList>
       <SeeAllLink to={`/explore-posts`}>See the full list</SeeAllLink>
-    </div>
+    </SidebarContainer>
   );
 };
 

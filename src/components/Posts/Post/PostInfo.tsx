@@ -46,22 +46,23 @@ type Props = {
 };
 
 const PostInfo = ({
-  post: { title, author, createdAt, tags, _id: id, likes, comments },
+  post: { title, author, createdAt, tags, _id, likes, comments },
 }: Props) => {
   const { user } = useUserContext();
 
   const useLikesProps = useLikes(likes as ILike[], user?._id as string);
 
-  const firstName = author?.firstName;
-  const lastName = author?.lastName;
-
   return (
     <>
       <StyledPostInfoContainer>
         <StyledH1>{title}</StyledH1>
-        <StyledAuthor to={`/user/${id}`}>
-          {firstName} {lastName} • {formatDate(createdAt)}
-        </StyledAuthor>
+        {author ? (
+          <StyledAuthor to={`/user/${author._id}`}>
+            {`${author.firstName} ${author.lastName} • ${formatDate(createdAt)}`}
+          </StyledAuthor>
+        ) : (
+          <p>{`Unknown • ${formatDate(createdAt)}`}</p>
+        )}
         <BottomRowInfo>
           <TagsSidebar>
             {/* TODO tags crap */}
@@ -74,7 +75,7 @@ const PostInfo = ({
           </TagsSidebar>
           <LikesAndComments>
             <CommentsButton commentsCount={comments?.length as number} />
-            <Likes {...useLikesProps} _id={id as string} />
+            <Likes {...useLikesProps} _id={_id as string} />
           </LikesAndComments>
         </BottomRowInfo>
       </StyledPostInfoContainer>

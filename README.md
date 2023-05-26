@@ -2,9 +2,10 @@
 
 ## Next
 
-- post when author null
-- still meh responsive
-- clean up eventually section
+- Sidebar
+
+  - likes or following? (to posts)
+  - show popular posts with 0 likes
 
 - Create post
   - add imgs
@@ -27,14 +28,11 @@
   - handle posts and users deleted (maybe comments too)
   - stupid scrollbar
   - add loading
-  - display count on pages (explore-topics etc)
-  - deleted users considerations
 
 - Posts
 
   - rich text editor
     - for post content and comments
-  - figure out good min content length
   - add imgs
   - calculate read time
   - tags separate link eventually but not now
@@ -46,12 +44,8 @@
       - delete
       - edit
     - sort by option?
-  - add topic
+  - add topic to previews and post
   - scroll to comments from button
-
-- Sidebar
-
-  - likes or following? (to posts)
 
 - Nav
 
@@ -62,8 +56,6 @@
 
   - Pagination
   - update comments given new schema
-  - add comments + likes to preview (num)
-  - 'pagination'
 
 - Comment Preview
 
@@ -76,7 +68,6 @@
   - add likes
 
 - Admin
-
 - gonna need to figure out how to add different levels of security
 - secured endpoint test out
 

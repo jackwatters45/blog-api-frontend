@@ -7,7 +7,7 @@ const StyledPostsContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 800px;
-  min-width: 400px;
+  min-width: 280px;
 `;
 
 const StyledNoPostsMessage = styled.p`

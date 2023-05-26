@@ -1,6 +1,7 @@
 import {
   SidebarHeader,
   SeeAllLink,
+  SidebarContainer,
 } from '../../../styles/styledComponents/SidebarComponents';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
@@ -13,10 +14,9 @@ const PopularTopicsSidebar = () => {
   const { topics } = useSidebarContext();
 
   return (
-    <div>
+    <SidebarContainer>
       <SidebarHeader>Popular Topics</SidebarHeader>
       <StyledHrHorizontal />
-
       <TagsSidebar>
         {!!topics.length &&
           topics.slice(0, 10).map((topic, index: number) => {
@@ -28,9 +28,8 @@ const PopularTopicsSidebar = () => {
             );
           })}
       </TagsSidebar>
-
       <SeeAllLink to={`/explore-topics`}>See the full list</SeeAllLink>
-    </div>
+    </SidebarContainer>
   );
 };
 

@@ -13,17 +13,23 @@ import useTimeRange from '../../custom/useTimeRange';
 
 const StyledMain = styled.main`
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 100px;
+  justify-content: space-evenly;
+  padding: 1rem 75px;
   margin: 0 auto;
   max-width: 1200px;
   gap: 50px;
 
   @media screen and (max-width: 768px) {
     padding: 1rem 50px;
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 924px) {
+    img {
+      display: none;
+    }
+  }
 `;
 
-// make topic page use popular aspect so its similar
 const PopularAuthors = () => {
   const [users, setUsers] = useState<undefined | IUser[]>(undefined);
 

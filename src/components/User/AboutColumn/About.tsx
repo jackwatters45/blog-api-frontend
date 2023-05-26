@@ -11,12 +11,26 @@ const RightColumn = styled.div`
   flex-wrap: nowrap;
   max-width: 300px;
   min-width: 200px;
-  padding: 0 1rem;
   gap: 0.5rem;
 
   @media screen and (max-width: 768px) {
     padding-top: 3rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    max-width: 100%;
+
+    .description {
+      grid-row: 2 / 3;
+      grid-column: 1 / 3;
+    }
   }
+`;
+
+const StyledSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const StyledNameContainer = styled.div`
@@ -66,22 +80,28 @@ const About = ({
 
   return (
     <RightColumn>
-      {img && (
-        <img src={img} style={{ height: '100px', width: '100px' }} alt="Placeholder" />
+      <StyledSection className="info">
+        {img && (
+          <img src={img} style={{ height: '100px', width: '100px' }} alt="Placeholder" />
+        )}
+        <StyledNameContainer>
+          <StyledName>
+            {firstName} {lastName}
+          </StyledName>
+          <StyledUsername>@{username}</StyledUsername>
+        </StyledNameContainer>
+        <StyledJoined>Joined {formatDate(createdAt)}</StyledJoined>
+        <FollowersContainer>
+          <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
+          <Follow followers={followers as string[]} setFollowerCount={setFollowerCount} />
+        </FollowersContainer>
+      </StyledSection>
+      {description && (
+        <StyledDescription className="description">{description}</StyledDescription>
       )}
-      <StyledNameContainer>
-        <StyledName>
-          {firstName} {lastName}
-        </StyledName>
-        <StyledUsername>@{username}</StyledUsername>
-      </StyledNameContainer>
-      <StyledJoined>Joined {formatDate(createdAt)}</StyledJoined>
-      <FollowersContainer>
-        <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
-        <Follow followers={followers as string[]} setFollowerCount={setFollowerCount} />
-      </FollowersContainer>
-      {description && <StyledDescription>{description}</StyledDescription>}
-      {!!following.length && <Following following={following} />}
+      <StyledSection className="following">
+        {!!following.length && <Following following={following} />}
+      </StyledSection>
     </RightColumn>
   );
 };

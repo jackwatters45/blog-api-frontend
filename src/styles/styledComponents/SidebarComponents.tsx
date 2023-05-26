@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
+export const SidebarContainer = styled.div``;
+
 export const SidebarHeader = styled.h2`
   padding-left: 0.5rem;
 `;

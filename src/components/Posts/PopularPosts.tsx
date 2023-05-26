@@ -13,8 +13,8 @@ import useTimeRange from '../../custom/useTimeRange';
 
 const StyledMain = styled.main`
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 100px;
+  justify-content: space-evenly;
+  padding: 1rem 75px;
   margin: 0 auto;
   max-width: 1200px;
   gap: 50px;

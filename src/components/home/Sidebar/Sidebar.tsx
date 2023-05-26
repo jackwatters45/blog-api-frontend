@@ -8,11 +8,13 @@ const StyledSidebar = styled.div`
   flex-direction: column;
   gap: 1rem;
   min-width: 250px;
+  width: 300px;
   margin: 2rem 0;
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
+
 const Sidebar = () => {
   return (
     <StyledSidebar className="sidebar">

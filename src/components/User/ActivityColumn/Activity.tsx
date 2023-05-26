@@ -6,6 +6,7 @@ import IComment from '../../../../types/comment.d';
 
 const LeftColumn = styled.div`
   width: 100%;
+  min-width: 350px;
 `;
 
 const StyledH1 = styled.h1`
