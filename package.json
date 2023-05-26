@@ -9,6 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier \"src/**/*.{js,jsx,ts,tsx,css,scss,md,html,json,yml}\" --write",
+    "fix": "npm run lint:fix && npm run format",
     "compile": "tsc",
     "test": "jest",
     "preview": "vite preview",
@@ -22,10 +23,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,js,cjs}": [
-      "npm run lint:fix",
-      "npm run format"
-    ],
+    "*.{ts,tsx,js,cjs}": "npm run fix",
     "*.{md,html,css,json,yml}": "prettier --write"
   },
   "dependencies": {

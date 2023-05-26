@@ -28,8 +28,8 @@ const PopularPostsSidebar = () => {
       <StyledHrHorizontal />
       <SidebarList>
         {!!posts.length &&
-          posts.map((post: Partial<IPost>, index: number) => {
-            const { _id, title, author, tags, createdAt } = post;
+          posts.slice(0, 5).map((post: Partial<IPost>, index: number) => {
+            const { _id, title, author, topic, createdAt } = post;
 
             const authorId = author?._id;
             const firstName = author?.firstName;
@@ -55,10 +55,7 @@ const PopularPostsSidebar = () => {
                 <Link to={`/post/${_id}`}>
                   <SidebarItemTitle>{title}</SidebarItemTitle>
                   <SidebarTags>
-                    {!!tags?.length &&
-                      tags?.map((tag: string, index: number) => (
-                        <li key={index}>#{tag}</li>
-                      ))}
+                    <li key={index}>in {topic?.name}</li>
                   </SidebarTags>
                 </Link>
               </li>

@@ -1,5 +1,6 @@
 import IUser from './user';
 import IComment from './comment';
+import ITopic from './topic';
 export interface ILike {
   userId: string;
   date: string;
@@ -11,8 +12,7 @@ interface IPost {
   content: string;
   author: Partial<IUser>;
   published: boolean;
-  tags?: string[];
-  topic?: string;
+  topic?: ITopic;
   likes?: ILike[];
   comments?: IComment[];
   url?: string;

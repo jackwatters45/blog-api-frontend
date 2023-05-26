@@ -2,8 +2,8 @@ import {
   StyledMain,
   StyledContentContainer,
   StyledH1,
-  StyledTags,
-  StyledTag,
+  PopularTopicsContainer,
+  TopicButtonLarge,
 } from '../../styles/styledComponents/HelperComponents';
 import Nav from '../Nav/Nav';
 import Sidebar from '../Home/Sidebar/Sidebar';
@@ -22,7 +22,7 @@ import SortBy from '../shared/SortBy';
 import { useSidebarContext } from '../../context/SidebarContext';
 import { camelToTitleCase } from '../shared/formattingHelpers';
 
-const StyledTagSelected = styled(StyledTag)`
+const StyledTopicButton = styled(TopicButtonLarge)`
   background: ${({ theme }) => theme.colors.textSecondary};
   display: flex;
   align-items: center;
@@ -74,20 +74,20 @@ const Topics = () => {
       <StyledMain>
         <StyledContentContainer>
           <StyledH1>{selectedTopic ? selectedTopic.name : 'Explore Topics'}</StyledH1>
-          <StyledTags>
+          <PopularTopicsContainer>
             {topics.slice(0, 10).map(({ _id, name }, index) => {
               return selectedTopic?._id === _id ? (
-                <StyledTagSelected key={index} to={'/explore-topics'}>
+                <StyledTopicButton key={index} to={'/explore-topics'}>
                   {name}
                   <Icon path={mdiCloseBox} size={0.8} />
-                </StyledTagSelected>
+                </StyledTopicButton>
               ) : (
-                <StyledTag key={index} to={`/topic/${_id}`}>
+                <TopicButtonLarge key={index} to={`/topic/${_id}`}>
                   {name}
-                </StyledTag>
+                </TopicButtonLarge>
               );
             })}
-          </StyledTags>
+          </PopularTopicsContainer>
           {selectedTopic && (
             <FilterContainer>
               <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />

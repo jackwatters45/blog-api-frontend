@@ -5,8 +5,8 @@ import {
 } from '../../../styles/styledComponents/SidebarComponents';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
-  TagSidebar,
-  TagsSidebar,
+  SidebarTopicsContainer,
+  TopicButton,
 } from '../../../styles/styledComponents/HelperComponents';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
@@ -17,17 +17,17 @@ const PopularTopicsSidebar = () => {
     <SidebarContainer>
       <SidebarHeader>Popular Topics</SidebarHeader>
       <StyledHrHorizontal />
-      <TagsSidebar>
+      <SidebarTopicsContainer>
         {!!topics.length &&
           topics.slice(0, 10).map((topic, index: number) => {
             const { _id, name } = topic;
             return (
-              <TagSidebar key={index} to={`/topic/${_id}`}>
+              <TopicButton key={index} to={`/topic/${_id}`}>
                 {name}
-              </TagSidebar>
+              </TopicButton>
             );
           })}
-      </TagsSidebar>
+      </SidebarTopicsContainer>
       <SeeAllLink to={`/explore-topics`}>See the full list</SeeAllLink>
     </SidebarContainer>
   );

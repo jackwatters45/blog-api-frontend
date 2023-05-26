@@ -36,17 +36,6 @@ const LikesAndComments = styled.div`
   font-size: 0.8rem;
 `;
 
-const StyledTagsSection = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-`;
-
-const StyledTags = styled.ul`
-  display: flex;
-  gap: 0.5rem;
-`;
-
 const StyledTag = styled.li`
   padding: 0.15rem 0.45rem;
   border-radius: 3px;
@@ -58,7 +47,7 @@ type Props = {
 };
 
 const PostPreview = ({
-  post: { title, content, createdAt, author, _id, tags, likes, comments },
+  post: { title, content, createdAt, author, _id, topic, likes, comments },
 }: Props) => {
   const { user } = useUserContext();
 
@@ -93,17 +82,10 @@ const PostPreview = ({
             <CommentsButton commentsCount={comments?.length as number} />
             <Likes {...useLikesProps} _id={_id} />
           </LikesAndComments>
-
-          {!!tags?.length && (
-            <StyledTagsSection>
-              <Link to={`/post/${_id}`}>
-                <StyledTags>
-                  {tags.map((tag, index) => (
-                    <StyledTag key={index}>{tag}</StyledTag>
-                  ))}
-                </StyledTags>
-              </Link>
-            </StyledTagsSection>
+          {topic && (
+            <Link to={`/topic/${topic._id}`}>
+              <StyledTag>{topic.name}</StyledTag>
+            </Link>
           )}
         </BottomRow>
       </Container>

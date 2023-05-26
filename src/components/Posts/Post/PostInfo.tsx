@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { formatDate } from '../../shared/formattingHelpers';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
-import {
-  TagSidebar,
-  TagsSidebar,
-} from '../../../styles/styledComponents/HelperComponents';
+import { TopicButton } from '../../../styles/styledComponents/HelperComponents';
 import Likes from '../../shared/Likes';
 import CommentsButton from '../components/Comments/CommentsButton';
 import IPost, { ILike } from '../../../../types/post';
@@ -31,6 +28,7 @@ const BottomRowInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.25rem 0 0.75rem;
 `;
 
 const LikesAndComments = styled.div`
@@ -46,7 +44,7 @@ type Props = {
 };
 
 const PostInfo = ({
-  post: { title, author, createdAt, tags, _id, likes, comments },
+  post: { title, author, createdAt, _id, likes, comments, topic },
 }: Props) => {
   const { user } = useUserContext();
 
@@ -64,15 +62,7 @@ const PostInfo = ({
           <p>{`Unknown • ${formatDate(createdAt)}`}</p>
         )}
         <BottomRowInfo>
-          <TagsSidebar>
-            {/* TODO tags crap */}
-            {!!tags?.length &&
-              tags.map((tag, index) => (
-                <TagSidebar key={index} to={''}>
-                  {tag}
-                </TagSidebar>
-              ))}
-          </TagsSidebar>
+          {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}
           <LikesAndComments>
             <CommentsButton commentsCount={comments?.length as number} />
             <Likes {...useLikesProps} _id={_id as string} />

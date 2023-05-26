@@ -2,10 +2,8 @@
 
 ## Next
 
-- Sidebar
-
-  - likes or following? (to posts)
-  - show popular posts with 0 likes
+- rename helpers
+- check out rte
 
 - Create post
   - add imgs
@@ -35,7 +33,6 @@
     - for post content and comments
   - add imgs
   - calculate read time
-  - tags separate link eventually but not now
   - add save ability
   - comments
     - 'pagination'
@@ -54,8 +51,8 @@
 
 - Dashboard
 
+  - add a following tab
   - Pagination
-  - update comments given new schema
 
 - Comment Preview
 

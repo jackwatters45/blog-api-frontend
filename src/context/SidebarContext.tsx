@@ -21,7 +21,7 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [topics, setTopics] = useState([]);
   useEffect(() => {
     const getPopularPosts = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular?limit=3`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular?limit=5`);
       return await res.json();
     };
 
@@ -42,6 +42,7 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
           getPopularAuthors(),
           getPopularTopics(),
         ]);
+        console.log(posts);
         setPosts(posts);
         setAuthors(authors);
         setTopics(topics);
