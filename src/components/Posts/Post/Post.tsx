@@ -8,6 +8,7 @@ import IComment from '../../../../types/comment';
 import CommentsSection from '../components/Comments/CommentsSection';
 import PostInfo from './PostInfo';
 import Profile from '../components/Profile';
+import { PostContentDefault } from '../../../styles/styledComponents/PostContentComponents';
 
 const StyledPostContainer = styled.main`
   display: flex;
@@ -19,10 +20,6 @@ const StyledPostContainer = styled.main`
   @media (max-width: 640px) {
     padding: 3rem 25px;
   }
-`;
-
-const Content = styled.p`
-  margin: 2rem 0;
 `;
 
 const Post = () => {
@@ -48,7 +45,7 @@ const Post = () => {
       <Nav />
       <StyledPostContainer>
         <PostInfo post={post} />
-        <Content>{content}</Content>
+        <PostContentDefault contentHtml={content} />
         {author && <Profile author={author} />}
         <CommentsSection comments={comments as IComment[]} postId={_id} />
       </StyledPostContainer>

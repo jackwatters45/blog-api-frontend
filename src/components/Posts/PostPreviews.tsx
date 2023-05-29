@@ -7,6 +7,7 @@ import Likes from '../shared/Likes';
 import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../custom/useLikes';
 import CommentsButton from './components/Comments/CommentsButton';
+import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
 
 const Container = styled.div`
   margin: 2rem 0;
@@ -20,6 +21,8 @@ const StyledDateAuthorDiv = styled.div`
 
 const StyledH2 = styled.h2`
   font-size: 1.8rem;
+  line-height: 1.2;
+  margin: 0.4rem 0;
 `;
 
 const BottomRow = styled.div`
@@ -53,17 +56,13 @@ const PostPreview = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
-  const authorId = author?._id;
-  const firstName = author?.firstName;
-  const lastName = author?.lastName;
-
   return (
     <>
       <Container>
         <StyledDateAuthorDiv>
-          {authorId ? (
-            <Link to={`/user/${authorId}`}>
-              {firstName} {lastName}
+          {author?._id ? (
+            <Link to={`/user/${author._id}`}>
+              {author.firstName} {author.lastName}
             </Link>
           ) : (
             <p>Unknown</p>
@@ -75,7 +74,7 @@ const PostPreview = ({
           <StyledH2>{title}</StyledH2>
         </Link>
         <Link to={`/post/${_id}`}>
-          <p>{formatContent(content)}</p>
+          <PostContentPreview contentHtml={formatContent(content)} />
         </Link>
         <BottomRow>
           <LikesAndComments>

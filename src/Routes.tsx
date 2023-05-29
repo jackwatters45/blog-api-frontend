@@ -10,6 +10,7 @@ import NotFoundPage from './components/Errors/NotFoundPage';
 import Topics from './components/Topics/Topics';
 import PopularPosts from './components/Posts/PopularPosts';
 import PopularAuthors from './components/User/PopularAuthors';
+import CreatePost from './components/Posts/CreatePost/CreatePost';
 
 const RoutesComponent = () => {
   const userContext = useContext(UserContext);
@@ -34,6 +35,10 @@ const RoutesComponent = () => {
 
       <Route path="/explore-topics" element={<Topics />} />
       <Route path="/topic/:id" element={<Topics />} />
+
+      <Route path="/write" element={<CreatePost />} />
+
+      <Route path="/my-posts" element={<NotFoundPage />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />

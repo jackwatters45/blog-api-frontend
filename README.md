@@ -2,9 +2,6 @@
 
 ## Next
 
-- rename helpers
-- check out rte
-
 - Create post
   - add imgs
 - add images to everything else
@@ -22,10 +19,12 @@
 
 - General
 
+  - make sure light mode doesn't f app up
   - interface vs type consistency
   - handle posts and users deleted (maybe comments too)
   - stupid scrollbar
   - add loading
+  - check that instances where i use key = index make sense
 
 - Posts
 

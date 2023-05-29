@@ -9,9 +9,15 @@ export const formatDate = (date: string) => {
   return `${month} ${day}`;
 };
 
+function htmlToText(html: string) {
+  const temporaryElement = document.createElement('div');
+  temporaryElement.innerHTML = html;
+  return temporaryElement.textContent || temporaryElement.innerText || '';
+}
+
 export const formatContent = (content: string) => {
-  if (content.length > 200) return `${content.slice(0, 200)}...`;
-  return content;
+  const text = htmlToText(content);
+  return text.length > 200 ? `${text.slice(0, 200)}...` : text;
 };
 
 export const getTitleCase = (str: string) =>

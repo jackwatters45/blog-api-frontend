@@ -37,7 +37,9 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
 
   const handleClickProfile = () => navigate(`/user/${user?._id}`);
 
-  const handleClickYourPosts = () => navigate(`/user/${user?._id}/posts`);
+  const handleClickYourPosts = () => navigate(`/my-posts`);
+
+  const handleClickSettings = () => navigate(`/user/${user?._id}/settings`);
 
   const handleClickLogout = async () => {
     updateUser(null);
@@ -59,6 +61,7 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
       <ul>
         <StyledLi onClick={handleClickProfile}>Profile</StyledLi>
         <StyledLi onClick={handleClickYourPosts}>Your Posts</StyledLi>
+        <StyledLi onClick={handleClickSettings}>Settings</StyledLi>
         <StyledLi onClick={handleClickLogout}>Log out</StyledLi>
       </ul>
     </Container>

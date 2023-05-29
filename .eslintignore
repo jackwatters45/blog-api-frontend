@@ -5,4 +5,5 @@ dist/
 env.d.ts
 vite.config.ts
 types/
+styles/tinymce
 ```
