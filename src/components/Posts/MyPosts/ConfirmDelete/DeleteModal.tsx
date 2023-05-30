@@ -5,7 +5,8 @@ const StyledModal = styled.div`
   position: absolute;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
   background: #dc2626;
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  margin-left: -0.75rem;
   border-radius: 4px;
   ${({ theme }) => theme.shadow};
 `;
@@ -29,7 +30,7 @@ const DeleteModal = ({ useModalParams, postId }: Props) => {
 
   return (
     <StyledModal {...modalProps} onClick={handleDelete}>
-      <h3>Really Delete?</h3>
+      <h4>Really Delete?</h4>
     </StyledModal>
   );
 };

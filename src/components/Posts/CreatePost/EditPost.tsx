@@ -4,8 +4,6 @@ import IPost from '../../../../types/post';
 import CreatePost from './CreatePost';
 
 // cgm
-// text to icons
-// make sure everything good for posts
 // reorganize file structure
 // commits
 // basic admin stuff

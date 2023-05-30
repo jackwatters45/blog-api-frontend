@@ -1,21 +1,35 @@
 import { ElementType, ReactNode } from 'react';
 import { useModalTrigger } from 'react-hook-modal-pure';
 import DeleteModal from './DeleteModal';
+import { styled } from 'styled-components';
 
 type Props = {
   postId: string;
   StyledButton: ElementType;
-  buttonContent: string | ReactNode;
+  buttonContent?: string | ReactNode;
+  extraButtonProps?: Record<string, unknown>;
 };
 
-const DeleteButton = ({ StyledButton, buttonContent, postId }: Props) => {
+const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const DeleteButton = ({
+  StyledButton,
+  buttonContent,
+  extraButtonProps,
+  postId,
+}: Props) => {
   const { isModalVisible, buttonProps, useModalParams } = useModalTrigger();
 
   return (
-    <div>
-      <StyledButton {...buttonProps}>{buttonContent}</StyledButton>
+    <StyledContainer>
+      <StyledButton {...buttonProps} {...extraButtonProps}>
+        {buttonContent}
+      </StyledButton>
       {isModalVisible && <DeleteModal useModalParams={useModalParams} postId={postId} />}
-    </div>
+    </StyledContainer>
   );
 };
 

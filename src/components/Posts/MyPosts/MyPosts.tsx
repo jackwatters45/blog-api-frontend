@@ -3,7 +3,7 @@ import IPost from '../../../../types/post';
 import { useUserContext } from '../../../context/UserContext';
 import Nav from '../../Nav/Nav';
 import { StyledMain } from '../../../styles/styledComponents/HelperComponents';
-import EditPostCard from './EditPostCard';
+import EditPostCard from './MyPostsCard';
 import { styled } from 'styled-components';
 
 const MyPostsMain = styled(StyledMain)`

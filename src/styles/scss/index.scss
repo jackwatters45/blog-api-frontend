@@ -30,7 +30,8 @@ li {
   list-style: none;
 }
 
-input, select {
+input,
+select {
   background: $background-secondary;
   border: 0.5px solid $border-color;
   border-radius: 4px;
@@ -38,7 +39,6 @@ input, select {
   cursor: auto;
   box-shadow: $shadow;
 }
-
 
 input[type='submit'] {
   cursor: pointer;

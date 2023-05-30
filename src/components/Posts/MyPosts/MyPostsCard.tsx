@@ -6,6 +6,8 @@ import useLikes from '../../../custom/useLikes';
 import CommentsButton from '../../shared/CommentsButton';
 import { Link } from 'react-router-dom';
 import DeleteButton from './ConfirmDelete/DeleteButton';
+import Icon from '@mdi/react';
+import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 
 const Container = styled.div`
   display: grid;
@@ -52,26 +54,26 @@ const Buttons = styled.div`
 `;
 
 const ButtonOptions = styled(Buttons)`
+  display: flex;
+  gap: 1rem;
   margin-top: 1rem;
   margin-right: 0.75rem;
   justify-content: flex-end;
   align-items: flex-end;
-`;
 
-const ButtonOption = styled.button`
-  text-decoration: underline;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 1rem;
+  svg {
+    cursor: pointer;
+  }
+  a {
+    line-height: 0;
+  }
 `;
 
 type Props = {
   post: IPost;
 };
 
-// connect to backend
-const EditPostCard = ({ post }: Props) => {
-  console.log(post);
+const MyPostsCard = ({ post }: Props) => {
   const { title, likes, topic, updatedAt, comments, author, _id } = post;
   const likesProps = useLikes(likes as ILike[], author as string);
 
@@ -89,16 +91,20 @@ const EditPostCard = ({ post }: Props) => {
         <CommentsButton commentsCount={comments?.length ?? 0} />
       </Buttons>
       <ButtonOptions>
-        <DeleteButton StyledButton={ButtonOption} buttonContent={'Delete'} postId={_id} />
+        <DeleteButton
+          StyledButton={Icon}
+          postId={_id}
+          extraButtonProps={{ path: mdiDelete, size: 1 }}
+        />
         <Link to={`/post/${_id}/edit`}>
-          <ButtonOption>Edit</ButtonOption>
+          <Icon path={mdiPencil} size={1} />
         </Link>
         <Link to={`/post/${_id}`}>
-          <ButtonOption>View</ButtonOption>
+          <Icon path={mdiOpenInNew} size={1} />
         </Link>
       </ButtonOptions>
     </Container>
   );
 };
 
-export default EditPostCard;
+export default MyPostsCard;
