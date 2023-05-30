@@ -75,14 +75,14 @@ const Topics = () => {
         <StyledContentContainer>
           <StyledH1>{selectedTopic ? selectedTopic.name : 'Explore Topics'}</StyledH1>
           <PopularTopicsContainer>
-            {topics.slice(0, 10).map(({ _id, name }, index) => {
+            {topics.slice(0, 10).map(({ _id, name }) => {
               return selectedTopic?._id === _id ? (
-                <StyledTopicButton key={index} to={'/explore-topics'}>
+                <StyledTopicButton key={_id} to={'/explore-topics'}>
                   {name}
                   <Icon path={mdiCloseBox} size={0.8} />
                 </StyledTopicButton>
               ) : (
-                <TopicButtonLarge key={index} to={`/topic/${_id}`}>
+                <TopicButtonLarge key={_id} to={`/topic/${_id}`}>
                   {name}
                 </TopicButtonLarge>
               );

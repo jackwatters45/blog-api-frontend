@@ -9,6 +9,7 @@ import '../../../styles/scss/auth.scss';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import IPost from '../../../../types/post';
 
 const StyledForm = styled.form`
   display: flex;
@@ -73,17 +74,17 @@ const StyleDraftButton = styled(StyledPublishButton)`
   background-color: ${(props) => props.theme.colors.textSecondary};
 `;
 
+type Props = {
+  post?: IPost;
+};
+
 type Inputs = {
   title: string;
   topic: string;
   content: string;
 };
 
-// test this
-// change tinyMCE skin
-// next: my posts -> edit post crap
-// same thing just prefill the form
-const CreatePost = () => {
+const CreatePost = ({ post }: Props) => {
   const { topics } = useSidebarContext();
   const { user } = useUserContext();
 
@@ -96,7 +97,13 @@ const CreatePost = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: post?.title,
+      topic: post?.topic?._id,
+      content: post?.content,
+    },
+  });
 
   const [isPublished, setIsPublished] = useState<boolean>(true);
 
@@ -107,14 +114,20 @@ const CreatePost = () => {
       ...formData,
       published: isPublished,
     };
-    console.log(data);
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/posts`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include',
-    });
+    const response = post?._id
+      ? await fetch(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          credentials: 'include',
+        })
+      : await fetch(`${import.meta.env.VITE_API_URL}/posts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          credentials: 'include',
+        });
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -196,7 +209,7 @@ const CreatePost = () => {
           </StyledFormSection>
           <StyledPublishSection>
             <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
-              Save As Draft
+              {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
             </StyleDraftButton>
 
             <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>

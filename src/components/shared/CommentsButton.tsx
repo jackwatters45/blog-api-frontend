@@ -1,4 +1,4 @@
-import { useUserContext } from '../../../../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
@@ -12,6 +12,10 @@ const CommentButton = styled.button`
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.055);
+  }
 `;
 
 const CommentsButton = ({ commentsCount }: Props) => {

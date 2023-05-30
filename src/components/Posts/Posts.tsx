@@ -37,7 +37,7 @@ const Posts = ({ postsProp, selectedFilter }: Props) => {
   return (
     <StyledPostsContainer>
       {posts?.length ? (
-        posts.map((post: IPost, index) => <PostPreviews key={index} post={post} />)
+        posts.map((post: IPost) => <PostPreviews key={post._id} post={post} />)
       ) : (
         <StyledNoPostsMessage>{`No posts here yet..`}</StyledNoPostsMessage>
       )}

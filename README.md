@@ -2,9 +2,7 @@
 
 ## Next
 
-- Create post
-  - add imgs
-- add images to everything else
+- edit posts
 
 - Admin stuff
   - view unpublished posts
@@ -19,21 +17,22 @@
 
 - General
 
+  - protected routes and also pages (cant just pull up edit page for anyone's post)
   - make sure light mode doesn't f app up
   - interface vs type consistency
   - handle posts and users deleted (maybe comments too)
   - stupid scrollbar
   - add loading
-  - check that instances where i use key = index make sense
+  - images
+  - loading for tinymce
 
 - Posts
 
-  - rich text editor
-    - for post content and comments
   - add imgs
   - calculate read time
   - add save ability
   - comments
+    - make text area
     - 'pagination'
     - improve
       - reply likes etc
@@ -64,8 +63,9 @@
   - add likes
 
 - Admin
-- gonna need to figure out how to add different levels of security
-- secured endpoint test out
+
+  - gonna need to figure out how to add different levels of security
+  - secured endpoint test out
 
 - topics
   - make sure time range and sortBy work

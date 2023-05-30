@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Likes from '../shared/Likes';
 import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../custom/useLikes';
-import CommentsButton from './components/Comments/CommentsButton';
+import CommentsButton from '../shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
 
 const Container = styled.div`

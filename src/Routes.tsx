@@ -11,6 +11,8 @@ import Topics from './components/Topics/Topics';
 import PopularPosts from './components/Posts/PopularPosts';
 import PopularAuthors from './components/User/PopularAuthors';
 import CreatePost from './components/Posts/CreatePost/CreatePost';
+import MyPosts from './components/Posts/MyPosts/MyPosts';
+import EditPost from './components/Posts/CreatePost/EditPost';
 
 const RoutesComponent = () => {
   const userContext = useContext(UserContext);
@@ -27,6 +29,7 @@ const RoutesComponent = () => {
 
       <Route path="/explore-posts" element={<PopularPosts />} />
       <Route path="/post/:id" element={<Post />} />
+      <Route path="/post/:id/edit" element={<EditPost />} />
 
       <Route path="/explore-authors" element={<PopularAuthors />} />
       <Route path="/user/:id" element={<User />}>
@@ -38,7 +41,7 @@ const RoutesComponent = () => {
 
       <Route path="/write" element={<CreatePost />} />
 
-      <Route path="/my-posts" element={<NotFoundPage />} />
+      <Route path="/my-posts" element={<MyPosts />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />

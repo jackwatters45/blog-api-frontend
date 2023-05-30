@@ -22,11 +22,11 @@ const PopularAuthorsSidebar = () => {
       <StyledHrHorizontal />
       <SidebarList>
         {!!authors.length &&
-          authors.slice(0, 5).map((author: IPopularAuthors, index: number) => {
+          authors.slice(0, 5).map((author: IPopularAuthors) => {
             if (!author) return null;
             const { likesCount, _id, username, firstName, lastName } = author;
             return (
-              <li key={index}>
+              <li key={_id}>
                 <Link to={`/user/${_id}`}>
                   <SidebarInfoFirstRow>
                     <SidebarItemTitle>

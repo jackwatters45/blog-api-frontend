@@ -28,39 +28,35 @@ const PopularPostsSidebar = () => {
       <StyledHrHorizontal />
       <SidebarList>
         {!!posts.length &&
-          posts.slice(0, 5).map((post: Partial<IPost>, index: number) => {
-            const { _id, title, author, topic, createdAt } = post;
-
-            const authorId = author?._id;
-            const firstName = author?.firstName;
-            const lastName = author?.lastName;
-
-            return (
-              <li key={index}>
-                <SidebarInfoFirstRow>
-                  {authorId ? (
-                    <Link to={`/user/${authorId}`}>
-                      <SidebarItemUsername>
-                        {firstName} {lastName}
-                      </SidebarItemUsername>
+          posts
+            .slice(0, 5)
+            .map(({ _id, title, author, topic, createdAt }: Partial<IPost>) => {
+              return (
+                <li key={_id}>
+                  <SidebarInfoFirstRow>
+                    {author?._id ? (
+                      <Link to={`/user/${author._id}`}>
+                        <SidebarItemUsername>
+                          {author.firstName} {author.lastName}
+                        </SidebarItemUsername>
+                      </Link>
+                    ) : (
+                      <SidebarItemUsername>Unknown</SidebarItemUsername>
+                    )}
+                    <p>•</p>
+                    <Link to={`/post/${_id}`}>
+                      <StyledDate>{formatDate(createdAt as string)}</StyledDate>
                     </Link>
-                  ) : (
-                    <SidebarItemUsername>Unknown</SidebarItemUsername>
-                  )}
-                  <p>•</p>
+                  </SidebarInfoFirstRow>
                   <Link to={`/post/${_id}`}>
-                    <StyledDate>{formatDate(createdAt as string)}</StyledDate>
+                    <SidebarItemTitle>{title}</SidebarItemTitle>
+                    <SidebarTags>
+                      <li key={topic?._id}>in {topic?.name}</li>
+                    </SidebarTags>
                   </Link>
-                </SidebarInfoFirstRow>
-                <Link to={`/post/${_id}`}>
-                  <SidebarItemTitle>{title}</SidebarItemTitle>
-                  <SidebarTags>
-                    <li key={index}>in {topic?.name}</li>
-                  </SidebarTags>
-                </Link>
-              </li>
-            );
-          })}
+                </li>
+              );
+            })}
       </SidebarList>
       <SeeAllLink to={`/explore-posts`}>See the full list</SeeAllLink>
     </SidebarContainer>

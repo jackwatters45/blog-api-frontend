@@ -134,8 +134,8 @@ const SignupForm = () => {
           <ul className="error">{formatErrors(errors.password.message)}</ul>
         ) : (
           <ul className="instructions">
-            {passwordRequirements.map((requirement, index) => (
-              <li key={index}>{requirement}</li>
+            {passwordRequirements.map((requirement) => (
+              <li key={requirement}>{requirement}</li>
             ))}
           </ul>
         )}

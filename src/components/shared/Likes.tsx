@@ -11,12 +11,21 @@ type Props = {
   setHasUserLiked: Dispatch<SetStateAction<boolean>>;
 };
 
-const LikeButton = styled.button`
+interface LikeButtonProps {
+  hasUserLiked: boolean;
+}
+
+const LikeButton = styled.button<LikeButtonProps>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+  background-color: ${(props) => (props.hasUserLiked ? 'rgb(55, 55, 55)' : 'inherit')};
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.055);
+  }
 `;
 
 const Likes = ({
@@ -61,12 +70,7 @@ const Likes = ({
   };
 
   return (
-    <LikeButton
-      onClick={handleClickLike}
-      style={{
-        background: hasUserLiked ? `rgb(55, 55, 55)` : 'transparent',
-      }}
-    >
+    <LikeButton onClick={handleClickLike} hasUserLiked={hasUserLiked}>
       <p>❤️</p>
       <p>{likesCount}</p>
     </LikeButton>

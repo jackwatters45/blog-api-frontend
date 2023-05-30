@@ -19,10 +19,9 @@ const PopularTopicsSidebar = () => {
       <StyledHrHorizontal />
       <SidebarTopicsContainer>
         {!!topics.length &&
-          topics.slice(0, 10).map((topic, index: number) => {
-            const { _id, name } = topic;
+          topics.slice(0, 10).map(({ _id, name }) => {
             return (
-              <TopicButton key={index} to={`/topic/${_id}`}>
+              <TopicButton key={_id} to={`/topic/${_id}`}>
                 {name}
               </TopicButton>
             );

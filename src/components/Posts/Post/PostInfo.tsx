@@ -4,7 +4,7 @@ import { formatDate } from '../../shared/formattingHelpers';
 import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import { TopicButton } from '../../../styles/styledComponents/HelperComponents';
 import Likes from '../../shared/Likes';
-import CommentsButton from '../components/Comments/CommentsButton';
+import CommentsButton from '../../shared/CommentsButton';
 import IPost, { ILike } from '../../../../types/post';
 import useLikes from '../../../custom/useLikes';
 import { useUserContext } from '../../../context/UserContext';

@@ -1,7 +1,7 @@
 export const formatErrors = (errorsString: string) => {
   if (!errorsString.includes(';')) return <li>{errorsString}</li>;
-  return errorsString.split(';').map((error, index) => {
-    return <li key={index}>{error}</li>;
+  return errorsString.split(';').map((error) => {
+    return <li key={error}>{error}</li>;
   });
 };
 

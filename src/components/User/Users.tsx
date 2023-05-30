@@ -37,7 +37,7 @@ const Users = ({ usersProp, selectedFilter }: Props) => {
   return (
     <StyledUsersContainer>
       {users?.length ? (
-        users.map((user: IUser, index) => <UserPreview key={index} user={user} />)
+        users.map((user: IUser) => <UserPreview key={user._id} user={user} />)
       ) : (
         <StyledNoUsersMessage>{`No Users here yet..`}</StyledNoUsersMessage>
       )}
