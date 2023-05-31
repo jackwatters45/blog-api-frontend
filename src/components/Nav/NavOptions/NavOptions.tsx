@@ -1,8 +1,9 @@
 import { styled } from 'styled-components';
 import NavOption from './NavOption';
-import { mdiAccountHardHat, mdiPencilBoxOutline } from '@mdi/js';
+import { mdiPencilBoxOutline } from '@mdi/js';
 import { useUserContext } from '../../../context/UserContext';
-import ProfileButton from './ProfileButton';
+import ProfileButton from './Profile/ProfileButton';
+import AdminButton from './Admin/AdminButton';
 
 const StyledNavOptions = styled.div`
   display: flex;
@@ -16,9 +17,7 @@ const NavOptions = () => {
     <StyledNavOptions>
       {user ? (
         <>
-          {user.userType === 'admin' && (
-            <NavOption icon={mdiAccountHardHat} text="Admin" to="/admin" size={0.8} />
-          )}
+          {user.userType === 'admin' && <AdminButton />}
           <NavOption icon={mdiPencilBoxOutline} text="Write" to="/write" size={0.8} />
           <ProfileButton />
         </>

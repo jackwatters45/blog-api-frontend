@@ -5,11 +5,11 @@ import Nav from '../../Nav/Nav';
 import { useSidebarContext } from '../../../context/SidebarContext';
 import { useForm, Controller } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
-import '../../../styles/scss/auth.scss';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import IPost from '../../../../types/post';
+import { StyledError } from '../../../styles/styledComponents/FormHelpers';
 
 const StyledForm = styled.form`
   display: flex;
@@ -76,6 +76,7 @@ const StyleDraftButton = styled(StyledPublishButton)`
 
 type Props = {
   post?: IPost;
+  pageTitle?: string;
 };
 
 type Inputs = {
@@ -84,7 +85,7 @@ type Inputs = {
   content: string;
 };
 
-const CreatePost = ({ post }: Props) => {
+const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   const { topics } = useSidebarContext();
   const { user } = useUserContext();
 
@@ -142,7 +143,7 @@ const CreatePost = ({ post }: Props) => {
       <Nav />
       <StyledMain>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          <StyledH1>Create Post</StyledH1>
+          <StyledH1>{pageTitle}</StyledH1>
           <StyledFormSection>
             <StyledLabel htmlFor="title">Title </StyledLabel>
             <StyledInput
@@ -158,9 +159,9 @@ const CreatePost = ({ post }: Props) => {
               })}
             />
             {errors.title && (
-              <ul className="error">
+              <StyledError>
                 <li>{errors.title.message}</li>
-              </ul>
+              </StyledError>
             )}
           </StyledFormSection>
           <StyledFormSection>
@@ -180,9 +181,9 @@ const CreatePost = ({ post }: Props) => {
               </StyledSelect>
             </SelectWrapper>
             {errors.topic && (
-              <ul className="error">
+              <StyledError>
                 <li>Topic is required</li>
-              </ul>
+              </StyledError>
             )}
           </StyledFormSection>
           <StyledFormSection>
@@ -202,9 +203,9 @@ const CreatePost = ({ post }: Props) => {
               )}
             />
             {errors.content && (
-              <ul className="error">
+              <StyledError>
                 <li>Content is required</li>
-              </ul>
+              </StyledError>
             )}
           </StyledFormSection>
           <StyledPublishSection>
@@ -217,9 +218,9 @@ const CreatePost = ({ post }: Props) => {
             </StyledPublishButton>
           </StyledPublishSection>
           {submitError && (
-            <ul className="error">
+            <StyledError>
               <li>{submitError}</li>
-            </ul>
+            </StyledError>
           )}
         </StyledForm>
       </StyledMain>
@@ -227,4 +228,4 @@ const CreatePost = ({ post }: Props) => {
   );
 };
 
-export default CreatePost;
+export default PostForm;

@@ -8,20 +8,22 @@ import { Link } from 'react-router-dom';
 import DeleteButton from './ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
+import { useUserContext } from '../../../context/UserContext';
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, auto) 1fr;
+  display: flex;
+  flex-direction: column;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
   border-radius: 4px;
-  padding: 1rem .25rem 1rem 1rem;
+  padding: 1rem 0.25rem 1rem 1rem;
   width: 350px;
   min-height: 200px;
-
   ${({ theme }) => theme.shadow};
 
   @media screen and (max-width: 400px) {
-  width: 90vw;
+    width: 90vw;
+  }
 `;
 
 const StyledTitleTopic = styled.div`
@@ -47,6 +49,17 @@ const StyledUpdated = styled(Link)`
   font-size: 0.9rem;
 `;
 
+const StyledAuthor = styled.div`
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+
+  p {
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
 const Buttons = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -55,6 +68,7 @@ const Buttons = styled.div`
 
 const ButtonOptions = styled(Buttons)`
   display: flex;
+  flex: 1 0 auto;
   gap: 1rem;
   margin-top: 1rem;
   margin-right: 0.75rem;
@@ -71,11 +85,13 @@ const ButtonOptions = styled(Buttons)`
 
 type Props = {
   post: IPost;
+  isAdminView?: boolean;
 };
 
-const MyPostsCard = ({ post }: Props) => {
+const MyPostsCard = ({ post, isAdminView }: Props) => {
+  const { user } = useUserContext();
   const { title, likes, topic, updatedAt, comments, author, _id } = post;
-  const likesProps = useLikes(likes as ILike[], author as string);
+  const likesProps = useLikes(likes as ILike[], user?._id as string);
 
   return (
     <Container>
@@ -86,6 +102,14 @@ const MyPostsCard = ({ post }: Props) => {
       <StyledUpdated to={`/post/${_id}`}>
         Last Updated: {formatDate(updatedAt)}
       </StyledUpdated>
+      {isAdminView && (
+        <StyledAuthor>
+          <p>Written by</p>
+          {author?.firstName && author?.lastName
+            ? `${author?.firstName} ${author?.lastName}`
+            : 'Unknown'}
+        </StyledAuthor>
+      )}
       <Buttons>
         <Likes _id={_id} {...likesProps} />
         <CommentsButton commentsCount={comments?.length ?? 0} />

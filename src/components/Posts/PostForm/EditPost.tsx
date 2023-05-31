@@ -1,16 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
-import CreatePost from './CreatePost';
+import PostForm from './PostForm';
 
-// cgm
-// reorganize file structure
-// commits
-// basic admin stuff
-
-// tomorrow
-// vet
-// quest
 const EditPost = () => {
   const { id } = useParams();
 
@@ -27,7 +19,7 @@ const EditPost = () => {
 
   // TODO loading
   if (!post) return null;
-  return <CreatePost post={post} />;
+  return <PostForm post={post} pageTitle={'Edit Post'} />;
 };
 
 export default EditPost;

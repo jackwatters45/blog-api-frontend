@@ -42,7 +42,6 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
           getPopularAuthors(),
           getPopularTopics(),
         ]);
-        console.log(posts);
         setPosts(posts);
         setAuthors(authors);
         setTopics(topics);

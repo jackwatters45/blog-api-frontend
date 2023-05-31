@@ -1,7 +1,7 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useUserContext } from '../../../context/UserContext';
+import { useUserContext } from '../../../../context/UserContext';
 import Cookies from 'js-cookie';
 
 const Container = styled.div`
@@ -32,14 +32,7 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
   const modalProps = useModal(useModalParams);
 
   const { updateUser, user } = useUserContext();
-
   const navigate = useNavigate();
-
-  const handleClickProfile = () => navigate(`/user/${user?._id}`);
-
-  const handleClickYourPosts = () => navigate(`/my-posts`);
-
-  const handleClickSettings = () => navigate(`/user/${user?._id}/settings`);
 
   const handleClickLogout = async () => {
     updateUser(null);
@@ -59,9 +52,15 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
   return (
     <Container {...modalProps}>
       <ul>
-        <StyledLi onClick={handleClickProfile}>Profile</StyledLi>
-        <StyledLi onClick={handleClickYourPosts}>Your Posts</StyledLi>
-        <StyledLi onClick={handleClickSettings}>Settings</StyledLi>
+        <Link to={`/user/${user?._id}`}>
+          <StyledLi>Profile</StyledLi>
+        </Link>
+        <Link to={`/my-posts`}>
+          <StyledLi>Your Posts</StyledLi>
+        </Link>
+        <Link to={`/user/${user?._id}/settings`}>
+          <StyledLi>Settings</StyledLi>
+        </Link>
         <StyledLi onClick={handleClickLogout}>Log out</StyledLi>
       </ul>
     </Container>
