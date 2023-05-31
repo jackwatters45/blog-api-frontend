@@ -17,7 +17,7 @@ const StyledSidebar = styled.div`
 
 const Sidebar = () => {
   return (
-    <StyledSidebar className="sidebar">
+    <StyledSidebar>
       <PopularPostsSidebar />
       <PopularAuthors />
       <PopularTopics />

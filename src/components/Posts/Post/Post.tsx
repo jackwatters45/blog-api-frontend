@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import { styled } from 'styled-components';
-import Nav from '../../Nav/Nav';
 import { useUserContext } from '../../../context/UserContext';
 import IComment from '../../../../types/comment';
 import CommentsSection from '../components/Comments/CommentsSection';
@@ -41,15 +40,12 @@ const Post = () => {
   if (!post) return <p>Loading</p>;
   const { content, comments, author, _id } = post;
   return (
-    <>
-      <Nav />
-      <StyledPostContainer>
-        <PostInfo post={post} />
-        <PostContentDefault contentHtml={content} />
-        {author && <Profile author={author} />}
-        <CommentsSection comments={comments as IComment[]} postId={_id} />
-      </StyledPostContainer>
-    </>
+    <StyledPostContainer>
+      <PostInfo post={post} />
+      <PostContentDefault contentHtml={content} />
+      {author && <Profile author={author} />}
+      <CommentsSection comments={comments as IComment[]} postId={_id} />
+    </StyledPostContainer>
   );
 };
 

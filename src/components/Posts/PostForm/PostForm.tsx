@@ -1,7 +1,6 @@
 import { init } from './editorOptions';
 import { styled } from 'styled-components';
 import { StyledH1, StyledMain } from '../../../styles/styledComponents/HelperComponents';
-import Nav from '../../Nav/Nav';
 import { useSidebarContext } from '../../../context/SidebarContext';
 import { useForm, Controller } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
@@ -139,92 +138,89 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   };
 
   return (
-    <>
-      <Nav />
-      <StyledMain>
-        <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          <StyledH1>{pageTitle}</StyledH1>
-          <StyledFormSection>
-            <StyledLabel htmlFor="title">Title </StyledLabel>
-            <StyledInput
-              type="text"
-              id="title"
-              aria-invalid={errors.title ? 'true' : 'false'}
-              {...register('title', {
-                required: 'Title is required',
-                maxLength: {
-                  value: 100,
-                  message: "First name can't exceed 100 characters",
-                },
-              })}
-            />
-            {errors.title && (
-              <StyledError>
-                <li>{errors.title.message}</li>
-              </StyledError>
-            )}
-          </StyledFormSection>
-          <StyledFormSection>
-            <StyledLabel htmlFor="topic">Topic </StyledLabel>
-            <SelectWrapper>
-              <StyledSelect
-                id="topic"
-                aria-invalid={errors.topic ? 'true' : 'false'}
-                {...register('topic', { required: true })}
-              >
-                <option value="">Select a topic</option>
-                {topics.map((topic) => (
-                  <option key={topic._id} value={topic._id}>
-                    {topic.name}
-                  </option>
-                ))}
-              </StyledSelect>
-            </SelectWrapper>
-            {errors.topic && (
-              <StyledError>
-                <li>Topic is required</li>
-              </StyledError>
-            )}
-          </StyledFormSection>
-          <StyledFormSection>
-            <StyledLabel htmlFor="content">Content</StyledLabel>
-            <Controller
-              name="content"
-              control={control}
-              defaultValue=""
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Editor
-                  apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
-                  init={init}
-                  onEditorChange={(content) => field.onChange(content)}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.content && (
-              <StyledError>
-                <li>Content is required</li>
-              </StyledError>
-            )}
-          </StyledFormSection>
-          <StyledPublishSection>
-            <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
-              {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
-            </StyleDraftButton>
-
-            <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>
-              Publish
-            </StyledPublishButton>
-          </StyledPublishSection>
-          {submitError && (
+    <StyledMain>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledH1>{pageTitle}</StyledH1>
+        <StyledFormSection>
+          <StyledLabel htmlFor="title">Title </StyledLabel>
+          <StyledInput
+            type="text"
+            id="title"
+            aria-invalid={errors.title ? 'true' : 'false'}
+            {...register('title', {
+              required: 'Title is required',
+              maxLength: {
+                value: 100,
+                message: "First name can't exceed 100 characters",
+              },
+            })}
+          />
+          {errors.title && (
             <StyledError>
-              <li>{submitError}</li>
+              <li>{errors.title.message}</li>
             </StyledError>
           )}
-        </StyledForm>
-      </StyledMain>
-    </>
+        </StyledFormSection>
+        <StyledFormSection>
+          <StyledLabel htmlFor="topic">Topic </StyledLabel>
+          <SelectWrapper>
+            <StyledSelect
+              id="topic"
+              aria-invalid={errors.topic ? 'true' : 'false'}
+              {...register('topic', { required: true })}
+            >
+              <option value="">Select a topic</option>
+              {topics.map((topic) => (
+                <option key={topic._id} value={topic._id}>
+                  {topic.name}
+                </option>
+              ))}
+            </StyledSelect>
+          </SelectWrapper>
+          {errors.topic && (
+            <StyledError>
+              <li>Topic is required</li>
+            </StyledError>
+          )}
+        </StyledFormSection>
+        <StyledFormSection>
+          <StyledLabel htmlFor="content">Content</StyledLabel>
+          <Controller
+            name="content"
+            control={control}
+            defaultValue=""
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Editor
+                apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
+                init={init}
+                onEditorChange={(content) => field.onChange(content)}
+                value={field.value}
+              />
+            )}
+          />
+          {errors.content && (
+            <StyledError>
+              <li>Content is required</li>
+            </StyledError>
+          )}
+        </StyledFormSection>
+        <StyledPublishSection>
+          <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
+            {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
+          </StyleDraftButton>
+
+          <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>
+            Publish
+          </StyledPublishButton>
+        </StyledPublishSection>
+        {submitError && (
+          <StyledError>
+            <li>{submitError}</li>
+          </StyledError>
+        )}
+      </StyledForm>
+    </StyledMain>
   );
 };
 

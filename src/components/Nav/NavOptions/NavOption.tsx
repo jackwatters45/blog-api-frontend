@@ -1,5 +1,5 @@
 import Icon from '@mdi/react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 type Props = {
@@ -18,12 +18,12 @@ const StyledNavOption = styled.div`
 
 const NavOption = ({ icon, text, size, to }: Props) => {
   return (
-    <Link to={to}>
+    <NavLink to={to}>
       <StyledNavOption>
         {icon && <Icon path={icon} size={size ?? 0.9} />}
         {text && <p>{text}</p>}
       </StyledNavOption>
-    </Link>
+    </NavLink>
   );
 };
 

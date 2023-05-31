@@ -2,22 +2,24 @@
 
 ## Next
 
-- edit posts
+- create nav nested layout
+- protected routes and also pages (cant just pull up edit page for anyone's post)
 
-- Admin stuff
-  - view unpublished posts
-  - own page
-    - create other admin
-    - topics
-  - on top of other pages
-    - delete
-- settings?
+- admin users page
+
+  - delete user option
+  - create edit user page
+    - admin user edit page combines user form and user settings
+
+- Topic create edit delete page
+
+- make settings page
 
 ## Eventually
 
 - General
 
-  - protected routes and also pages (cant just pull up edit page for anyone's post)
+  - reorganize css
   - make sure light mode doesn't f app up
   - interface vs type consistency
   - handle posts and users deleted (maybe comments too)

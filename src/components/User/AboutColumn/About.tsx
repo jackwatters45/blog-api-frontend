@@ -96,10 +96,8 @@ const About = ({
           <Follow followers={followers as string[]} setFollowerCount={setFollowerCount} />
         </FollowersContainer>
       </StyledSection>
-      {description && (
-        <StyledDescription className="description">{description}</StyledDescription>
-      )}
-      <StyledSection className="following">
+      {description && <StyledDescription>{description}</StyledDescription>}
+      <StyledSection>
         {!!following.length && <Following following={following} />}
       </StyledSection>
     </RightColumn>

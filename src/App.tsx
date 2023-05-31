@@ -1,4 +1,4 @@
-import './styles/scss/index.scss';
+import './styles/index.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { styled, ThemeProvider } from 'styled-components';
 import { UserProvider } from './context/UserContext';

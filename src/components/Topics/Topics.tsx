@@ -5,7 +5,6 @@ import {
   PopularTopicsContainer,
   TopicButtonLarge,
 } from '../../styles/styledComponents/HelperComponents';
-import Nav from '../Nav/Nav';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
@@ -69,43 +68,40 @@ const Topics = () => {
   };
 
   return (
-    <>
-      <Nav />
-      <StyledMain>
-        <StyledContentContainer>
-          <StyledH1>{selectedTopic ? selectedTopic.name : 'Explore Topics'}</StyledH1>
-          <PopularTopicsContainer>
-            {topics.slice(0, 10).map(({ _id, name }) => {
-              return selectedTopic?._id === _id ? (
-                <StyledTopicButton key={_id} to={'/explore-topics'}>
-                  {name}
-                  <Icon path={mdiCloseBox} size={0.8} />
-                </StyledTopicButton>
-              ) : (
-                <TopicButtonLarge key={_id} to={`/topic/${_id}`}>
-                  {name}
-                </TopicButtonLarge>
-              );
-            })}
-          </PopularTopicsContainer>
-          {selectedTopic && (
-            <FilterContainer>
-              <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
-              <SortBy
-                label={'Sort Topics By:'}
-                sortBy={sortBy}
-                handleSelectSortBy={handleSelectSortBy}
-              />
-              <p>
-                {camelToTitleCase(sortBy)}: {getFilterResult()}
-              </p>
-            </FilterContainer>
-          )}
-          <Posts postsProp={posts} selectedFilter={!!selectedTopic} />
-        </StyledContentContainer>
-        <Sidebar />
-      </StyledMain>
-    </>
+    <StyledMain>
+      <StyledContentContainer>
+        <StyledH1>{selectedTopic ? selectedTopic.name : 'Explore Topics'}</StyledH1>
+        <PopularTopicsContainer>
+          {topics.slice(0, 10).map(({ _id, name }) => {
+            return selectedTopic?._id === _id ? (
+              <StyledTopicButton key={_id} to={'/explore-topics'}>
+                {name}
+                <Icon path={mdiCloseBox} size={0.8} />
+              </StyledTopicButton>
+            ) : (
+              <TopicButtonLarge key={_id} to={`/topic/${_id}`}>
+                {name}
+              </TopicButtonLarge>
+            );
+          })}
+        </PopularTopicsContainer>
+        {selectedTopic && (
+          <FilterContainer>
+            <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
+            <SortBy
+              label={'Sort Topics By:'}
+              sortBy={sortBy}
+              handleSelectSortBy={handleSelectSortBy}
+            />
+            <p>
+              {camelToTitleCase(sortBy)}: {getFilterResult()}
+            </p>
+          </FilterContainer>
+        )}
+        <Posts postsProp={posts} selectedFilter={!!selectedTopic} />
+      </StyledContentContainer>
+      <Sidebar />
+    </StyledMain>
   );
 };
 

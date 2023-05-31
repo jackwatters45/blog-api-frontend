@@ -1,7 +1,16 @@
 import { useState, FormEvent } from 'react';
-import '../../styles/scss/auth.scss';
 import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import {
+  StyledError,
+  StyledForm,
+  StyledFormContainer,
+  StyledFormInput,
+  StyledFormLink,
+  StyledFormNav,
+  StyledFormSection,
+  StyledFormSubmitInput,
+} from '../../styles/styledComponents/FormHelpers';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,25 +54,20 @@ const Login = () => {
     } catch (err) {
       console.log(err);
     }
-
-    // TODO test whether this part needed
-    // setEmail('');
-    // setPassword('');
-    // setCredentialsError('');
   };
 
   return (
-    <main className="login">
-      <nav>
+    <StyledFormContainer>
+      <StyledFormNav>
         <h1>Log in to your account</h1>
         <p>
-          Or <a href="/signup">create a new account</a>
+          Or <StyledFormLink to={'/signup'}>create a new account</StyledFormLink>
         </p>
-      </nav>
-      <form method="POST" onSubmit={handleSubmit}>
-        <div>
+      </StyledFormNav>
+      <StyledForm method="POST" onSubmit={handleSubmit}>
+        <StyledFormSection>
           <label htmlFor="email">Email</label>
-          <input
+          <StyledFormInput
             value={email}
             onChange={handleEmailChange}
             type="email"
@@ -71,10 +75,10 @@ const Login = () => {
             id="email"
             autoComplete="username"
           />
-        </div>
-        <div>
+        </StyledFormSection>
+        <StyledFormSection>
           <label htmlFor="password">Password</label>
-          <input
+          <StyledFormInput
             value={password}
             onChange={handlePasswordChange}
             type="password"
@@ -82,11 +86,15 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-        </div>
-        <input type="submit" value="Log in" />
-        {credentialsError && <p className="error">{credentialsError}</p>}
-      </form>
-    </main>
+        </StyledFormSection>
+        <StyledFormSubmitInput type="submit" value="Log in" />
+        {credentialsError && (
+          <StyledError>
+            <li>{credentialsError}</li>
+          </StyledError>
+        )}
+      </StyledForm>
+    </StyledFormContainer>
   );
 };
 

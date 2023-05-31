@@ -1,4 +1,3 @@
-import Nav from '../Nav/Nav';
 import {
   StyledContentContainer,
   StyledH1,
@@ -48,17 +47,14 @@ const PopularAuthors = () => {
   }, [timeRange]);
 
   return (
-    <>
-      <Nav />
-      <StyledMain>
-        <StyledContentContainer>
-          <StyledH1>Explore Popular Authors</StyledH1>
-          <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
-          <Users usersProp={users} selectedFilter={true} />
-        </StyledContentContainer>
-        <Sidebar />
-      </StyledMain>
-    </>
+    <StyledMain>
+      <StyledContentContainer>
+        <StyledH1>Explore Popular Authors</StyledH1>
+        <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
+        <Users usersProp={users} selectedFilter={true} />
+      </StyledContentContainer>
+      <Sidebar />
+    </StyledMain>
   );
 };
 

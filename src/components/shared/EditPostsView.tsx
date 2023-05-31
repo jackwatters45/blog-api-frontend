@@ -1,4 +1,3 @@
-import Nav from '../Nav/Nav';
 import { StyledMain } from '../../styles/styledComponents/HelperComponents';
 import EditPostCard from '../Posts/MyPosts/MyPostsCard';
 import { styled } from 'styled-components';
@@ -38,32 +37,29 @@ const EditPostsView = ({ posts, title, isAdminView }: Props) => {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts);
 
   return (
-    <>
-      <Nav />
-      <MyPostsMain>
-        <Container>
-          <h1>{title}</h1>
-          <FilterContainer>
-            <Filter
-              postsData={posts}
-              setFilteredPosts={setFilteredPosts}
-              isAdminView={isAdminView}
-            />
-          </FilterContainer>
-          <StyledPosts>
-            {filteredPosts?.length ? (
-              filteredPosts.map((post: IPost) => {
-                return (
-                  <EditPostCard key={post._id} post={post} isAdminView={isAdminView} />
-                );
-              })
-            ) : (
-              <div>{`No posts here yet..`}</div>
-            )}
-          </StyledPosts>
-        </Container>
-      </MyPostsMain>
-    </>
+    <MyPostsMain>
+      <Container>
+        <h1>{title}</h1>
+        <FilterContainer>
+          <Filter
+            postsData={posts}
+            setFilteredPosts={setFilteredPosts}
+            isAdminView={isAdminView}
+          />
+        </FilterContainer>
+        <StyledPosts>
+          {filteredPosts?.length ? (
+            filteredPosts.map((post: IPost) => {
+              return (
+                <EditPostCard key={post._id} post={post} isAdminView={isAdminView} />
+              );
+            })
+          ) : (
+            <div>{`No posts here yet..`}</div>
+          )}
+        </StyledPosts>
+      </Container>
+    </MyPostsMain>
   );
 };
 

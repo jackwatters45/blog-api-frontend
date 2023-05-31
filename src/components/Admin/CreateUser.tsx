@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import { StyledFormContainer } from '../../styles/styledComponents/FormHelpers';
-import Nav from '../Nav/Nav';
 import UserForm, { Inputs } from '../shared/UserForm/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,14 +9,6 @@ const StyledH1 = styled.h1`
   text-align: center;
 `;
 
-// admin users page
-// create edit user page
-// delete user page
-
-// Topic create edit delete page
-
-// make settings page
-// -> admin user edit page combines user form and user settings
 const CreateUser = () => {
   const navigate = useNavigate();
 
@@ -37,26 +28,22 @@ const CreateUser = () => {
       }
 
       await response.json();
-
-      navigate('/');
+      navigate('/admin/users');
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <>
-      <Nav />
-      <StyledFormContainer>
-        <StyledH1>Create User</StyledH1>
-        <UserForm
-          onSubmit={onSubmit}
-          isAdminView={true}
-          submitText={'Create User'}
-          signupError={signupError}
-        />
-      </StyledFormContainer>
-    </>
+    <StyledFormContainer>
+      <StyledH1>Create User</StyledH1>
+      <UserForm
+        onSubmit={onSubmit}
+        isAdminView={true}
+        submitText={'Create User'}
+        signupError={signupError}
+      />
+    </StyledFormContainer>
   );
 };
 
