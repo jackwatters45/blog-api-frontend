@@ -11,7 +11,7 @@ const theme = {
     backgroundSecondary: 'rgb(47, 47, 47)',
     borderColor: 'rgba(255, 255, 255, 0.282)',
   },
-  hoverBackground: 'rgb(55, 55, 55);',
+  hoverBackground: 'rgba(255, 255, 255, 0.055);',
 
   shadow: css`
     box-shadow: rgb(15 15 15 / 15%) 0px 0px 0px 2px, rgb(15 15 15 / 15%) 0px 3px 6px;

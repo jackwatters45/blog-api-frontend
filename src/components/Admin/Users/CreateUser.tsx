@@ -1,13 +1,11 @@
-import { styled } from 'styled-components';
-import { StyledFormContainer } from '../../styles/styledComponents/FormHelpers';
-import UserForm, { Inputs } from '../shared/UserForm/UserForm';
+import {
+  StyledFormContainer,
+  StyledH1Centered,
+} from '../../../styles/styledComponents/FormHelpers';
+import UserForm, { Inputs } from '../../shared/UserForm/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-
-const StyledH1 = styled.h1`
-  text-align: center;
-`;
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -36,7 +34,7 @@ const CreateUser = () => {
 
   return (
     <StyledFormContainer>
-      <StyledH1>Create User</StyledH1>
+      <StyledH1Centered>Create User</StyledH1Centered>
       <UserForm
         onSubmit={onSubmit}
         isAdminView={true}

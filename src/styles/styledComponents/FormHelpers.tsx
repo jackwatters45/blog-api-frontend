@@ -10,6 +10,10 @@ export const StyledFormContainer = styled.div`
   gap: 2rem;
 `;
 
+export const StyledH1Centered = styled.h1`
+  text-align: center;
+`;
+
 export const StyledFormNav = styled.nav`
   display: flex;
   flex-direction: column;

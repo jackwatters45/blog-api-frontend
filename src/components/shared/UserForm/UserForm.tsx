@@ -11,6 +11,7 @@ import {
   StyledFormSelect,
   StyledFormSubmitInput,
 } from '../../../styles/styledComponents/FormHelpers';
+import IUser from '../../../../types/user';
 
 export type Inputs = {
   firstName: string;
@@ -27,16 +28,32 @@ type Props = {
   submitText: string;
   signupError: string;
   isAdminView?: boolean;
+  userData?: IUser;
 };
 
-// TODO remove default values
-const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => {
+const UserForm = ({
+  isAdminView,
+  onSubmit,
+  signupError,
+  submitText,
+  userData,
+}: Props) => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      firstName: userData?.firstName,
+      lastName: userData?.lastName,
+      email: userData?.email,
+      username: userData?.username,
+      password: userData?.password,
+      confirmPassword: userData?.password,
+      userType: userData?.userType,
+    },
+  });
 
   return (
     <StyledForm method="POST" onSubmit={handleSubmit(onSubmit)}>
@@ -45,7 +62,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="text"
           id="firstName"
-          defaultValue={'Jeff'}
           aria-invalid={errors.firstName ? 'true' : 'false'}
           {...register('firstName', {
             required: 'First name is required',
@@ -63,7 +79,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="text"
           id="lastName"
-          defaultValue={'Stein'}
           aria-invalid={errors.lastName ? 'true' : 'false'}
           {...register('lastName', {
             required: 'Last name is required',
@@ -81,7 +96,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="email"
           id="email"
-          defaultValue={'some@email.com'}
           aria-invalid={errors.email ? 'true' : 'false'}
           {...register('email', { required: true, validate: validateEmailHooks })}
         />
@@ -94,7 +108,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="text"
           id="username"
-          defaultValue={'jstein'}
           aria-invalid={errors.username ? 'true' : 'false'}
           {...register('username', {
             required: 'Username is required',
@@ -112,7 +125,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="password"
           id="password"
-          defaultValue={'passwordA1$'}
           aria-invalid={errors.password ? 'true' : 'false'}
           {...register('password', { required: true, validate: validatePasswordHooks })}
         />
@@ -131,7 +143,6 @@ const UserForm = ({ isAdminView, onSubmit, signupError, submitText }: Props) => 
         <StyledFormInput
           type="password"
           id="confirmPassword"
-          defaultValue={'passwordA1$'}
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
           {...register('confirmPassword', {
             required: true,

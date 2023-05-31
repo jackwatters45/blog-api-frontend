@@ -35,8 +35,8 @@ const AdminDropdown = ({ useModalParams }: Props) => {
         <Link to={`/admin/create-topic`}>
           <StyledLi>Create Topic</StyledLi>
         </Link>
-        <Link to={`/admin/users/create`}>
-          <StyledLi>Create User</StyledLi>
+        <Link to={`/admin/users`}>
+          <StyledLi>View Users</StyledLi>
         </Link>
         <Link to={`/admin/posts`}>
           <StyledLi>View Posts</StyledLi>

@@ -14,8 +14,9 @@ import PostForm from './components/Posts/PostForm/PostForm';
 import MyPosts from './components/Posts/MyPosts/MyPosts';
 import EditPost from './components/Posts/PostForm/EditPost';
 import EditPostsAdmin from './components/Admin/EditPostsAdmin';
-import CreateUser from './components/Admin/CreateUser';
+import CreateUser from './components/Admin/Users/CreateUser';
 import Layout from './Layout';
+import EditUsersAdmin from './components/Admin/Users/EditUsers';
 
 const RoutesComponent = () => {
   const userContext = useContext(UserContext);
@@ -31,32 +32,42 @@ const RoutesComponent = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
-      {/* root route index below, move  */}
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Dashboard />} />
+        <Route index element={<Dashboard />} />
+
         <Route path="/explore-posts" element={<PopularPosts />} />
-        <Route path="/post/:id" element={<Post />} />
-        <Route path="/post/:id/edit" element={<EditPost />} />
+        <Route path="/post/:id" element={<Post />}>
+          <Route path="edit" element={<EditPost />} />
+        </Route>
+
         <Route path="/write" element={<PostForm />} />
+        <Route path="/my-posts" element={<MyPosts />} />
+
         <Route path="/explore-authors" element={<PopularAuthors />} />
         <Route path="/user/:id" element={<User />}>
           <Route path=":type" element={<User />} />
         </Route>
+
         <Route path="/explore-topics" element={<Topics />} />
         <Route path="/topic/:id" element={<Topics />} />
-        <Route path="/my-posts" element={<MyPosts />} />
 
-        <Route path="/admin" element={<h1>404</h1>} />
-        <Route path="/admin/posts" element={<EditPostsAdmin />} />
+        <Route path="/admin/posts">
+          <Route index element={<EditPostsAdmin />} />
+          <Route path=":id/edit" element={<EditPost />} />
+        </Route>
 
-        <Route path="/admin/users" />
-        <Route path="create" element={<CreateUser />} />
+        <Route path="/admin/users">
+          <Route index element={<EditUsersAdmin />} />
+          <Route path="create" element={<CreateUser />} />
+          <Route path=":id/edit" />
+        </Route>
+
+        <Route path="/admin/topics">
+          <Route index />
+          <Route path="create" />
+          <Route path=":id/edit" />
+        </Route>
       </Route>
-
-      {/* note sure if i want page at index */}
-      {/* <Route index element={<NotFoundPage />} />  */}
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
-
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

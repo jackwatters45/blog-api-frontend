@@ -2,10 +2,7 @@
 
 ## Next
 
-- create nav nested layout
-- protected routes and also pages (cant just pull up edit page for anyone's post)
-
-- admin users page
+- admin users page (copy post design)
 
   - delete user option
   - create edit user page
@@ -14,6 +11,8 @@
 - Topic create edit delete page
 
 - make settings page
+
+- protected routes and also pages (cant just pull up edit page for anyone's post)
 
 ## Eventually
 
