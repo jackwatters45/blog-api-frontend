@@ -25,9 +25,7 @@ function checkValidationErrorsPassword(password: string) {
 
   // Check for at least one special character
   if (!/[@$!%*?&]/.test(password)) {
-    errors.push(
-      'Password must contain at least one special character (@, $, !, %, *, ?, &).',
-    );
+    errors.push('Password must contain at least one special character.');
   }
 
   return errors.length ? errors : true;

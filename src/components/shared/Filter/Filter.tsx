@@ -32,8 +32,9 @@ type filterOption = {
 type Props<T> = {
   data: T[];
   setFilteredData: Dispatch<SetStateAction<T[]>>;
-  filterFunction: (filter: string, filterType: string, data: T[]) => T[];
-  filterOptions: filterOption[];
+  filterFunction: (filter: string, data: T[], filterType?: string) => T[];
+  filterOptions?: filterOption[];
+  placeHolder: string;
 };
 
 const Filter = <T,>({
@@ -41,6 +42,7 @@ const Filter = <T,>({
   setFilteredData,
   filterFunction,
   filterOptions,
+  placeHolder,
 }: Props<T>) => {
   const [filter, setFilter] = useState<string>('');
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,29 +56,31 @@ const Filter = <T,>({
 
   useEffect(() => {
     if (filter === '') return setFilteredData(data);
-    return setFilteredData(filterFunction(filter, filterType, data));
-  }, [filter, filterType, data, setFilteredData, filterFunction]);
+    return setFilteredData(filterFunction(filter, data, filterType));
+  }, [filter, filterType, setFilteredData, filterFunction, data]);
 
   return (
     <StyledForm>
-      <SelectWrapper>
-        <StyledSelect
-          name="filterType"
-          value={filterType}
-          onChange={handleFilterTypeChange}
-        >
-          {filterOptions?.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </StyledSelect>
-      </SelectWrapper>
+      {filterOptions && (
+        <SelectWrapper>
+          <StyledSelect
+            name="filterType"
+            value={filterType}
+            onChange={handleFilterTypeChange}
+          >
+            {filterOptions?.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </StyledSelect>
+        </SelectWrapper>
+      )}
       <StyledInput
         type="text"
         value={filter}
         onChange={handleFilterChange}
-        placeholder="Filter posts..."
+        placeholder={placeHolder}
       />
     </StyledForm>
   );

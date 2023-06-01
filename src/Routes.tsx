@@ -2,8 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Dashboard from './components/Home/Dashboard';
-import { useContext, useEffect } from 'react';
-import { UserContext } from './context/UserContext';
 import Post from './components/Posts/Post/Post';
 import User from './components/User/User';
 import NotFoundPage from './components/Errors/NotFoundPage';
@@ -14,18 +12,17 @@ import PostForm from './components/Posts/PostForm/PostForm';
 import MyPosts from './components/Posts/MyPosts/MyPosts';
 import EditPost from './components/Posts/PostForm/EditPost';
 import EditPostsAdmin from './components/Admin/EditPostsAdmin';
-import CreateUser from './components/Admin/Users/CreateUser';
 import Layout from './Layout';
-import EditUsersAdmin from './components/Admin/Users/EditUsers';
+import EditUsersAdmin from './components/Admin/Users/EditUsersAdmin';
+import EditUser from './components/Admin/Users/EditUser';
+import EditTopicsAdmin from './components/Admin/Topics/EditTopicsAdmin';
+import CreateUser from './components/Admin/Users/CreateUser';
+import EditTopic from './components/Admin/Topics/EditTopic';
 
 const RoutesComponent = () => {
-  const userContext = useContext(UserContext);
+  // const userContext = useContext(UserContext);
   // TODO handle error (your session has expired log in again)
   // if (!userContext) return null;
-
-  useEffect(() => {
-    if (userContext?.user) console.log(userContext?.user);
-  }, [userContext]);
 
   return (
     <Routes>
@@ -59,13 +56,13 @@ const RoutesComponent = () => {
         <Route path="/admin/users">
           <Route index element={<EditUsersAdmin />} />
           <Route path="create" element={<CreateUser />} />
-          <Route path=":id/edit" />
+          <Route path=":id/edit" element={<EditUser />} />
         </Route>
 
         <Route path="/admin/topics">
-          <Route index />
-          <Route path="create" />
-          <Route path=":id/edit" />
+          <Route index element={<EditTopicsAdmin />} />
+          <Route path="create" element={<EditTopic />} />
+          <Route path=":id/edit" element={<EditTopic />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />

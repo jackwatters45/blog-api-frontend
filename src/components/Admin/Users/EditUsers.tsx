@@ -1,83 +1,46 @@
-import { useEffect, useState } from 'react';
-import IUser from '../../../../types/user';
-import { styled } from 'styled-components';
-import { StyledMain } from '../../../styles/styledComponents/HelperComponents';
+import { useState } from 'react';
 import Filter from '../../shared/Filter/Filter';
 import EditUserCard from './EditUserCard';
+import { userFilterOptions } from '../../shared/Filter/filterOptions';
+import {
+  AdminContainer,
+  CardContainer,
+  FilterContainer,
+  FilterError,
+} from '../../../styles/styledComponents/AdminCardComponents';
+import { userFilterFunction } from '../../shared/Filter/filterFunctions';
+import { AdminUser } from '../../../../types/post';
 
-const Container = styled(StyledMain)`
-  max-width: 1250px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
-`;
+type Props = {
+  users: AdminUser[];
+};
 
-const FilterContainer = styled.div`
-  padding-right: 1rem;
-`;
-
-const StyledPosts = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-// card
-// filter
-// backend
-// reorganize
-const EditUsersAdmin = () => {
-  const [users, setUsers] = useState<undefined | IUser[]>(undefined);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      // TODO change to all
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-        credentials: 'include',
-      });
-      const data = await res.json();
-      setUsers(data);
-    };
-    fetchUsers();
-  }, []);
-
-  const [filteredUsers, setFilteredUsers] = useState<IUser[]>(users ?? []);
-  useEffect(() => {
-    setFilteredUsers(users ?? []);
-  }, [users]);
-
-  const filterFunction = (filter: string, filterType: string, usersData: IUser[]) => {
-    return usersData;
-  };
+const EditUsers = ({ users }: Props) => {
+  const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>(users ?? []);
 
   return filteredUsers ? (
-    <Container>
+    <AdminContainer>
       <h1>Edit Users</h1>
       <FilterContainer>
-        <Filter<IUser>
+        <Filter<AdminUser>
           data={users ?? []}
           setFilteredData={setFilteredUsers}
-          filterFunction={filterFunction}
-          // TODO
-          filterOptions={[
-            { value: '', label: 'Any' },
-            { value: 'title', label: 'Title' },
-            { value: 'author', label: 'Author' },
-            { value: 'topic', label: 'Topic' },
-          ]}
+          filterFunction={userFilterFunction}
+          filterOptions={userFilterOptions}
+          placeHolder={'Filter Users...'}
         />
       </FilterContainer>
-      <StyledPosts>
+      <CardContainer>
         {filteredUsers?.length ? (
-          filteredUsers.map((user: IUser) => {
+          filteredUsers.map((user: AdminUser) => {
             return <EditUserCard key={user._id} user={user} />;
           })
         ) : (
-          <div>{`No users here yet..`}</div>
+          <FilterError>{`No users match your filter...`}</FilterError>
         )}
-      </StyledPosts>
-    </Container>
+      </CardContainer>
+    </AdminContainer>
   ) : null;
 };
 
-export default EditUsersAdmin;
+export default EditUsers;

@@ -2,15 +2,15 @@
 
 ## Next
 
-- admin users page (copy post design)
-
-  - delete user option
-  - create edit user page
-    - admin user edit page combines user form and user settings
-
-- Topic create edit delete page
+- fix topic filter (remove the options button)
+- make cards fit better
+- should be a way to combine the edit(Posts | Topics | Users) pages
+- clean up inputs interfaces
+- rename topics by id route (/all -> express route)
+- reposition delete button on topics edit page
 
 - make settings page
+- admin user edit page combines user form and user settings
 
 - protected routes and also pages (cant just pull up edit page for anyone's post)
 

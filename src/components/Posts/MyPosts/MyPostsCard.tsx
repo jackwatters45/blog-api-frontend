@@ -11,11 +11,11 @@ import { useUserContext } from '../../../context/UserContext';
 import {
   ButtonOptions,
   Buttons,
-  Container,
+  AdminCard,
   StyledAuthor,
   StyledTitleTopic,
   StyledUpdated,
-} from '../../../styles/styledComponents/AdminCard';
+} from '../../../styles/styledComponents/AdminCardComponents';
 
 type Props = {
   post: IPost;
@@ -28,14 +28,12 @@ const MyPostsCard = ({ post, isAdminView }: Props) => {
   const likesProps = useLikes(likes as ILike[], user?._id as string);
 
   return (
-    <Container>
+    <AdminCard>
       <StyledTitleTopic>
         <h2>{title}</h2>
         {topic && <Link to={`/topic/${topic._id}`}>in {topic.name}</Link>}
       </StyledTitleTopic>
-      <StyledUpdated to={`/post/${_id}`}>
-        Last Updated: {formatDate(updatedAt)}
-      </StyledUpdated>
+      <StyledUpdated>Last Updated: {formatDate(updatedAt)}</StyledUpdated>
       {isAdminView && (
         <StyledAuthor>
           <p>Written by</p>
@@ -51,7 +49,8 @@ const MyPostsCard = ({ post, isAdminView }: Props) => {
       <ButtonOptions>
         <DeleteButton
           StyledButton={Icon}
-          postId={_id}
+          objType={'post'}
+          id={_id}
           extraButtonProps={{ path: mdiDelete, size: 1 }}
         />
         <Link to={isAdminView ? `/admin/posts/${_id}/edit` : `/post/${_id}/edit`}>
@@ -61,7 +60,7 @@ const MyPostsCard = ({ post, isAdminView }: Props) => {
           <Icon path={mdiOpenInNew} size={1} />
         </Link>
       </ButtonOptions>
-    </Container>
+    </AdminCard>
   );
 };
 

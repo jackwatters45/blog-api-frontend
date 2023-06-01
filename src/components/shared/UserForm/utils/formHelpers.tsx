@@ -10,7 +10,7 @@ export const passwordRequirements = [
   'Password must contain at least one uppercase letter.',
   'Password must contain at least one lowercase letter.',
   'Password must contain at least one digit.',
-  'Password must contain at least one special character (@, $, !, %, *, ?, &).',
+  'Password must contain at least one special character.',
 ];
 
 export const arrToString = (arr: string[]) => arr.join(';');

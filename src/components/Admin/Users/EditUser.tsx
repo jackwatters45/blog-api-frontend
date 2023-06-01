@@ -17,8 +17,8 @@ const EditUser = () => {
     if (!id) return;
     const fetchUser = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`);
-      const data = await res.json();
-      setUser(data);
+      const { user } = await res.json();
+      setUser(user);
     };
     fetchUser();
   }, [id]);
@@ -27,18 +27,29 @@ const EditUser = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(data),
-      });
+      console.log(id);
+      const response = id
+        ? await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data),
+          })
+        : await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data),
+          });
 
       if (!response.ok) {
-        return setSignupError('Invalid credentials. Please try again.');
+        return setSignupError(
+          id
+            ? 'Error saving changes. Please try again.'
+            : 'Error creating user. Please try again.',
+        );
       }
 
-      await response.json();
       navigate('/admin/users');
     } catch (err) {
       console.log(err);
@@ -48,15 +59,14 @@ const EditUser = () => {
   // TODO loading
   return user ? (
     <StyledFormContainer>
-      <StyledH1Centered>Create User</StyledH1Centered>
+      <StyledH1Centered>Edit User</StyledH1Centered>
       <UserForm
         userData={user}
-        submitText={'Edit User'}
+        submitText={'Confirm Changes'}
         onSubmit={onSubmit}
         isAdminView={true}
         signupError={signupError}
       />
-      ;
     </StyledFormContainer>
   ) : null;
 };

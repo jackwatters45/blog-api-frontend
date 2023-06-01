@@ -4,8 +4,15 @@ const commonPostFilterOptions = [
   { value: 'topic', label: 'Topic' },
 ];
 
-export const PostFilterOptions = (isAdminView: boolean) => {
+export const getPostFilterOptions = (isAdminView: boolean) => {
   return isAdminView
     ? [...commonPostFilterOptions, { value: 'author', label: 'Author' }]
     : commonPostFilterOptions;
 };
+
+export const userFilterOptions = [
+  { value: '', label: 'Any' },
+  { value: 'name', label: 'Name' },
+  { value: 'email', label: 'Email' },
+  { value: 'username', label: 'Username' },
+];

@@ -13,14 +13,15 @@ const StyledModal = styled.div`
 
 type Props = {
   useModalParams: useModalParams;
-  postId: string;
+  objType: string;
+  id: string;
 };
 
-const DeleteModal = ({ useModalParams, postId }: Props) => {
+const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);
 
   const handleDelete = async () => {
-    await fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/${objType}s/${id}`, {
       method: 'DELETE',
       credentials: 'include',
     });

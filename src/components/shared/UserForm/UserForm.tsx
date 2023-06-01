@@ -49,8 +49,6 @@ const UserForm = ({
       lastName: userData?.lastName,
       email: userData?.email,
       username: userData?.username,
-      password: userData?.password,
-      confirmPassword: userData?.password,
       userType: userData?.userType,
     },
   });
@@ -126,7 +124,15 @@ const UserForm = ({
           type="password"
           id="password"
           aria-invalid={errors.password ? 'true' : 'false'}
-          {...register('password', { required: true, validate: validatePasswordHooks })}
+          {...register(
+            'password',
+            isAdminView
+              ? {}
+              : {
+                  required: true,
+                  validate: validatePasswordHooks,
+                },
+          )}
         />
         {errors.password && errors.password.message ? (
           <StyledError>{formatErrors(errors.password.message)}</StyledError>
@@ -144,15 +150,20 @@ const UserForm = ({
           type="password"
           id="confirmPassword"
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-          {...register('confirmPassword', {
-            required: true,
-            validate: {
-              matchesPreviousPassword: (value) => {
-                const { password } = watch();
-                return password === value || 'Passwords should match!';
-              },
-            },
-          })}
+          {...register(
+            'confirmPassword',
+            isAdminView
+              ? {}
+              : {
+                  required: true,
+                  validate: {
+                    matchesPreviousPassword: (value) => {
+                      const { password } = watch();
+                      return password === value || 'Passwords should match!';
+                    },
+                  },
+                },
+          )}
         />
         {errors.confirmPassword && (
           <StyledError>
