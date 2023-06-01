@@ -23,9 +23,7 @@ export const StyledCreateLink = styled(Link)`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-export const FilterContainer = styled.div`
-  padding-right: 1rem;
-`;
+export const FilterContainer = styled.div``;
 
 export const CardContainer = styled.div`
   display: flex;
@@ -35,17 +33,16 @@ export const CardContainer = styled.div`
 
 // Card
 export const AdminCard = styled.div`
-  display: grid;
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
   border-radius: 4px;
   padding: 1rem 0.25rem 0.75rem 1rem;
-  width: 350px;
+  flex: 1 0 300px;
   ${({ theme }) => theme.shadow};
 
   @media screen and (max-width: 400px) {
-    width: 90vw;
+    flex: 1 0 80vw;
   }
 `;
 

@@ -7,10 +7,7 @@ import {
   StyledH1Centered,
 } from '../../../styles/styledComponents/FormHelpers';
 import TopicForm from './TopicForm';
-
-export type Inputs = {
-  name: string;
-};
+import { TopicInputs } from '../../../../types/utils/formInputs';
 
 const EditTopic = () => {
   const { id } = useParams();
@@ -20,7 +17,7 @@ const EditTopic = () => {
   useEffect(() => {
     if (!id) return;
     const fetchTopic = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}/all`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}`);
       const data = await res.json();
 
       setTopic(data);
@@ -30,7 +27,7 @@ const EditTopic = () => {
 
   const [changeError, setChangeError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<TopicInputs> = async (data) => {
     try {
       const response = id
         ? await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}`, {

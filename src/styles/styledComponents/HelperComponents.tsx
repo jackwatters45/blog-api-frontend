@@ -44,6 +44,10 @@ export const StyledMain = styled.main`
   @media screen and (max-width: 768px) {
     padding: 1rem 50px;
   }
+
+  @media screen and (max-width: 400px) {
+    padding: 1rem 25px;
+  }
 `;
 
 export const StyledContentContainer = styled.main`

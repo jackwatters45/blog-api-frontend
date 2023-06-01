@@ -4,7 +4,7 @@ import Likes from '../../shared/Likes';
 import useLikes from '../../../custom/useLikes';
 import CommentsButton from '../../shared/CommentsButton';
 import { Link } from 'react-router-dom';
-import DeleteButton from './ConfirmDelete/DeleteButton';
+import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 import { useUserContext } from '../../../context/UserContext';

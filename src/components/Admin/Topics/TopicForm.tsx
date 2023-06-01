@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Inputs } from './EditTopic';
 import {
   StyledError,
   StyledForm,
@@ -7,10 +6,11 @@ import {
   StyledFormSection,
   StyledFormSubmitInput,
 } from '../../../styles/styledComponents/FormHelpers';
+import { TopicInputs } from '../../../../types/utils/formInputs';
 
 type Props = {
   topicName?: string;
-  onSubmit: SubmitHandler<Inputs>;
+  onSubmit: SubmitHandler<TopicInputs>;
   submitText: string;
   changeError?: string;
 };
@@ -20,7 +20,7 @@ const TopicForm = ({ topicName, onSubmit, submitText, changeError }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<TopicInputs>({
     defaultValues: {
       name: topicName,
     },

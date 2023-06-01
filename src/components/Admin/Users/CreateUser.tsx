@@ -2,17 +2,18 @@ import {
   StyledFormContainer,
   StyledH1Centered,
 } from '../../../styles/styledComponents/FormHelpers';
-import UserForm, { Inputs } from '../../shared/UserForm/UserForm';
+import UserForm from '../../shared/UserForm/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { UserInputs } from '../../../../types/utils/formInputs';
 
 const CreateUser = () => {
   const navigate = useNavigate();
 
   const [signupError, setSignupError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
         method: 'POST',

@@ -13,7 +13,7 @@ type Props = {
 
 const StyledContainer = styled.div`
   display: flex;
-  align-items: center;
+  position: relative;
 `;
 
 const DeleteButton = ({
@@ -26,14 +26,16 @@ const DeleteButton = ({
   const { isModalVisible, buttonProps, useModalParams } = useModalTrigger();
 
   return (
-    <StyledContainer>
-      <StyledButton {...buttonProps} {...extraButtonProps}>
-        {buttonContent}
-      </StyledButton>
-      {isModalVisible && (
-        <DeleteModal useModalParams={useModalParams} objType={objType} id={id} />
-      )}
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <StyledButton {...buttonProps} {...extraButtonProps}>
+          {buttonContent}
+        </StyledButton>
+        {isModalVisible && (
+          <DeleteModal useModalParams={useModalParams} objType={objType} id={id} />
+        )}
+      </StyledContainer>
+    </>
   );
 };
 

@@ -3,11 +3,13 @@ import { styled } from 'styled-components';
 
 const StyledModal = styled.div`
   position: absolute;
-  background: ${({ theme }) => theme.colors.backgroundSecondary};
   background: #dc2626;
-  padding: 0.25rem 0.5rem;
-  margin-left: -0.75rem;
   border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 40px;
+  width: 120px;
   ${({ theme }) => theme.shadow};
 `;
 

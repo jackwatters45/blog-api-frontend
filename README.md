@@ -2,12 +2,7 @@
 
 ## Next
 
-- fix topic filter (remove the options button)
-- make cards fit better
 - should be a way to combine the edit(Posts | Topics | Users) pages
-- clean up inputs interfaces
-- rename topics by id route (/all -> express route)
-- reposition delete button on topics edit page
 
 - make settings page
 - admin user edit page combines user form and user settings
@@ -70,3 +65,4 @@
 
 - topics
   - make sure time range and sortBy work
+  - filter stuff responsive

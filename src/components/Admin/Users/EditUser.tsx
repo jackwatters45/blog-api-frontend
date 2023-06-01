@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import UserForm, { Inputs } from '../../shared/UserForm/UserForm';
+import UserForm from '../../shared/UserForm/UserForm';
 import {
   StyledFormContainer,
   StyledH1Centered,
@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import IUser from '../../../../types/user';
+import { UserInputs } from '../../../../types/utils/formInputs';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const EditUser = () => {
 
   const [signupError, setSignupError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
       console.log(id);
       const response = id

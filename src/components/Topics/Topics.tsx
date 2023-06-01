@@ -50,7 +50,7 @@ const Topics = () => {
       const res = await fetch(
         `${
           import.meta.env.VITE_API_URL
-        }/topics/${id}?timeRange=${timeRange}&sortBy=${sortBy}`,
+        }/topics/${id}/posts/?timeRange=${timeRange}&sortBy=${sortBy}`,
       );
       const data = await res.json();
       const { posts, topic } = data;

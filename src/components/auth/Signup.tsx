@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import UserForm, { Inputs } from '../shared/UserForm/UserForm';
+import UserForm from '../shared/UserForm/UserForm';
 import { SubmitHandler } from 'react-hook-form';
 import { useUserContext } from '../../context/UserContext';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import {
   StyledFormLink,
   StyledFormNav,
 } from '../../styles/styledComponents/FormHelpers';
+import { UserInputs } from '../../../types/utils/formInputs';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Signup = () => {
 
   const [signupError, setSignupError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
         method: 'POST',

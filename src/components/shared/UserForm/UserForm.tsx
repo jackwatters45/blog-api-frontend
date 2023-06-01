@@ -12,19 +12,10 @@ import {
   StyledFormSubmitInput,
 } from '../../../styles/styledComponents/FormHelpers';
 import IUser from '../../../../types/user';
-
-export type Inputs = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  password: string;
-  confirmPassword: string;
-  userType?: string;
-};
+import { UserInputs } from '../../../../types/utils/formInputs';
 
 type Props = {
-  onSubmit: SubmitHandler<Inputs>;
+  onSubmit: SubmitHandler<UserInputs>;
   submitText: string;
   signupError: string;
   isAdminView?: boolean;
@@ -43,7 +34,7 @@ const UserForm = ({
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<UserInputs>({
     defaultValues: {
       firstName: userData?.firstName,
       lastName: userData?.lastName,

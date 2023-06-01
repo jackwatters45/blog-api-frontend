@@ -6,7 +6,7 @@ const EditPostsAdmin = () => {
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/all`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/preview`, {
         credentials: 'include',
       });
       const data = await res.json();

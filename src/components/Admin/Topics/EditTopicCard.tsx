@@ -6,7 +6,7 @@ import ITopic from '../../../../types/topic';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiPencil } from '@mdi/js';
 import { Link } from 'react-router-dom';
-import DeleteButton from '../../Posts/MyPosts/ConfirmDelete/DeleteButton';
+import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
 
 type Props = {
   topic: ITopic;
