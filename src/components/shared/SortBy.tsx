@@ -6,6 +6,11 @@ const Container = styled.form`
   display: flex;
   gap: 1rem;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    gap: 0rem;
+    align-items: flex-start;
 `;
 
 const StyledLabel = styled.label`
@@ -20,7 +25,7 @@ const SelectWrapper = styled.div`
 `;
 
 const StyledSelect = styled.select`
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem;
   border: none;
   border-right: 0.5rem solid transparent;
 `;

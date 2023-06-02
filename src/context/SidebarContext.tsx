@@ -31,7 +31,7 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
     };
 
     const getPopularTopics = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/topics/popular?limit=10`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/topics/popular?limit`);
       return await res.json();
     };
 

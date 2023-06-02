@@ -2,21 +2,37 @@
 
 ## Next
 
-- protected routes and also pages (cant just pull up edit page for anyone's post)
+- popular authors filter stuff responsive
+- protected
+  - protected routes
+  - pages (cant just pull up edit page for anyone's post)
+  - gonna need to figure out how to add different levels of security
+  - secured endpoint test out
+- reorganize css
+- when media query is hit, nav should be a hamburger menu or search bar becomes an icon used to open input
+- make sure light mode doesn't f app up
+- interface vs type consistency
+- stupid scrollbar
+- should be a way to combine the edit(Posts | Topics | Users) pages
+- add loading
+  - for tinymce too
 
 ## Eventually
 
 - General
 
-  - reorganize css
-  - make sure light mode doesn't f app up
-  - interface vs type consistency
   - handle posts and users deleted (maybe comments too)
-  - stupid scrollbar
-  - add loading
   - images
-  - loading for tinymce
-  - should be a way to combine the edit(Posts | Topics | Users) pages
+
+- Dashboard
+
+  - add a following tab
+  - Pagination
+  - Search
+
+  - Comment Preview
+
+  - Link to comment instead of post
 
 - Posts
 
@@ -34,31 +50,8 @@
   - add topic to previews and post
   - scroll to comments from button
 
-- Nav
-
-  - when media query is hit, nav should be a hamburger menu or search bar becomes an icon used to open input
-  - Search
-
-- Dashboard
-
-  - add a following tab
-  - Pagination
-
-- Comment Preview
-
-  - Link to comment instead of post
-
 - User
 
   - 'pagination'
   - view following
   - add likes
-
-- Admin
-
-  - gonna need to figure out how to add different levels of security
-  - secured endpoint test out
-
-- topics
-  - make sure time range and sortBy work
-  - filter stuff responsive
