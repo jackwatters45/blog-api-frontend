@@ -2,8 +2,8 @@ import { createContext, useState, ReactNode, useContext } from 'react';
 import IUser from '../../types/user.d';
 
 export interface IUserContext {
-  user: IUser | null;
-  updateUser: (newUser: IUser | null) => void;
+  user: IUser | undefined;
+  updateUser: (newUser: IUser | undefined) => void;
 }
 
 interface UserProviderProps {
@@ -34,10 +34,10 @@ export const UserContext = createContext<undefined | IUserContext>(undefined);
 
 // Create the provider component
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<null | IUser>(exUser);
+  const [user, setUser] = useState<undefined | IUser>(exUser);
 
   // Function to update the user
-  const updateUser = (newUser: IUser | null) => {
+  const updateUser = (newUser: IUser | undefined) => {
     setUser(newUser);
   };
 
@@ -51,7 +51,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 export const useUserContext = (): IUserContext => {
   const context = useContext(UserContext);
 
-  // TODO maybe navigate to login page if user is null
+  // TODO maybe navigate to login page if user is undefined
   if (context === undefined) {
     throw new Error('useUserContext must be used within a UserProvider');
   }

@@ -35,7 +35,7 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
   const navigate = useNavigate();
 
   const handleClickLogout = async () => {
-    updateUser(null);
+    updateUser(undefined);
 
     // TODO
     // remove session
@@ -58,8 +58,8 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
         <Link to={`/my-posts`}>
           <StyledLi>Your Posts</StyledLi>
         </Link>
-        <Link to={`/user/${user?._id}/settings`}>
-          <StyledLi>Settings</StyledLi>
+        <Link to={`/edit-profile`}>
+          <StyledLi>Edit Profile</StyledLi>
         </Link>
         <StyledLi onClick={handleClickLogout}>Log out</StyledLi>
       </ul>

@@ -26,6 +26,7 @@ export const StyledFormLink = styled(Link)`
 `;
 
 export const StyledForm = styled.form`
+  color: ${({ theme }) => theme.colors.textPrimary};
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -42,6 +43,7 @@ export const StyledFormSubmitInput = styled.input`
   margin-top: 1rem;
   background: rgb(35, 35, 35);
   font-size: 1rem;
+  box-shadow: none;
 
   &:hover {
     opacity: 0.7;
@@ -59,12 +61,37 @@ export const StyledFormInput = styled.input`
   height: 40px;
   width: 100%;
   font-size: 1rem;
+  ${(props) => props.theme.shadow};
+`;
+
+export const StyledTextArea = styled.textarea`
+  height: 120px;
+  width: 100%;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  background: ${({ theme }) => theme.colors.backgroundSecondary};
+  border: 1px solid ${({ theme }) => theme.colors.borderColor};
+  font-size: 0.9rem;
+  ${(props) => props.theme.shadow};
+`;
+
+export const SelectWrapper = styled.div`
+  border-radius: 0.25rem;
+  overflow: hidden;
+  ${(props) => props.theme.shadow};
+  border: 1px solid ${({ theme }) => theme.colors.borderColor};
 `;
 
 export const StyledFormSelect = styled.select`
   height: 40px;
   width: 100%;
+  border: none;
   font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-right: 0.5rem solid transparent;
 `;
 
 export const StyledFormInstructions = styled.ul`

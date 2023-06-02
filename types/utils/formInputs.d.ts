@@ -9,5 +9,6 @@ export type UserInputs = {
   username: string;
   password: string;
   confirmPassword: string;
+  description: string;
   userType?: string;
 };

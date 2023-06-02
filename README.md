@@ -2,10 +2,7 @@
 
 ## Next
 
-- should be a way to combine the edit(Posts | Topics | Users) pages
-
-- make settings page
-- admin user edit page combines user form and user settings
+- confirm works
 
 - protected routes and also pages (cant just pull up edit page for anyone's post)
 
@@ -21,6 +18,7 @@
   - add loading
   - images
   - loading for tinymce
+  - should be a way to combine the edit(Posts | Topics | Users) pages
 
 - Posts
 

@@ -10,6 +10,8 @@ import {
   StyledFormInstructions,
   StyledFormSelect,
   StyledFormSubmitInput,
+  StyledTextArea,
+  SelectWrapper,
 } from '../../../styles/styledComponents/FormHelpers';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
@@ -41,6 +43,7 @@ const UserForm = ({
       email: userData?.email,
       username: userData?.username,
       userType: userData?.userType,
+      description: userData?.description,
     },
   });
 
@@ -162,13 +165,30 @@ const UserForm = ({
           </StyledError>
         )}
       </StyledFormSection>
+      <StyledFormSection>
+        <label htmlFor="description">User Description (Optional):</label>
+        <StyledTextArea
+          id="description"
+          aria-invalid={errors.description ? 'true' : 'false'}
+          {...register('description', {
+            maxLength: { value: 250, message: "Description can't exceed 250 characters" },
+          })}
+        />
+        {errors.description && (
+          <StyledError>
+            <li>{errors.description.message}</li>
+          </StyledError>
+        )}
+      </StyledFormSection>
       {isAdminView && (
         <StyledFormSection>
           <label htmlFor="userType">User Type:</label>
-          <StyledFormSelect id="userType" {...register('userType')}>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </StyledFormSelect>
+          <SelectWrapper>
+            <StyledFormSelect id="userType" {...register('userType')}>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </StyledFormSelect>
+          </SelectWrapper>
         </StyledFormSection>
       )}
       <StyledFormSubmitInput type="submit" value={submitText} />
