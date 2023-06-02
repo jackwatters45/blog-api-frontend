@@ -31,7 +31,7 @@ type Props = {
 const ProfileDropdown = ({ useModalParams }: Props) => {
   const modalProps = useModal(useModalParams);
 
-  const { updateUser, user } = useUserContext();
+  const { updateUser } = useUserContext();
   const navigate = useNavigate();
 
   const handleClickLogout = async () => {
@@ -52,7 +52,7 @@ const ProfileDropdown = ({ useModalParams }: Props) => {
   return (
     <Container {...modalProps}>
       <ul>
-        <Link to={`/user/${user?._id}`}>
+        <Link to={`/my-profile`}>
           <StyledLi>Profile</StyledLi>
         </Link>
         <Link to={`/my-posts`}>

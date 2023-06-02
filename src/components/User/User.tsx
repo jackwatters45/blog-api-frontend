@@ -30,20 +30,23 @@ interface UserDetails {
   posts: IPost[] | string[];
 }
 
-// TODO responsive
-const User = () => {
+interface Props {
+  userId?: string;
+}
+
+const User = ({ userId }: Props) => {
   const { id } = useParams();
 
   const [user, setUser] = useState<UserDetails | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId ?? id}`);
       const data = await res.json();
       setUser(data);
     };
     fetchUser();
-  }, [id]);
+  }, [id, userId]);
 
   if (!user) return null;
 

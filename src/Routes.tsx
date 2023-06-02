@@ -19,6 +19,7 @@ import EditTopicsAdmin from './components/Admin/Topics/EditTopicsAdmin';
 import CreateUser from './components/Admin/Users/CreateUser';
 import EditTopic from './components/Admin/Topics/EditTopic';
 import EditProfile from './components/User/EditProfile';
+import MyProfile from './components/User/MyProfile';
 
 const RoutesComponent = () => {
   // const userContext = useContext(UserContext);
@@ -39,8 +40,9 @@ const RoutesComponent = () => {
         </Route>
 
         <Route path="/write" element={<PostForm />} />
-        <Route path="/my-posts" element={<MyPosts />} />
 
+        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-posts" element={<MyPosts />} />
         <Route path="/edit-profile" element={<EditProfile />} />
 
         <Route path="/explore-authors" element={<PopularAuthors />} />

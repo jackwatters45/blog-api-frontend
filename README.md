@@ -2,8 +2,6 @@
 
 ## Next
 
-- confirm works
-
 - protected routes and also pages (cant just pull up edit page for anyone's post)
 
 ## Eventually
