@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import IPost from '../../../../types/post';
 import { useUserContext } from '../../../context/UserContext';
 import EditPostsView from '../../shared/EditPostsView';
+import Loading from '../../shared/Loading';
 
 const MyPosts = () => {
   const { user } = useUserContext();
@@ -16,7 +17,7 @@ const MyPosts = () => {
     fetchMyPosts();
   }, [user]);
 
-  return myPosts ? <EditPostsView posts={myPosts} title={'My Posts'} /> : null;
+  return myPosts ? <EditPostsView posts={myPosts} title={'My Posts'} /> : <Loading />;
 };
 
 export default MyPosts;

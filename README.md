@@ -2,24 +2,21 @@
 
 ## Next
 
-- interface vs type consistency
-- light/dark mode
-  - change buttons, selects, hover color, input for light mode
-- add a loading screen- read about generics
-  - use interface except when using | or generics
 - when media query is hit, nav should be a hamburger menu or search bar becomes an icon used to open input
 - filter package
+- reorganize css
+- stupid scrollbar
+- Optimize components
+
+  - should be a way to combine the edit(Posts | Topics | Users) pages
+  - make sure everything is memoized
+  - make sure everything is only rerendering when it needs to
 
 - protected
   - protected routes
   - pages (cant just pull up edit page for anyone's post)
   - gonna need to figure out how to add different levels of security
   - secured endpoint test out
-- reorganize css
-- stupid scrollbar
-- should be a way to combine the edit(Posts | Topics | Users) pages
-- add loading
-  - for tinymce too
 
 ## Eventually
 

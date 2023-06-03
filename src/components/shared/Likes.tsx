@@ -21,11 +21,10 @@ const LikeButton = styled.button<LikeButtonProps>`
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  background-color: ${(props) => (props.hasUserLiked ? 'rgb(55, 55, 55)' : 'inherit')};
+  background-color: ${({ hasUserLiked, theme }) =>
+    hasUserLiked ? theme.colors.selected : 'inherit'};
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.055);
-  }
+  ${({ theme }) => theme.hoverNoBorder};
 `;
 
 const Likes = ({

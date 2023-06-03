@@ -35,6 +35,7 @@ const RoutesComponent = () => {
         <Route index element={<Dashboard />} />
 
         <Route path="/explore-posts" element={<PopularPosts />} />
+        <Route path="/post/:id/edit" element={<EditPost />} />
         <Route path="/post/:id" element={<Post />}>
           <Route path="edit" element={<EditPost />} />
         </Route>

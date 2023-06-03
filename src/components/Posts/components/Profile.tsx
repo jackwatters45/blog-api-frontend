@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import IUser from '../../../../types/user';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import Follow from '../../shared/Follow';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -8,8 +7,10 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
   display: flex;
   gap: 2rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
+  padding: 2rem 0;
   justify-content: space-evenly;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledImg = styled.img`
@@ -46,28 +47,25 @@ const Profile = ({ author }: Props) => {
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
 
   return (
-    <>
-      <StyledHrHorizontal />
-      <Container>
-        {img && (
-          <StyledImg
-            src={img}
-            style={{ height: '100px', width: '100px' }}
-            alt="Placeholder"
-          />
-        )}
-        <LeftColumn to={`/user/${_id}`}>
-          <h3>Written by {firstName}</h3>
-          <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
-          {description && <StyledDescription>{description}</StyledDescription>}
-        </LeftColumn>
-        <Follow
-          followers={followers as string[]}
-          setFollowerCount={setFollowerCount}
-          userId={_id}
+    <Container>
+      {img && (
+        <StyledImg
+          src={img}
+          style={{ height: '100px', width: '100px' }}
+          alt="Placeholder"
         />
-      </Container>
-    </>
+      )}
+      <LeftColumn to={`/user/${_id}`}>
+        <h3>Written by {firstName}</h3>
+        <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
+        {description && <StyledDescription>{description}</StyledDescription>}
+      </LeftColumn>
+      <Follow
+        followers={followers as string[]}
+        setFollowerCount={setFollowerCount}
+        userId={_id}
+      />
+    </Container>
   );
 };
 

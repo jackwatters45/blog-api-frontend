@@ -1,14 +1,14 @@
-import { init } from './editorOptions';
 import { styled } from 'styled-components';
 import { StyledH1, StyledMain } from '../../../styles/styledComponents/HelperComponents';
 import { useSidebarContext } from '../../../context/SidebarContext';
-import { useForm, Controller } from 'react-hook-form';
-import { Editor } from '@tinymce/tinymce-react';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import { StyledError } from '../../../styles/styledComponents/FormHelpers';
+import TinyMceEditor from '../../shared/TinyMceEditor';
+import { PostInputs } from '../../../../types/utils/formInputs';
 
 const StyledForm = styled.form`
   display: flex;
@@ -38,7 +38,7 @@ const SelectWrapper = styled.div`
   height: 2.5rem;
   border-radius: 0.25rem;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border: 0.5px solid ${({ theme }) => theme.colors.textSecondary};
   ${(props) => props.theme.shadow};
 `;
 
@@ -78,12 +78,6 @@ interface Props {
   pageTitle?: string;
 }
 
-interface Inputs {
-  title: string;
-  topic: string;
-  content: string;
-}
-
 const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   const { topics } = useSidebarContext();
   const { user } = useUserContext();
@@ -97,7 +91,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<Inputs>({
+  } = useForm<PostInputs>({
     defaultValues: {
       title: post?.title,
       topic: post?.topic?._id,
@@ -107,7 +101,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
 
   const [isPublished, setIsPublished] = useState<boolean>(true);
 
-  const onSubmit = async (formData: Inputs) => {
+  const onSubmit = async (formData: PostInputs) => {
     if (!user) return navigate('/login');
 
     const data = {
@@ -185,7 +179,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
         </StyledFormSection>
         <StyledFormSection>
           <StyledLabel htmlFor="content">Content</StyledLabel>
-          <Controller
+          {/* <Controller
             name="content"
             control={control}
             defaultValue=""
@@ -198,7 +192,8 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
                 value={field.value}
               />
             )}
-          />
+          /> */}
+          <TinyMceEditor control={control} />
           {errors.content && (
             <StyledError>
               <li>Content is required</li>

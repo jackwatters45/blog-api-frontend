@@ -10,6 +10,7 @@ import {
 } from '../../../styles/styledComponents/AdminCardComponents';
 import { userFilterFunction } from '../../shared/Filter/filterFunctions';
 import { AdminUser } from '../../../../types/post';
+import Loading from '../../shared/Loading';
 
 interface Props {
   users: AdminUser[];
@@ -40,7 +41,9 @@ const EditUsers = ({ users }: Props) => {
         )}
       </CardContainer>
     </AdminContainer>
-  ) : null;
+  ) : (
+    <Loading />
+  );
 };
 
 export default EditUsers;

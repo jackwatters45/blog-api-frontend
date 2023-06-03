@@ -11,6 +11,7 @@ import {
 import Filter from '../../shared/Filter/Filter';
 import { topicFilterFunction } from '../../shared/Filter/filterFunctions';
 import EditTopicCard from './EditTopicCard';
+import Loading from '../../shared/Loading';
 
 interface Props {
   topics: ITopic[];
@@ -43,7 +44,9 @@ const EditTopics = ({ topics }: Props) => {
         )}
       </CardContainer>
     </AdminContainer>
-  ) : null;
+  ) : (
+    <Loading />
+  );
 };
 
 export default EditTopics;

@@ -10,7 +10,7 @@ const StyledForm = styled.form`
   grid-template-columns: 1fr auto;
   margin: 1rem 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid ${({ theme }) => theme.colors.textPrimary};
+  border: 0.5px solid ${({ theme }) => theme.colors.textPrimary};
   box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 

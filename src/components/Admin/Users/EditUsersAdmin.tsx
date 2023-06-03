@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import EditUsers from './EditUsers';
 import { AdminUser } from '../../../../types/post';
+import Loading from '../../shared/Loading';
 
 const EditUsersAdmin = () => {
   const [users, setUsers] = useState<undefined | AdminUser[]>(undefined);
@@ -13,7 +14,7 @@ const EditUsersAdmin = () => {
     fetchUsers();
   }, []);
 
-  return users ? <EditUsers users={users} /> : null;
+  return users ? <EditUsers users={users} /> : <Loading />;
 };
 
 export default EditUsersAdmin;

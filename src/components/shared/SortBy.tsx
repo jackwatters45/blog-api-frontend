@@ -1,6 +1,5 @@
 import { ChangeEvent } from 'react';
 import { styled } from 'styled-components';
-import theme from '../../styles/styledComponents/theme';
 
 const Container = styled.form`
   display: flex;
@@ -20,8 +19,8 @@ const StyledLabel = styled.label`
 const SelectWrapper = styled.div`
   border-radius: 0.25rem;
   overflow: hidden;
-  ${theme.shadow[0]}
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  ${({ theme }) => theme.shadow};
+  border: 0.5px solid ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const StyledSelect = styled.select`

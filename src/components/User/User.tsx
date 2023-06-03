@@ -6,6 +6,7 @@ import IPost from '../../../types/post.d';
 import About from './AboutColumn/About';
 import Activity from './ActivityColumn/Activity';
 import IComment from '../../../types/comment.d';
+import Loading from '../shared/Loading';
 
 const StyledUserContainer = styled.main`
   display: flex;
@@ -48,7 +49,7 @@ const User = ({ userId }: Props) => {
     fetchUser();
   }, [id, userId]);
 
-  if (!user) return null;
+  if (!user) return <Loading />;
 
   const { user: userInfo, comments, posts } = user;
 

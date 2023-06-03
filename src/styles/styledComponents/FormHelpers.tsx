@@ -41,7 +41,8 @@ export const StyledFormSubmitInput = styled.input`
   height: 40px;
   border: none;
   margin-top: 1rem;
-  background: rgb(35, 35, 35);
+  color: ${({ theme }) => theme.colors.backgroundSecondary};
+  background: ${({ theme }) => theme.colors.textSecondary};
   font-size: 1rem;
   box-shadow: none;
 
@@ -73,7 +74,7 @@ export const StyledTextArea = styled.textarea`
   border-radius: 4px;
   padding: 0.25rem 0.5rem;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
-  border: 1px solid ${({ theme }) => theme.colors.borderColor};
+  border: none;
   font-size: 0.9rem;
   ${(props) => props.theme.shadow};
 `;
@@ -82,7 +83,6 @@ export const SelectWrapper = styled.div`
   border-radius: 0.25rem;
   overflow: hidden;
   ${(props) => props.theme.shadow};
-  border: 1px solid ${({ theme }) => theme.colors.borderColor};
 `;
 
 export const StyledFormSelect = styled.select`

@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import IPost, { ILike } from '../../../types/post';
-import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
 import { formatContent, formatDate } from '../shared/formattingHelpers';
 import { Link } from 'react-router-dom';
 import Likes from '../shared/Likes';
@@ -10,7 +9,8 @@ import CommentsButton from '../shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
 
 const Container = styled.div`
-  margin: 2rem 0;
+  padding: 2rem 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledDateAuthorDiv = styled.div`
@@ -57,39 +57,36 @@ const PostPreview = ({
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
   return (
-    <>
-      <Container>
-        <StyledDateAuthorDiv>
-          {author?._id ? (
-            <Link to={`/user/${author._id}`}>
-              {author.firstName} {author.lastName}
-            </Link>
-          ) : (
-            <p>Unknown</p>
-          )}
-          <p>•</p>
-          <Link to={`/post/${_id}`}>{formatDate(createdAt)}</Link>
-        </StyledDateAuthorDiv>
-        <Link to={`/post/${_id}`}>
-          <StyledH2>{title}</StyledH2>
-        </Link>
-        <Link to={`/post/${_id}`}>
-          <PostContentPreview contentHtml={formatContent(content)} />
-        </Link>
-        <BottomRow>
-          <LikesAndComments>
-            <CommentsButton commentsCount={comments?.length as number} />
-            <Likes {...useLikesProps} _id={_id} />
-          </LikesAndComments>
-          {topic && (
-            <Link to={`/topic/${topic._id}`}>
-              <StyledTag>{topic.name}</StyledTag>
-            </Link>
-          )}
-        </BottomRow>
-      </Container>
-      <StyledHrHorizontal />
-    </>
+    <Container>
+      <StyledDateAuthorDiv>
+        {author?._id ? (
+          <Link to={`/user/${author._id}`}>
+            {author.firstName} {author.lastName}
+          </Link>
+        ) : (
+          <p>Unknown</p>
+        )}
+        <p>•</p>
+        <Link to={`/post/${_id}`}>{formatDate(createdAt)}</Link>
+      </StyledDateAuthorDiv>
+      <Link to={`/post/${_id}`}>
+        <StyledH2>{title}</StyledH2>
+      </Link>
+      <Link to={`/post/${_id}`}>
+        <PostContentPreview contentHtml={formatContent(content)} />
+      </Link>
+      <BottomRow>
+        <LikesAndComments>
+          <CommentsButton commentsCount={comments?.length as number} />
+          <Likes {...useLikesProps} _id={_id} />
+        </LikesAndComments>
+        {topic && (
+          <Link to={`/topic/${topic._id}`}>
+            <StyledTag>{topic.name}</StyledTag>
+          </Link>
+        )}
+      </BottomRow>
+    </Container>
   );
 };
 

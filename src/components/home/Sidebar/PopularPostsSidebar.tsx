@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SidebarHeader,
   SidebarInfoFirstRow,
@@ -25,7 +24,6 @@ const PopularPostsSidebar = () => {
   return (
     <SidebarContainer>
       <SidebarHeader>Popular Posts</SidebarHeader>
-      <StyledHrHorizontal />
       <SidebarList>
         {!!posts.length &&
           posts

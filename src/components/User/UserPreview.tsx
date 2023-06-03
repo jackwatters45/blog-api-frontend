@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import IUser, { IPopularAuthors } from '../../../types/user';
-import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
 import { styled } from 'styled-components';
 import Follow from '../shared/Follow';
 import { Link } from 'react-router-dom';
@@ -10,6 +9,7 @@ const Container = styled.div`
   gap: 2rem;
   margin: 2rem 0;
   justify-content: space-between;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledImg = styled.img`
@@ -49,34 +49,31 @@ const UserPreview = ({ user }: Props) => {
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
 
   return (
-    <>
-      <StyledHrHorizontal />
-      <Container>
-        {img && (
-          <StyledImg
-            src={img}
-            style={{ height: '100px', width: '100px' }}
-            alt="Placeholder"
-          />
-        )}
-        <LeftColumn to={`/user/${_id}`}>
-          <h3>
-            {firstName} {lastName}
-          </h3>
-          <StyledFollowerAndLikes>
-            <p>{followerCount} Followers</p>
-            <p>•</p>
-            <p>{likesCountInTimeRange} Likes</p>
-          </StyledFollowerAndLikes>
-          {description && <StyledDescription>{description}</StyledDescription>}
-        </LeftColumn>
-        <Follow
-          followers={followers as string[]}
-          setFollowerCount={setFollowerCount}
-          userId={_id}
+    <Container>
+      {img && (
+        <StyledImg
+          src={img}
+          style={{ height: '100px', width: '100px' }}
+          alt="Placeholder"
         />
-      </Container>
-    </>
+      )}
+      <LeftColumn to={`/user/${_id}`}>
+        <h3>
+          {firstName} {lastName}
+        </h3>
+        <StyledFollowerAndLikes>
+          <p>{followerCount} Followers</p>
+          <p>•</p>
+          <p>{likesCountInTimeRange} Likes</p>
+        </StyledFollowerAndLikes>
+        {description && <StyledDescription>{description}</StyledDescription>}
+      </LeftColumn>
+      <Follow
+        followers={followers as string[]}
+        setFollowerCount={setFollowerCount}
+        userId={_id}
+      />
+    </Container>
   );
 };
 

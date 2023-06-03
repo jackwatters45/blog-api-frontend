@@ -1,11 +1,11 @@
-import './styles/index.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { styled, ThemeProvider } from 'styled-components';
 import { UserProvider } from './context/UserContext';
 import Routes from './Routes';
 import { ModalProvider } from 'react-hook-modal-pure';
-import theme from './styles/styledComponents/theme';
 import { SidebarProvider } from './context/SidebarContext';
+import { useColorTheme } from './styles/theme/useColorTheme';
+import GlobalStyle from './styles/theme/GlobalStyle';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -14,13 +14,16 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const colorTheme = useColorTheme();
+
   return (
     <UserProvider>
       <SidebarProvider>
         <ModalProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={colorTheme}>
             <BrowserRouter>
               <AppContainer>
+                <GlobalStyle />
                 <Routes />
               </AppContainer>
             </BrowserRouter>

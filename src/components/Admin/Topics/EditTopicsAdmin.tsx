@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ITopic from '../../../../types/topic';
 import EditTopics from './EditTopics';
+import Loading from '../../shared/Loading';
 
 const EditTopicsAdmin = () => {
   const [topics, setTopics] = useState<undefined | ITopic[]>(undefined);
@@ -13,7 +14,7 @@ const EditTopicsAdmin = () => {
     fetchUsers();
   }, []);
 
-  return topics ? <EditTopics topics={topics} /> : null;
+  return topics ? <EditTopics topics={topics} /> : <Loading />;
 };
 
 export default EditTopicsAdmin;

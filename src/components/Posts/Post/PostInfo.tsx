@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { formatDate } from '../../shared/formattingHelpers';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import { TopicButton } from '../../../styles/styledComponents/HelperComponents';
 import Likes from '../../shared/Likes';
 import CommentsButton from '../../shared/CommentsButton';
@@ -13,6 +12,7 @@ const StyledPostInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledH1 = styled.h1`
@@ -51,26 +51,23 @@ const PostInfo = ({
   const useLikesProps = useLikes(likes as ILike[], user?._id as string);
 
   return (
-    <>
-      <StyledPostInfoContainer>
-        <StyledH1>{title}</StyledH1>
-        {author ? (
-          <StyledAuthor to={`/user/${author._id}`}>
-            {`${author.firstName} ${author.lastName} • ${formatDate(createdAt)}`}
-          </StyledAuthor>
-        ) : (
-          <p>{`Unknown • ${formatDate(createdAt)}`}</p>
-        )}
-        <BottomRowInfo>
-          {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}
-          <LikesAndComments>
-            <CommentsButton commentsCount={comments?.length as number} />
-            <Likes {...useLikesProps} _id={_id as string} />
-          </LikesAndComments>
-        </BottomRowInfo>
-      </StyledPostInfoContainer>
-      <StyledHrHorizontal />
-    </>
+    <StyledPostInfoContainer>
+      <StyledH1>{title}</StyledH1>
+      {author ? (
+        <StyledAuthor to={`/user/${author._id}`}>
+          {`${author.firstName} ${author.lastName} • ${formatDate(createdAt)}`}
+        </StyledAuthor>
+      ) : (
+        <p>{`Unknown • ${formatDate(createdAt)}`}</p>
+      )}
+      <BottomRowInfo>
+        {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}
+        <LikesAndComments>
+          <CommentsButton commentsCount={comments?.length as number} />
+          <Likes {...useLikesProps} _id={_id as string} />
+        </LikesAndComments>
+      </BottomRowInfo>
+    </StyledPostInfoContainer>
   );
 };
 

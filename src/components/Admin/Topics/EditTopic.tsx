@@ -8,6 +8,7 @@ import {
 } from '../../../styles/styledComponents/FormHelpers';
 import TopicForm from './TopicForm';
 import { TopicInputs } from '../../../../types/utils/formInputs';
+import Loading from '../../shared/Loading';
 
 const EditTopic = () => {
   const { id } = useParams();
@@ -57,10 +58,7 @@ const EditTopic = () => {
     }
   };
 
-  // TODO loading
-
-  if (!topic && id) return null;
-  return (
+  return !(!topic && id) ? (
     <StyledFormContainer>
       <StyledH1Centered>{id ? 'Edit Topic' : 'Create Topic'}</StyledH1Centered>
       <TopicForm
@@ -70,6 +68,8 @@ const EditTopic = () => {
         changeError={changeError}
       />
     </StyledFormContainer>
+  ) : (
+    <Loading />
   );
 };
 

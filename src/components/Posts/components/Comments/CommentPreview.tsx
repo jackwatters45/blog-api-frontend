@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
-import { StyledHrHorizontal } from '../../../../styles/styledComponents/theme';
 import { Link } from 'react-router-dom';
 import IUser from '../../../../../types/user';
 import { formatContent, formatDate } from '../../../shared/formattingHelpers';
 import IPost from '../../../../../types/post';
 
 const Container = styled.div`
-  margin: 2rem 0;
+  padding: 2rem 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledDateAuthorDiv = styled.div`
@@ -42,31 +42,28 @@ const CommentPreview = ({ comment }: Props) => {
   const { firstName: posterFirstName, lastName: posterLastName } = postAuthor as IUser;
 
   return (
-    <>
-      <Container>
-        <StyledDateAuthorDiv>
-          {commenterId ? (
-            <Link to={`/user/${commenterId}`}>
-              {commenterFirstName} {commenterLastName}
-            </Link>
-          ) : (
-            <p>Unknown</p>
-          )}
-          <p>•</p>
-          <Link to={`/poss/${postId}`}>{formatDate(updatedAt)}</Link>
-        </StyledDateAuthorDiv>
-        <Link to={`/post/${postId}`}>
-          <StyledContent>{formatContent(content)}</StyledContent>
-        </Link>
-        <StyledPostInfo>
-          On post:{' '}
-          <Link to={`/post/${postId}`}>
-            {title} by {posterFirstName} {posterLastName}
+    <Container>
+      <StyledDateAuthorDiv>
+        {commenterId ? (
+          <Link to={`/user/${commenterId}`}>
+            {commenterFirstName} {commenterLastName}
           </Link>
-        </StyledPostInfo>
-      </Container>
-      <StyledHrHorizontal />
-    </>
+        ) : (
+          <p>Unknown</p>
+        )}
+        <p>•</p>
+        <Link to={`/poss/${postId}`}>{formatDate(updatedAt)}</Link>
+      </StyledDateAuthorDiv>
+      <Link to={`/post/${postId}`}>
+        <StyledContent>{formatContent(content)}</StyledContent>
+      </Link>
+      <StyledPostInfo>
+        On post:{' '}
+        <Link to={`/post/${postId}`}>
+          {title} by {posterFirstName} {posterLastName}
+        </Link>
+      </StyledPostInfo>
+    </Container>
   );
 };
 

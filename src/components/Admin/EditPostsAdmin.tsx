@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import EditPostsView from '../shared/EditPostsView';
+import Loading from '../shared/Loading';
 
 const EditPostsAdmin = () => {
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
@@ -17,7 +18,9 @@ const EditPostsAdmin = () => {
 
   return posts ? (
     <EditPostsView posts={posts} title={'All Posts'} isAdminView={true} />
-  ) : null;
+  ) : (
+    <Loading />
+  );
 };
 
 export default EditPostsAdmin;

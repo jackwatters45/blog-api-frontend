@@ -1,6 +1,5 @@
 import { IPopularAuthors } from '../../../../types/user';
 import { Link } from 'react-router-dom';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SeeAllLink,
   SidebarAdditionalInfo,
@@ -19,7 +18,6 @@ const PopularAuthorsSidebar = () => {
   return (
     <SidebarContainer>
       <SidebarHeader>Popular Authors</SidebarHeader>
-      <StyledHrHorizontal />
       <SidebarList>
         {!!authors.length &&
           authors.slice(0, 5).map((author: IPopularAuthors) => {

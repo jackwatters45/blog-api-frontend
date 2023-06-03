@@ -17,9 +17,7 @@ const EditPost = () => {
     fetchPost();
   }, [id]);
 
-  // TODO loading
-  if (!post) return null;
-  return <PostForm post={post} pageTitle={'Edit Post'} />;
+  return post ? <PostForm post={post} pageTitle={'Edit Post'} /> : null;
 };
 
 export default EditPost;

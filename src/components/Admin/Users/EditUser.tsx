@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
+import Loading from '../../shared/Loading';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -57,7 +58,6 @@ const EditUser = () => {
     }
   };
 
-  // TODO loading
   return user ? (
     <StyledFormContainer>
       <StyledH1Centered>Edit User</StyledH1Centered>
@@ -69,7 +69,9 @@ const EditUser = () => {
         signupError={signupError}
       />
     </StyledFormContainer>
-  ) : null;
+  ) : (
+    <Loading />
+  );
 };
 
 export default EditUser;

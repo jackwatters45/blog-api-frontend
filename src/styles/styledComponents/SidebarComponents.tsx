@@ -5,6 +5,7 @@ export const SidebarContainer = styled.div``;
 
 export const SidebarHeader = styled.h2`
   padding-left: 0.5rem;
+  border-bottom: 0.5px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const SidebarList = styled.ul`

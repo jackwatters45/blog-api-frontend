@@ -12,3 +12,9 @@ export interface UserInputs {
   description: string;
   userType?: string;
 }
+
+export interface PostInputs {
+  title: string;
+  topic: string;
+  content: string;
+}

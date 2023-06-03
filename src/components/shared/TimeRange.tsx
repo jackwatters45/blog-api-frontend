@@ -15,7 +15,7 @@ const SelectWrapper = styled.div`
   border-radius: 0.25rem;
   overflow: hidden;
   ${(props) => props.theme.shadow};
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border: 0.5px solid ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const StyledSelect = styled.select`

@@ -1,16 +1,16 @@
 import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
-import { StyledHrHorizontal } from '../../../../styles/styledComponents/theme';
 import AddComment from './AddComment';
 import { useState } from 'react';
 import { formatDate } from '../../../shared/formattingHelpers';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  margin: 2rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const CommentContainer = styled.div`
@@ -57,30 +57,27 @@ const CommentsSection = ({ comments: initialComments, postId }: Props) => {
   const img = 'https://via.placeholder.com/100';
 
   return (
-    <>
-      <StyledHrHorizontal />
-      <Container>
-        <h2>Comments ({comments?.length ?? 0})</h2>
-        <AddComment setComments={setComments} postId={postId} />
-        {comments?.map(({ content, updatedAt, author, _id }) => {
-          const { firstName, lastName, _id: authorId } = author;
-          return (
-            <CommentContainer key={_id}>
-              <Link to={`/user/${authorId}`}>
-                <StyledCommentImg src={img} alt="user icon" />
-              </Link>
-              <CommentInfo>
-                <StyledLink to={`/user/${authorId}`}>
-                  {firstName} {lastName}
-                </StyledLink>
-                <StyledDate>{formatDate(updatedAt)}</StyledDate>
-                <StyledCommentContent>{content}</StyledCommentContent>
-              </CommentInfo>
-            </CommentContainer>
-          );
-        })}
-      </Container>
-    </>
+    <Container>
+      <h2>Comments ({comments?.length ?? 0})</h2>
+      <AddComment setComments={setComments} postId={postId} />
+      {comments?.map(({ content, updatedAt, author, _id }) => {
+        const { firstName, lastName, _id: authorId } = author;
+        return (
+          <CommentContainer key={_id}>
+            <Link to={`/user/${authorId}`}>
+              <StyledCommentImg src={img} alt="user icon" />
+            </Link>
+            <CommentInfo>
+              <StyledLink to={`/user/${authorId}`}>
+                {firstName} {lastName}
+              </StyledLink>
+              <StyledDate>{formatDate(updatedAt)}</StyledDate>
+              <StyledCommentContent>{content}</StyledCommentContent>
+            </CommentInfo>
+          </CommentContainer>
+        );
+      })}
+    </Container>
   );
 };
 

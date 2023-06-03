@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import { StyledHrHorizontal } from '../../styles/styledComponents/theme';
 import NavOptions from './NavOptions/NavOptions';
 
 const StyledNav = styled.nav`
@@ -11,6 +10,7 @@ const StyledNav = styled.nav`
   height: 4rem;
   padding: 0 2rem;
   gap: 4vw;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
   @media screen and (max-width: 768px) {
     display: flex;
@@ -26,16 +26,13 @@ const StyledH1 = styled.h1`
 
 const Nav = () => {
   return (
-    <>
-      <StyledNav>
-        <Link to="/">
-          <StyledH1>SCHMEDIUM</StyledH1>
-        </Link>
-        <SearchBar />
-        <NavOptions />
-      </StyledNav>
-      <StyledHrHorizontal />
-    </>
+    <StyledNav>
+      <Link to="/">
+        <StyledH1>SCHMEDIUM</StyledH1>
+      </Link>
+      <SearchBar />
+      <NavOptions />
+    </StyledNav>
   );
 };
 

@@ -8,6 +8,7 @@ import CommentsSection from '../components/Comments/CommentsSection';
 import PostInfo from './PostInfo';
 import Profile from '../components/Profile';
 import { PostContentDefault } from '../../../styles/styledComponents/PostContentComponents';
+import Loading from '../../shared/Loading';
 
 const StyledPostContainer = styled.main`
   display: flex;
@@ -26,7 +27,7 @@ const Post = () => {
 
   const { user } = useUserContext();
 
-  const [post, setPost] = useState<IPost | null>(null);
+  const [post, setPost] = useState<IPost | undefined>(undefined);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -37,7 +38,7 @@ const Post = () => {
     fetchPost();
   }, [id, user]);
 
-  if (!post) return <p>Loading</p>;
+  if (!post) return <Loading />;
   const { content, comments, author, _id } = post;
   return (
     <StyledPostContainer>

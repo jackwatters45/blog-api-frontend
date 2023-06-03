@@ -3,7 +3,6 @@ import {
   SeeAllLink,
   SidebarContainer,
 } from '../../../styles/styledComponents/SidebarComponents';
-import { StyledHrHorizontal } from '../../../styles/styledComponents/theme';
 import {
   SidebarTopicsContainer,
   TopicButton,
@@ -16,7 +15,6 @@ const PopularTopicsSidebar = () => {
   return (
     <SidebarContainer>
       <SidebarHeader>Popular Topics</SidebarHeader>
-      <StyledHrHorizontal />
       <SidebarTopicsContainer>
         {!!topics.length &&
           topics.slice(0, 10).map(({ _id, name }) => {
