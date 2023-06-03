@@ -11,11 +11,11 @@ import {
 } from '../../styles/styledComponents/AdminCardComponents';
 import { postFilterFunction } from './Filter/filterFunctions';
 
-type Props = {
+interface Props {
   posts: IPost[];
   title: string;
   isAdminView?: boolean;
-};
+}
 
 const EditPostsView = ({ posts, title, isAdminView }: Props) => {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts);

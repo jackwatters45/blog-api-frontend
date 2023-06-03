@@ -13,11 +13,11 @@ const StyledModal = styled.div`
   ${({ theme }) => theme.shadow};
 `;
 
-type Props = {
+interface Props {
   useModalParams: useModalParams;
   objType: string;
   id: string;
-};
+}
 
 const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);

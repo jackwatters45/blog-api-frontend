@@ -8,12 +8,12 @@ import {
 } from '../../../styles/styledComponents/FormHelpers';
 import { TopicInputs } from '../../../../types/utils/formInputs';
 
-type Props = {
+interface Props {
   topicName?: string;
   onSubmit: SubmitHandler<TopicInputs>;
   submitText: string;
   changeError?: string;
-};
+}
 
 const TopicForm = ({ topicName, onSubmit, submitText, changeError }: Props) => {
   const {

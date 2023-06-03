@@ -1,9 +1,9 @@
 import IPost from '../../../../../types/post';
 import PostPreview from '../../../Posts/PostPreviews';
 
-type Props = {
+interface Props {
   posts: IPost[] | string[];
-};
+}
 
 const ActivityPosts = ({ posts }: Props) => {
   if (!posts.length) return <p>No posts yet...</p>;

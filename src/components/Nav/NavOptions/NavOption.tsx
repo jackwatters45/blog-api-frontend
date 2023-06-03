@@ -2,12 +2,12 @@ import Icon from '@mdi/react';
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-type Props = {
+interface Props {
   icon?: string;
   text?: string;
   to: string;
   size?: number;
-};
+}
 
 const StyledNavOption = styled.div`
   display: flex;

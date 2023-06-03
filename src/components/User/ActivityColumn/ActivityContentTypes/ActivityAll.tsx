@@ -3,10 +3,10 @@ import IComment from '../../../../../types/comment';
 import PostPreview from '../../../Posts/PostPreviews';
 import CommentPreview from '../../../Posts/components/Comments/CommentPreview';
 
-type Props = {
+interface Props {
   posts: IPost[] | string[];
   comments: IComment[];
-};
+}
 
 const isPost = (obj: IPost | IComment): obj is IPost =>
   (obj as IPost).title !== undefined;

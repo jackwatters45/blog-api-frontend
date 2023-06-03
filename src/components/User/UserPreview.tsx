@@ -37,9 +37,9 @@ const StyledDescription = styled.p`
   font-size: 0.9rem;
 `;
 
-type Props = {
+interface Props {
   user: IUser;
-};
+}
 
 const UserPreview = ({ user }: Props) => {
   const { firstName, lastName, followers, description, _id, likesCountInTimeRange } =

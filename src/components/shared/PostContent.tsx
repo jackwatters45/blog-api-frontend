@@ -24,10 +24,10 @@ const sanitizeOptions = {
   ALLOWED_ATTR: ['href'],
 };
 
-type Props = {
+interface Props {
   className?: string;
   contentHtml: string;
-};
+}
 
 const PostContent = ({ contentHtml, className }: Props) => {
   const sanitizedJsx = useMemo(() => {

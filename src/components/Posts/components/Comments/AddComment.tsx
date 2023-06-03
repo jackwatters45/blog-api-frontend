@@ -30,10 +30,10 @@ const StyledButton = styled.input`
   padding: 0.5rem 1rem;
 `;
 
-type Props = {
+interface Props {
   setComments: Dispatch<SetStateAction<IComment[] | undefined>>;
   postId: string;
-};
+}
 
 const AddComment = ({ setComments, postId }: Props) => {
   const { user } = useUserContext();

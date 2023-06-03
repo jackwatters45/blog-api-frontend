@@ -45,9 +45,9 @@ const StyledTag = styled.li`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
-type Props = {
+interface Props {
   post: IPost;
-};
+}
 
 const PostPreview = ({
   post: { title, content, createdAt, author, _id, topic, likes, comments },

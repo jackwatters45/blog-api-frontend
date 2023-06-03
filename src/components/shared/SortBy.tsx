@@ -30,11 +30,11 @@ const StyledSelect = styled.select`
   border-right: 0.5rem solid transparent;
 `;
 
-type Props = {
+interface Props {
   label?: string;
   sortBy: string;
   handleSelectSortBy: (e: ChangeEvent<HTMLSelectElement>) => void;
-};
+}
 
 const SortBy = ({ sortBy, handleSelectSortBy, label }: Props) => {
   return (

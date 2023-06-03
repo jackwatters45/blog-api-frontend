@@ -22,9 +22,9 @@ const StyledLi = styled.li`
   cursor: pointer;
 `;
 
-type Props = {
+interface Props {
   useModalParams: useModalParams;
-};
+}
 
 const AdminDropdown = ({ useModalParams }: Props) => {
   const modalProps = useModal(useModalParams);

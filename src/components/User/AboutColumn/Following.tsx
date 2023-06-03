@@ -33,9 +33,9 @@ const StyledUser = styled.p`
   font-size: 0.9rem;
 `;
 
-type Props = {
+interface Props {
   following: string[] | (IUser | undefined)[];
-};
+}
 
 const Following = ({ following }: Props) => {
   return (

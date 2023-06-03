@@ -12,9 +12,9 @@ import Filter from '../../shared/Filter/Filter';
 import { topicFilterFunction } from '../../shared/Filter/filterFunctions';
 import EditTopicCard from './EditTopicCard';
 
-type Props = {
+interface Props {
   topics: ITopic[];
-};
+}
 
 const EditTopics = ({ topics }: Props) => {
   const [filteredTopics, setFilteredTopics] = useState(topics ?? []);

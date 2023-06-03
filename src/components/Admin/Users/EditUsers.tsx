@@ -11,9 +11,9 @@ import {
 import { userFilterFunction } from '../../shared/Filter/filterFunctions';
 import { AdminUser } from '../../../../types/post';
 
-type Props = {
+interface Props {
   users: AdminUser[];
-};
+}
 
 const EditUsers = ({ users }: Props) => {
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>(users ?? []);

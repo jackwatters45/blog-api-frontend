@@ -1,18 +1,18 @@
-import TimeRange from '../shared/TimeRange';
 import ITopic, { PopularTopics } from '../../../types/topic';
 import { ChangeEvent, useMemo } from 'react';
 import {
   StyledValue,
   TotalValueContainer,
   FilterContainer,
+  StyledTimeRange,
 } from '../../styles/styledComponents/TopicComponents';
 
-type Props = {
+interface Props {
   topics: PopularTopics[];
   timeRange: string;
   selectedTopic?: ITopic;
   handleSelectRange: (e: ChangeEvent<HTMLSelectElement>) => void;
-};
+}
 
 const PostSort = ({ topics, timeRange, selectedTopic, handleSelectRange }: Props) => {
   const filterResult = useMemo(() => {
@@ -21,7 +21,7 @@ const PostSort = ({ topics, timeRange, selectedTopic, handleSelectRange }: Props
 
   return (
     <FilterContainer>
-      <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
+      <StyledTimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
       <TotalValueContainer>
         <p>Total Likes: </p>
         <StyledValue>{filterResult}</StyledValue>

@@ -25,9 +25,9 @@ const StyledPostInfo = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-type Props = {
+interface Props {
   comment: IComment;
-};
+}
 
 const CommentPreview = ({ comment }: Props) => {
   const { content, updatedAt, author: commenter, post } = comment;

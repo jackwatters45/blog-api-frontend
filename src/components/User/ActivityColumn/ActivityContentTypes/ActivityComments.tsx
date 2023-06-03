@@ -1,9 +1,9 @@
 import IComment from '../../../../../types/comment';
 import CommentPreview from '../../../Posts/components/Comments/CommentPreview';
 
-type Props = {
+interface Props {
   comments: IComment[] | string[];
-};
+}
 
 const ActivityComments = ({ comments }: Props) => {
   if (!comments.length) return <p>No comments yet...</p>;

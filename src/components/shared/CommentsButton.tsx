@@ -2,10 +2,6 @@ import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-type Props = {
-  commentsCount: number;
-};
-
 const CommentButton = styled.button`
   display: flex;
   align-items: center;
@@ -17,6 +13,10 @@ const CommentButton = styled.button`
     background-color: rgba(255, 255, 255, 0.055);
   }
 `;
+
+interface Props {
+  commentsCount: number;
+}
 
 const CommentsButton = ({ commentsCount }: Props) => {
   const { user } = useUserContext();

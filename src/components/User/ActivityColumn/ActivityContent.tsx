@@ -5,10 +5,10 @@ import ActivityPosts from './ActivityContentTypes/ActivityPosts';
 import ActivityComments from './ActivityContentTypes/ActivityComments';
 import ActivityAll from './ActivityContentTypes/ActivityAll';
 
-type Props = {
+interface Props {
   posts: IPost[] | string[];
   comments: IComment[];
-};
+}
 
 const ActivityContent = ({ posts, comments }: Props) => {
   const { type } = useParams();

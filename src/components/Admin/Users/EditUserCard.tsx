@@ -12,9 +12,9 @@ import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 import { formatDate } from '../../shared/formattingHelpers';
 import { AdminUser } from '../../../../types/post';
 
-type Props = {
+interface Props {
   user: AdminUser;
-};
+}
 
 const EditUserCard = ({
   user: {

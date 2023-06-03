@@ -2,16 +2,20 @@
 
 ## Next
 
-- popular authors filter stuff responsive
+- interface vs type consistency
+- light/dark mode
+  - change buttons, selects, hover color, input for light mode
+- add a loading screen- read about generics
+  - use interface except when using | or generics
+- when media query is hit, nav should be a hamburger menu or search bar becomes an icon used to open input
+- filter package
+
 - protected
   - protected routes
   - pages (cant just pull up edit page for anyone's post)
   - gonna need to figure out how to add different levels of security
   - secured endpoint test out
 - reorganize css
-- when media query is hit, nav should be a hamburger menu or search bar becomes an icon used to open input
-- make sure light mode doesn't f app up
-- interface vs type consistency
 - stupid scrollbar
 - should be a way to combine the edit(Posts | Topics | Users) pages
 - add loading

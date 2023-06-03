@@ -5,11 +5,6 @@ const Container = styled.form`
   display: flex;
   gap: 1rem;
   align-items: center;
-
-  @media (max-width: 1000px) {
-    flex-direction: column;
-    gap: 0rem;
-    align-items: flex-start;
 `;
 
 const StyledLabel = styled.label`
@@ -29,14 +24,15 @@ const StyledSelect = styled.select`
   border-right: 0.5rem solid transparent;
 `;
 
-type Props = {
+interface Props {
+  className?: string;
   timeRange: string;
   handleSelectRange: (e: ChangeEvent<HTMLSelectElement>) => void;
-};
+}
 
-const TimeRange = ({ timeRange, handleSelectRange }: Props) => {
+const TimeRange = ({ className, timeRange, handleSelectRange }: Props) => {
   return (
-    <Container>
+    <Container className={className}>
       <StyledLabel htmlFor="timeRange">Time Range:</StyledLabel>
       <SelectWrapper>
         <StyledSelect

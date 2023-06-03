@@ -1,8 +1,8 @@
-export type TopicInputs = {
+export interface TopicInputs {
   name: string;
-};
+}
 
-export type UserInputs = {
+export interface UserInputs {
   firstName: string;
   lastName: string;
   email: string;
@@ -11,4 +11,4 @@ export type UserInputs = {
   confirmPassword: string;
   description: string;
   userType?: string;
-};
+}

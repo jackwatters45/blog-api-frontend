@@ -16,13 +16,13 @@ import {
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
 
-type Props = {
+interface Props {
   onSubmit: SubmitHandler<UserInputs>;
   submitText: string;
   signupError: string;
   isAdminView?: boolean;
   userData?: IUser;
-};
+}
 
 const UserForm = ({
   isAdminView,

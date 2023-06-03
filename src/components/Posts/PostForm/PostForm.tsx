@@ -73,16 +73,16 @@ const StyleDraftButton = styled(StyledPublishButton)`
   background-color: ${(props) => props.theme.colors.textSecondary};
 `;
 
-type Props = {
+interface Props {
   post?: IPost;
   pageTitle?: string;
-};
+}
 
-type Inputs = {
+interface Inputs {
   title: string;
   topic: string;
   content: string;
-};
+}
 
 const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   const { topics } = useSidebarContext();

@@ -19,11 +19,11 @@ const ActivityContainer = styled.div`
   margin-top: 2rem;
 `;
 
-type Props = {
+interface Props {
   name: string;
   comments: IComment[];
   posts: IPost[] | string[];
-};
+}
 
 const Activity = ({ comments, posts, name }: Props) => {
   return (

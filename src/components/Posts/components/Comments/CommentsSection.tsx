@@ -46,10 +46,10 @@ const StyledCommentContent = styled.p`
   font-size: 0.9rem;
 `;
 
-type Props = {
+interface Props {
   comments: IComment[] | undefined;
   postId: string;
-};
+}
 
 const CommentsSection = ({ comments: initialComments, postId }: Props) => {
   const [comments, setComments] = useState<IComment[] | undefined>(initialComments);

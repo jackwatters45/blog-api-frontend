@@ -8,9 +8,9 @@ import { mdiDelete, mdiPencil } from '@mdi/js';
 import { Link } from 'react-router-dom';
 import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
 
-type Props = {
+interface Props {
   topic: ITopic;
-};
+}
 
 const EditTopicCard = ({ topic: { _id, name } }: Props) => {
   return (

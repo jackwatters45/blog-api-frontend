@@ -17,10 +17,10 @@ import {
   StyledUpdated,
 } from '../../../styles/styledComponents/AdminCardComponents';
 
-type Props = {
+interface Props {
   post: IPost;
   isAdminView?: boolean;
-};
+}
 
 const MyPostsCard = ({ post, isAdminView }: Props) => {
   const { user } = useUserContext();

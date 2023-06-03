@@ -24,10 +24,10 @@ const StyledInput = styled.input`
   border-radius: 0 0.25rem 0.25rem 0;
 `;
 
-type filterOption = {
+interface filterOption {
   value: string;
   label: string;
-};
+}
 
 type Props<T> = {
   data: T[];

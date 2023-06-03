@@ -24,9 +24,9 @@ const StyledLi = styled.li`
   cursor: pointer;
 `;
 
-type Props = {
+interface Props {
   useModalParams: useModalParams;
-};
+}
 
 const ProfileDropdown = ({ useModalParams }: Props) => {
   const modalProps = useModal(useModalParams);

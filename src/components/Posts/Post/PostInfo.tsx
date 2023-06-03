@@ -39,9 +39,9 @@ const LikesAndComments = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-type Props = {
+interface Props {
   post: IPost;
-};
+}
 
 const PostInfo = ({
   post: { title, author, createdAt, _id, likes, comments, topic },

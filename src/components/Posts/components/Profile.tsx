@@ -35,9 +35,9 @@ const StyledDescription = styled.p`
   font-size: 0.9rem;
 `;
 
-type Props = {
+interface Props {
   author: Partial<IUser> | string;
-};
+}
 
 const Profile = ({ author }: Props) => {
   const { firstName, followers, description, _id } = author as IUser;

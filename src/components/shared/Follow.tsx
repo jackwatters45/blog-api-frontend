@@ -10,11 +10,11 @@ const StyledFollowButton = styled.button`
   width: 60px;
 `;
 
-type Props = {
+interface Props {
   followers: string[];
   setFollowerCount: Dispatch<SetStateAction<number>>;
   userId?: string;
-};
+}
 
 const Follow = ({ followers, setFollowerCount, userId }: Props) => {
   const { id } = useParams();

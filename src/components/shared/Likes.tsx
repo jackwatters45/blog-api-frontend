@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
-type Props = {
+interface Props {
   hasUserLiked: boolean;
   likesCount: number;
   _id: string;
   setLikesCount: Dispatch<SetStateAction<number>>;
   setHasUserLiked: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 interface LikeButtonProps {
   hasUserLiked: boolean;
