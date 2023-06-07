@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    overflow-y: scroll;
 
     color: ${({ theme }) => theme.colors.textPrimary};
     background-color: ${({ theme }) => theme.colors.backgroundPrimary};
@@ -55,6 +56,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     color: inherit;
+    font: inherit;
   }
 
   .error {

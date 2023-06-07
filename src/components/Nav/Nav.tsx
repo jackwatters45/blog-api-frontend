@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import NavOptions from './NavOptions/NavOptions';
+import NavContent from './NavContent';
 
 const StyledNav = styled.nav`
   display: grid;
@@ -15,6 +15,7 @@ const StyledNav = styled.nav`
   @media screen and (max-width: 768px) {
     display: flex;
     justify-content: space-between;
+    padding: 0 1rem;
   }
 `;
 
@@ -31,7 +32,7 @@ const Nav = () => {
         <StyledH1>SCHMEDIUM</StyledH1>
       </Link>
       <SearchBar />
-      <NavOptions />
+      <NavContent />
     </StyledNav>
   );
 };

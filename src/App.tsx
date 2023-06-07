@@ -1,4 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
 import { styled, ThemeProvider } from 'styled-components';
 import { UserProvider } from './context/UserContext';
 import Routes from './Routes';
@@ -21,12 +20,10 @@ function App() {
       <SidebarProvider>
         <ModalProvider>
           <ThemeProvider theme={colorTheme}>
-            <BrowserRouter>
-              <AppContainer>
-                <GlobalStyle />
-                <Routes />
-              </AppContainer>
-            </BrowserRouter>
+            <AppContainer>
+              <GlobalStyle />
+              <Routes />
+            </AppContainer>
           </ThemeProvider>
         </ModalProvider>
       </SidebarProvider>

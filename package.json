@@ -27,8 +27,10 @@
     "*.{md,html,css,json,yml}": "prettier --write"
   },
   "dependencies": {
+    "@jackwatters/simple-nav": "^1.0.4",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
+    "@mui/icons-material": "^5.11.16",
     "@tinymce/tinymce-react": "^4.3.0",
     "dotenv": "^16.0.3",
     "js-cookie": "^3.0.5",

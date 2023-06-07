@@ -6,8 +6,10 @@ const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
   max-width: 600px;
+  width: 100%;
+  padding: 0.5rem;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 400px) {
     display: none;
   }
 `;
@@ -21,6 +23,7 @@ const SearchIcon = styled.span`
 `;
 
 const SearchInput = styled.input`
+  width: 100%;
   flex: 1;
   border: none;
   outline: none;
