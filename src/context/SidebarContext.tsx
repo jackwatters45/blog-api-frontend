@@ -22,12 +22,14 @@ export const SidebarProvider = ({ children }: SidebarProviderProps) => {
   useEffect(() => {
     const getPopularPosts = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/popular?limit=5`);
-      return await res.json();
+      const { posts } = await res.json();
+      return posts;
     };
 
     const getPopularAuthors = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/users/popular?limit=5`);
-      return await res.json();
+      const { users } = await res.json();
+      return users;
     };
 
     const getPopularTopics = async () => {

@@ -30,28 +30,29 @@ const StyledSelect = styled.select`
 `;
 
 interface Props {
-  label?: string;
-  sortBy: string;
-  handleSelectSortBy: (e: ChangeEvent<HTMLSelectElement>) => void;
+  id: string;
+  label: string;
+  value: string;
+  handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void;
+  options: { value: string; label: string }[];
+  className?: string;
 }
 
-const SortBy = ({ sortBy, handleSelectSortBy, label }: Props) => {
+const Select = ({ id, label, value, options, handleSelect, className }: Props) => {
   return (
-    <Container>
-      <StyledLabel htmlFor="sortBy">{label ?? 'Sort By:'}</StyledLabel>
+    <Container className={className}>
+      <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <SelectWrapper>
-        <StyledSelect
-          name="sortBy"
-          id="sortBy"
-          value={sortBy}
-          onChange={handleSelectSortBy}
-        >
-          <option value="totalPosts">Total Posts</option>
-          <option value="totalLikes">Total Likes</option>
+        <StyledSelect name={id} id={id} value={value} onChange={handleSelect}>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </StyledSelect>
       </SelectWrapper>
     </Container>
   );
 };
 
-export default SortBy;
+export default Select;

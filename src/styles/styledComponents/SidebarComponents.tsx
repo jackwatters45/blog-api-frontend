@@ -35,7 +35,7 @@ export const SidebarAdditionalInfo = styled.p`
   margin-left: 0.5rem;
 `;
 
-export const SidebarTags = styled.ul`
+export const SidebarTopics = styled.ul`
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;

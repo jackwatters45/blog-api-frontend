@@ -13,35 +13,55 @@ import ITopic from '../../../types/topic';
 import Posts from '../Posts/Posts';
 import { useParams } from 'react-router-dom';
 import IPost from '../../../types/post';
-import useTimeRange from '../../custom/useTimeRange';
+import useSelect from '../../custom/useSelect';
 import { useSidebarContext } from '../../context/SidebarContext';
 import PostSort from './PostSort';
 import { StyledTopicButton } from '../../styles/styledComponents/TopicComponents';
+import { usePagination, Pagination } from '../../custom/usePagination';
+import { styled } from 'styled-components';
+import Loading from '../shared/Loading';
+
+const PostsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Topics = () => {
   const { id } = useParams();
-
-  const { timeRange, handleSelectRange } = useTimeRange();
   const { topics } = useSidebarContext();
+
+  const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
 
   const [selectedTopic, setSelectedTopic] = useState<ITopic | undefined>(undefined);
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
+
+  const [postCount, setPostCount] = useState<number>(0);
+  const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
+  const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
+
   useEffect(() => {
     if (!id) return setSelectedTopic(undefined);
     const fetchTopic = async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/topics/${id}/posts/?timeRange=${timeRange}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/topics/${id}/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
       const data = await res.json();
-      const { posts, topic } = data;
+      const {
+        posts,
+        topic,
+        meta: { total },
+      } = data;
 
       setSelectedTopic(topic);
+      setPostCount(total);
       setPosts(posts);
     };
     fetchTopic();
-  }, [id, timeRange]);
+  }, [id, timeRange, itemsPerPage, offset]);
 
-  return (
+  return posts ? (
     <StyledMain>
       <StyledContentContainer>
         <StyledH1>{selectedTopic ? selectedTopic.name : 'Explore Topics'}</StyledH1>
@@ -63,14 +83,19 @@ const Topics = () => {
           <PostSort
             topics={topics}
             selectedTopic={selectedTopic}
-            timeRange={timeRange}
-            handleSelectRange={handleSelectRange}
+            TimeRangeSelect={TimeRangeSelect}
+            ItemsPerPageSelect={ItemsPerPageSelect}
           />
         )}
-        <Posts postsProp={posts} selectedFilter={!!selectedTopic} />
+        <PostsContainer>
+          <Posts posts={posts} />
+          <Pagination {...paginationProps} />
+        </PostsContainer>
       </StyledContentContainer>
       <Sidebar />
     </StyledMain>
+  ) : (
+    <Loading />
   );
 };
 

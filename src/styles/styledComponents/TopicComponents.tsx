@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import { TopicButtonLarge } from './HelperComponents';
-import TimeRange from '../../components/shared/TimeRange';
 
 export const StyledTopicButton = styled(TopicButtonLarge)`
   background: ${({ theme }) => theme.colors.textSecondary};
@@ -42,10 +41,4 @@ export const StyledValue = styled.p`
     line-height: 1.2rem;
     font-size: 1.2rem;
   }
-`;
-
-export const StyledTimeRange = styled(TimeRange)`
-@media (max-width: 420px) {
-  flex-direction: column;
-  gap: 0rem;
 `;

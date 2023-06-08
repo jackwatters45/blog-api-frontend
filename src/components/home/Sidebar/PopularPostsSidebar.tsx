@@ -5,7 +5,7 @@ import {
   SidebarItemTitle,
   SidebarList,
   SidebarItemUsername,
-  SidebarTags,
+  SidebarTopics,
   SeeAllLink,
   SidebarContainer,
 } from '../../../styles/styledComponents/SidebarComponents';
@@ -48,9 +48,9 @@ const PopularPostsSidebar = () => {
                   </SidebarInfoFirstRow>
                   <Link to={`/post/${_id}`}>
                     <SidebarItemTitle>{title}</SidebarItemTitle>
-                    <SidebarTags>
+                    <SidebarTopics>
                       <li key={topic?._id}>in {topic?.name}</li>
-                    </SidebarTags>
+                    </SidebarTopics>
                   </Link>
                 </li>
               );

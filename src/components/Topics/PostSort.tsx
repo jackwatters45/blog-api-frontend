@@ -1,27 +1,37 @@
 import ITopic, { PopularTopics } from '../../../types/topic';
-import { ChangeEvent, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import {
   StyledValue,
   TotalValueContainer,
   FilterContainer,
-  StyledTimeRange,
 } from '../../styles/styledComponents/TopicComponents';
+import {
+  SelectProps,
+  getItemsPerPageOptions,
+  timeRangeOptions,
+} from '../../custom/useSelect';
 
 interface Props {
   topics: PopularTopics[];
-  timeRange: string;
   selectedTopic?: ITopic;
-  handleSelectRange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  TimeRangeSelect: FC<SelectProps>;
+  ItemsPerPageSelect: FC<SelectProps>;
 }
 
-const PostSort = ({ topics, timeRange, selectedTopic, handleSelectRange }: Props) => {
+const PostSort = ({
+  topics,
+  selectedTopic,
+  TimeRangeSelect,
+  ItemsPerPageSelect,
+}: Props) => {
   const filterResult = useMemo(() => {
     return topics.find((topic) => topic._id === selectedTopic?._id)?.totalLikes ?? '0';
   }, [topics, selectedTopic]);
 
   return (
     <FilterContainer>
-      <StyledTimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
+      <TimeRangeSelect {...timeRangeOptions} />
+      <ItemsPerPageSelect {...getItemsPerPageOptions('Post')} />
       <TotalValueContainer>
         <p>Total Likes: </p>
         <StyledValue>{filterResult}</StyledValue>

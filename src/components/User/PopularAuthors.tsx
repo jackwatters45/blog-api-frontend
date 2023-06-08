@@ -5,10 +5,13 @@ import {
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { styled } from 'styled-components';
 import { useEffect, useState } from 'react';
-import TimeRange from '../shared/TimeRange';
 import IUser from '../../../types/user';
 import Users from './Users';
-import useTimeRange from '../../custom/useTimeRange';
+import useSelect, {
+  getItemsPerPageOptions,
+  timeRangeOptions,
+} from '../../custom/useSelect';
+import { usePagination, Pagination } from '../../custom/usePagination';
 
 const StyledMain = styled.main`
   display: flex;
@@ -29,29 +32,54 @@ const StyledMain = styled.main`
   }
 `;
 
+const Selects = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const PopularAuthors = () => {
   const [users, setUsers] = useState<undefined | IUser[]>(undefined);
 
-  const { timeRange, handleSelectRange } = useTimeRange();
+  const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
+
+  const [userCount, setUserCount] = useState<number>(0);
+  const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
+  const { offset, ...paginationProps } = usePagination(itemsPerPage, userCount);
 
   useEffect(() => {
     const fetchAuthorsPopular = async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/users/popular?timeRange=${timeRange}&limit=10`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/users/popular?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const data = await res.json();
-      console.log(data);
-      setUsers(data);
+      const {
+        users,
+        meta: { total },
+      } = await res.json();
+      setUserCount(total);
+      setUsers(users);
     };
     fetchAuthorsPopular();
-  }, [timeRange]);
+  }, [timeRange, itemsPerPage, offset]);
 
   return (
     <StyledMain>
       <StyledContentContainer>
         <StyledH1>Explore Popular Authors</StyledH1>
-        <TimeRange timeRange={timeRange} handleSelectRange={handleSelectRange} />
-        <Users usersProp={users} selectedFilter={true} />
+        <Selects>
+          <TimeRangeSelect {...timeRangeOptions} />
+          <ItemsPerPageSelect {...getItemsPerPageOptions('User')} />
+        </Selects>
+        <UserContainer>
+          <Users usersProp={users} selectedFilter={true} />
+          <Pagination {...paginationProps} />
+        </UserContainer>
       </StyledContentContainer>
       <Sidebar />
     </StyledMain>

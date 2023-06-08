@@ -1,5 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
+import IPost, { AdminUser } from '../../../../types/post';
+import IUser from '../../../../types/user';
+import ITopic from '../../../../types/topic';
 
 const StyledForm = styled.form`
   display: flex;
@@ -37,7 +40,7 @@ type Props<T> = {
   placeHolder: string;
 };
 
-const Filter = <T,>({
+const Filter = <T extends IPost | IUser | ITopic | AdminUser>({
   data,
   setFilteredData,
   filterFunction,

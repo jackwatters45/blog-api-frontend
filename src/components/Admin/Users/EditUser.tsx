@@ -29,7 +29,6 @@ const EditUser = () => {
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
-      console.log(id);
       const response = id
         ? await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
             method: 'PATCH',

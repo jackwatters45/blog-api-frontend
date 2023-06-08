@@ -11,12 +11,14 @@ import {
 import { userFilterFunction } from '../../shared/Filter/filterFunctions';
 import { AdminUser } from '../../../../types/post';
 import Loading from '../../shared/Loading';
+import { PaginateProps, Pagination } from '../../../custom/usePagination';
 
 interface Props {
   users: AdminUser[];
+  paginationProps: PaginateProps;
 }
 
-const EditUsers = ({ users }: Props) => {
+const EditUsers = ({ users, paginationProps }: Props) => {
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>(users ?? []);
 
   return filteredUsers ? (
@@ -40,6 +42,7 @@ const EditUsers = ({ users }: Props) => {
           <FilterError>{`No users match your filter...`}</FilterError>
         )}
       </CardContainer>
+      <Pagination {...paginationProps} />
     </AdminContainer>
   ) : (
     <Loading />

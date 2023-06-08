@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import PostPreviews from './PostPreviews';
-import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 
 const StyledPostsContainer = styled.div`
@@ -17,23 +16,10 @@ const StyledNoPostsMessage = styled.p`
 `;
 
 interface Props {
-  postsProp?: IPost[];
-  selectedFilter?: boolean;
+  posts: IPost[];
 }
 
-const Posts = ({ postsProp, selectedFilter }: Props) => {
-  const [posts, setPosts] = useState<IPost[] | undefined>(undefined);
-
-  useEffect(() => {
-    if (selectedFilter) return setPosts(postsProp);
-    const fetchPostsNew = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`);
-      const data = await res.json();
-      setPosts(data);
-    };
-    fetchPostsNew();
-  }, [selectedFilter, postsProp]);
-
+const Posts = ({ posts }: Props) => {
   return (
     <StyledPostsContainer>
       {posts?.length ? (

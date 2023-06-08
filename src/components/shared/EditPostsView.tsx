@@ -10,14 +10,16 @@ import {
   FilterError,
 } from '../../styles/styledComponents/AdminCardComponents';
 import { postFilterFunction } from './Filter/filterFunctions';
+import { PaginateProps, Pagination } from '../../custom/usePagination';
 
 interface Props {
   posts: IPost[];
   title: string;
   isAdminView?: boolean;
+  paginationProps: PaginateProps;
 }
 
-const EditPostsView = ({ posts, title, isAdminView }: Props) => {
+const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) => {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts);
 
   return (
@@ -41,6 +43,7 @@ const EditPostsView = ({ posts, title, isAdminView }: Props) => {
           <FilterError>{`No posts match your filter...`}</FilterError>
         )}
       </CardContainer>
+      <Pagination {...paginationProps} />
     </AdminContainer>
   );
 };

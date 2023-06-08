@@ -39,7 +39,7 @@ const LikesAndComments = styled.div`
   font-size: 0.8rem;
 `;
 
-const StyledTag = styled.li`
+const StyledTopic = styled.li`
   padding: 0.15rem 0.45rem;
   border-radius: 3px;
   background: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -50,7 +50,7 @@ interface Props {
 }
 
 const PostPreview = ({
-  post: { title, content, createdAt, author, _id, topic, likes, comments },
+  post: { _id, title, content, createdAt, author, topic, comments, likes },
 }: Props) => {
   const { user } = useUserContext();
 
@@ -82,7 +82,7 @@ const PostPreview = ({
         </LikesAndComments>
         {topic && (
           <Link to={`/topic/${topic._id}`}>
-            <StyledTag>{topic.name}</StyledTag>
+            <StyledTopic>{topic.name}</StyledTopic>
           </Link>
         )}
       </BottomRow>
