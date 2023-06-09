@@ -69,6 +69,11 @@ export const StyledUpdated = styled.p`
   font-size: 0.9rem;
 `;
 
+export const StyledDeleteDate = styled.i`
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
+
 const StyledInfo = css`
   font-size: 0.85rem;
   display: flex;
@@ -79,8 +84,11 @@ const StyledInfo = css`
 export const StyledUserInfo = styled.div`
   ${StyledInfo}
   color: ${({ theme }) => theme.colors.textSecondary};
-
   margin: 2px 0;
+
+  p {
+    padding-right: 1rem;
+  }
 `;
 
 export const StyledFollowInfo = styled.div`
@@ -89,6 +97,10 @@ export const StyledFollowInfo = styled.div`
 `;
 export const StyledAuthor = styled.div`
   ${StyledInfo}
+`;
+
+export const StyledDeletedAuthor = styled.i`
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 export const Buttons = styled.div`

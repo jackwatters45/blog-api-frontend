@@ -10,15 +10,19 @@ const Container = styled.div`
   padding: 3rem;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: underline;
+`;
+
 function UnauthorizedPage() {
   return (
     <Container>
       <h1>You are not authorized to view this page.</h1>
       <p>
-        If you are an admin, <Link to="login">login to view this page.</Link>
+        If you are an admin, <StyledLink to="login">login to view this page.</StyledLink>
       </p>
       <p>
-        Otherwise, <Link to="/">return home</Link>
+        Otherwise, <StyledLink to="/">return home</StyledLink>
       </p>
     </Container>
   );

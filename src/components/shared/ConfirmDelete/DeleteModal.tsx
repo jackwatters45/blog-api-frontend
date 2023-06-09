@@ -23,10 +23,17 @@ const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);
 
   const handleDelete = async () => {
-    await fetch(`${import.meta.env.VITE_API_URL}/${objType}s/${id}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    });
+    if (objType === 'user') {
+      await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/delete`, {
+        method: 'PATCH',
+        credentials: 'include',
+      });
+    } else {
+      await fetch(`${import.meta.env.VITE_API_URL}/${objType}s/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+    }
 
     window.location.reload();
   };

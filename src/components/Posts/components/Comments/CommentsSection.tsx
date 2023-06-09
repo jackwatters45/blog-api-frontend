@@ -37,6 +37,12 @@ const StyledLink = styled(Link)`
   font-size: 0.9rem;
 `;
 
+const StyledDeleted = styled.i`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: 700;
+  font-size: 0.9rem;
+`;
+
 const StyledDate = styled.p`
   font-size: 0.8rem;
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -61,16 +67,20 @@ const CommentsSection = ({ comments: initialComments, postId }: Props) => {
       <h2>Comments ({comments?.length ?? 0})</h2>
       <AddComment setComments={setComments} postId={postId} />
       {comments?.map(({ content, updatedAt, author, _id }) => {
-        const { firstName, lastName, _id: authorId } = author;
+        const { firstName, lastName, _id: authorId, isDeleted } = author;
         return (
           <CommentContainer key={_id}>
             <Link to={`/user/${authorId}`}>
               <StyledCommentImg src={img} alt="user icon" />
             </Link>
             <CommentInfo>
-              <StyledLink to={`/user/${authorId}`}>
-                {firstName} {lastName}
-              </StyledLink>
+              {author && !isDeleted ? (
+                <StyledLink to={`/user/${authorId}`}>
+                  {firstName} {lastName}
+                </StyledLink>
+              ) : (
+                <StyledDeleted>Deleted</StyledDeleted>
+              )}
               <StyledDate>{formatDate(updatedAt)}</StyledDate>
               <StyledCommentContent>{content}</StyledCommentContent>
             </CommentInfo>

@@ -5,11 +5,6 @@ const Container = styled.form`
   display: flex;
   gap: 1rem;
   align-items: center;
-
-  @media (max-width: 1000px) {
-    flex-direction: column;
-    gap: 0rem;
-    align-items: flex-start;
 `;
 
 const StyledLabel = styled.label`

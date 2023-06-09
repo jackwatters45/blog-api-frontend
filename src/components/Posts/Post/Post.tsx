@@ -44,7 +44,7 @@ const Post = () => {
     <StyledPostContainer>
       <PostInfo post={post} />
       <PostContentDefault contentHtml={content} />
-      {author && <Profile author={author} />}
+      {!author?.isDeleted && <Profile author={author} />}
       <CommentsSection comments={comments as IComment[]} postId={_id} />
     </StyledPostContainer>
   );

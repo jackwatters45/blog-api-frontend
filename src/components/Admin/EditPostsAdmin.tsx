@@ -14,8 +14,9 @@ const EditPostsAdmin = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/posts/preview?limit=
-      ${itemsPerPage}&offset=${offset}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/posts/preview?limit=${itemsPerPage}&offset=${offset}`,
         {
           credentials: 'include',
         },

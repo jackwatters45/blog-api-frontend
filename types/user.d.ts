@@ -1,6 +1,26 @@
+export interface DeletedData {
+  deletedAt: string;
+  deletedBy: string;
+  username: string;
+  email: string;
+}
 export interface IPopularAuthors extends IUser {
   likesCount: number;
   likesCountInTimeRange: number;
+}
+
+export interface AdminUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  userType: string;
+  updatedAt: string;
+  followersCount: number;
+  followingCount: number;
+  isDeleted: boolean;
+  deletedData?: DeletedData;
 }
 
 interface IUser {
@@ -16,6 +36,8 @@ interface IUser {
   updatedAt: string;
   followers: Partial<IUser[]> | string[];
   following: Partial<IUser[]> | string[];
+  isDeleted: boolean;
+  deletedData?: DeletedData;
   description?: string;
 }
 

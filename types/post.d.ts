@@ -6,17 +6,6 @@ export interface ILike {
   date: string;
 }
 
-export interface AdminUser {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  userType: string;
-  updatedAt: string;
-  followersCount: number;
-  followingCount: number;
-}
 interface IPost {
   _id: string;
   title: string;

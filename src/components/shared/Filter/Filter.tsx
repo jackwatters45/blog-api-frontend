@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import IPost, { AdminUser } from '../../../../types/post';
-import IUser from '../../../../types/user';
+import IPost from '../../../../types/post';
+import IUser, { AdminUser } from '../../../../types/user';
 import ITopic from '../../../../types/topic';
 
 const StyledForm = styled.form`

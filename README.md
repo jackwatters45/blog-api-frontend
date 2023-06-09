@@ -3,28 +3,12 @@
 ## Next
 
 - General
-
-  - make selects responsive (wrap)
-  - center unauthorized message
-
-  - handle posts and users deleted (maybe comments too)
-
-    - add userDelete field
-    - remove fields
-      - password
-      - email
-    - make user private to regular users
-    - not able to find user
-    - keep their content public but make sure it doesn't break
+  - calculate read time
+  - sessions
+  - Posts
+    - images
       - posts
-      - comments
-    - name -> redacted user
-
-  - images
-
-    - posts
-    - users
-
+      - users
   - make sure everything has loading
 
 ## Eventually
@@ -39,11 +23,6 @@
     - preview
     - activity`
   - save posts
-
-- Posts
-
-  - calculate read time
-  - add imgs
 
 - comments
 
@@ -76,10 +55,3 @@
   - arrow spacing
   - indent of hamburger
 - filter package
-
-## Delete
-
-- likesCount seems unnecessary
-
-- select styling
-  - export const StyledTimeRange = styled(TimeRange)`@media (max-width: 420px) {flex-direction: column;gap: 0rem;}`;

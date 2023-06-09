@@ -23,7 +23,6 @@ const LikeButton = styled.button<LikeButtonProps>`
   border-radius: 0.25rem;
   background-color: ${({ hasUserLiked, theme }) =>
     hasUserLiked ? theme.colors.selected : 'inherit'};
-
   ${({ theme }) => theme.hoverNoBorder};
 `;
 

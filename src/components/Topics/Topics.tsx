@@ -40,7 +40,21 @@ const Topics = () => {
   const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
 
   useEffect(() => {
-    if (!id) return setSelectedTopic(undefined);
+    const fetchPosts = async () => {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_API_URL
+        }/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
+      );
+      const data = await res.json();
+      const {
+        posts,
+        meta: { total },
+      } = data;
+      setPosts(posts);
+      setPostCount(total);
+    };
+
     const fetchTopic = async () => {
       const res = await fetch(
         `${
@@ -58,7 +72,9 @@ const Topics = () => {
       setPostCount(total);
       setPosts(posts);
     };
-    fetchTopic();
+
+    if (id) fetchTopic();
+    else fetchPosts();
   }, [id, timeRange, itemsPerPage, offset]);
 
   return posts ? (

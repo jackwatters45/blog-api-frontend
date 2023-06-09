@@ -9,7 +9,7 @@ import {
   FilterError,
 } from '../../../styles/styledComponents/AdminCardComponents';
 import { userFilterFunction } from '../../shared/Filter/filterFunctions';
-import { AdminUser } from '../../../../types/post';
+import { AdminUser } from '../../../../types/user';
 import Loading from '../../shared/Loading';
 import { PaginateProps, Pagination } from '../../../custom/usePagination';
 

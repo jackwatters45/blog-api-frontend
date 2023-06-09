@@ -8,6 +8,7 @@ import {
   SidebarTopics,
   SeeAllLink,
   SidebarContainer,
+  SidebarItemUsernameDeleted,
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
@@ -29,17 +30,18 @@ const PopularPostsSidebar = () => {
           posts
             .slice(0, 5)
             .map(({ _id, title, author, topic, createdAt }: Partial<IPost>) => {
+              const isDeleted = author?.isDeleted;
               return (
                 <li key={_id}>
                   <SidebarInfoFirstRow>
-                    {author?._id ? (
+                    {author && !isDeleted ? (
                       <Link to={`/user/${author._id}`}>
                         <SidebarItemUsername>
                           {author.firstName} {author.lastName}
                         </SidebarItemUsername>
                       </Link>
                     ) : (
-                      <SidebarItemUsername>Unknown</SidebarItemUsername>
+                      <SidebarItemUsernameDeleted>Deleted</SidebarItemUsernameDeleted>
                     )}
                     <p>•</p>
                     <Link to={`/post/${_id}`}>
@@ -48,9 +50,11 @@ const PopularPostsSidebar = () => {
                   </SidebarInfoFirstRow>
                   <Link to={`/post/${_id}`}>
                     <SidebarItemTitle>{title}</SidebarItemTitle>
-                    <SidebarTopics>
-                      <li key={topic?._id}>in {topic?.name}</li>
-                    </SidebarTopics>
+                    {topic && (
+                      <SidebarTopics>
+                        <li key={topic?._id}>in {topic?.name}</li>
+                      </SidebarTopics>
+                    )}
                   </Link>
                 </li>
               );

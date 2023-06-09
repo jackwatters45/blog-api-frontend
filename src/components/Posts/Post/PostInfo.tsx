@@ -24,6 +24,11 @@ const StyledAuthor = styled(Link)`
   color: grey;
 `;
 
+const StyledAuthorDeleted = styled.div`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 const BottomRowInfo = styled.div`
   display: flex;
   justify-content: space-between;
@@ -50,15 +55,21 @@ const PostInfo = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id as string);
 
+  const isDeleted = author?.isDeleted;
   return (
     <StyledPostInfoContainer>
       <StyledH1>{title}</StyledH1>
-      {author ? (
+      {author && !isDeleted ? (
         <StyledAuthor to={`/user/${author._id}`}>
           {`${author.firstName} ${author.lastName} • ${formatDate(createdAt)}`}
         </StyledAuthor>
       ) : (
-        <p>{`Unknown • ${formatDate(createdAt)}`}</p>
+        <StyledAuthorDeleted>
+          <p>
+            <i>Deleted</i>
+            {` • ${formatDate(createdAt)}`}
+          </p>
+        </StyledAuthorDeleted>
       )}
       <BottomRowInfo>
         {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}

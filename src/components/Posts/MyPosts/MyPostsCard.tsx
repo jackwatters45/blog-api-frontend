@@ -15,6 +15,7 @@ import {
   StyledAuthor,
   StyledTitleTopic,
   StyledUpdated,
+  StyledDeletedAuthor,
 } from '../../../styles/styledComponents/AdminCardComponents';
 
 interface Props {
@@ -26,7 +27,7 @@ const MyPostsCard = ({ post, isAdminView }: Props) => {
   const { user } = useUserContext();
   const { title, likes, topic, updatedAt, comments, author, _id } = post;
   const likesProps = useLikes(likes as ILike[], user?._id as string);
-
+  const isDeleted = author?.isDeleted;
   return (
     <AdminCard>
       <StyledTitleTopic>
@@ -37,9 +38,13 @@ const MyPostsCard = ({ post, isAdminView }: Props) => {
       {isAdminView && (
         <StyledAuthor>
           <p>Written by</p>
-          {author?.firstName && author?.lastName
-            ? `${author?.firstName} ${author?.lastName}`
-            : 'Unknown'}
+          {author && !isDeleted ? (
+            <p>
+              {author?.firstName} {author?.lastName}
+            </p>
+          ) : (
+            <StyledDeletedAuthor>Deleted</StyledDeletedAuthor>
+          )}
         </StyledAuthor>
       )}
       <Buttons>

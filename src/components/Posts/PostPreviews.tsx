@@ -45,6 +45,10 @@ const StyledTopic = styled.li`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
+const StyledDeleted = styled.i`
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 interface Props {
   post: IPost;
 }
@@ -53,18 +57,18 @@ const PostPreview = ({
   post: { _id, title, content, createdAt, author, topic, comments, likes },
 }: Props) => {
   const { user } = useUserContext();
-
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
+  const isDeleted = author?.isDeleted;
   return (
     <Container>
       <StyledDateAuthorDiv>
-        {author?._id ? (
+        {author && !isDeleted ? (
           <Link to={`/user/${author._id}`}>
             {author.firstName} {author.lastName}
           </Link>
         ) : (
-          <p>Unknown</p>
+          <StyledDeleted>Deleted</StyledDeleted>
         )}
         <p>•</p>
         <Link to={`/post/${_id}`}>{formatDate(createdAt)}</Link>

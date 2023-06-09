@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 export const SidebarContainer = styled.div``;
 
@@ -25,9 +25,17 @@ export const SidebarItemTitle = styled.p`
   font-weight: 600;
 `;
 
-export const SidebarItemUsername = styled.p`
+const SidebarUsername = css`
   font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const SidebarItemUsername = styled.p`
+  ${SidebarUsername}
+`;
+
+export const SidebarItemUsernameDeleted = styled.i`
+  ${SidebarUsername}
 `;
 
 export const SidebarAdditionalInfo = styled.p`

@@ -5,19 +5,20 @@ import {
   StyledUpdated,
   StyledUserInfo,
   StyledFollowInfo,
+  StyledDeleteDate,
 } from '../../../styles/styledComponents/AdminCardComponents';
 import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 import { formatDate } from '../../shared/formattingHelpers';
-import { AdminUser } from '../../../../types/post';
+import { AdminUser } from '../../../../types/user';
 
 interface Props {
   user: AdminUser;
 }
 
-const EditUserCard = ({
-  user: {
+const EditUserCard = ({ user }: Props) => {
+  const {
     _id,
     firstName,
     lastName,
@@ -27,26 +28,44 @@ const EditUserCard = ({
     updatedAt: lastActivity,
     followersCount,
     followingCount,
-  },
-}: Props) => {
+    isDeleted,
+    deletedData,
+  } = user;
+
+  console.log(deletedData);
   return (
     <AdminCard>
       <h2>{`${firstName} ${lastName}`}</h2>
-      <StyledUserInfo>
-        <p>{`${email} | @${username} | ${userType}`}</p>
-      </StyledUserInfo>
-      <StyledUpdated>Last Activity: {formatDate(lastActivity)}</StyledUpdated>
-      <StyledFollowInfo>
-        <p>{`Followers ${followersCount}`}</p>
-        <p>{`Following ${followingCount}`}</p>
-      </StyledFollowInfo>
+      {user && !isDeleted ? (
+        <>
+          <StyledUserInfo>
+            <p>{`${email} | @${username} | ${userType}`}</p>
+          </StyledUserInfo>
+          <StyledUpdated>Last Activity: {formatDate(lastActivity)}</StyledUpdated>
+          <StyledFollowInfo>
+            <p>{`Followers ${followersCount}`}</p>
+            <p>{`Following ${followingCount}`}</p>
+          </StyledFollowInfo>
+        </>
+      ) : (
+        <>
+          <StyledUserInfo>
+            <p>{`${deletedData?.email} | @${deletedData?.username} | ${userType}`}</p>
+          </StyledUserInfo>
+          <StyledDeleteDate>
+            Deleted: {formatDate(deletedData?.deletedAt as string)}
+          </StyledDeleteDate>
+        </>
+      )}
       <ButtonOptions>
-        <DeleteButton
-          StyledButton={Icon}
-          id={_id}
-          objType={'user'}
-          extraButtonProps={{ path: mdiDelete, size: 1 }}
-        />
+        {!isDeleted && (
+          <DeleteButton
+            StyledButton={Icon}
+            id={_id}
+            objType={'user'}
+            extraButtonProps={{ path: mdiDelete, size: 1 }}
+          />
+        )}
         <Link to={`/admin/users/${_id}/edit`}>
           <Icon path={mdiPencil} size={1} />
         </Link>
