@@ -1,5 +1,6 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { styled } from 'styled-components';
+import useLogout from '../../Auth/Logout';
 
 const StyledModal = styled.div`
   position: absolute;
@@ -21,6 +22,7 @@ interface Props {
 
 const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);
+  const { logout } = useLogout();
 
   const handleDelete = async () => {
     if (objType === 'user') {
@@ -34,6 +36,8 @@ const DeleteModal = ({ useModalParams, objType, id }: Props) => {
         credentials: 'include',
       });
     }
+
+    logout();
 
     window.location.reload();
   };

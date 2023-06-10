@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import ActivityContent from './ActivityContent';
 import ActivityOptions from './ActivityOptions';
 import IComment from '../../../../types/comment.d';
+import { SelectedUserNameProvider } from '../../../context/SelectedUserNameContext';
 
 const LeftColumn = styled.div`
   width: 100%;
@@ -27,13 +28,15 @@ interface Props {
 
 const Activity = ({ comments, posts, name }: Props) => {
   return (
-    <LeftColumn>
-      <StyledH1>{name}</StyledH1>
-      <ActivityContainer>
-        <ActivityOptions />
-        <ActivityContent comments={comments} posts={posts} />
-      </ActivityContainer>
-    </LeftColumn>
+    <SelectedUserNameProvider value={name}>
+      <LeftColumn>
+        <StyledH1>{name}</StyledH1>
+        <ActivityContainer>
+          <ActivityOptions />
+          <ActivityContent comments={comments} posts={posts} />
+        </ActivityContainer>
+      </LeftColumn>
+    </SelectedUserNameProvider>
   );
 };
 

@@ -1,8 +1,9 @@
 export interface DeletedData {
   deletedAt: string;
-  deletedBy: string;
+  deletedBy: Partial<IUser> | null;
   username: string;
   email: string;
+  followerCount: number;
 }
 export interface IPopularAuthors extends IUser {
   likesCount: number;

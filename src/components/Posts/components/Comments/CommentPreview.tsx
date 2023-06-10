@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import IUser from '../../../../../types/user';
 import { formatContent, formatDate } from '../../../shared/formattingHelpers';
 import IPost from '../../../../../types/post';
+import { useContext } from 'react';
+import { SelectedUserNameContext } from '../../../../context/SelectedUserNameContext';
 
 const Container = styled.div`
   padding: 2rem 0;
@@ -25,6 +27,10 @@ const StyledPostInfo = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
+const StyledDeleted = styled.i`
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 interface Props {
   comment: IComment;
 }
@@ -37,6 +43,8 @@ const CommentPreview = ({ comment }: Props) => {
     lastName: commenterLastName,
   } = commenter as IUser;
 
+  const authorName = useContext(SelectedUserNameContext);
+
   const { _id: postId, title, author: postAuthor } = post as IPost;
 
   const { firstName: posterFirstName, lastName: posterLastName } = postAuthor as IUser;
@@ -46,10 +54,10 @@ const CommentPreview = ({ comment }: Props) => {
       <StyledDateAuthorDiv>
         {commenterId ? (
           <Link to={`/user/${commenterId}`}>
-            {commenterFirstName} {commenterLastName}
+            {`${commenterFirstName} ${commenterLastName}`}
           </Link>
         ) : (
-          <p>Unknown</p>
+          <StyledDeleted>{authorName ?? 'Deleted'}</StyledDeleted>
         )}
         <p>•</p>
         <Link to={`/poss/${postId}`}>{formatDate(updatedAt)}</Link>

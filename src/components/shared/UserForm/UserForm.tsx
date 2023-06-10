@@ -12,9 +12,14 @@ import {
   StyledFormSubmitInput,
   StyledTextArea,
   SelectWrapper,
+  StyledDeleteAccountButton,
+  DangerText,
 } from '../../../styles/styledComponents/FormHelpers';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
+import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+import useLogout from '../../Auth/Logout';
 
 interface Props {
   onSubmit: SubmitHandler<UserInputs>;
@@ -22,6 +27,7 @@ interface Props {
   signupError: string;
   isAdminView?: boolean;
   userData?: IUser;
+  showDelete?: boolean;
 }
 
 const UserForm = ({
@@ -30,6 +36,7 @@ const UserForm = ({
   signupError,
   submitText,
   userData,
+  showDelete = false,
 }: Props) => {
   const {
     register,
@@ -46,6 +53,20 @@ const UserForm = ({
       description: userData?.description,
     },
   });
+  const { logout } = useLogout();
+
+  const navigate = useNavigate();
+  const deleteUser = useCallback(async () => {
+    const id = userData?._id;
+    await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/delete`, {
+      method: 'PATCH',
+      credentials: 'include',
+    });
+
+    logout();
+
+    return navigate('/');
+  }, [navigate, userData, logout]);
 
   return (
     <StyledForm method="POST" onSubmit={handleSubmit(onSubmit)}>
@@ -196,6 +217,16 @@ const UserForm = ({
         <StyledError>
           <li>{signupError}</li>
         </StyledError>
+      )}
+      {showDelete && (
+        <div>
+          <DangerText>Danger Zone</DangerText>
+          <StyledDeleteAccountButton
+            type="button"
+            value={'Delete User'}
+            onClick={deleteUser}
+          />
+        </div>
       )}
     </StyledForm>
   );

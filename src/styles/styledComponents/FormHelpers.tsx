@@ -42,13 +42,27 @@ export const StyledFormSubmitInput = styled.input`
   border: none;
   margin-top: 1rem;
   color: ${({ theme }) => theme.colors.backgroundSecondary};
-  background: ${({ theme }) => theme.colors.textSecondary};
+  background: ${({ theme }) => theme.colors.textPrimary};
+  ${({ theme }) => theme.shadow};
   font-size: 1rem;
   box-shadow: none;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.7;
   }
+`;
+
+export const DangerText = styled.p`
+  color: #dc2626;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 800;
+  margin-top: 3rem;
+`;
+
+export const StyledDeleteAccountButton = styled(StyledFormSubmitInput)`
+  background: #dc2626;
 `;
 
 export const StyledFormSection = styled.div`
@@ -77,12 +91,15 @@ export const StyledTextArea = styled.textarea`
   border: none;
   font-size: 0.9rem;
   ${(props) => props.theme.shadow};
+  border-right: 0;
+  border: 0.5px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const SelectWrapper = styled.div`
   border-radius: 0.25rem;
   overflow: hidden;
   ${(props) => props.theme.shadow};
+  border: 0.5px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const StyledFormSelect = styled.select`

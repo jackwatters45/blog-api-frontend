@@ -35,6 +35,7 @@ const EditProfile = () => {
         onSubmit={onSubmit}
         submitText="Save Changes"
         isAdminView={user.userType === 'admin'}
+        showDelete={true}
       />
     </StyledFormContainer>
   );

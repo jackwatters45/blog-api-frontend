@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
+import IUser from '../../../../types/user';
+import IComment from '../../../../types/comment';
+import IPost from '../../../../types/post';
 import { useParams } from 'react-router-dom';
-import IUser from '../../../types/user.d';
+import Loading from '../../shared/Loading';
 import { styled } from 'styled-components';
-import IPost from '../../../types/post.d';
-import About from './AboutColumn/About';
-import Activity from './ActivityColumn/Activity';
-import IComment from '../../../types/comment.d';
-import Loading from '../shared/Loading';
-import UnauthorizedPage from '../Errors/Unauthorized';
+import Activity from '../ActivityColumn/Activity';
+import AboutDeleted from './AboutDeleted';
 
 const StyledUserContainer = styled.main`
   display: flex;
@@ -30,43 +29,37 @@ interface UserDetails {
   user: IUser;
   comments: IComment[];
   posts: IPost[] | string[];
-  isDeleted?: boolean;
-  message?: string;
 }
 
-interface Props {
-  userId?: string;
-}
-
-// TODO return something if user is deleted
-const User = ({ userId }: Props) => {
+const ViewDeletedUser = () => {
   const { id } = useParams();
 
   const [user, setUser] = useState<UserDetails | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId ?? id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/deleted`, {
+        credentials: 'include',
+      });
+
       const data = await res.json();
       setUser(data);
     };
     fetchUser();
-  }, [id, userId]);
+  }, [id]);
 
-  console.log(user);
   if (!user) return <Loading />;
 
-  if (user.isDeleted) return <UnauthorizedPage message={user.message} />;
   const { user: userInfo, comments, posts } = user;
 
   const { firstName, lastName } = userInfo;
 
   return (
     <StyledUserContainer>
-      <About user={userInfo} />
+      <AboutDeleted user={userInfo} />
       <Activity comments={comments} posts={posts} name={`${firstName} ${lastName}`} />
     </StyledUserContainer>
   );
 };
 
-export default User;
+export default ViewDeletedUser;

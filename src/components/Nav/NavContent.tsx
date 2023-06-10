@@ -3,27 +3,12 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useUserContext } from '../../context/UserContext';
 import { Nav, NavDropdown, NavLink, NavButton } from '@jackwatters/simple-nav';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import useLogout from '../Auth/Logout';
 
 const NavContent = () => {
-  const { updateUser, user } = useUserContext();
+  const { user } = useUserContext();
 
-  const navigate = useNavigate();
-  const handleClickLogout = async () => {
-    updateUser(undefined);
-
-    // TODO
-    // remove session
-    // clear cookies
-    Object.keys(Cookies.get()).forEach((name) => Cookies.remove(name));
-
-    await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
-      method: 'POST',
-    });
-
-    navigate('/login');
-  };
+  const { handleClickLogout } = useLogout();
 
   return (
     <Nav>
@@ -44,9 +29,9 @@ const NavContent = () => {
               icon: <AccountBoxIcon />,
             }}
           >
-            <NavLink to={`/user/${user?._id}`} text="Profile" />
+            <NavLink to={`/my-profile`} text="Profile" />
+            <NavLink to={`/edit-profile`} text="Edit Profile" />
             <NavLink to={`/my-posts`} text="Your Posts" />
-            <NavLink to={`/user/${user?._id}/settings`} text="Settings" />
             <NavButton onClick={handleClickLogout} text="Log out" />
           </NavDropdown>
         </>

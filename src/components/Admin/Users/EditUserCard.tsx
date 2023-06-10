@@ -32,7 +32,6 @@ const EditUserCard = ({ user }: Props) => {
     deletedData,
   } = user;
 
-  console.log(deletedData);
   return (
     <AdminCard>
       <h2>{`${firstName} ${lastName}`}</h2>
@@ -58,20 +57,26 @@ const EditUserCard = ({ user }: Props) => {
         </>
       )}
       <ButtonOptions>
-        {!isDeleted && (
-          <DeleteButton
-            StyledButton={Icon}
-            id={_id}
-            objType={'user'}
-            extraButtonProps={{ path: mdiDelete, size: 1 }}
-          />
+        {!isDeleted ? (
+          <>
+            <DeleteButton
+              StyledButton={Icon}
+              id={_id}
+              objType={'user'}
+              extraButtonProps={{ path: mdiDelete, size: 1 }}
+            />
+            <Link to={`/admin/users/${_id}/edit`}>
+              <Icon path={mdiPencil} size={1} />
+            </Link>
+            <Link to={`/user/${_id}`}>
+              <Icon path={mdiOpenInNew} size={1} />
+            </Link>
+          </>
+        ) : (
+          <Link to={`/admin/users/${_id}/deleted`}>
+            <Icon path={mdiOpenInNew} size={1} />
+          </Link>
         )}
-        <Link to={`/admin/users/${_id}/edit`}>
-          <Icon path={mdiPencil} size={1} />
-        </Link>
-        <Link to={`/user/${_id}`}>
-          <Icon path={mdiOpenInNew} size={1} />
-        </Link>
       </ButtonOptions>
     </AdminCard>
   );

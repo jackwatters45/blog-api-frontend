@@ -14,12 +14,13 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
 `;
 
-function UnauthorizedPage() {
+function UnauthorizedPage({ message }: { message?: string }) {
   return (
     <Container>
       <h1>You are not authorized to view this page.</h1>
+      {message && <h2>{message}</h2>}
       <p>
-        If you are an admin, <StyledLink to="login">login to view this page.</StyledLink>
+        If you are an admin, <StyledLink to="/login">login to view this page.</StyledLink>
       </p>
       <p>
         Otherwise, <StyledLink to="/">return home</StyledLink>

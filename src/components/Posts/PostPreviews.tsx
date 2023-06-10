@@ -7,6 +7,8 @@ import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../custom/useLikes';
 import CommentsButton from '../shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
+import { useContext } from 'react';
+import { SelectedUserNameContext } from '../../context/SelectedUserNameContext';
 
 const Container = styled.div`
   padding: 2rem 0;
@@ -30,6 +32,7 @@ const BottomRow = styled.div`
   flex-direction: row-reverse;
   justify-content: space-between;
   margin-top: 2rem;
+  align-items: center;
 `;
 
 const LikesAndComments = styled.div`
@@ -42,11 +45,24 @@ const LikesAndComments = styled.div`
 const StyledTopic = styled.li`
   padding: 0.15rem 0.45rem;
   border-radius: 3px;
+  color: ${({ theme }) => theme.colors.textPrimary};
   background: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
 const StyledDeleted = styled.i`
   color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+const TopicReadTimeDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+const StyledReadTime = styled.p`
+  font-size: 0.8rem;
+  height: fit-content;
 `;
 
 interface Props {
@@ -57,18 +73,23 @@ const PostPreview = ({
   post: { _id, title, content, createdAt, author, topic, comments, likes },
 }: Props) => {
   const { user } = useUserContext();
+  const authorName = useContext(SelectedUserNameContext);
+
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
   const isDeleted = author?.isDeleted;
+
+  const readTime = Math.ceil(content.split(' ').length / 200);
+
   return (
     <Container>
       <StyledDateAuthorDiv>
-        {author && !isDeleted ? (
+        {author?._id && !isDeleted ? (
           <Link to={`/user/${author._id}`}>
-            {author.firstName} {author.lastName}
+            {`${author.firstName} ${author.lastName}`}
           </Link>
         ) : (
-          <StyledDeleted>Deleted</StyledDeleted>
+          <StyledDeleted>{authorName || 'Deleted'}</StyledDeleted>
         )}
         <p>•</p>
         <Link to={`/post/${_id}`}>{formatDate(createdAt)}</Link>
@@ -84,11 +105,17 @@ const PostPreview = ({
           <CommentsButton commentsCount={comments?.length as number} />
           <Likes {...useLikesProps} _id={_id} />
         </LikesAndComments>
-        {topic && (
-          <Link to={`/topic/${topic._id}`}>
-            <StyledTopic>{topic.name}</StyledTopic>
-          </Link>
-        )}
+        <TopicReadTimeDiv>
+          {topic && (
+            <>
+              <Link to={`/topic/${topic._id}`}>
+                <StyledTopic>{topic.name}</StyledTopic>
+              </Link>
+              <p>•</p>
+            </>
+          )}
+          {readTime && <StyledReadTime>{readTime} min read</StyledReadTime>}
+        </TopicReadTimeDiv>
       </BottomRow>
     </Container>
   );

@@ -23,11 +23,33 @@ import MyProfile from './components/User/MyProfile';
 import UnauthorizedPage from './components/Errors/Unauthorized';
 import { useUserContext } from './context/UserContext';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import ViewDeletedUser from './components/User/Deleted/ViewDeletedUser';
+import { useEffect } from 'react';
 
 const RoutesComponent = () => {
-  const { user } = useUserContext();
+  const { user, updateUser } = useUserContext();
 
-  // TODO handle error (your session has expired log in again)
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        const { isAuthenticated, user } = await res.json();
+        updateUser(isAuthenticated ? user : undefined);
+      } else {
+        updateUser(undefined);
+      }
+    };
+
+    fetchUser();
+  }, [updateUser]);
+
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <BrowserRouter>
@@ -69,6 +91,9 @@ const RoutesComponent = () => {
                 <Route index element={<EditUsersAdmin />} />
                 <Route path="create" element={<CreateUser />} />
                 <Route path=":id/edit" element={<EditUser />} />
+                <Route path=":id/deleted" element={<ViewDeletedUser />}>
+                  <Route path=":type" element={<ViewDeletedUser />} />
+                </Route>
               </Route>
 
               <Route path="topics">
