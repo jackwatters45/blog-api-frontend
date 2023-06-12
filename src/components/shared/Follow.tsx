@@ -12,10 +12,11 @@ const StyledFollowButton = styled.button`
 
 interface Props {
   followers: string[];
-  setFollowerCount: Dispatch<SetStateAction<number>>;
+  setFollowerCount?: Dispatch<SetStateAction<number>>;
   userId?: string;
 }
 
+// should have done the check if user is following backend
 const Follow = ({ followers, setFollowerCount, userId }: Props) => {
   const { id } = useParams();
   const { user } = useUserContext();
@@ -30,7 +31,7 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
     if (!user) return navigate('/login');
 
     const FollowUser = async () => {
-      setFollowerCount((prev) => prev + 1);
+      if (setFollowerCount) setFollowerCount((prev) => prev + 1);
       setIsFollowingState(true);
       await fetch(`${import.meta.env.VITE_API_URL}/users/${userId || id}/follow`, {
         method: 'PUT',
@@ -47,7 +48,7 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
     if (!user) return navigate('/login');
 
     const UnfollowUser = async () => {
-      setFollowerCount((prev) => prev - 1);
+      if (setFollowerCount) setFollowerCount((prev) => prev - 1);
       setIsFollowingState(false);
       await fetch(`${import.meta.env.VITE_API_URL}/users/${userId || id}/unfollow`, {
         method: 'PUT',

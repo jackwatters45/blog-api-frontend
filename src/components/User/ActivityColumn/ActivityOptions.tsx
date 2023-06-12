@@ -26,7 +26,7 @@ const SelectedOption = styled.p`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
-const activityOptions = ['all', 'posts', 'comments'];
+const activityOptions = ['all', 'posts', 'comments', 'following'];
 
 const ActivityOptions = () => {
   const { type } = useParams();

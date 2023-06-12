@@ -1,6 +1,6 @@
 import IUser from '../../../../types/user.d';
 import { formatDate } from '../../shared/formattingHelpers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Following from './Following';
 import Follow from '../../shared/Follow';
 import {
@@ -17,14 +17,19 @@ import {
 
 interface Props {
   user: IUser;
+  isViewingOwnProfile: boolean;
 }
 
 const About = ({
+  isViewingOwnProfile,
   user: { username, createdAt, followers, description, following, firstName, lastName },
 }: Props) => {
   const img = 'https://via.placeholder.com/100';
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
+  useEffect(() => {
+    setFollowerCount(followers?.length ?? 0);
+  }, [followers]);
 
   return (
     <RightColumn>
@@ -41,12 +46,19 @@ const About = ({
         <StyledDate>Joined {formatDate(createdAt)}</StyledDate>
         <FollowersContainer>
           <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
-          <Follow followers={followers as string[]} setFollowerCount={setFollowerCount} />
+          {!isViewingOwnProfile && (
+            <Follow
+              followers={followers as string[]}
+              setFollowerCount={setFollowerCount}
+            />
+          )}
         </FollowersContainer>
       </StyledSection>
       {description && <StyledDescription>{description}</StyledDescription>}
       <StyledSection>
-        {!!following.length && <Following following={following} />}
+        {!!following.length && (
+          <Following following={following} isViewingOwnProfile={isViewingOwnProfile} />
+        )}
       </StyledSection>
     </RightColumn>
   );

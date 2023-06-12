@@ -24,10 +24,12 @@ import UnauthorizedPage from './components/Errors/Unauthorized';
 import { useUserContext } from './context/UserContext';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ViewDeletedUser from './components/User/Deleted/ViewDeletedUser';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Loading from './components/shared/Loading';
 
 const RoutesComponent = () => {
   const { user, updateUser } = useUserContext();
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -39,8 +41,10 @@ const RoutesComponent = () => {
       if (res.ok) {
         const { isAuthenticated, user } = await res.json();
         updateUser(isAuthenticated ? user : undefined);
+        setIsUserLoaded(true);
       } else {
         updateUser(undefined);
+        setIsUserLoaded(true);
       }
     };
 
@@ -51,6 +55,7 @@ const RoutesComponent = () => {
   //   console.log(user);
   // }, [user]);
 
+  if (!isUserLoaded) return <Loading />;
   return (
     <BrowserRouter>
       <Routes>
@@ -73,7 +78,9 @@ const RoutesComponent = () => {
           {/* Logged in */}
           <Route element={<ProtectedRoute isAllowed={!!user} redirectPath="/login" />}>
             <Route path="/write" element={<PostForm />} />
-            <Route path="/my-profile" element={<MyProfile />} />
+            <Route path="/my-profile" element={<MyProfile />}>
+              <Route path=":type" element={<MyProfile />} />
+            </Route>
             <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/post/:id/edit" element={<EditPost />} />

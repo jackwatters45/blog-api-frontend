@@ -109,6 +109,7 @@ const UserForm = ({
         <StyledFormInput
           type="email"
           id="email"
+          autoComplete="email"
           aria-invalid={errors.email ? 'true' : 'false'}
           {...register('email', { required: true, validate: validateEmailHooks })}
         />
@@ -121,6 +122,7 @@ const UserForm = ({
         <StyledFormInput
           type="text"
           id="username"
+          autoComplete="username"
           aria-invalid={errors.username ? 'true' : 'false'}
           {...register('username', {
             required: 'Username is required',
@@ -138,6 +140,7 @@ const UserForm = ({
         <StyledFormInput
           type="password"
           id="password"
+          autoComplete="new-password"
           aria-invalid={errors.password ? 'true' : 'false'}
           {...register(
             'password',
@@ -164,6 +167,7 @@ const UserForm = ({
         <StyledFormInput
           type="password"
           id="confirmPassword"
+          autoComplete="new-password"
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
           {...register(
             'confirmPassword',

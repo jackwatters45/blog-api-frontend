@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IUser from '../../../types/user.d';
 import { styled } from 'styled-components';
@@ -7,7 +7,8 @@ import About from './AboutColumn/About';
 import Activity from './ActivityColumn/Activity';
 import IComment from '../../../types/comment.d';
 import Loading from '../shared/Loading';
-import UnauthorizedPage from '../Errors/Unauthorized';
+import NotFoundPage from '../Errors/NotFoundPage';
+import { useUserContext } from '../../context/UserContext';
 
 const StyledUserContainer = styled.main`
   display: flex;
@@ -38,11 +39,14 @@ interface Props {
   userId?: string;
 }
 
-// TODO return something if user is deleted
 const User = ({ userId }: Props) => {
   const { id } = useParams();
-
+  const { user: LoggedInUser } = useUserContext();
   const [user, setUser] = useState<UserDetails | null>(null);
+
+  const isViewingOwnProfile = useMemo(() => {
+    return id === LoggedInUser?._id || !id;
+  }, [id, LoggedInUser?._id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -53,17 +57,14 @@ const User = ({ userId }: Props) => {
     fetchUser();
   }, [id, userId]);
 
-  console.log(user);
   if (!user) return <Loading />;
+  if (user.isDeleted) return <NotFoundPage message={user.message} />;
 
-  if (user.isDeleted) return <UnauthorizedPage message={user.message} />;
   const { user: userInfo, comments, posts } = user;
-
   const { firstName, lastName } = userInfo;
-
   return (
     <StyledUserContainer>
-      <About user={userInfo} />
+      <About user={userInfo} isViewingOwnProfile={isViewingOwnProfile} />
       <Activity comments={comments} posts={posts} name={`${firstName} ${lastName}`} />
     </StyledUserContainer>
   );

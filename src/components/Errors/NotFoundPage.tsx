@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -15,10 +14,11 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
 `;
 
-const NotFoundPage = () => (
+const NotFoundPage = ({ message }: { message?: string }) => (
   <Container>
     <h1>404</h1>
-    <h3>Oops! The page you're looking for does not exist.</h3>
+    {message && <h2>{message}</h2>}
+    <h3>{"Oops! The page you're looking for does not exist."}</h3>
     <StyledLink to="/">Go back home</StyledLink>
   </Container>
 );

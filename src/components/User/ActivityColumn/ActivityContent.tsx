@@ -4,6 +4,7 @@ import IComment from '../../../../types/comment.d';
 import ActivityPosts from './ActivityContentTypes/ActivityPosts';
 import ActivityComments from './ActivityContentTypes/ActivityComments';
 import ActivityAll from './ActivityContentTypes/ActivityAll';
+import ActivityFollowing from './ActivityFollowing';
 
 interface Props {
   posts: IPost[] | string[];
@@ -18,6 +19,8 @@ const ActivityContent = ({ posts, comments }: Props) => {
       return <ActivityPosts posts={posts} />;
     case 'comments':
       return <ActivityComments comments={comments} />;
+    case 'following':
+      return <ActivityFollowing />;
     default:
       return <ActivityAll posts={posts} comments={comments} />;
   }

@@ -2,21 +2,7 @@
 
 ## Next
 
-- deleting users
-  - email user didn't work
-
-
-- needs to be a difference between no user and user not loaded
-- add message to unauthorized page when applicable
-- password autocomplete
-- remove promise any's (just res.status and then return)
-
-- User
-  - view following (must not have completed)
-  - activity
-    - add likes
-
-<!-- -->
+- dashboard following
 
 - Posts
 
@@ -34,7 +20,6 @@
 - Dashboard
 
   - Search
-  - add a following tab
   - Link to comment instead of post
   - scroll to comments from button
     - preview
@@ -65,3 +50,8 @@
   - lol clicking link needs to close nav
   - also z-index
 - filter package?
+- learn react query
+
+## Notes for next
+
+- do a better job of using the error message returned from backend in 404 and 401 pages

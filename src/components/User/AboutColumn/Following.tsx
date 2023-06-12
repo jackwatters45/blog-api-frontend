@@ -35,9 +35,10 @@ const StyledUser = styled.p`
 
 interface Props {
   following: string[] | (IUser | undefined)[];
+  isViewingOwnProfile?: boolean;
 }
 
-const Following = ({ following }: Props) => {
+const Following = ({ following, isViewingOwnProfile }: Props) => {
   return (
     <Container>
       <StyledHeader>Following</StyledHeader>
@@ -56,7 +57,9 @@ const Following = ({ following }: Props) => {
           </UserContainer>
         );
       })}
-      <StyledLink to={`comments`}>See all ({following.length})</StyledLink>
+      <StyledLink to={`following`}>
+        {isViewingOwnProfile ? 'See all' : `See all (${following.length})`}
+      </StyledLink>
     </Container>
   );
 };
