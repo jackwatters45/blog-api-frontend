@@ -179,20 +179,6 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
         </StyledFormSection>
         <StyledFormSection>
           <StyledLabel htmlFor="content">Content</StyledLabel>
-          {/* <Controller
-            name="content"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Editor
-                apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
-                init={init}
-                onEditorChange={(content) => field.onChange(content)}
-                value={field.value}
-              />
-            )}
-          /> */}
           <TinyMceEditor control={control} />
           {errors.content && (
             <StyledError>

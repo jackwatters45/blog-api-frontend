@@ -2,16 +2,13 @@
 
 ## Next
 
-- dashboard following
+- check that user pages are good (admin and non)
 
 - Posts
 
   - images
     - posts
     - users
-
-- make sure everything has loading
-- check that user pages are good (admin and non)
 
 ## Eventually
 
@@ -43,15 +40,3 @@
 - Optimize components
   - make sure everything is memoized
   - make sure everything is only rerendering when it needs to
-
-## After
-
-- fixup nav
-  - lol clicking link needs to close nav
-  - also z-index
-- filter package?
-- learn react query
-
-## Notes for next
-
-- do a better job of using the error message returned from backend in 404 and 401 pages

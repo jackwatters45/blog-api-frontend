@@ -12,6 +12,7 @@ import useSelect, {
   timeRangeOptions,
 } from '../../custom/useSelect';
 import { usePagination, Pagination } from '../../custom/usePagination';
+import Loading from '../shared/Loading';
 
 const StyledMain = styled.main`
   display: flex;
@@ -68,7 +69,7 @@ const PopularAuthors = () => {
     fetchAuthorsPopular();
   }, [timeRange, itemsPerPage, offset]);
 
-  return (
+  return users ? (
     <StyledMain>
       <StyledContentContainer>
         <StyledH1>Explore Popular Authors</StyledH1>
@@ -83,6 +84,8 @@ const PopularAuthors = () => {
       </StyledContentContainer>
       <Sidebar />
     </StyledMain>
+  ) : (
+    <Loading />
   );
 };
 

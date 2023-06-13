@@ -1,7 +1,7 @@
 import IPost from '../../../../types/post.d';
 import { styled } from 'styled-components';
 import ActivityContent from './ActivityContent';
-import ActivityOptions from './ActivityOptions';
+import MenuOptions from '../../shared/MenuOptions';
 import IComment from '../../../../types/comment.d';
 import { SelectedUserNameProvider } from '../../../context/SelectedUserNameContext';
 
@@ -18,6 +18,7 @@ const ActivityContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
+  gap: 1rem;
 `;
 
 interface Props {
@@ -27,12 +28,13 @@ interface Props {
 }
 
 const Activity = ({ comments, posts, name }: Props) => {
+  const options = ['all', 'posts', 'comments', 'following'];
   return (
     <SelectedUserNameProvider value={name}>
       <LeftColumn>
         <StyledH1>{name}</StyledH1>
         <ActivityContainer>
-          <ActivityOptions />
+          <MenuOptions options={options} defaultOption="all" selectType="params" />
           <ActivityContent comments={comments} posts={posts} />
         </ActivityContainer>
       </LeftColumn>

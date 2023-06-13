@@ -3,6 +3,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import PostForm from './PostForm';
 import { useUserContext } from '../../../context/UserContext';
+import Loading from '../../shared/Loading';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const EditPost = () => {
   if (user?.userType !== 'admin' && user?._id !== post?.author._id)
     return <Navigate to={'/unauthorized'} />;
 
-  return post ? <PostForm post={post} pageTitle={'Edit Post'} /> : null;
+  return post ? <PostForm post={post} pageTitle={'Edit Post'} /> : <Loading />;
 };
 
 export default EditPost;
