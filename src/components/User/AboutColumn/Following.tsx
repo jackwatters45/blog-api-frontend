@@ -34,7 +34,7 @@ const StyledUser = styled.p`
 `;
 
 interface Props {
-  following: string[] | (IUser | undefined)[];
+  following: (IUser | undefined)[];
   isViewingOwnProfile?: boolean;
 }
 
@@ -44,13 +44,16 @@ const Following = ({ following, isViewingOwnProfile }: Props) => {
       <StyledHeader>Following</StyledHeader>
       {following.slice(0, 5).map((user) => {
         const { _id, firstName, lastName } = user as IUser;
+        const avatarUrl = user?.avatarUrl as string;
         return (
           <UserContainer key={_id} to={`/user/${_id}`}>
-            <img
-              src="https://via.placeholder.com/20"
-              style={{ height: '1rem', width: '1rem' }}
-              alt="Placeholder"
-            />
+            {avatarUrl && (
+              <img
+                src={avatarUrl}
+                style={{ height: '1rem', width: '1rem' }}
+                alt="Placeholder"
+              />
+            )}
             <StyledUser>
               {firstName} {lastName}
             </StyledUser>

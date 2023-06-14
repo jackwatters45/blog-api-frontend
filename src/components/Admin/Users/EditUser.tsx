@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import UserForm from '../../shared/UserForm/UserForm';
+import { useParams } from 'react-router-dom';
+import UserForm from '../../shared/UserForms/UserForm';
 import {
   StyledFormContainer,
   StyledH1Centered,
@@ -9,10 +9,11 @@ import { SubmitHandler } from 'react-hook-form';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';
+import ChangePasswordForm from '../../shared/UserForms/ChangePasswordForm';
+import DeleteUserSection from '../../shared/UserForms/DeleteUser';
 
 const EditUser = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | undefined>(undefined);
   useEffect(() => {
@@ -26,32 +27,30 @@ const EditUser = () => {
   }, [id]);
 
   const [signupError, setSignupError] = useState<string>('');
+  const [confirmText, setConfirmText] = useState<string>('');
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
-      const response = id
-        ? await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(data),
-          })
-        : await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(data),
-          });
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        return key === 'avatar' && value[0]
+          ? formData.append(key, value[0])
+          : formData.append(key, value);
+      });
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { Accept: 'multipart/form-data' },
+        body: formData,
+      });
 
       if (!response.ok) {
-        return setSignupError(
-          id
-            ? 'Error saving changes. Please try again.'
-            : 'Error creating user. Please try again.',
-        );
+        return setSignupError('Error saving changes. Please try again.');
       }
 
-      navigate('/admin/users');
+      const { message } = await response.json();
+      setConfirmText(message);
     } catch (err) {
       console.log(err);
     }
@@ -64,9 +63,16 @@ const EditUser = () => {
         userData={user}
         submitText={'Confirm Changes'}
         onSubmit={onSubmit}
-        isAdminView={true}
+        confirmText={confirmText}
         signupError={signupError}
+        isAdminView={true}
+        showPassword={false}
+        showAvatar={true}
+        showDescription={true}
+        showDelete={true}
       />
+      <ChangePasswordForm isOwnProfile={false} />
+      <DeleteUserSection userId={user._id} />
     </StyledFormContainer>
   ) : (
     <Loading />

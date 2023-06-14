@@ -2,7 +2,7 @@ import {
   StyledFormContainer,
   StyledH1Centered,
 } from '../../../styles/styledComponents/FormHelpers';
-import UserForm from '../../shared/UserForm/UserForm';
+import UserForm from '../../shared/UserForms/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -26,7 +26,6 @@ const CreateUser = () => {
         return setSignupError('Invalid credentials. Please try again.');
       }
 
-      await response.json();
       navigate('/admin/users');
     } catch (err) {
       console.log(err);
@@ -38,9 +37,10 @@ const CreateUser = () => {
       <StyledH1Centered>Create User</StyledH1Centered>
       <UserForm
         onSubmit={onSubmit}
-        isAdminView={true}
         submitText={'Create User'}
         signupError={signupError}
+        isAdminView={true}
+        showPassword={true}
       />
     </StyledFormContainer>
   );

@@ -24,7 +24,7 @@ const EditTopics = ({ topics }: Props) => {
     <AdminContainer>
       <StyledHeader>
         <h1>Edit Topics</h1>
-        <StyledCreateLink to={`/admin/topics/create`}>+Create Topic</StyledCreateLink>
+        <StyledCreateLink to={`/admin/topics/create`}>+ Create Topic</StyledCreateLink>
       </StyledHeader>
       <FilterContainer>
         <Filter<ITopic>

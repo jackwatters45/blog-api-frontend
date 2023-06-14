@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import IUser from '../../../../types/user';
+import IUser from '../../../../../types/user';
 import { styled } from 'styled-components';
-import Follow from '../../shared/Follow';
-import { useUserContext } from '../../../context/UserContext';
+import Follow from '../../../shared/Follow';
+import { useUserContext } from '../../../../context/UserContext';
 
 const Container = styled.div`
   display: flex;
@@ -41,20 +41,18 @@ const ActivityFollowing = () => {
     fetchFollowing();
   }, [id, user?._id]);
 
-  const img = 'https://via.placeholder.com/100';
-
-  // add img to user model
-  return (
+  return following.length ? (
     <Container>
       {following.map((user) => {
         if (!user) return null;
         const { username, _id, followers: userFollowers } = user;
+        const avatarUrl = user?.avatarUrl;
         return (
           <FollowingUser key={_id}>
             <UserProfile to={`/user/${_id}`}>
-              {img && (
+              {avatarUrl && (
                 <img
-                  src={img}
+                  src={avatarUrl}
                   style={{ height: '50px', width: '50px' }}
                   alt="Placeholder"
                 />
@@ -66,6 +64,8 @@ const ActivityFollowing = () => {
         );
       })}
     </Container>
+  ) : (
+    <p>Not currently following any users...</p>
   );
 };
 

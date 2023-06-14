@@ -12,6 +12,7 @@ const StyledModal = styled.div`
   margin-left: 40px;
   width: 120px;
   ${({ theme }) => theme.shadow};
+  cursor: pointer;
 `;
 
 interface Props {

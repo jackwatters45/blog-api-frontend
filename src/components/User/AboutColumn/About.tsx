@@ -20,11 +20,10 @@ interface Props {
   isViewingOwnProfile: boolean;
 }
 
-const About = ({
-  isViewingOwnProfile,
-  user: { username, createdAt, followers, description, following, firstName, lastName },
-}: Props) => {
-  const img = 'https://via.placeholder.com/100';
+const About = ({ isViewingOwnProfile, user }: Props) => {
+  const { username, createdAt, followers, description, following, firstName, lastName } =
+    user;
+  const avatarUrl = user?.avatarUrl as string;
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
   useEffect(() => {
@@ -34,8 +33,12 @@ const About = ({
   return (
     <RightColumn>
       <StyledSection className="info">
-        {img && (
-          <img src={img} style={{ height: '100px', width: '100px' }} alt="Placeholder" />
+        {avatarUrl && (
+          <img
+            src={avatarUrl}
+            style={{ height: '100px', width: '100px' }}
+            alt="Placeholder"
+          />
         )}
         <StyledNameContainer>
           <StyledName>
@@ -57,7 +60,10 @@ const About = ({
       {description && <StyledDescription>{description}</StyledDescription>}
       <StyledSection>
         {!!following.length && (
-          <Following following={following} isViewingOwnProfile={isViewingOwnProfile} />
+          <Following
+            following={following as (IUser | undefined)[]}
+            isViewingOwnProfile={isViewingOwnProfile}
+          />
         )}
       </StyledSection>
     </RightColumn>

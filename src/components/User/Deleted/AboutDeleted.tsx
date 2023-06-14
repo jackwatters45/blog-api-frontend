@@ -23,19 +23,17 @@ interface Props {
   user: IUser;
 }
 
-const AboutDeleted = ({
-  user: { createdAt, description, following, firstName, lastName, deletedData },
-}: Props) => {
-  const img = 'https://via.placeholder.com/100';
-
+const AboutDeleted = ({ user }: Props) => {
+  const { createdAt, description, following, firstName, lastName, deletedData } = user;
   const { username, email, deletedAt, deletedBy, followerCount } =
     deletedData as DeletedData;
+  const avatarUrl = user?.avatarUrl as string;
 
   return (
     <RightColumn>
       <StyledSection className="info">
-        {img && (
-          <img src={img} style={{ height: '100px', width: '100px' }} alt="Placeholder" />
+        {avatarUrl && (
+          <img src={avatarUrl} style={{ height: '100px', width: '100px' }} alt="avatar" />
         )}
         <StyledNameContainer>
           <StyledName>
@@ -63,7 +61,9 @@ const AboutDeleted = ({
       </StyledSection>
       {description && <StyledDescription>{description}</StyledDescription>}
       <StyledSection>
-        {!!following.length && <Following following={following} />}
+        {!!following.length && (
+          <Following following={following as (IUser | undefined)[]} />
+        )}
       </StyledSection>
     </RightColumn>
   );

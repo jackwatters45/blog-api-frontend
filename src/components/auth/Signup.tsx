@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import UserForm from '../shared/UserForm/UserForm';
+import UserForm from '../shared/UserForms/UserForm';
 import { SubmitHandler } from 'react-hook-form';
 import { useUserContext } from '../../context/UserContext';
 import { useState } from 'react';
@@ -46,7 +46,12 @@ const Signup = () => {
           Or <StyledFormLink to="/login">sign in to your existing account</StyledFormLink>
         </p>
       </StyledFormNav>
-      <UserForm onSubmit={onSubmit} signupError={signupError} submitText={'Sign Up'} />
+      <UserForm
+        onSubmit={onSubmit}
+        signupError={signupError}
+        submitText={'Sign Up'}
+        showPassword={true}
+      />
     </StyledFormContainer>
   );
 };

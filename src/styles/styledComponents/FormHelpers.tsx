@@ -36,6 +36,10 @@ export const StyledForm = styled.form`
   ${({ theme }) => theme.shadow};
 `;
 
+export const StyledFormPassword = styled(StyledForm)`
+  margin: 1rem 0;
+`;
+
 export const StyledFormSubmitInput = styled.input`
   width: 100%;
   height: 40px;
@@ -53,12 +57,15 @@ export const StyledFormSubmitInput = styled.input`
   }
 `;
 
+export const DeleteUserContainer = styled.div`
+  margin: 1rem 0;
+`;
+
 export const DangerText = styled.p`
   color: #dc2626;
   font-size: 1.5rem;
   text-align: center;
   font-weight: 800;
-  margin-top: 3rem;
 `;
 
 export const StyledDeleteAccountButton = styled(StyledFormSubmitInput)`
@@ -121,8 +128,7 @@ export const StyledFormInstructions = styled.ul`
   }
 `;
 
-export const StyledError = styled.ul`
-  color: #dc2626;
+export const ListMessage = styled.ul`
   font-size: 12px;
   margin: 0.5rem 0 0 1.5rem;
   list-style: disc;
@@ -130,4 +136,7 @@ export const StyledError = styled.ul`
   li {
     list-style: disc;
   }
+`;
+export const StyledError = styled(ListMessage)`
+  color: #dc2626;
 `;

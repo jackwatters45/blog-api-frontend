@@ -4,7 +4,7 @@ import IComment from '../../../../types/comment.d';
 import ActivityPosts from './ActivityContentTypes/ActivityPosts';
 import ActivityComments from './ActivityContentTypes/ActivityComments';
 import ActivityAll from './ActivityContentTypes/ActivityAll';
-import ActivityFollowing from './ActivityFollowing';
+import ActivityFollowing from './ActivityContentTypes/ActivityFollowing';
 
 interface Props {
   posts: IPost[] | string[];

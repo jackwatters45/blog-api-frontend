@@ -7,6 +7,8 @@ import {
   CardContainer,
   FilterContainer,
   FilterError,
+  StyledCreateLink,
+  StyledHeader,
 } from '../../../styles/styledComponents/AdminCardComponents';
 import { userFilterFunction } from '../../shared/Filter/filterFunctions';
 import { AdminUser } from '../../../../types/user';
@@ -23,7 +25,10 @@ const EditUsers = ({ users, paginationProps }: Props) => {
 
   return filteredUsers ? (
     <AdminContainer>
-      <h1>Edit Users</h1>
+      <StyledHeader>
+        <h1>Edit Users</h1>
+        <StyledCreateLink to={`/admin/users/create`}>+ Create User</StyledCreateLink>
+      </StyledHeader>
       <FilterContainer>
         <Filter<AdminUser>
           data={users ?? []}

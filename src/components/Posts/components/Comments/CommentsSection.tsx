@@ -60,18 +60,18 @@ interface Props {
 const CommentsSection = ({ comments: initialComments, postId }: Props) => {
   const [comments, setComments] = useState<IComment[] | undefined>(initialComments);
 
-  const img = 'https://via.placeholder.com/100';
-
   return (
     <Container>
       <h2>Comments ({comments?.length ?? 0})</h2>
       <AddComment setComments={setComments} postId={postId} />
-      {comments?.map(({ content, updatedAt, author, _id }) => {
+      {comments?.map((comment) => {
+        const { _id, content, author, updatedAt } = comment;
         const { firstName, lastName, _id: authorId, isDeleted } = author;
+        const avatarUrl = author?.avatarUrl as string;
         return (
           <CommentContainer key={_id}>
             <Link to={`/user/${authorId}`}>
-              <StyledCommentImg src={img} alt="user icon" />
+              <StyledCommentImg src={avatarUrl} alt="avatar" />
             </Link>
             <CommentInfo>
               {author && !isDeleted ? (

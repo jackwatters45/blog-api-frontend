@@ -12,31 +12,34 @@ import {
   StyledFormSubmitInput,
   StyledTextArea,
   SelectWrapper,
-  StyledDeleteAccountButton,
-  DangerText,
+  ListMessage,
 } from '../../../styles/styledComponents/FormHelpers';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
-import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
-import useLogout from '../../Auth/Logout';
 
 interface Props {
   onSubmit: SubmitHandler<UserInputs>;
   submitText: string;
+  confirmText?: string;
   signupError: string;
-  isAdminView?: boolean;
   userData?: IUser;
+  isAdminView?: boolean;
   showDelete?: boolean;
+  showPassword?: boolean;
+  showAvatar?: boolean;
+  showDescription?: boolean;
 }
 
 const UserForm = ({
-  isAdminView,
   onSubmit,
-  signupError,
   submitText,
+  confirmText,
+  signupError,
   userData,
-  showDelete = false,
+  isAdminView = false,
+  showPassword = false,
+  showAvatar = false,
+  showDescription = false,
 }: Props) => {
   const {
     register,
@@ -53,23 +56,13 @@ const UserForm = ({
       description: userData?.description,
     },
   });
-  const { logout } = useLogout();
-
-  const navigate = useNavigate();
-  const deleteUser = useCallback(async () => {
-    const id = userData?._id;
-    await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/delete`, {
-      method: 'PATCH',
-      credentials: 'include',
-    });
-
-    logout();
-
-    return navigate('/');
-  }, [navigate, userData, logout]);
 
   return (
-    <StyledForm method="POST" onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm
+      method="POST"
+      encType="multipart/form-data"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <StyledFormSection>
         <label htmlFor="firstName">First Name:</label>
         <StyledFormInput
@@ -135,76 +128,102 @@ const UserForm = ({
           </StyledError>
         )}
       </StyledFormSection>
-      <StyledFormSection>
-        <label htmlFor="password">Password:</label>
-        <StyledFormInput
-          type="password"
-          id="password"
-          autoComplete="new-password"
-          aria-invalid={errors.password ? 'true' : 'false'}
-          {...register(
-            'password',
-            isAdminView
-              ? {}
-              : {
-                  required: true,
-                  validate: validatePasswordHooks,
-                },
-          )}
-        />
-        {errors.password && errors.password.message ? (
-          <StyledError>{formatErrors(errors.password.message)}</StyledError>
-        ) : (
-          <StyledFormInstructions>
-            {passwordRequirements.map((requirement) => (
-              <li key={requirement}>{requirement}</li>
-            ))}
-          </StyledFormInstructions>
-        )}
-      </StyledFormSection>
-      <StyledFormSection>
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <StyledFormInput
-          type="password"
-          id="confirmPassword"
-          autoComplete="new-password"
-          aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-          {...register(
-            'confirmPassword',
-            isAdminView
-              ? {}
-              : {
-                  required: true,
-                  validate: {
-                    matchesPreviousPassword: (value) => {
-                      const { password } = watch();
-                      return password === value || 'Passwords should match!';
+      {showPassword && (
+        <>
+          <StyledFormSection>
+            <label htmlFor="password">Password:</label>
+            <StyledFormInput
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              {...register(
+                'password',
+                isAdminView
+                  ? {}
+                  : {
+                      required: true,
+                      validate: validatePasswordHooks,
                     },
-                  },
-                },
+              )}
+            />
+            {errors.password && errors.password.message ? (
+              <StyledError>{formatErrors(errors.password.message)}</StyledError>
+            ) : (
+              <StyledFormInstructions>
+                {passwordRequirements.map((requirement) => (
+                  <li key={requirement}>{requirement}</li>
+                ))}
+              </StyledFormInstructions>
+            )}
+          </StyledFormSection>
+          <StyledFormSection>
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <StyledFormInput
+              type="password"
+              id="confirmPassword"
+              autoComplete="new-password"
+              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+              {...register(
+                'confirmPassword',
+                isAdminView
+                  ? {}
+                  : {
+                      required: true,
+                      validate: {
+                        matchesPreviousPassword: (value) => {
+                          const { password } = watch();
+                          return password === value || 'Passwords should match!';
+                        },
+                      },
+                    },
+              )}
+            />
+            {errors.confirmPassword && (
+              <StyledError>
+                <li>{errors.confirmPassword.message}</li>
+              </StyledError>
+            )}
+          </StyledFormSection>
+        </>
+      )}
+      {showDescription && (
+        <StyledFormSection>
+          <label htmlFor="description">User Description (Optional):</label>
+          <StyledTextArea
+            id="description"
+            aria-invalid={errors.description ? 'true' : 'false'}
+            {...register('description', {
+              maxLength: {
+                value: 250,
+                message: "Description can't exceed 250 characters",
+              },
+            })}
+          />
+          {errors.description && (
+            <StyledError>
+              <li>{errors.description.message}</li>
+            </StyledError>
           )}
-        />
-        {errors.confirmPassword && (
-          <StyledError>
-            <li>{errors.confirmPassword.message}</li>
-          </StyledError>
-        )}
-      </StyledFormSection>
-      <StyledFormSection>
-        <label htmlFor="description">User Description (Optional):</label>
-        <StyledTextArea
-          id="description"
-          aria-invalid={errors.description ? 'true' : 'false'}
-          {...register('description', {
-            maxLength: { value: 250, message: "Description can't exceed 250 characters" },
-          })}
-        />
-        {errors.description && (
-          <StyledError>
-            <li>{errors.description.message}</li>
-          </StyledError>
-        )}
-      </StyledFormSection>
+        </StyledFormSection>
+      )}
+      {showAvatar && (
+        <StyledFormSection>
+          <label htmlFor="avatar">Avatar (Optional):</label>
+          <StyledFormInput
+            type="file"
+            id="avatar"
+            accept="image/*"
+            aria-invalid={errors.avatar ? 'true' : 'false'}
+            {...register('avatar')}
+          />
+          {errors.avatar && (
+            <StyledError>
+              <li>{errors.avatar.message}</li>
+            </StyledError>
+          )}
+        </StyledFormSection>
+      )}
       {isAdminView && (
         <StyledFormSection>
           <label htmlFor="userType">User Type:</label>
@@ -222,15 +241,10 @@ const UserForm = ({
           <li>{signupError}</li>
         </StyledError>
       )}
-      {showDelete && (
-        <div>
-          <DangerText>Danger Zone</DangerText>
-          <StyledDeleteAccountButton
-            type="button"
-            value={'Delete User'}
-            onClick={deleteUser}
-          />
-        </div>
+      {confirmText && (
+        <ListMessage>
+          <li>{confirmText}</li>
+        </ListMessage>
       )}
     </StyledForm>
   );

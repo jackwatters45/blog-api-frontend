@@ -37,22 +37,22 @@ const StyledDescription = styled.p`
 `;
 
 interface Props {
-  author: Partial<IUser> | string;
+  user: Partial<IUser>;
 }
 
-const Profile = ({ author }: Props) => {
-  const { firstName, followers, description, _id } = author as IUser;
-  const img = 'https://via.placeholder.com/100';
+const Profile = ({ user }: Props) => {
+  const { firstName, followers, description, _id } = user as IUser;
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
 
+  const avatarUrl = user?.avatarUrl as string;
   return (
     <Container>
-      {img && (
+      {avatarUrl && (
         <StyledImg
-          src={img}
+          src={avatarUrl}
           style={{ height: '100px', width: '100px' }}
-          alt="Placeholder"
+          alt="avatar"
         />
       )}
       <LeftColumn to={`/user/${_id}`}>

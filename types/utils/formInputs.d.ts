@@ -11,6 +11,7 @@ export interface UserInputs {
   confirmPassword: string;
   description: string;
   userType?: string;
+  avatar?: string;
 }
 
 export interface PostInputs {

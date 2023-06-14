@@ -40,6 +40,7 @@ interface IUser {
   isDeleted: boolean;
   deletedData?: DeletedData;
   description?: string;
+  avatarUrl?: string;
 }
 
 export default IUser;

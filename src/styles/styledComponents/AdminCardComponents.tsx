@@ -7,7 +7,7 @@ export const AdminContainer = styled(StyledMain)`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  margin: 2rem 0;
 `;
 
 export const StyledHeader = styled.div`

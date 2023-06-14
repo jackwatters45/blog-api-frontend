@@ -1,19 +1,21 @@
 import { useState } from 'react';
-import IUser, { IPopularAuthors } from '../../../types/user';
+import { IPopularAuthors } from '../../../types/user';
 import { styled } from 'styled-components';
 import Follow from '../shared/Follow';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  display: flex;
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 2rem;
-  margin: 2rem 0;
-  justify-content: space-between;
+  padding: 2rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const StyledImg = styled.img`
-  align-self: center;
+  align-self: start;
 
   @media (max-width: 640px) {
     display: none;
@@ -38,23 +40,23 @@ const StyledDescription = styled.p`
 `;
 
 interface Props {
-  user: IUser;
+  user: IPopularAuthors;
 }
 
 const UserPreview = ({ user }: Props) => {
   const { firstName, lastName, followers, description, _id, likesCountInTimeRange } =
-    user as IPopularAuthors;
-  const img = 'https://via.placeholder.com/100';
+    user;
+  const avatarUrl = user?.avatarUrl as string;
 
   const [followerCount, setFollowerCount] = useState(followers?.length ?? 0);
 
   return (
     <Container>
-      {img && (
+      {avatarUrl && (
         <StyledImg
-          src={img}
+          src={avatarUrl}
           style={{ height: '100px', width: '100px' }}
-          alt="Placeholder"
+          alt="avatar"
         />
       )}
       <LeftColumn to={`/user/${_id}`}>
@@ -64,7 +66,7 @@ const UserPreview = ({ user }: Props) => {
         <StyledFollowerAndLikes>
           <p>{followerCount} Followers</p>
           <p>•</p>
-          <p>{likesCountInTimeRange} Likes</p>
+          <p>{likesCountInTimeRange ?? 0} Likes</p>
         </StyledFollowerAndLikes>
         {description && <StyledDescription>{description}</StyledDescription>}
       </LeftColumn>

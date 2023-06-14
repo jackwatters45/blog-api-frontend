@@ -1,17 +1,15 @@
 # blog-admin-frontend
 
-## Next
+- dashboard -> if not following anyone fix
 
-- check that user pages are good (admin and non)
+- deleted data should not exist if not deleted
 
-- Posts
+  - some form is adding deleted data to the db
+    - check that this is fixed
+  - check that deleting yourself -> isDeleted = true
+  - make sure email and username doesn't show up to public
 
-  - images
-    - posts
-    - users
-
-## Eventually
-
+- somehow when token expires -> redirect to login
 - admin -> filter needs to just be search
 
 - Dashboard
@@ -25,7 +23,6 @@
 
 - comments
 
-  - make text area
   - improve
     - reply likes etc
     - delete
