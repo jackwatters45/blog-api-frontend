@@ -3,8 +3,11 @@ import EditUsers from './EditUsers';
 import { AdminUser } from '../../../../types/user';
 import Loading from '../../shared/Loading';
 import { usePagination } from '../../../custom/usePagination';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const EditUsersAdmin = () => {
+  const handleError = useErrorHandler();
+
   const [userCount, setUserCount] = useState<number>(0);
   const itemsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(itemsPerPage, userCount);
@@ -20,6 +23,10 @@ const EditUsersAdmin = () => {
           credentials: 'include',
         },
       );
+      if (!res.ok) {
+        handleError(res);
+        return;
+      }
       const data = await res.json();
       const {
         users,
@@ -29,7 +36,7 @@ const EditUsersAdmin = () => {
       setUserCount(total);
     };
     fetchUsers();
-  }, [offset]);
+  }, [offset, handleError]);
 
   return users ? (
     <EditUsers users={users} paginationProps={paginationProps} />

@@ -7,22 +7,25 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { UserInputs } from '../../../../types/utils/formInputs';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const CreateUser = () => {
+  const handleError = useErrorHandler();
   const navigate = useNavigate();
 
   const [signupError, setSignupError] = useState<string>('');
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
+        handleError(res);
         return setSignupError('Invalid credentials. Please try again.');
       }
 

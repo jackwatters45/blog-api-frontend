@@ -9,9 +9,11 @@ import {
 } from '../../styles/styledComponents/FormHelpers';
 import ChangePasswordForm from '../shared/UserForms/ChangePasswordForm';
 import DeleteUserSection from '../shared/UserForms/DeleteUser';
+import useErrorHandler from '../Errors/useErrorHandler';
 
 const EditProfile = () => {
   const { user } = useUserContext();
+  const handleError = useErrorHandler();
 
   const [changeError, setChangeError] = useState<string>('');
   const [confirmText, setConfirmText] = useState<string>('');
@@ -23,6 +25,9 @@ const EditProfile = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
+
+    if (!res.ok) handleError(res);
+
     const resData = await res.json();
     if (resData.error) return setChangeError(resData.error);
     setConfirmText(resData.message);

@@ -9,6 +9,7 @@ import IPost from '../../../../types/post';
 import { StyledError } from '../../../styles/styledComponents/FormHelpers';
 import TinyMceEditor from '../../shared/TinyMceEditor';
 import { PostInputs } from '../../../../types/utils/formInputs';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const StyledForm = styled.form`
   display: flex;
@@ -82,6 +83,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   const { topics } = useSidebarContext();
   const { user } = useUserContext();
 
+  const handleError = useErrorHandler();
   const navigate = useNavigate();
 
   const [submitError, setSubmitError] = useState<string>('');
@@ -109,7 +111,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
       published: isPublished,
     };
 
-    const response = post?._id
+    const res = post?._id
       ? await fetch(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -123,8 +125,9 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
           credentials: 'include',
         });
 
-    if (!response.ok) {
-      const errorData = await response.json();
+    if (!res.ok) {
+      handleError(res);
+      const errorData = await res.json();
       return setSubmitError(errorData.message);
     }
 

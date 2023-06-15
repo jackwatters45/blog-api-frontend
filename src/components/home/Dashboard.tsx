@@ -8,14 +8,17 @@ import IPost from '../../../types/post';
 import Loading from '../shared/Loading';
 import MenuOptions from '../shared/MenuOptions';
 import { useUserContext } from '../../context/UserContext';
+import useErrorHandler from '../Errors/useErrorHandler';
 
 const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
+  width: 100%;
 `;
 
 const Dashboard = () => {
+  const handleError = useErrorHandler();
   const { user } = useUserContext();
 
   const [postCount, setPostCount] = useState<number>(0);
@@ -36,6 +39,11 @@ const Dashboard = () => {
           credentials: 'include',
         },
       );
+
+      if (!res.ok) {
+        handleError(res);
+        return;
+      }
       const {
         posts,
         meta: { total },
@@ -64,7 +72,7 @@ const Dashboard = () => {
         fetchPostsNew();
         break;
     }
-  }, [offset, selectedOption]);
+  }, [offset, selectedOption, handleError]);
 
   const options = ['new', 'following'];
   return posts ? (

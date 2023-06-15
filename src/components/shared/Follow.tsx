@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { styled } from 'styled-components';
 import { useUserContext } from '../../context/UserContext';
+import useErrorHandler from '../Errors/useErrorHandler';
 
 const StyledFollowButton = styled.button`
   font-size: 0.8rem;
@@ -20,6 +21,7 @@ interface Props {
 const Follow = ({ followers, setFollowerCount, userId }: Props) => {
   const { id } = useParams();
   const { user } = useUserContext();
+  const handleError = useErrorHandler();
 
   const navigate = useNavigate();
 
@@ -31,15 +33,24 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
     if (!user) return navigate('/login');
 
     const FollowUser = async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/${userId || id}/follow`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        },
+      );
+
+      if (!res.ok) {
+        handleError(res);
+        return;
+      }
+
       if (setFollowerCount) setFollowerCount((prev) => prev + 1);
       setIsFollowingState(true);
-      await fetch(`${import.meta.env.VITE_API_URL}/users/${userId || id}/follow`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
     };
     FollowUser();
   };
@@ -48,15 +59,24 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
     if (!user) return navigate('/login');
 
     const UnfollowUser = async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/${userId || id}/unfollow`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        },
+      );
+
+      if (!res.ok) {
+        handleError(res);
+        return;
+      }
+
       if (setFollowerCount) setFollowerCount((prev) => prev - 1);
       setIsFollowingState(false);
-      await fetch(`${import.meta.env.VITE_API_URL}/users/${userId || id}/unfollow`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
     };
     UnfollowUser();
   };

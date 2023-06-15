@@ -18,17 +18,17 @@ const Signup = () => {
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
         return setSignupError('Invalid credentials. Please try again.');
       }
 
-      const responseData = await response.json();
+      const responseData = await res.json();
       const { user } = responseData;
       updateUser(user);
 

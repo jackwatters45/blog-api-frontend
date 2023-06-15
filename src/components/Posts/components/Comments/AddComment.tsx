@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
 import { useNavigate } from 'react-router';
 import { useUserContext } from '../../../../context/UserContext';
+import useErrorHandler from '../../../Errors/useErrorHandler';
 
 const StyledForm = styled.form`
   display: grid;
@@ -36,6 +37,7 @@ interface Props {
 }
 
 const AddComment = ({ setComments, postId }: Props) => {
+  const handleError = useErrorHandler();
   const { user } = useUserContext();
   const navigate = useNavigate();
 
@@ -63,7 +65,7 @@ const AddComment = ({ setComments, postId }: Props) => {
     setComments((prev) => [...(prev as IComment[]), newComment]);
 
     try {
-      const response = await fetch(
+      const res = await fetch(
         `${import.meta.env.VITE_API_URL}/posts/${postId}/comments`,
         {
           method: 'POST',
@@ -75,12 +77,13 @@ const AddComment = ({ setComments, postId }: Props) => {
         },
       );
 
-      if (!response.ok) {
+      if (!res.ok) {
+        handleError(res);
         setComments((prev) => prev?.filter((comment) => comment._id !== 'tempId'));
         throw new Error('Could not add comment');
       }
 
-      const realComment = await response.json();
+      const realComment = await res.json();
       setComments((prev) =>
         prev?.map((comment) => (comment._id === 'temporary-id' ? realComment : comment)),
       );

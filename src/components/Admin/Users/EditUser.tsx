@@ -11,9 +11,11 @@ import { UserInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';
 import ChangePasswordForm from '../../shared/UserForms/ChangePasswordForm';
 import DeleteUserSection from '../../shared/UserForms/DeleteUser';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const EditUser = () => {
   const { id } = useParams();
+  const handleError = useErrorHandler();
 
   const [user, setUser] = useState<IUser | undefined>(undefined);
   useEffect(() => {
@@ -38,18 +40,19 @@ const EditUser = () => {
           : formData.append(key, value);
       });
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: { Accept: 'multipart/form-data' },
         body: formData,
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
+        handleError(res);
         return setSignupError('Error saving changes. Please try again.');
       }
 
-      const { message } = await response.json();
+      const { message } = await res.json();
       setConfirmText(message);
     } catch (err) {
       console.log(err);

@@ -3,8 +3,10 @@ import IPost from '../../../types/post';
 import EditPostsView from '../shared/EditPostsView';
 import Loading from '../shared/Loading';
 import { usePagination } from '../../custom/usePagination';
+import useErrorHandler from '../Errors/useErrorHandler';
 
 const EditPostsAdmin = () => {
+  const handleResponse = useErrorHandler();
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
 
   const [postCount, setPostCount] = useState<number>(0);
@@ -21,6 +23,12 @@ const EditPostsAdmin = () => {
           credentials: 'include',
         },
       );
+
+      if (!res.ok) {
+        handleResponse(res);
+        return;
+      }
+
       const {
         posts,
         meta: { total },
@@ -29,7 +37,7 @@ const EditPostsAdmin = () => {
       setPosts(posts);
     };
     fetchPosts();
-  }, [offset]);
+  }, [offset, handleResponse]);
 
   return posts ? (
     <EditPostsView

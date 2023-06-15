@@ -6,6 +6,7 @@ import {
   DeleteUserContainer,
   StyledDeleteAccountButton,
 } from '../../../styles/styledComponents/FormHelpers';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 interface Props {
   userId: string;
@@ -14,20 +15,26 @@ interface Props {
 
 const DeleteUserSection = ({ userId, isOwnProfile }: Props) => {
   const { logout } = useLogout();
+  const handleError = useErrorHandler();
 
   const navigate = useNavigate();
   const deleteUser = useCallback(async () => {
-    await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/delete`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/delete`, {
       method: 'PATCH',
       credentials: 'include',
     });
+
+    if (!res.ok) {
+      handleError(res);
+      return;
+    }
 
     if (isOwnProfile) {
       logout();
       return navigate('/');
     }
     return navigate('/admin/users');
-  }, [navigate, userId, logout, isOwnProfile]);
+  }, [navigate, userId, logout, isOwnProfile, handleError]);
 
   return (
     <DeleteUserContainer>

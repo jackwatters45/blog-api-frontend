@@ -13,6 +13,7 @@ import {
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 interface PasswordInputs {
   password: string;
@@ -34,6 +35,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
   const { user } = useUserContext();
   const { id } = useParams();
 
+  const handleError = useErrorHandler();
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -49,7 +51,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
       userId = id;
     }
     try {
-      const response = await fetch(
+      const res = await fetch(
         `${import.meta.env.VITE_API_URL}/users/${userId}/password`,
         {
           method: 'PUT',
@@ -59,10 +61,11 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
         },
       );
 
-      if (!response.ok) {
+      if (!res.ok) {
+        handleError(res);
         return setErrorMessage('Error changing password. Please try again.');
       } else {
-        const { message } = await response.json();
+        const { message } = await res.json();
         setSuccessMessage(message);
       }
       reset();

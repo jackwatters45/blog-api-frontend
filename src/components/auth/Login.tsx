@@ -33,20 +33,19 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({ username: email, password, userType: 'admin' }),
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
         return setCredentialsError('Invalid credentials. Please try again.');
       }
 
-      const responseData = await response.json();
+      const responseData = await res.json();
       const { user } = responseData;
       updateUser(user);
 

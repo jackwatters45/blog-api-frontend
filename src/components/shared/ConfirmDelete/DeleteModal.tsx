@@ -1,6 +1,7 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { styled } from 'styled-components';
 import useLogout from '../../Auth/Logout';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const StyledModal = styled.div`
   position: absolute;
@@ -23,19 +24,26 @@ interface Props {
 
 const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);
+  const handleError = useErrorHandler();
   const { logout } = useLogout();
 
   const handleDelete = async () => {
+    let res;
     if (objType === 'user') {
-      await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/delete`, {
+      res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/delete`, {
         method: 'PATCH',
         credentials: 'include',
       });
     } else {
-      await fetch(`${import.meta.env.VITE_API_URL}/${objType}s/${id}`, {
+      res = await fetch(`${import.meta.env.VITE_API_URL}/${objType}s/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
+    }
+
+    if (!res.ok) {
+      handleError(res);
+      return;
     }
 
     logout();

@@ -1,25 +1,28 @@
 # blog-admin-frontend
 
-- dashboard -> if not following anyone fix
-
-- deleted data should not exist if not deleted
-
-  - some form is adding deleted data to the db
-    - check that this is fixed
-  - check that deleting yourself -> isDeleted = true
-  - make sure email and username doesn't show up to public
-
 - somehow when token expires -> redirect to login
-- admin -> filter needs to just be search
+
+  - add to frontend requests with credentials
+    - if status is 401 -> login
+    - if status is 403 -> unauthorized
 
 - Dashboard
 
-  - Search
-  - Link to comment instead of post
-  - scroll to comments from button
-    - preview
-    - activity`
   - save posts
+
+    - add to user model
+    - meep meep
+
+  - Search
+
+    - probably make its own routes page
+    - home page
+    - admin -> filter needs to just be search but of specific category
+
+  - Link to comment instead of post
+    - scroll to comments from button
+      - preview
+      - activity`
 
 - comments
 

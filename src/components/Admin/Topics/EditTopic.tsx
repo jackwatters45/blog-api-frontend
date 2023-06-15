@@ -9,10 +9,12 @@ import {
 import TopicForm from './TopicForm';
 import { TopicInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const EditTopic = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const handleResponse = useErrorHandler();
 
   const [topic, setTopic] = useState<ITopic | undefined>(undefined);
   useEffect(() => {
@@ -30,7 +32,7 @@ const EditTopic = () => {
 
   const onSubmit: SubmitHandler<TopicInputs> = async (data) => {
     try {
-      const response = id
+      const res = id
         ? await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -44,7 +46,8 @@ const EditTopic = () => {
             body: JSON.stringify(data),
           });
 
-      if (!response.ok) {
+      if (!res.ok) {
+        handleResponse(res);
         return setChangeError(
           id
             ? 'Error saving changes. Please try again.'

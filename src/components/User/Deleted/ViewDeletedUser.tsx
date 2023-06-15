@@ -7,6 +7,7 @@ import Loading from '../../shared/Loading';
 import { styled } from 'styled-components';
 import Activity from '../ActivityColumn/Activity';
 import AboutDeleted from './AboutDeleted';
+import useErrorHandler from '../../Errors/useErrorHandler';
 
 const StyledUserContainer = styled.main`
   display: flex;
@@ -33,6 +34,7 @@ interface UserDetails {
 
 const ViewDeletedUser = () => {
   const { id } = useParams();
+  const handleError = useErrorHandler();
 
   const [user, setUser] = useState<UserDetails | null>(null);
 
@@ -42,11 +44,16 @@ const ViewDeletedUser = () => {
         credentials: 'include',
       });
 
+      if (!res.ok) {
+        handleError(res);
+        return;
+      }
+
       const data = await res.json();
       setUser(data);
     };
     fetchUser();
-  }, [id]);
+  }, [handleError, id]);
 
   if (!user) return <Loading />;
 

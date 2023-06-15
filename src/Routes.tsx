@@ -33,18 +33,22 @@ const RoutesComponent = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
-        method: 'GET',
-        credentials: 'include',
-      });
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
+          method: 'GET',
+          credentials: 'include',
+        });
 
-      if (res.ok) {
-        const { isAuthenticated, user } = await res.json();
-        updateUser(isAuthenticated ? user : undefined);
-        setIsUserLoaded(true);
-      } else {
-        updateUser(undefined);
-        setIsUserLoaded(true);
+        if (res.ok) {
+          const { isAuthenticated, user } = await res.json();
+          updateUser(isAuthenticated ? user : undefined);
+          setIsUserLoaded(true);
+        } else {
+          updateUser(undefined);
+          setIsUserLoaded(true);
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
 
