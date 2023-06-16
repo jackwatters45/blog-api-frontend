@@ -16,7 +16,7 @@ const StyledNoPostsMessage = styled.p`
 `;
 
 interface Props {
-  posts: IPost[];
+  posts?: IPost[];
 }
 
 const Posts = ({ posts }: Props) => {

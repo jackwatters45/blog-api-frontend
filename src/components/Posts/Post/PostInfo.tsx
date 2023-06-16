@@ -7,6 +7,7 @@ import CommentsButton from '../../shared/CommentsButton';
 import IPost, { ILike } from '../../../../types/post';
 import useLikes from '../../../custom/useLikes';
 import { useUserContext } from '../../../context/UserContext';
+import SavePost from '../../shared/SavePost/SavePost';
 
 const StyledPostInfoContainer = styled.div`
   display: flex;
@@ -36,12 +37,11 @@ const BottomRowInfo = styled.div`
   padding: 0.25rem 0 0.75rem;
 `;
 
-const LikesAndComments = styled.div`
+const SocialContainer = styled.div`
   display: flex;
   gap: 1.5rem;
   align-items: center;
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 interface Props {
@@ -55,11 +55,10 @@ const PostInfo = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id as string);
 
-  const isDeleted = author?.isDeleted;
   return (
     <StyledPostInfoContainer>
       <StyledH1>{title}</StyledH1>
-      {author && !isDeleted ? (
+      {author && !author?.isDeleted ? (
         <StyledAuthor to={`/user/${author._id}`}>
           {`${author.firstName} ${author.lastName} • ${formatDate(createdAt)}`}
         </StyledAuthor>
@@ -73,10 +72,11 @@ const PostInfo = ({
       )}
       <BottomRowInfo>
         {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}
-        <LikesAndComments>
-          <CommentsButton commentsCount={comments?.length as number} />
-          <Likes {...useLikesProps} _id={_id as string} />
-        </LikesAndComments>
+        <SocialContainer>
+          <CommentsButton commentsCount={comments?.length} />
+          <Likes {...useLikesProps} _id={_id} />
+          <SavePost />
+        </SocialContainer>
       </BottomRowInfo>
     </StyledPostInfoContainer>
   );

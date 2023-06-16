@@ -32,6 +32,7 @@ const NavContent = () => {
             <NavLink to={`/my-profile`} text="Profile" />
             <NavLink to={`/edit-profile`} text="Edit Profile" />
             <NavLink to={`/my-posts`} text="Your Posts" />
+            <NavLink to={`/saved-posts`} text="Saved Posts" />
             <NavButton onClick={handleClickLogout} text="Log out" />
           </NavDropdown>
         </>

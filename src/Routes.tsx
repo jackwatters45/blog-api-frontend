@@ -26,6 +26,7 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ViewDeletedUser from './components/User/Deleted/ViewDeletedUser';
 import { useEffect, useState } from 'react';
 import Loading from './components/shared/Loading';
+import SavedPosts from './components/Posts/SavedPosts';
 
 const RoutesComponent = () => {
   const { user, updateUser } = useUserContext();
@@ -55,12 +56,7 @@ const RoutesComponent = () => {
     fetchUser();
   }, [updateUser]);
 
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
-  if (!isUserLoaded) return <Loading />;
-  return (
+  return isUserLoaded ? (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -86,6 +82,7 @@ const RoutesComponent = () => {
               <Route path=":type" element={<MyProfile />} />
             </Route>
             <Route path="/my-posts" element={<MyPosts />} />
+            <Route path="/saved-posts" element={<SavedPosts />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/post/:id/edit" element={<EditPost />} />
           </Route>
@@ -118,6 +115,8 @@ const RoutesComponent = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
+  ) : (
+    <Loading />
   );
 };
 

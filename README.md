@@ -1,17 +1,18 @@
 # blog-admin-frontend
 
-- somehow when token expires -> redirect to login
-
-  - add to frontend requests with credentials
-    - if status is 401 -> login
-    - if status is 403 -> unauthorized
-
 - Dashboard
 
   - save posts
 
-    - add to user model
-    - meep meep
+    - figure out frontend logic
+      - options to add post
+      - view saved in profile dropdown (own page)
+      - add link to view saved in profile
+    - test
+
+  - filter
+    - my posts
+  - saved posts
 
   - Search
 

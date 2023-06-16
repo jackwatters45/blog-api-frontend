@@ -13,9 +13,8 @@ interface IPost {
   author: Partial<IUser>;
   published: boolean;
   topic?: ITopic;
-  likes?: ILike[];
-  comments?: IComment[];
-  url?: string;
+  likes: ILike[];
+  comments: IComment[];
   createdAt: string;
   updatedAt: string;
 }

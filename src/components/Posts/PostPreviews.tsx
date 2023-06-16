@@ -9,6 +9,7 @@ import CommentsButton from '../shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
 import { useContext } from 'react';
 import { SelectedUserNameContext } from '../../context/SelectedUserNameContext';
+import SavePost from '../shared/SavePost/SavePost';
 
 const Container = styled.div`
   padding: 2rem 0;
@@ -104,6 +105,7 @@ const PostPreview = ({
         <LikesAndComments>
           <CommentsButton commentsCount={comments?.length as number} />
           <Likes {...useLikesProps} _id={_id} />
+          {user && <SavePost postId={_id} />}
         </LikesAndComments>
         <TopicReadTimeDiv>
           {topic && (

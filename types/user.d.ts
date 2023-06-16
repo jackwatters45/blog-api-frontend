@@ -38,8 +38,9 @@ interface IUser {
   followers: Partial<IUser[]> | string[];
   following: Partial<IUser[]> | string[];
   isDeleted: boolean;
+  savedPosts: string[];
+  description: string;
   deletedData?: DeletedData;
-  description?: string;
   avatarUrl?: string;
 }
 

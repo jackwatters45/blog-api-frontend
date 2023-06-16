@@ -22,6 +22,7 @@ interface Props {
 const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) => {
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts);
 
+  const isFilter = filteredPosts?.length !== posts?.length;
   return (
     <AdminContainer>
       <h1>{title}</h1>
@@ -40,7 +41,9 @@ const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) =>
             <EditPostCard key={post._id} post={post} isAdminView={isAdminView} />
           ))
         ) : (
-          <FilterError>{`No posts match your filter...`}</FilterError>
+          <FilterError>
+            {isFilter ? `No posts match your filter...` : `No Posts`}
+          </FilterError>
         )}
       </CardContainer>
       <Pagination {...paginationProps} />

@@ -25,7 +25,7 @@ const CommentsButton = ({ commentsCount }: Props) => {
 
   const handleClickComment = async () => {
     if (!user) return navigate('/login');
-    // navigate to comments section of post
+    // TODO navigate to comments section of post
   };
 
   return (
