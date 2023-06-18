@@ -1,6 +1,6 @@
-import IPost, { AdminUser } from '../../../../types/post';
+import IPost from '../../../../types/post';
 import ITopic from '../../../../types/topic';
-import IUser from '../../../../types/user';
+import IUser, { IAdminUser } from '../../../../types/user';
 
 export const postFilterFunction = (
   filter: string,
@@ -41,7 +41,7 @@ export const postFilterFunction = (
 };
 export const userFilterFunction = (
   filter: string,
-  usersData: AdminUser[],
+  usersData: IAdminUser[],
   filterType?: string,
 ) => {
   if (!filter) return usersData;
@@ -62,7 +62,7 @@ export const userFilterFunction = (
       );
       break;
     default:
-      return usersData.filter((user: AdminUser) =>
+      return usersData.filter((user: IAdminUser) =>
         `${user.firstName} ${user.lastName}`.toLowerCase().includes(filter),
       );
   }

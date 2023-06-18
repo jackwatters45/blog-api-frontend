@@ -15,7 +15,7 @@ import useErrorHandler from '../../Errors/useErrorHandler';
 
 const EditUser = () => {
   const { id } = useParams();
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
   const [user, setUser] = useState<IUser | undefined>(undefined);
   useEffect(() => {
@@ -48,7 +48,7 @@ const EditUser = () => {
       });
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return setSignupError('Error saving changes. Please try again.');
       }
 

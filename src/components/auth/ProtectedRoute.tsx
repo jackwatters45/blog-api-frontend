@@ -12,9 +12,7 @@ const ProtectedRoute = ({
   redirectPath = '/unauthorized',
   children,
 }: Props) => {
-  if (!isAllowed) {
-    return <Navigate to={redirectPath} replace />;
-  }
+  if (!isAllowed) return <Navigate to={redirectPath} replace />;
 
   return children ? children : <Outlet />;
 };

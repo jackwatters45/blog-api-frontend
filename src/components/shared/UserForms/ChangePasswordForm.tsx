@@ -35,7 +35,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
   const { user } = useUserContext();
   const { id } = useParams();
 
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -62,7 +62,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
       );
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return setErrorMessage('Error changing password. Please try again.');
       } else {
         const { message } = await res.json();

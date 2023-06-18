@@ -11,11 +11,8 @@ const useLikes = (likes: ILike[], userId: string | undefined) => {
   const [hasUserLiked, setHasUserLiked] = useState<boolean>(false);
 
   useEffect(() => {
-    const setupLikes = () => {
-      setLikesCount(likes?.length ?? 0);
-      if (userId) setHasUserLiked(isAlreadyLiked(likes, userId));
-    };
-    setupLikes();
+    setLikesCount(likes?.length ?? 0);
+    if (userId) setHasUserLiked(isAlreadyLiked(likes, userId));
   }, [likes, userId]);
 
   return { likesCount, hasUserLiked, setLikesCount, setHasUserLiked };

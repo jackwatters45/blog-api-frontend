@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
-import { useEffect, useState } from 'react';
-import IUser from '../../../types/user';
+import { IPopularAuthors } from '../../../types/user';
 import UserPreview from './UserPreview';
 
 const StyledUsersContainer = styled.div`
@@ -17,27 +16,14 @@ const StyledNoUsersMessage = styled.p`
 `;
 
 interface Props {
-  usersProp?: IUser[];
-  selectedFilter?: boolean;
+  users?: IPopularAuthors[];
 }
 
-const Users = ({ usersProp, selectedFilter }: Props) => {
-  const [users, setUsers] = useState<IUser[] | undefined>(undefined);
-
-  useEffect(() => {
-    if (selectedFilter) return setUsers(usersProp);
-    const fetchUsersNew = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/Users`);
-      const data = await res.json();
-      setUsers(data);
-    };
-    fetchUsersNew();
-  }, [selectedFilter, usersProp]);
-
+const Users = ({ users }: Props) => {
   return (
     <StyledUsersContainer>
       {users?.length ? (
-        users.map((user: IUser) => <UserPreview key={user._id} user={user} />)
+        users.map((user) => <UserPreview key={user._id} user={user} />)
       ) : (
         <StyledNoUsersMessage>{`No Users here yet..`}</StyledNoUsersMessage>
       )}

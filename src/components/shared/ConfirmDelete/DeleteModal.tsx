@@ -24,7 +24,7 @@ interface Props {
 
 const DeleteModal = ({ useModalParams, objType, id }: Props) => {
   const modalProps = useModal(useModalParams);
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const { logout } = useLogout();
 
   const handleDelete = async () => {
@@ -42,7 +42,7 @@ const DeleteModal = ({ useModalParams, objType, id }: Props) => {
     }
 
     if (!res.ok) {
-      handleError(res);
+      handleErrors(res);
       return;
     }
 

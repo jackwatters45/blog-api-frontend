@@ -1,16 +1,19 @@
-import EditPostCard from '../Posts/MyPosts/MyPostsCard';
+import EditPostCard from './PostPreviewCard';
 import IPost from '../../../types/post';
-import Filter from './Filter/Filter';
-import { useState } from 'react';
-import { getPostFilterOptions } from './Filter/filterOptions';
 import {
   AdminContainer,
   CardContainer,
   FilterContainer,
   FilterError,
 } from '../../styles/styledComponents/AdminCardComponents';
-import { postFilterFunction } from './Filter/filterFunctions';
 import { PaginateProps, Pagination } from '../../custom/usePagination';
+import { useSearchSingleCategory } from '../../custom/useSearchSingle';
+import { styled } from 'styled-components';
+import { useMemo } from 'react';
+
+const StyledInput = styled.input`
+  width: calc(100% - 59.25px);
+`;
 
 interface Props {
   posts: IPost[];
@@ -20,20 +23,26 @@ interface Props {
 }
 
 const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) => {
-  const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts);
+  const searchRoute = useMemo(() => {
+    return isAdminView ? 'admin/posts' : 'my-posts';
+  }, [isAdminView]);
 
-  const isFilter = filteredPosts?.length !== posts?.length;
+  const [filteredPosts, searchInput, setSearchInput, onSubmit, isFilter] =
+    useSearchSingleCategory<IPost>(posts, searchRoute);
+
   return (
     <AdminContainer>
       <h1>{title}</h1>
       <FilterContainer>
-        <Filter<IPost>
-          data={posts}
-          setFilteredData={setFilteredPosts}
-          filterFunction={postFilterFunction}
-          filterOptions={getPostFilterOptions(isAdminView ?? false)}
-          placeHolder={'Filter Posts...'}
-        />
+        <form onSubmit={onSubmit}>
+          <StyledInput
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search Users..."
+          />
+          <input type="submit" value="Search" />
+        </form>
       </FilterContainer>
       <CardContainer>
         {filteredPosts?.length ? (

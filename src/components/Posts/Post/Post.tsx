@@ -24,11 +24,9 @@ const StyledPostContainer = styled.main`
 
 const Post = () => {
   const { id } = useParams();
-
   const { user } = useUserContext();
 
   const [post, setPost] = useState<IPost | undefined>(undefined);
-
   useEffect(() => {
     const fetchPost = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/${id}`);

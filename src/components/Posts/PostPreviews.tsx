@@ -7,7 +7,7 @@ import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../custom/useLikes';
 import CommentsButton from '../shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { SelectedUserNameContext } from '../../context/SelectedUserNameContext';
 import SavePost from '../shared/SavePost/SavePost';
 
@@ -78,14 +78,14 @@ const PostPreview = ({
 
   const useLikesProps = useLikes(likes as ILike[], user?._id);
 
-  const isDeleted = author?.isDeleted;
-
-  const readTime = Math.ceil(content.split(' ').length / 200);
+  const readTime = useMemo(() => {
+    return Math.ceil(content.split(' ').length / 200);
+  }, [content]);
 
   return (
     <Container>
       <StyledDateAuthorDiv>
-        {author?._id && !isDeleted ? (
+        {author?._id && !author?.isDeleted ? (
           <Link to={`/user/${author._id}`}>
             {`${author.firstName} ${author.lastName}`}
           </Link>

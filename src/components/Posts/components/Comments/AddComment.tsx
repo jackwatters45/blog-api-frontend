@@ -37,7 +37,7 @@ interface Props {
 }
 
 const AddComment = ({ setComments, postId }: Props) => {
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const { user } = useUserContext();
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ const AddComment = ({ setComments, postId }: Props) => {
       );
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         setComments((prev) => prev?.filter((comment) => comment._id !== 'tempId'));
         throw new Error('Could not add comment');
       }

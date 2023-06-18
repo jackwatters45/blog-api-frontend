@@ -5,8 +5,7 @@ import User from './User';
 const MyProfile = () => {
   const { user } = useUserContext();
 
-  if (!user) return <Navigate to={'/login'} />;
-  return <User userId={user._id} />;
+  return !user ? <Navigate to={'/login'} /> : <User userId={user._id} />;
 };
 
 export default MyProfile;

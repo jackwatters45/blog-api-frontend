@@ -5,10 +5,8 @@ import Follow from '../shared/Follow';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  // display: flex;
-  // justify-content: space-between;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  justify-content: space-between;
   gap: 2rem;
   padding: 2rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.border};

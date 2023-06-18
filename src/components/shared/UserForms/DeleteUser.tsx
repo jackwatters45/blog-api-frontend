@@ -15,7 +15,7 @@ interface Props {
 
 const DeleteUserSection = ({ userId, isOwnProfile }: Props) => {
   const { logout } = useLogout();
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
   const navigate = useNavigate();
   const deleteUser = useCallback(async () => {
@@ -25,7 +25,7 @@ const DeleteUserSection = ({ userId, isOwnProfile }: Props) => {
     });
 
     if (!res.ok) {
-      handleError(res);
+      handleErrors(res);
       return;
     }
 
@@ -34,7 +34,7 @@ const DeleteUserSection = ({ userId, isOwnProfile }: Props) => {
       return navigate('/');
     }
     return navigate('/admin/users');
-  }, [navigate, userId, logout, isOwnProfile, handleError]);
+  }, [navigate, userId, logout, isOwnProfile, handleErrors]);
 
   return (
     <DeleteUserContainer>

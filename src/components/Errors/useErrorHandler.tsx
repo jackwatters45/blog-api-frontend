@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 const useErrorHandler = () => {
   const navigate = useNavigate();
 
-  const handleError = useCallback(
+  const handleErrors = useCallback(
     (res: Response) => {
       switch (res.status) {
         case 401:
@@ -18,7 +18,7 @@ const useErrorHandler = () => {
     [navigate],
   );
 
-  return handleError;
+  return handleErrors;
 };
 
 export default useErrorHandler;

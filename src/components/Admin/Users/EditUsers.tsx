@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import Filter from '../../shared/Filter/Filter';
 import EditUserCard from './EditUserCard';
-import { userFilterOptions } from '../../shared/Filter/filterOptions';
 import {
   AdminContainer,
   CardContainer,
@@ -10,18 +7,24 @@ import {
   StyledCreateLink,
   StyledHeader,
 } from '../../../styles/styledComponents/AdminCardComponents';
-import { userFilterFunction } from '../../shared/Filter/filterFunctions';
-import { AdminUser } from '../../../../types/user';
+import { IAdminUser } from '../../../../types/user';
 import Loading from '../../shared/Loading';
 import { PaginateProps, Pagination } from '../../../custom/usePagination';
+import { styled } from 'styled-components';
+import { useSearchSingleCategory } from '../../../custom/useSearchSingle';
+
+const StyledInput = styled.input`
+  width: calc(100% - 59.25px);
+`;
 
 interface Props {
-  users: AdminUser[];
+  users: IAdminUser[];
   paginationProps: PaginateProps;
 }
 
 const EditUsers = ({ users, paginationProps }: Props) => {
-  const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>(users ?? []);
+  const [filteredUsers, searchInput, setSearchInput, onSubmit, isFilter] =
+    useSearchSingleCategory<IAdminUser>(users, 'admin/users');
 
   return filteredUsers ? (
     <AdminContainer>
@@ -30,21 +33,25 @@ const EditUsers = ({ users, paginationProps }: Props) => {
         <StyledCreateLink to={`/admin/users/create`}>+ Create User</StyledCreateLink>
       </StyledHeader>
       <FilterContainer>
-        <Filter<AdminUser>
-          data={users ?? []}
-          setFilteredData={setFilteredUsers}
-          filterFunction={userFilterFunction}
-          filterOptions={userFilterOptions}
-          placeHolder={'Filter Users...'}
-        />
+        <form onSubmit={onSubmit}>
+          <StyledInput
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search Users..."
+          />
+          <input type="submit" value="Search" />
+        </form>
       </FilterContainer>
       <CardContainer>
         {filteredUsers?.length ? (
-          filteredUsers.map((user: AdminUser) => {
+          filteredUsers.map((user: IAdminUser) => {
             return <EditUserCard key={user._id} user={user} />;
           })
         ) : (
-          <FilterError>{`No users match your filter...`}</FilterError>
+          <FilterError>
+            {isFilter ? `No users match your filter...` : `No Users`}
+          </FilterError>
         )}
       </CardContainer>
       <Pagination {...paginationProps} />

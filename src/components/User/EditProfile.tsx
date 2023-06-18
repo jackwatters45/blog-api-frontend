@@ -13,7 +13,7 @@ import useErrorHandler from '../Errors/useErrorHandler';
 
 const EditProfile = () => {
   const { user } = useUserContext();
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
   const [changeError, setChangeError] = useState<string>('');
   const [confirmText, setConfirmText] = useState<string>('');
@@ -26,7 +26,7 @@ const EditProfile = () => {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) handleError(res);
+    if (!res.ok) handleErrors(res);
 
     const resData = await res.json();
     if (resData.error) return setChangeError(resData.error);

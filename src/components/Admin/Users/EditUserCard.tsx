@@ -11,13 +11,14 @@ import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 import { formatDate } from '../../shared/formattingHelpers';
-import { AdminUser } from '../../../../types/user';
+import { IAdminUser } from '../../../../types/user';
 
 interface Props {
-  user: AdminUser;
+  user: IAdminUser;
+  isViewOnly?: boolean;
 }
 
-const EditUserCard = ({ user }: Props) => {
+const EditUserCard = ({ user, isViewOnly = false }: Props) => {
   const {
     _id,
     firstName,
@@ -57,7 +58,7 @@ const EditUserCard = ({ user }: Props) => {
         </>
       )}
       <ButtonOptions>
-        {!isDeleted ? (
+        {!isDeleted && !isViewOnly ? (
           <>
             <DeleteButton
               StyledButton={Icon}

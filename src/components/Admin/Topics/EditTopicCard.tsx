@@ -15,7 +15,7 @@ interface Props {
 const EditTopicCard = ({ topic: { _id, name } }: Props) => {
   return (
     <TopicAdminCard>
-      <h2>{`${name}`}</h2>
+      <h2>{name}</h2>
       <StyledButtonsOptions>
         <DeleteButton
           StyledButton={Icon}

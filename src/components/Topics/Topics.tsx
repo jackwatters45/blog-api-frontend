@@ -6,7 +6,7 @@ import {
   TopicButtonLarge,
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiCloseBox } from '@mdi/js';
 import ITopic from '../../../types/topic';
@@ -31,11 +31,13 @@ const Topics = () => {
   const { topics } = useSidebarContext();
 
   const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
-
   const [selectedTopic, setSelectedTopic] = useState<ITopic | undefined>(undefined);
-  const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
 
-  const [postCount, setPostCount] = useState<number>(0);
+  const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
+  const postCount = useMemo(() => {
+    return posts?.length ?? 0;
+  }, [posts]);
+
   const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
   const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
 
@@ -47,12 +49,8 @@ const Topics = () => {
         }/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
       const data = await res.json();
-      const {
-        posts,
-        meta: { total },
-      } = data;
+      const { posts } = data;
       setPosts(posts);
-      setPostCount(total);
     };
 
     const fetchTopic = async () => {
@@ -62,19 +60,19 @@ const Topics = () => {
         }/topics/${id}/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
       const data = await res.json();
-      const {
-        posts,
-        topic,
-        meta: { total },
-      } = data;
+      const { posts, topic } = data;
 
       setSelectedTopic(topic);
-      setPostCount(total);
       setPosts(posts);
     };
 
-    if (id) fetchTopic();
-    else fetchPosts();
+    if (id) {
+      console.log('fetching topic');
+      fetchTopic();
+    } else {
+      console.log('fetching posts');
+      fetchPosts();
+    }
   }, [id, timeRange, itemsPerPage, offset]);
 
   return posts ? (

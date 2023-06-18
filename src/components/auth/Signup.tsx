@@ -15,7 +15,6 @@ const Signup = () => {
   const { updateUser } = useUserContext();
 
   const [signupError, setSignupError] = useState<string>('');
-
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
@@ -30,8 +29,8 @@ const Signup = () => {
 
       const responseData = await res.json();
       const { user } = responseData;
-      updateUser(user);
 
+      updateUser(user);
       navigate('/');
     } catch (err) {
       console.log(err);

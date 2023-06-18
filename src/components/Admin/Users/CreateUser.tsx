@@ -10,7 +10,7 @@ import { UserInputs } from '../../../../types/utils/formInputs';
 import useErrorHandler from '../../Errors/useErrorHandler';
 
 const CreateUser = () => {
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const navigate = useNavigate();
 
   const [signupError, setSignupError] = useState<string>('');
@@ -25,7 +25,7 @@ const CreateUser = () => {
       });
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return setSignupError('Invalid credentials. Please try again.');
       }
 

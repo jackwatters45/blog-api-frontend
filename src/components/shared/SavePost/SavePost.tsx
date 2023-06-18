@@ -10,38 +10,31 @@ interface Props {
 
 const SavePost = ({ postId }: Props) => {
   const { id } = useParams();
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
   const { user } = useUserContext();
   const savedPosts = user?.savedPosts;
 
   const [isSaved, setIsSaved] = useState(false);
-  const handleClick = () => {
-    const savePost = async () => {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/posts/saved-posts/${id ?? postId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        },
-      );
+  const handleClick = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/saved-posts/${id ?? postId}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      },
+    );
 
-      if (!res.ok) {
-        handleError(res);
-        return;
-      }
+    if (!res.ok) {
+      handleErrors(res);
+      return;
+    }
 
-      setIsSaved((prev) => !prev);
-    };
-    savePost();
+    setIsSaved((prev) => !prev);
   };
 
   useEffect(() => {
-    console.log(savedPosts);
-    console.log(postId);
     setIsSaved(
       savedPosts?.some((post) => {
         return post === id || post === postId;

@@ -10,7 +10,7 @@ export interface IPopularAuthors extends IUser {
   likesCountInTimeRange: number;
 }
 
-export interface AdminUser {
+export interface IAdminUser {
   _id: string;
   firstName: string;
   lastName: string;

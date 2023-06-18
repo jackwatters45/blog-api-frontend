@@ -3,7 +3,7 @@ import Sidebar from './Sidebar/Sidebar';
 import { StyledMain } from '../../styles/styledComponents/HelperComponents';
 import { styled } from 'styled-components';
 import { Pagination, usePagination } from '../../custom/usePagination';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import IPost from '../../../types/post';
 import Loading from '../shared/Loading';
 import MenuOptions from '../shared/MenuOptions';
@@ -18,61 +18,40 @@ const PostsContainer = styled.div`
 `;
 
 const Dashboard = () => {
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const { user } = useUserContext();
 
-  const [postCount, setPostCount] = useState<number>(0);
+  const [posts, setPosts] = useState<IPost[] | undefined>(undefined);
+  const postCount = useMemo(() => posts?.length ?? 0, [posts?.length]);
+
   const postsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(postsPerPage, postCount);
 
   const defaultState = 'new';
   const [selectedOption, setSelectedOption] = useState(defaultState);
 
-  const [posts, setPosts] = useState<IPost[] | undefined>(undefined);
   useEffect(() => {
-    const fetchPostsFollowing = async () => {
+    const fetchPosts = async () => {
+      const endUrl = selectedOption === 'following' ? '/following' : '';
       const res = await fetch(
         `${
           import.meta.env.VITE_API_URL
-        }/posts/following?limit=${postsPerPage}&offset=${offset}`,
+        }/posts${endUrl}?limit=${postsPerPage}&offset=${offset}`,
         {
           credentials: 'include',
         },
       );
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return;
       }
-      const {
-        posts,
-        meta: { total },
-      } = await res.json();
-      setPosts(posts);
-      setPostCount(total);
-    };
 
-    const fetchPostsNew = async () => {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/posts?limit=${postsPerPage}&offset=${offset}`,
-      );
-      const {
-        posts,
-        meta: { total },
-      } = await res.json();
+      const { posts } = await res.json();
       setPosts(posts);
-      setPostCount(total);
     };
-
-    switch (selectedOption) {
-      case 'following':
-        fetchPostsFollowing();
-        break;
-      default:
-        fetchPostsNew();
-        break;
-    }
-  }, [offset, selectedOption, handleError]);
+    fetchPosts();
+  }, [offset, selectedOption, handleErrors]);
 
   const options = ['new', 'following'];
   return posts ? (

@@ -83,7 +83,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   const { topics } = useSidebarContext();
   const { user } = useUserContext();
 
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
   const navigate = useNavigate();
 
   const [submitError, setSubmitError] = useState<string>('');
@@ -102,31 +102,23 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
   });
 
   const [isPublished, setIsPublished] = useState<boolean>(true);
-
   const onSubmit = async (formData: PostInputs) => {
     if (!user) return navigate('/login');
 
-    const data = {
-      ...formData,
-      published: isPublished,
-    };
-
-    const res = post?._id
-      ? await fetch(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          credentials: 'include',
-        })
-      : await fetch(`${import.meta.env.VITE_API_URL}/posts`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          credentials: 'include',
-        });
+    const data = { ...formData, published: isPublished };
+    const method = post?._id ? 'PUT' : 'POST';
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts${post?._id ? `/${post._id}` : ''}`,
+      {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        credentials: 'include',
+      },
+    );
 
     if (!res.ok) {
-      handleError(res);
+      handleErrors(res);
       const errorData = await res.json();
       return setSubmitError(errorData.message);
     }

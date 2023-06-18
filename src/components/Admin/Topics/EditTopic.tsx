@@ -22,37 +22,30 @@ const EditTopic = () => {
     const fetchTopic = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}`);
       const data = await res.json();
-
       setTopic(data);
     };
     fetchTopic();
   }, [id]);
 
   const [changeError, setChangeError] = useState<string>('');
-
   const onSubmit: SubmitHandler<TopicInputs> = async (data) => {
     try {
-      const res = id
-        ? await fetch(`${import.meta.env.VITE_API_URL}/topics/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(data),
-          })
-        : await fetch(`${import.meta.env.VITE_API_URL}/topics`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(data),
-          });
+      const method = id ? 'PATCH' : 'POST';
+      const url = id ? `/${id}` : '';
+
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/topics${url}`, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(data),
+      });
 
       if (!res.ok) {
         handleResponse(res);
-        return setChangeError(
-          id
-            ? 'Error saving changes. Please try again.'
-            : 'Error creating topic. Please try again.',
-        );
+        const error = id
+          ? 'Error saving changes. Please try again.'
+          : 'Error creating topic. Please try again.';
+        return setChangeError(error);
       }
 
       navigate('/admin/topics');

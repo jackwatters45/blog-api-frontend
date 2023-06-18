@@ -34,10 +34,9 @@ interface UserDetails {
 
 const ViewDeletedUser = () => {
   const { id } = useParams();
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
   const [user, setUser] = useState<UserDetails | null>(null);
-
   useEffect(() => {
     const fetchUser = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/deleted`, {
@@ -45,7 +44,7 @@ const ViewDeletedUser = () => {
       });
 
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return;
       }
 
@@ -53,14 +52,11 @@ const ViewDeletedUser = () => {
       setUser(data);
     };
     fetchUser();
-  }, [handleError, id]);
+  }, [handleErrors, id]);
 
   if (!user) return <Loading />;
-
   const { user: userInfo, comments, posts } = user;
-
   const { firstName, lastName } = userInfo;
-
   return (
     <StyledUserContainer>
       <AboutDeleted user={userInfo} />

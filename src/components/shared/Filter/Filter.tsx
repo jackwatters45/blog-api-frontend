@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import IPost from '../../../../types/post';
-import IUser, { AdminUser } from '../../../../types/user';
+import IUser, { IAdminUser } from '../../../../types/user';
 import ITopic from '../../../../types/topic';
 
 const StyledForm = styled.form`
@@ -40,7 +40,7 @@ type Props<T> = {
   placeHolder: string;
 };
 
-const Filter = <T extends IPost | IUser | ITopic | AdminUser>({
+const Filter = <T extends IPost | IUser | ITopic | IAdminUser>({
   data,
   setFilteredData,
   filterFunction,

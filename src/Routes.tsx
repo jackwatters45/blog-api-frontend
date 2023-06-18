@@ -27,6 +27,7 @@ import ViewDeletedUser from './components/User/Deleted/ViewDeletedUser';
 import { useEffect, useState } from 'react';
 import Loading from './components/shared/Loading';
 import SavedPosts from './components/Posts/SavedPosts';
+import SearchResults from './components/Search/SearchResults';
 
 const RoutesComponent = () => {
   const { user, updateUser } = useUserContext();
@@ -66,6 +67,7 @@ const RoutesComponent = () => {
         <Route path="/" element={<Layout />}>
           {/* Public */}
           <Route index element={<Dashboard />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/explore-posts" element={<PopularPosts />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/explore-authors" element={<PopularAuthors />} />

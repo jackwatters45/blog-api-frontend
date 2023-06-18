@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import IPost from '../../../types/post';
 import { useUserContext } from '../../context/UserContext';
 import useErrorHandler from '../Errors/useErrorHandler';
@@ -12,18 +12,17 @@ import Filter from '../shared/Filter/Filter';
 import { Pagination, usePagination } from '../../custom/usePagination';
 import { postFilterFunction } from '../shared/Filter/filterFunctions';
 import { getPostFilterOptions } from '../shared/Filter/filterOptions';
-const SavedPosts = () => {
-  const handleError = useErrorHandler();
 
+const SavedPosts = () => {
+  const handleErrors = useErrorHandler();
+  const { user } = useUserContext();
   const [isFetched, setIsFetched] = useState(false);
 
-  const { user } = useUserContext();
-
-  const [postCount, setPostCount] = useState<number>(0);
-  const itemsPerPage = '25';
-  const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
-
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
+  const postCount = useMemo(() => posts?.length ?? 0, [posts]);
+
+  const { offset, ...paginationProps } = usePagination('25', postCount);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -36,12 +35,11 @@ const SavedPosts = () => {
         );
 
         if (!res.ok) {
-          handleError(res);
+          handleErrors(res);
           return;
         }
 
         const savedPosts = await res.json();
-        setPostCount(savedPosts.length);
         setPosts(savedPosts);
         setIsFetched(true);
       } catch (err) {
@@ -49,7 +47,7 @@ const SavedPosts = () => {
       }
     };
     fetchPosts();
-  }, [user?._id, handleError]);
+  }, [user?._id, handleErrors]);
 
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts ?? []);
 

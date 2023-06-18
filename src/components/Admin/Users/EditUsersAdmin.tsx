@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import EditUsers from './EditUsers';
-import { AdminUser } from '../../../../types/user';
+import { IAdminUser } from '../../../../types/user';
 import Loading from '../../shared/Loading';
 import { usePagination } from '../../../custom/usePagination';
 import useErrorHandler from '../../Errors/useErrorHandler';
 
 const EditUsersAdmin = () => {
-  const handleError = useErrorHandler();
+  const handleErrors = useErrorHandler();
 
-  const [userCount, setUserCount] = useState<number>(0);
+  const [users, setUsers] = useState<undefined | IAdminUser[]>(undefined);
+  const userCount = useMemo(() => users?.length ?? 0, [users?.length]);
+
   const itemsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(itemsPerPage, userCount);
-
-  const [users, setUsers] = useState<undefined | AdminUser[]>(undefined);
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await fetch(
@@ -24,19 +24,15 @@ const EditUsersAdmin = () => {
         },
       );
       if (!res.ok) {
-        handleError(res);
+        handleErrors(res);
         return;
       }
       const data = await res.json();
-      const {
-        users,
-        meta: { total },
-      } = data;
+      const { users } = data;
       setUsers(users);
-      setUserCount(total);
     };
     fetchUsers();
-  }, [offset, handleError]);
+  }, [offset, handleErrors]);
 
   return users ? (
     <EditUsers users={users} paginationProps={paginationProps} />

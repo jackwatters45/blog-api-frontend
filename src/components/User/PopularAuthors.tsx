@@ -4,8 +4,8 @@ import {
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { styled } from 'styled-components';
-import { useEffect, useState } from 'react';
-import IUser from '../../../types/user';
+import { useEffect, useMemo, useState } from 'react';
+import { IPopularAuthors } from '../../../types/user';
 import Users from './Users';
 import useSelect, {
   getItemsPerPageOptions,
@@ -44,11 +44,10 @@ const UserContainer = styled.div`
 `;
 
 const PopularAuthors = () => {
-  const [users, setUsers] = useState<undefined | IUser[]>(undefined);
+  const [users, setUsers] = useState<undefined | IPopularAuthors[]>(undefined);
+  const userCount = useMemo(() => users?.length ?? 0, [users?.length]);
 
   const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
-
-  const [userCount, setUserCount] = useState<number>(0);
   const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
   const { offset, ...paginationProps } = usePagination(itemsPerPage, userCount);
 
@@ -59,11 +58,7 @@ const PopularAuthors = () => {
           import.meta.env.VITE_API_URL
         }/users/popular?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const {
-        users,
-        meta: { total },
-      } = await res.json();
-      setUserCount(total);
+      const { users } = await res.json();
       setUsers(users);
     };
     fetchAuthorsPopular();
@@ -78,7 +73,7 @@ const PopularAuthors = () => {
           <ItemsPerPageSelect {...getItemsPerPageOptions('User')} />
         </Selects>
         <UserContainer>
-          <Users usersProp={users} selectedFilter={true} />
+          <Users users={users} />
           <Pagination {...paginationProps} />
         </UserContainer>
       </StyledContentContainer>
