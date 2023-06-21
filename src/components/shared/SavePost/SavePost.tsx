@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../../context/UserContext';
 import useErrorHandler from '../../../custom/useErrorHandler';
@@ -13,7 +13,6 @@ const SavePost = ({ postId }: Props) => {
   const handleErrors = useErrorHandler();
 
   const { user } = useUserContext();
-  const savedPosts = user?.savedPosts;
 
   const [isSaved, setIsSaved] = useState(false);
   const handleClick = async () => {
@@ -34,6 +33,7 @@ const SavePost = ({ postId }: Props) => {
     setIsSaved((prev) => !prev);
   };
 
+  const savedPosts = useMemo(() => user?.savedPosts, [user]);
   useEffect(() => {
     setIsSaved(
       savedPosts?.some((post) => {

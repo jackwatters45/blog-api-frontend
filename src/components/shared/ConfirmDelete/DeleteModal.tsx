@@ -1,6 +1,6 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { styled } from 'styled-components';
-import useLogout from '../../Auth/Logout';
+import useLogout from '../../../custom/useLogout';
 import useErrorHandler from '../../../custom/useErrorHandler';
 
 const StyledModal = styled.div`

@@ -10,7 +10,7 @@ import {
   StyledFormNav,
   StyledFormSection,
   StyledFormSubmitInput,
-} from '../../styles/styledComponents/FormHelpers';
+} from '../../styles/styledComponents/AuthStyledComponents';
 
 const Login = () => {
   const navigate = useNavigate();

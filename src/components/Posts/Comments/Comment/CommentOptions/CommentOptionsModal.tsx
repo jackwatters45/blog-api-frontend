@@ -1,9 +1,9 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
-import useErrorHandler from '../../../../../../custom/useErrorHandler';
+import useErrorHandler from '../../../../../custom/useErrorHandler';
 import { styled } from 'styled-components';
 import { Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCommentsContext } from '../../../../../../context/CommentsContext';
+import { useCommentsContext } from '../../../../../context/CommentsContext';
 
 const StyledModal = styled.div`
   position: absolute;

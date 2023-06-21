@@ -48,9 +48,8 @@ const Filter = <T extends IPost | IUser | ITopic | IAdminUser>({
   placeHolder,
 }: Props<T>) => {
   const [filter, setFilter] = useState<string>('');
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) =>
     setFilter(e.target.value.toLowerCase());
-  };
 
   const [filterType, setFilterType] = useState<string>('any');
   const handleFilterTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -58,8 +57,10 @@ const Filter = <T extends IPost | IUser | ITopic | IAdminUser>({
   };
 
   useEffect(() => {
-    if (filter === '') return setFilteredData(data);
-    return setFilteredData(filterFunction(filter, data, filterType));
+    const updatedFilteredData =
+      filter.trim() === '' ? data : filterFunction(filter, data, filterType);
+
+    return setFilteredData(updatedFilteredData);
   }, [filter, filterType, setFilteredData, filterFunction, data]);
 
   return (

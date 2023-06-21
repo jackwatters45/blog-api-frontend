@@ -14,6 +14,7 @@ import useSelect, {
 import { styled } from 'styled-components';
 import { usePagination, Pagination } from '../../custom/usePagination';
 import Loading from '../shared/Loading';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const Selects = styled.div`
   display: flex;
@@ -26,6 +27,8 @@ const PostsContainer = styled.div`
 `;
 
 const PopularPosts = () => {
+  const handleErrors = useErrorHandler();
+
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
   const [postCount, setPostCount] = useState<number>(0);
 
@@ -40,6 +43,12 @@ const PopularPosts = () => {
           import.meta.env.VITE_API_URL
         }/posts/popular?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
+
+      if (!res.ok) {
+        handleErrors(res);
+        return;
+      }
+
       const {
         posts,
         meta: { total },
@@ -48,7 +57,7 @@ const PopularPosts = () => {
       setPostCount(total);
     };
     fetchPostsPopular();
-  }, [timeRange, itemsPerPage, offset]);
+  }, [timeRange, itemsPerPage, offset, handleErrors]);
 
   return posts ? (
     <StyledMain>

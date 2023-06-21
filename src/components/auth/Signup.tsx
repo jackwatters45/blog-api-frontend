@@ -7,7 +7,7 @@ import {
   StyledFormContainer,
   StyledFormLink,
   StyledFormNav,
-} from '../../styles/styledComponents/FormHelpers';
+} from '../../styles/styledComponents/AuthStyledComponents';
 import { UserInputs } from '../../../types/utils/formInputs';
 
 const Signup = () => {

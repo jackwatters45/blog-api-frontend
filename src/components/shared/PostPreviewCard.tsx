@@ -17,6 +17,7 @@ import {
   StyledUpdated,
   StyledDeletedAuthor,
 } from '../../styles/styledComponents/AdminCardComponents';
+import { useMemo } from 'react';
 
 interface Props {
   post: IPost;
@@ -27,7 +28,7 @@ const PostPreviewCard = ({ post, isAdminView }: Props) => {
   const { user } = useUserContext();
   const { title, likes, topic, updatedAt, comments, author, _id } = post;
   const likesProps = useLikes(likes as ILike[], user?._id as string);
-  const isDeleted = author?.isDeleted;
+  const isDeleted = useMemo(() => author?.isDeleted, [author]);
   return (
     <AdminCard>
       <StyledTitleTopic>

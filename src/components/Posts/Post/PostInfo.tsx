@@ -75,7 +75,7 @@ const PostInfo = ({
         <SocialContainer>
           <CommentsButton postId={_id} commentsCount={comments?.length} />
           <Likes {...useLikesProps} _id={_id} />
-          <SavePost />
+          {user && <SavePost />}
         </SocialContainer>
       </BottomRowInfo>
     </StyledPostInfoContainer>

@@ -5,7 +5,7 @@ import {
   StyledFormInput,
   StyledFormSection,
   StyledFormSubmitInput,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import { TopicInputs } from '../../../../types/utils/formInputs';
 
 interface Props {

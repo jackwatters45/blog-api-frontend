@@ -9,7 +9,7 @@ import {
   StyledFormSubmitInput,
   StyledFormPassword,
   ListMessage,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';

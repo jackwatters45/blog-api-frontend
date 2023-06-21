@@ -1,4 +1,3 @@
-import { styled } from 'styled-components';
 import {
   SidebarHeader,
   SidebarInfoFirstRow,
@@ -9,15 +8,12 @@ import {
   SeeAllLink,
   SidebarContainer,
   SidebarItemUsernameDeleted,
+  StyledDate,
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../shared/formattingHelpers';
 import { useSidebarContext } from '../../../context/SidebarContext';
-
-const StyledDate = styled(SidebarItemUsername)`
-  color: ${({ theme }) => theme.colors.textPrimary};
-`;
 
 const PopularPostsSidebar = () => {
   const { posts } = useSidebarContext();

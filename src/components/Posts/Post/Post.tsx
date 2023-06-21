@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import { styled } from 'styled-components';
 import { useUserContext } from '../../../context/UserContext';
 import IComment from '../../../../types/comment';
 import PostInfo from './PostInfo';
-import Profile from '../components/Profile';
+import Profile from '../Profile';
 import { PostContentDefault } from '../../../styles/styledComponents/PostContentComponents';
 import Loading from '../../shared/Loading';
-import CommentsContainer from '../components/Comments/CommentsContainer';
+import CommentsContainer from '../Comments/CommentsContainer';
 
 const StyledPostContainer = styled.main`
   display: flex;
@@ -25,16 +25,19 @@ const StyledPostContainer = styled.main`
 const Post = () => {
   const { id } = useParams();
   const { user } = useUserContext();
+  const navigate = useNavigate();
 
   const [post, setPost] = useState<IPost | undefined>(undefined);
   useEffect(() => {
     const fetchPost = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/${id}`);
+
+      if (!res.ok) return navigate('/404');
       const data = await res.json();
       setPost(data);
     };
     fetchPost();
-  }, [id, user]);
+  }, [id, user, navigate]);
 
   if (!post) return <Loading />;
   const { content, comments, author } = post;

@@ -1,15 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import IComment from '../../../../../types/comment';
+import IComment from '../../../../types/comment';
 import { useNavigate, useLocation } from 'react-router';
-import { useUserContext } from '../../../../context/UserContext';
-import useErrorHandler from '../../../../custom/useErrorHandler';
+import { useUserContext } from '../../../context/UserContext';
+import useErrorHandler from '../../../custom/useErrorHandler';
 import {
   StyledButton,
   StyledForm,
   StyledInput,
-} from '../../../../styles/styledComponents/Comment';
+} from '../../../styles/styledComponents/Comment';
 import { useParams } from 'react-router-dom';
-import { useCommentsContext } from '../../../../context/CommentsContext';
+import { useCommentsContext } from '../../../context/CommentsContext';
 
 const AddComment = () => {
   const handleErrors = useErrorHandler();

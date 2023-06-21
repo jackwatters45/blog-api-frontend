@@ -5,7 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import {
   StyledFormContainer,
   StyledH1Centered,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import TopicForm from './TopicForm';
 import { TopicInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';

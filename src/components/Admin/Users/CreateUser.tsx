@@ -1,7 +1,7 @@
 import {
   StyledFormContainer,
   StyledH1Centered,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import UserForm from '../../shared/UserForms/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

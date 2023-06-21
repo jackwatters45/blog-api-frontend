@@ -6,7 +6,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import {
   StyledFormContainer,
   StyledH1Centered,
-} from '../../styles/styledComponents/FormHelpers';
+} from '../../styles/styledComponents/AuthStyledComponents';
 import ChangePasswordForm from '../shared/UserForms/ChangePasswordForm';
 import DeleteUserSection from '../shared/UserForms/DeleteUser';
 import useErrorHandler from '../../custom/useErrorHandler';
@@ -27,10 +27,12 @@ const EditProfile = () => {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) handleErrors(res);
+    if (!res.ok) {
+      handleErrors(res);
+      return setChangeError('Error saving changes. Please try again.');
+    }
 
     const resData = await res.json();
-    if (resData.error) return setChangeError(resData.error);
     setConfirmText(resData.message);
   };
 

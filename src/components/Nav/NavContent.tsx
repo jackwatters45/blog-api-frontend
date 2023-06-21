@@ -3,11 +3,10 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useUserContext } from '../../context/UserContext';
 import { Nav, NavDropdown, NavLink, NavButton } from '@jackwatters/simple-nav';
-import useLogout from '../Auth/Logout';
+import useLogout from '../../custom/useLogout';
 
 const NavContent = () => {
   const { user } = useUserContext();
-
   const { handleClickLogout } = useLogout();
 
   return (

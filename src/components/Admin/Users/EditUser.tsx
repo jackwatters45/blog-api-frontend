@@ -3,7 +3,7 @@ import UserForm from '../../shared/UserForms/UserForm';
 import {
   StyledFormContainer,
   StyledH1Centered,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import IUser from '../../../../types/user';

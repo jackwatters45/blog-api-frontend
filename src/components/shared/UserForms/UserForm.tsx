@@ -13,7 +13,7 @@ import {
   StyledTextArea,
   SelectWrapper,
   ListMessage,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
 

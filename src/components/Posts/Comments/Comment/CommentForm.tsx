@@ -4,11 +4,11 @@ import {
   StyledAddForm,
   StyledAddInput,
   StyledButton,
-} from '../../../../../styles/styledComponents/Comment';
-import useErrorHandler from '../../../../../custom/useErrorHandler';
+} from '../../../../styles/styledComponents/Comment';
+import useErrorHandler from '../../../../custom/useErrorHandler';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useUserContext } from '../../../../../context/UserContext';
-import { useCommentsContext } from '../../../../../context/CommentsContext';
+import { useUserContext } from '../../../../context/UserContext';
+import { useCommentsContext } from '../../../../context/CommentsContext';
 import { updateCommentsRecursively } from '../utils/commentHelperFuncs';
 
 interface Props {

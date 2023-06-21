@@ -20,6 +20,7 @@ import { StyledTopicButton } from '../../styles/styledComponents/TopicComponents
 import { usePagination, Pagination } from '../../custom/usePagination';
 import { styled } from 'styled-components';
 import Loading from '../shared/Loading';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const PostsContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ const PostsContainer = styled.div`
 const Topics = () => {
   const { id } = useParams();
   const { topics } = useSidebarContext();
+  const handleErrors = useErrorHandler();
 
   const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
   const [selectedTopic, setSelectedTopic] = useState<ITopic | undefined>(undefined);
@@ -46,6 +48,12 @@ const Topics = () => {
           import.meta.env.VITE_API_URL
         }/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
+
+      if (!res.ok) {
+        handleErrors(res);
+        return;
+      }
+
       const {
         posts,
         meta: { total },
@@ -60,6 +68,12 @@ const Topics = () => {
           import.meta.env.VITE_API_URL
         }/topics/${id}/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
+
+      if (!res.ok) {
+        handleErrors(res);
+        return;
+      }
+
       const {
         posts,
         topic,
@@ -72,7 +86,7 @@ const Topics = () => {
 
     if (id) fetchTopic();
     else fetchPosts();
-  }, [id, timeRange, itemsPerPage, offset]);
+  }, [id, timeRange, itemsPerPage, offset, handleErrors]);
 
   return posts ? (
     <StyledMain>

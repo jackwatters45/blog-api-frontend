@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import IComment from '../../../../../types/comment';
-import { CommentsContext } from '../../../../context/CommentsContext';
+import IComment from '../../../../types/comment';
+import { CommentsContext } from '../../../context/CommentsContext';
 import CommentsSection from './CommentsSection';
 import { useParams } from 'react-router-dom';
-import useSelect from '../../../../custom/useSelect';
-import { usePagination } from '../../../../custom/usePagination';
+import useSelect from '../../../custom/useSelect';
+import { usePagination } from '../../../custom/usePagination';
 
 interface Props {
   initialComments: IComment[] | undefined;

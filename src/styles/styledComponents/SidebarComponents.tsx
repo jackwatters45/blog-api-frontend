@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 
+export const StyledSidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 250px;
+  width: 300px;
+  margin: 2rem 0;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 export const SidebarContainer = styled.div``;
 
 export const SidebarHeader = styled.h2`
@@ -57,4 +69,8 @@ export const SeeAllLink = styled(Link)`
   margin-left: 0.5rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   text-decoration: underline;
+`;
+
+export const StyledDate = styled(SidebarItemUsername)`
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;

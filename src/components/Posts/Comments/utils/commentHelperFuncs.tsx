@@ -1,4 +1,4 @@
-import IComment from '../../../../../../types/comment';
+import IComment from '../../../../../types/comment';
 
 export const updateCommentsRecursively = (
   comments: IComment[],

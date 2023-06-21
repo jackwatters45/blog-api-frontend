@@ -4,9 +4,11 @@ import { useUserContext } from '../../../context/UserContext';
 import EditPostsView from '../../shared/EditPostsView';
 import Loading from '../../shared/Loading';
 import { usePagination } from '../../../custom/usePagination';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const MyPosts = () => {
   const { user } = useUserContext();
+  const handleErrors = useErrorHandler();
 
   const [myPosts, setMyPosts] = useState<undefined | IPost[]>(undefined);
   const [postCount, setPostCount] = useState<number>(0);
@@ -22,6 +24,11 @@ const MyPosts = () => {
           user._id
         }/posts?limit=${itemsPerPage}&offset=${offset}`,
       );
+
+      if (!res.ok) {
+        handleErrors(res);
+        return;
+      }
       const {
         posts,
         meta: { total },
@@ -30,7 +37,7 @@ const MyPosts = () => {
       setPostCount(total);
     };
     fetchMyPosts();
-  }, [user, offset]);
+  }, [user, offset, handleErrors]);
 
   return myPosts ? (
     <EditPostsView

@@ -57,13 +57,12 @@ const Dashboard = () => {
     fetchPosts();
   }, [offset, selectedOption, handleErrors]);
 
-  const options = ['new', 'following'];
   return posts ? (
     <StyledMain>
       <PostsContainer>
         {user && (
           <MenuOptions
-            options={options}
+            options={['new', 'following']}
             defaultOption={defaultState}
             selectType="state"
             selectedOption={selectedOption}

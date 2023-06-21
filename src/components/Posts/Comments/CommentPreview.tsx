@@ -1,11 +1,11 @@
 import { styled } from 'styled-components';
-import IComment from '../../../../../types/comment';
+import IComment from '../../../../types/comment';
 import { Link } from 'react-router-dom';
-import IUser from '../../../../../types/user';
-import { formatContent, formatDate } from '../../../shared/formattingHelpers';
-import IPost from '../../../../../types/post';
+import IUser from '../../../../types/user';
+import { formatContent, formatDate } from '../../shared/formattingHelpers';
+import IPost from '../../../../types/post';
 import { useContext } from 'react';
-import { SelectedUserNameContext } from '../../../../context/SelectedUserNameContext';
+import { SelectedUserNameContext } from '../../../context/SelectedUserNameContext';
 
 const Container = styled.div`
   padding: 2rem 0;

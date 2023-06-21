@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
-import useLogout from '../../Auth/Logout';
+import useLogout from '../../../custom/useLogout';
 import {
   DangerText,
   DeleteUserContainer,
   StyledDeleteAccountButton,
-} from '../../../styles/styledComponents/FormHelpers';
+} from '../../../styles/styledComponents/AuthStyledComponents';
 import useErrorHandler from '../../../custom/useErrorHandler';
 
 interface Props {

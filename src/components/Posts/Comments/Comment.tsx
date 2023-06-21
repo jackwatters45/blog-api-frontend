@@ -1,9 +1,9 @@
-import IComment from '../../../../../types/comment';
+import IComment from '../../../../types/comment';
 import { useMemo, useState } from 'react';
 import CommentForm from './Comment/CommentForm';
 import CommentContent from './Comment/CommentContent';
 import ShowMoreComments from './Comment/ShowMoreComments';
-import { useCommentsContext } from '../../../../context/CommentsContext';
+import { useCommentsContext } from '../../../context/CommentsContext';
 import { sortCommentReplies } from './utils/commentHelperFuncs';
 
 interface Props {

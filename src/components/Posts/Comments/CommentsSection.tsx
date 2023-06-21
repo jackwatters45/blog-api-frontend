@@ -3,9 +3,9 @@ import AddComment from './AddComment';
 import { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Comment from './Comment';
-import { Pagination } from '../../../../custom/usePagination';
-import { SelectProps, getSortOptions } from '../../../../custom/useSelect';
-import { useCommentsContext } from '../../../../context/CommentsContext';
+import { Pagination } from '../../../custom/usePagination';
+import { SelectProps, getSortOptions } from '../../../custom/useSelect';
+import { useCommentsContext } from '../../../context/CommentsContext';
 
 const Container = styled.div`
   padding: 2rem 0;
