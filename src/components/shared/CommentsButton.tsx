@@ -1,4 +1,3 @@
-import { useUserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
@@ -16,16 +15,14 @@ const CommentButton = styled.button`
 
 interface Props {
   commentsCount: number;
+  postId: string;
 }
 
-const CommentsButton = ({ commentsCount }: Props) => {
-  const { user } = useUserContext();
-
+const CommentsButton = ({ commentsCount, postId }: Props) => {
   const navigate = useNavigate();
 
   const handleClickComment = async () => {
-    if (!user) return navigate('/login');
-    // TODO navigate to comments section of post
+    navigate(`/post/${postId}`, { state: { scrollToComments: true } });
   };
 
   return (

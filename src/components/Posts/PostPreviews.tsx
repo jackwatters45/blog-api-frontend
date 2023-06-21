@@ -103,7 +103,7 @@ const PostPreview = ({
       </Link>
       <BottomRow>
         <LikesAndComments>
-          <CommentsButton commentsCount={comments?.length as number} />
+          <CommentsButton postId={_id} commentsCount={comments?.length as number} />
           <Likes {...useLikesProps} _id={_id} />
           {user && <SavePost postId={_id} />}
         </LikesAndComments>

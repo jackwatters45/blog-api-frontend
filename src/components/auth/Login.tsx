@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { useUserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   StyledError,
   StyledForm,
@@ -14,6 +14,8 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from: '/' };
 
   const { updateUser } = useUserContext();
 
@@ -50,7 +52,7 @@ const Login = () => {
       const { user } = responseData;
       updateUser(user);
 
-      navigate('/');
+      navigate(from);
     } catch (err) {
       console.log(err);
     }

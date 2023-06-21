@@ -4,12 +4,12 @@ import { useSidebarContext } from '../../../context/SidebarContext';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import { StyledError } from '../../../styles/styledComponents/FormHelpers';
 import TinyMceEditor from '../../shared/TinyMceEditor';
 import { PostInputs } from '../../../../types/utils/formInputs';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const StyledForm = styled.form`
   display: flex;
@@ -85,6 +85,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
 
   const handleErrors = useErrorHandler();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [submitError, setSubmitError] = useState<string>('');
 
@@ -103,7 +104,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
 
   const [isPublished, setIsPublished] = useState<boolean>(true);
   const onSubmit = async (formData: PostInputs) => {
-    if (!user) return navigate('/login');
+    if (!user) return navigate('/login', { state: { from: pathname } });
 
     const data = { ...formData, published: isPublished };
     const method = post?._id ? 'PUT' : 'POST';

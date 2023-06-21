@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { styled } from 'styled-components';
 import { useUserContext } from '../../context/UserContext';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const StyledFollowButton = styled.button`
   font-size: 0.8rem;
@@ -21,7 +21,9 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
   const { id } = useParams();
   const { user } = useUserContext();
   const handleErrors = useErrorHandler();
+
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const isFollowing = useMemo(() => {
     return followers.some((followerId) => followerId === user?._id);
@@ -30,7 +32,7 @@ const Follow = ({ followers, setFollowerCount, userId }: Props) => {
   const [isFollowingState, setIsFollowingState] = useState(isFollowing);
 
   const handleClickFollowButton = async () => {
-    if (!user) return navigate('/login');
+    if (!user) return navigate('/login', { state: { from: pathname } });
 
     const res = await fetch(
       `${import.meta.env.VITE_API_URL}/users/${userId || id}/${

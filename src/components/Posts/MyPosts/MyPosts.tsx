@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../../types/post';
 import { useUserContext } from '../../../context/UserContext';
 import EditPostsView from '../../shared/EditPostsView';
@@ -9,9 +9,7 @@ const MyPosts = () => {
   const { user } = useUserContext();
 
   const [myPosts, setMyPosts] = useState<undefined | IPost[]>(undefined);
-  const postCount = useMemo(() => {
-    return myPosts?.length ?? 0;
-  }, [myPosts]);
+  const [postCount, setPostCount] = useState<number>(0);
 
   const itemsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
@@ -24,8 +22,12 @@ const MyPosts = () => {
           user._id
         }/posts?limit=${itemsPerPage}&offset=${offset}`,
       );
-      const { posts } = await res.json();
+      const {
+        posts,
+        meta: { total },
+      } = await res.json();
       setMyPosts(posts);
+      setPostCount(total);
     };
     fetchMyPosts();
   }, [user, offset]);

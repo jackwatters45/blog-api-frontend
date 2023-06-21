@@ -6,7 +6,7 @@ import {
   DeleteUserContainer,
   StyledDeleteAccountButton,
 } from '../../../styles/styledComponents/FormHelpers';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 interface Props {
   userId: string;

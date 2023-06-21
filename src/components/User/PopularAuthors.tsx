@@ -4,7 +4,7 @@ import {
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import { styled } from 'styled-components';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IPopularAuthors } from '../../../types/user';
 import Users from './Users';
 import useSelect, {
@@ -45,7 +45,7 @@ const UserContainer = styled.div`
 
 const PopularAuthors = () => {
   const [users, setUsers] = useState<undefined | IPopularAuthors[]>(undefined);
-  const userCount = useMemo(() => users?.length ?? 0, [users?.length]);
+  const [userCount, setUserCount] = useState<number>(0);
 
   const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
   const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
@@ -58,8 +58,12 @@ const PopularAuthors = () => {
           import.meta.env.VITE_API_URL
         }/users/popular?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const { users } = await res.json();
+      const {
+        users,
+        meta: { total },
+      } = await res.json();
       setUsers(users);
+      setUserCount(total);
     };
     fetchAuthorsPopular();
   }, [timeRange, itemsPerPage, offset]);

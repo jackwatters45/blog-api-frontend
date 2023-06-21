@@ -1,8 +1,8 @@
 import { useUserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 interface Props {
   hasUserLiked: boolean;
@@ -36,10 +36,12 @@ const Likes = ({
 }: Props) => {
   const { user } = useUserContext();
   const handleErrors = useErrorHandler();
+
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleClickLike = async () => {
-    if (!user) return navigate('/login');
+    if (!user) return navigate('/login', { state: { from: pathname } });
     const res = await fetch(
       `${import.meta.env.VITE_API_URL}/posts/${_id}/${!hasUserLiked ? 'like' : 'unlike'}`,
       {

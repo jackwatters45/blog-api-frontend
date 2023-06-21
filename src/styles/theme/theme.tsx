@@ -13,7 +13,7 @@ export const lightTheme = {
     box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px, rgb(0 0 0 / 10%) 0px 1px 2px;
   `,
 
-  hover: css`
+  hoverStyle: css`
     &:hover {
       background-color: rgba(255, 255, 255, 0.055);
       border-radius: 4px;

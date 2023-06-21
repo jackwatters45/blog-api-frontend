@@ -7,7 +7,7 @@ import Loading from '../../shared/Loading';
 import { styled } from 'styled-components';
 import Activity from '../ActivityColumn/Activity';
 import AboutDeleted from './AboutDeleted';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const StyledUserContainer = styled.main`
   display: flex;

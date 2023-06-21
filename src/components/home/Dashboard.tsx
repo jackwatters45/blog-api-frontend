@@ -3,12 +3,12 @@ import Sidebar from './Sidebar/Sidebar';
 import { StyledMain } from '../../styles/styledComponents/HelperComponents';
 import { styled } from 'styled-components';
 import { Pagination, usePagination } from '../../custom/usePagination';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import Loading from '../shared/Loading';
 import MenuOptions from '../shared/MenuOptions';
 import { useUserContext } from '../../context/UserContext';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const PostsContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Dashboard = () => {
   const { user } = useUserContext();
 
   const [posts, setPosts] = useState<IPost[] | undefined>(undefined);
-  const postCount = useMemo(() => posts?.length ?? 0, [posts?.length]);
+  const [postCount, setPostCount] = useState<number>(0);
 
   const postsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(postsPerPage, postCount);
@@ -47,8 +47,12 @@ const Dashboard = () => {
         return;
       }
 
-      const { posts } = await res.json();
+      const {
+        posts,
+        meta: { total },
+      } = await res.json();
       setPosts(posts);
+      setPostCount(total);
     };
     fetchPosts();
   }, [offset, selectedOption, handleErrors]);

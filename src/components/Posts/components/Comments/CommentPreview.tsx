@@ -36,7 +36,7 @@ interface Props {
 }
 
 const CommentPreview = ({ comment }: Props) => {
-  const { content, updatedAt, author: commenter, post } = comment;
+  const { content, updatedAt, author: commenter, post, _id } = comment;
   const {
     _id: commenterId,
     firstName: commenterFirstName,
@@ -60,14 +60,16 @@ const CommentPreview = ({ comment }: Props) => {
           <StyledDeleted>{authorName ?? 'Deleted'}</StyledDeleted>
         )}
         <p>•</p>
-        <Link to={`/poss/${postId}`}>{formatDate(updatedAt)}</Link>
+        <Link to={`/post/${postId}`} state={{ scrollToComment: _id }}>
+          {formatDate(updatedAt)}
+        </Link>
       </StyledDateAuthorDiv>
-      <Link to={`/post/${postId}`}>
+      <Link to={`/post/${postId}`} state={{ scrollToComment: _id }}>
         <StyledContent>{formatContent(content)}</StyledContent>
       </Link>
       <StyledPostInfo>
         On post:{' '}
-        <Link to={`/post/${postId}`}>
+        <Link to={`/post/${postId}`} state={{ scrollToComment: _id }}>
           {title} by {posterFirstName} {posterLastName}
         </Link>
       </StyledPostInfo>

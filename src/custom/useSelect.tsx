@@ -86,3 +86,16 @@ export const getItemsPerPageOptions = (itemName: string) => {
     ],
   };
 };
+
+export const getSortOptions = (itemName: string) => {
+  return {
+    id: 'sort',
+    label: itemName !== '' ? `Sort ${itemName}s by:` : 'Sort by:',
+    options: [
+      { value: 'newest', label: 'Newest' },
+      { value: 'likes', label: 'Most Likes' },
+      { value: 'dislikes', label: 'Most Dislikes' },
+      { value: 'replies', label: 'Most Replies' },
+    ],
+  };
+};

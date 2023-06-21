@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { useUserContext } from '../../context/UserContext';
 import UserForm from '../shared/UserForms/UserForm';
 import { UserInputs } from '../../../types/utils/formInputs';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import {
   StyledFormContainer,
   StyledH1Centered,
 } from '../../styles/styledComponents/FormHelpers';
 import ChangePasswordForm from '../shared/UserForms/ChangePasswordForm';
 import DeleteUserSection from '../shared/UserForms/DeleteUser';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const EditProfile = () => {
   const { user } = useUserContext();
   const handleErrors = useErrorHandler();
+  const { pathname } = useLocation();
 
   const [changeError, setChangeError] = useState<string>('');
   const [confirmText, setConfirmText] = useState<string>('');
@@ -51,7 +52,7 @@ const EditProfile = () => {
       <DeleteUserSection userId={user._id} isOwnProfile={true} />
     </StyledFormContainer>
   ) : (
-    <Navigate to={'/login'} />
+    <Navigate to={'/login'} state={{ from: pathname }} />
   );
 };
 

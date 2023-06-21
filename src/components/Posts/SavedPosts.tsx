@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import { useUserContext } from '../../context/UserContext';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 import Posts from './Posts';
 import Loading from '../shared/Loading';
 import {
@@ -19,7 +19,7 @@ const SavedPosts = () => {
   const [isFetched, setIsFetched] = useState(false);
 
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
-  const postCount = useMemo(() => posts?.length ?? 0, [posts]);
+  const [postCount, setPostCount] = useState<number>(0);
 
   const { offset, ...paginationProps } = usePagination('25', postCount);
 
@@ -39,8 +39,12 @@ const SavedPosts = () => {
           return;
         }
 
-        const savedPosts = await res.json();
+        const {
+          savedPosts,
+          meta: { total },
+        } = await res.json();
         setPosts(savedPosts);
+        setPostCount(total);
         setIsFetched(true);
       } catch (err) {
         console.log(err);

@@ -5,7 +5,7 @@ import {
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
 import Posts from './Posts';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import useSelect, {
   getItemsPerPageOptions,
@@ -27,7 +27,7 @@ const PostsContainer = styled.div`
 
 const PopularPosts = () => {
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
-  const postCount = useMemo(() => posts?.length, [posts]);
+  const [postCount, setPostCount] = useState<number>(0);
 
   const [timeRange, TimeRangeSelect] = useSelect('lastWeek');
   const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
@@ -40,8 +40,12 @@ const PopularPosts = () => {
           import.meta.env.VITE_API_URL
         }/posts/popular?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const { posts } = await res.json();
+      const {
+        posts,
+        meta: { total },
+      } = await res.json();
       setPosts(posts);
+      setPostCount(total);
     };
     fetchPostsPopular();
   }, [timeRange, itemsPerPage, offset]);

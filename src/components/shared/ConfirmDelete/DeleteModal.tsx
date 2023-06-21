@@ -1,7 +1,7 @@
 import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { styled } from 'styled-components';
 import useLogout from '../../Auth/Logout';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const StyledModal = styled.div`
   position: absolute;

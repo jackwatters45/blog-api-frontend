@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
   gap: 2rem;
   margin: 1rem 0;
   padding: 2rem 0;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
@@ -22,6 +23,11 @@ const StyledImg = styled.img`
 `;
 
 const LeftColumn = styled(Link)`
+  display: flex;
+  gap: 2rem;
+`;
+
+const AuthorInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -48,17 +54,19 @@ const Profile = ({ user }: Props) => {
   const avatarUrl = user?.avatarUrl as string;
   return (
     <Container>
-      {avatarUrl && (
-        <StyledImg
-          src={avatarUrl}
-          style={{ height: '100px', width: '100px' }}
-          alt="avatar"
-        />
-      )}
       <LeftColumn to={`/user/${_id}`}>
-        <h3>Written by {firstName}</h3>
-        <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
-        {description && <StyledDescription>{description}</StyledDescription>}
+        {avatarUrl && (
+          <StyledImg
+            src={avatarUrl}
+            style={{ height: '100px', width: '100px' }}
+            alt="avatar"
+          />
+        )}
+        <AuthorInfo>
+          <h3>Written by {firstName}</h3>
+          <StyledFollowerCount>{followerCount} Followers</StyledFollowerCount>
+          {description && <StyledDescription>{description}</StyledDescription>}
+        </AuthorInfo>
       </LeftColumn>
       <Follow
         followers={followers as string[]}

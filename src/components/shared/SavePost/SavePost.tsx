@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../../context/UserContext';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 import SavePostButton from './SavePostButton';
 
 interface Props {

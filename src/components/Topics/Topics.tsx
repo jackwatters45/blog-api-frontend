@@ -6,7 +6,7 @@ import {
   TopicButtonLarge,
 } from '../../styles/styledComponents/HelperComponents';
 import Sidebar from '../Home/Sidebar/Sidebar';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiCloseBox } from '@mdi/js';
 import ITopic from '../../../types/topic';
@@ -34,9 +34,7 @@ const Topics = () => {
   const [selectedTopic, setSelectedTopic] = useState<ITopic | undefined>(undefined);
 
   const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
-  const postCount = useMemo(() => {
-    return posts?.length ?? 0;
-  }, [posts]);
+  const [postCount, setPostCount] = useState<number>(0);
 
   const [itemsPerPage, ItemsPerPageSelect] = useSelect('10');
   const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
@@ -48,9 +46,12 @@ const Topics = () => {
           import.meta.env.VITE_API_URL
         }/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const data = await res.json();
-      const { posts } = data;
+      const {
+        posts,
+        meta: { total },
+      } = await res.json();
       setPosts(posts);
+      setPostCount(total);
     };
 
     const fetchTopic = async () => {
@@ -59,20 +60,18 @@ const Topics = () => {
           import.meta.env.VITE_API_URL
         }/topics/${id}/posts/?timeRange=${timeRange}&limit=${itemsPerPage}&offset=${offset}`,
       );
-      const data = await res.json();
-      const { posts, topic } = data;
-
+      const {
+        posts,
+        topic,
+        meta: { total },
+      } = await res.json();
       setSelectedTopic(topic);
       setPosts(posts);
+      setPostCount(total);
     };
 
-    if (id) {
-      console.log('fetching topic');
-      fetchTopic();
-    } else {
-      console.log('fetching posts');
-      fetchPosts();
-    }
+    if (id) fetchTopic();
+    else fetchPosts();
   }, [id, timeRange, itemsPerPage, offset]);
 
   return posts ? (

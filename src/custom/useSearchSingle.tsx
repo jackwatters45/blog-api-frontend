@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction, useMemo, useState } from 'react';
-import useErrorHandler from '../components/Errors/useErrorHandler';
+import useErrorHandler from './useErrorHandler';
 
 type UseSearchSingleCategoryReturn<T> = [
   T[],

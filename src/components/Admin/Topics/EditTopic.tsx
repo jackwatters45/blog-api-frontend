@@ -9,7 +9,7 @@ import {
 import TopicForm from './TopicForm';
 import { TopicInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const EditTopic = () => {
   const { id } = useParams();

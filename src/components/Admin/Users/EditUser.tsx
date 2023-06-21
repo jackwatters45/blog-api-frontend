@@ -11,7 +11,7 @@ import { UserInputs } from '../../../../types/utils/formInputs';
 import Loading from '../../shared/Loading';
 import ChangePasswordForm from '../../shared/UserForms/ChangePasswordForm';
 import DeleteUserSection from '../../shared/UserForms/DeleteUser';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const EditUser = () => {
   const { id } = useParams();

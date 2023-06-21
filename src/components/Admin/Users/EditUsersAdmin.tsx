@@ -1,15 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditUsers from './EditUsers';
 import { IAdminUser } from '../../../../types/user';
 import Loading from '../../shared/Loading';
 import { usePagination } from '../../../custom/usePagination';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const EditUsersAdmin = () => {
   const handleErrors = useErrorHandler();
 
   const [users, setUsers] = useState<undefined | IAdminUser[]>(undefined);
-  const userCount = useMemo(() => users?.length ?? 0, [users?.length]);
+  const [userCount, setUserCount] = useState<number>(0);
 
   const itemsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(itemsPerPage, userCount);
@@ -23,13 +23,18 @@ const EditUsersAdmin = () => {
           credentials: 'include',
         },
       );
+
       if (!res.ok) {
         handleErrors(res);
         return;
       }
-      const data = await res.json();
-      const { users } = data;
+
+      const {
+        users,
+        meta: { total },
+      } = await res.json();
       setUsers(users);
+      setUserCount(total);
     };
     fetchUsers();
   }, [offset, handleErrors]);

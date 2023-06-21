@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { UserInputs } from '../../../../types/utils/formInputs';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 const CreateUser = () => {
   const handleErrors = useErrorHandler();

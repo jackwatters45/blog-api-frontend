@@ -4,11 +4,11 @@ import IPost from '../../../../types/post';
 import { styled } from 'styled-components';
 import { useUserContext } from '../../../context/UserContext';
 import IComment from '../../../../types/comment';
-import CommentsSection from '../components/Comments/CommentsSection';
 import PostInfo from './PostInfo';
 import Profile from '../components/Profile';
 import { PostContentDefault } from '../../../styles/styledComponents/PostContentComponents';
 import Loading from '../../shared/Loading';
+import CommentsContainer from '../components/Comments/CommentsContainer';
 
 const StyledPostContainer = styled.main`
   display: flex;
@@ -37,13 +37,13 @@ const Post = () => {
   }, [id, user]);
 
   if (!post) return <Loading />;
-  const { content, comments, author, _id } = post;
+  const { content, comments, author } = post;
   return (
     <StyledPostContainer>
       <PostInfo post={post} />
       <PostContentDefault contentHtml={content} />
       {!author?.isDeleted && <Profile user={author} />}
-      <CommentsSection comments={comments as IComment[]} postId={_id} />
+      <CommentsContainer initialComments={comments as IComment[]} />
     </StyledPostContainer>
   );
 };

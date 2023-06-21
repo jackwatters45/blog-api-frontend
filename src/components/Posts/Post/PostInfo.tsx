@@ -73,7 +73,7 @@ const PostInfo = ({
       <BottomRowInfo>
         {topic && <TopicButton to={topic._id}>{topic?.name}</TopicButton>}
         <SocialContainer>
-          <CommentsButton commentsCount={comments?.length} />
+          <CommentsButton postId={_id} commentsCount={comments?.length} />
           <Likes {...useLikesProps} _id={_id} />
           <SavePost />
         </SocialContainer>

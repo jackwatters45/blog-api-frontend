@@ -1,15 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import EditPostsView from '../shared/EditPostsView';
 import Loading from '../shared/Loading';
 import { usePagination } from '../../custom/usePagination';
-import useErrorHandler from '../Errors/useErrorHandler';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const EditPostsAdmin = () => {
   const handleResponse = useErrorHandler();
-  const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
 
-  const postCount = useMemo(() => posts?.length ?? 0, [posts?.length]);
+  const [posts, setPosts] = useState<undefined | IPost[]>(undefined);
+  const [postCount, setPostCount] = useState<number>(0);
+
   const itemsPerPage = '25';
   const { offset, ...paginationProps } = usePagination(itemsPerPage, postCount);
 
@@ -29,8 +30,12 @@ const EditPostsAdmin = () => {
         return;
       }
 
-      const { posts } = await res.json();
+      const {
+        posts,
+        meta: { total },
+      } = await res.json();
       setPosts(posts);
+      setPostCount(total);
     };
     fetchPosts();
   }, [offset, handleResponse]);

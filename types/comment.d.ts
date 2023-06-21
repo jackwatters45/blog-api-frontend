@@ -8,6 +8,11 @@ interface IComment {
   createdAt: string;
   updatedAt: string;
   post: Partial<IPost>;
+  likes: string[];
+  dislikes: string[];
+  isDeleted: boolean;
+  replies: IComment[];
+  parentComment: string | null;
 }
 
 export default IComment;

@@ -35,7 +35,6 @@ const PostPreviewCard = ({ post, isAdminView }: Props) => {
         {topic && <Link to={`/topic/${topic._id}`}>in {topic.name}</Link>}
       </StyledTitleTopic>
       <StyledUpdated>Last Updated: {formatDate(updatedAt)}</StyledUpdated>
-      {/* {isAdminView && ( */}
       <StyledAuthor>
         <p>Written by</p>
         {author && !isDeleted ? (
@@ -46,10 +45,9 @@ const PostPreviewCard = ({ post, isAdminView }: Props) => {
           <StyledDeletedAuthor>Deleted</StyledDeletedAuthor>
         )}
       </StyledAuthor>
-      {/* )} */}
       <Buttons>
         <Likes _id={_id} {...likesProps} />
-        <CommentsButton commentsCount={comments?.length ?? 0} />
+        <CommentsButton postId={_id} commentsCount={comments?.length ?? 0} />
       </Buttons>
       <ButtonOptions>
         {isAdminView && (

@@ -1,44 +1,24 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { styled } from 'styled-components';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import IComment from '../../../../../types/comment';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { useUserContext } from '../../../../context/UserContext';
-import useErrorHandler from '../../../Errors/useErrorHandler';
+import useErrorHandler from '../../../../custom/useErrorHandler';
+import {
+  StyledButton,
+  StyledForm,
+  StyledInput,
+} from '../../../../styles/styledComponents/Comment';
+import { useParams } from 'react-router-dom';
+import { useCommentsContext } from '../../../../context/CommentsContext';
 
-const StyledForm = styled.form`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr auto;
-  margin: 1rem 0.5rem;
-  border-radius: 0.25rem;
-  border: 0.5px solid ${({ theme }) => theme.colors.textPrimary};
-  box-shadow: ${({ theme }) => theme.boxShadow};
-`;
-
-const StyledInput = styled.input`
-  box-shadow: none;
-  padding: 0.5rem;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  background: none;
-`;
-
-const StyledButton = styled.input`
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  border-left: 1px solid ${({ theme }) => theme.colors.textPrimary};
-  border-radius: 0;
-  padding: 0.5rem 1rem;
-`;
-
-interface Props {
-  setComments: Dispatch<SetStateAction<IComment[] | undefined>>;
-  postId: string;
-}
-
-const AddComment = ({ setComments, postId }: Props) => {
+const AddComment = () => {
   const handleErrors = useErrorHandler();
   const { user } = useUserContext();
+  const { id: postId } = useParams();
+
+  const { setComments, setTotalComments, setTotalParentComments } = useCommentsContext();
+
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const [comment, setComment] = useState('');
@@ -46,20 +26,32 @@ const AddComment = ({ setComments, postId }: Props) => {
     setComment(e.target.value);
   };
 
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!user) return navigate('/login');
+    if (!user) return navigate('/login', { state: { from: pathname } });
 
     if (!comment.trim()) return;
+
+    const author = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      _id: user._id,
+      avatarUrl: user.avatarUrl,
+    };
 
     const newComment = {
       _id: 'tempId',
       content: comment,
-      author: user,
+      author,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       post: postId,
+      likes: [],
+      dislikes: [],
+      isDeleted: false,
+      replies: [],
+      parentComment: null,
     } as IComment;
 
     setComments((prev) => [...(prev as IComment[]), newComment]);
@@ -84,10 +76,15 @@ const AddComment = ({ setComments, postId }: Props) => {
       }
 
       const realComment = await res.json();
-      setComments((prev) =>
-        prev?.map((comment) => (comment._id === 'temporary-id' ? realComment : comment)),
-      );
+
+      setComments((prev) => {
+        return prev?.map((comment) => {
+          return comment._id === 'tempId' ? realComment : comment;
+        });
+      });
       setComment('');
+      setTotalComments((prev) => prev + 1);
+      setTotalParentComments((prev) => prev + 1);
     } catch (err) {
       console.log(err);
     }

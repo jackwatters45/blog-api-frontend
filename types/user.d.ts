@@ -40,8 +40,8 @@ interface IUser {
   isDeleted: boolean;
   savedPosts: string[];
   description: string;
+  avatarUrl: string;
   deletedData?: DeletedData;
-  avatarUrl?: string;
 }
 
 export default IUser;

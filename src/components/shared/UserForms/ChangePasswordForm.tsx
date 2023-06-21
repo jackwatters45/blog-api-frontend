@@ -12,8 +12,8 @@ import {
 } from '../../../styles/styledComponents/FormHelpers';
 import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
-import { useNavigate, useParams } from 'react-router-dom';
-import useErrorHandler from '../../Errors/useErrorHandler';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import useErrorHandler from '../../../custom/useErrorHandler';
 
 interface PasswordInputs {
   password: string;
@@ -37,6 +37,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
 
   const handleErrors = useErrorHandler();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<string>('');
@@ -44,7 +45,7 @@ const ChangePasswordForm = ({ isOwnProfile }: Props) => {
   const onSubmit: SubmitHandler<PasswordInputs> = async (data) => {
     let userId;
     if (isOwnProfile) {
-      if (!user) return navigate('/login');
+      if (!user) return navigate('/login', { state: { from: pathname } });
       userId = user._id;
     } else {
       if (!id) return navigate('/admin/users');

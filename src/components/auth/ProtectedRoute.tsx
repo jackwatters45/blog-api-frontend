@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ReactElement } from 'react';
 
 interface Props {
@@ -12,7 +12,10 @@ const ProtectedRoute = ({
   redirectPath = '/unauthorized',
   children,
 }: Props) => {
-  if (!isAllowed) return <Navigate to={redirectPath} replace />;
+  const { pathname } = useLocation();
+
+  if (!isAllowed)
+    return <Navigate to={redirectPath} state={{ from: pathname }} replace />;
 
   return children ? children : <Outlet />;
 };

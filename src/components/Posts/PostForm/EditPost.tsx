@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import PostForm from './PostForm';
 import { useUserContext } from '../../../context/UserContext';
@@ -8,6 +8,8 @@ import Loading from '../../shared/Loading';
 const EditPost = () => {
   const { id } = useParams();
   const { user } = useUserContext();
+
+  const { pathname } = useLocation();
 
   const [post, setPost] = useState<IPost | undefined>(undefined);
   useEffect(() => {
@@ -21,7 +23,7 @@ const EditPost = () => {
   }, [id]);
 
   if (user?.userType !== 'admin' && user?._id !== post?.author._id)
-    return <Navigate to={'/unauthorized'} />;
+    return <Navigate to={'/unauthorized'} state={{ from: pathname }} />;
 
   return post ? <PostForm post={post} pageTitle={'Edit Post'} /> : <Loading />;
 };
