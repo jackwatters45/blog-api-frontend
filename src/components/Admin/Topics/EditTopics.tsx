@@ -8,10 +8,10 @@ import {
   StyledCreateLink,
   StyledHeader,
 } from '../../../styles/styledComponents/AdminCardComponents';
-import Filter from '../../shared/Filter/Filter';
-import { topicFilterFunction } from '../../shared/Filter/filterFunctions';
+import Filter from '../../Shared/Filter/Filter';
+import { topicFilterFunction } from '../../Shared/Filter/filterFunctions';
 import EditTopicCard from './EditTopicCard';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 
 interface Props {
   topics: ITopic[];

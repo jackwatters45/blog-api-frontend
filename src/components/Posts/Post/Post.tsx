@@ -7,7 +7,7 @@ import IComment from '../../../../types/comment';
 import PostInfo from './PostInfo';
 import Profile from '../Profile';
 import { PostContentDefault } from '../../../styles/styledComponents/PostContentComponents';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 import CommentsContainer from '../Comments/CommentsContainer';
 
 const StyledPostContainer = styled.main`

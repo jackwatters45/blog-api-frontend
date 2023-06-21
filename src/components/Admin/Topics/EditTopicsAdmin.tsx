@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ITopic from '../../../../types/topic';
 import EditTopics from './EditTopics';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 
 const EditTopicsAdmin = () => {
   const [topics, setTopics] = useState<undefined | ITopic[]>(undefined);

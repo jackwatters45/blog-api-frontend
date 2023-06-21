@@ -8,7 +8,7 @@ import {
   StyledHeader,
 } from '../../../styles/styledComponents/AdminCardComponents';
 import { IAdminUser } from '../../../../types/user';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 import { PaginateProps, Pagination } from '../../../custom/usePagination';
 import { styled } from 'styled-components';
 import { useSearchSingleCategory } from '../../../custom/useSearchSingle';

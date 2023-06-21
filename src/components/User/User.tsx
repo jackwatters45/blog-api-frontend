@@ -6,7 +6,7 @@ import IPost from '../../../types/post.d';
 import About from './AboutColumn/About';
 import Activity from './ActivityColumn/Activity';
 import IComment from '../../../types/comment.d';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 import NotFoundPage from '../Errors/NotFoundPage';
 import { useUserContext } from '../../context/UserContext';
 

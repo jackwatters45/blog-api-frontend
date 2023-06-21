@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useUserContext } from '../../context/UserContext';
-import UserForm from '../shared/UserForms/UserForm';
+import UserForm from '../Shared/UserForms/UserForm';
 import { UserInputs } from '../../../types/utils/formInputs';
 import { Navigate, useLocation } from 'react-router-dom';
 import {
   StyledFormContainer,
   StyledH1Centered,
 } from '../../styles/styledComponents/AuthStyledComponents';
-import ChangePasswordForm from '../shared/UserForms/ChangePasswordForm';
-import DeleteUserSection from '../shared/UserForms/DeleteUser';
+import ChangePasswordForm from '../Shared/UserForms/ChangePasswordForm';
+import DeleteUserSection from '../Shared/UserForms/DeleteUser';
 import useErrorHandler from '../../custom/useErrorHandler';
 
 const EditProfile = () => {

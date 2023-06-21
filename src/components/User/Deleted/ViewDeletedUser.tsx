@@ -3,7 +3,7 @@ import IUser from '../../../../types/user';
 import IComment from '../../../../types/comment';
 import IPost from '../../../../types/post';
 import { useParams } from 'react-router-dom';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 import { styled } from 'styled-components';
 import Activity from '../ActivityColumn/Activity';
 import AboutDeleted from './AboutDeleted';

@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import IComment from '../../../../../types/comment';
 import { useUserContext } from '../../../../context/UserContext';
 import { Link, useParams } from 'react-router-dom';
-import { formatDate } from '../../../shared/formattingHelpers';
+import { formatDate } from '../../../Shared/formattingHelpers';
 import CommentOptionsButton from './CommentOptions/CommentOptionsButton';
 import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import useErrorHandler from '../../../../custom/useErrorHandler';

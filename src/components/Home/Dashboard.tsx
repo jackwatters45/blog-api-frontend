@@ -5,8 +5,8 @@ import { styled } from 'styled-components';
 import { Pagination, usePagination } from '../../custom/usePagination';
 import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
-import Loading from '../shared/Loading';
-import MenuOptions from '../shared/MenuOptions';
+import Loading from '../Shared/Loading';
+import MenuOptions from '../Shared/MenuOptions';
 import { useUserContext } from '../../context/UserContext';
 import useErrorHandler from '../../custom/useErrorHandler';
 

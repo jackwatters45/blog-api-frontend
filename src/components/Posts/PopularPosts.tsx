@@ -13,7 +13,7 @@ import useSelect, {
 } from '../../custom/useSelect';
 import { styled } from 'styled-components';
 import { usePagination, Pagination } from '../../custom/usePagination';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 import useErrorHandler from '../../custom/useErrorHandler';
 
 const Selects = styled.div`

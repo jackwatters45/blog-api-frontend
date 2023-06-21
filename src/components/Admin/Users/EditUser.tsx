@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import UserForm from '../../shared/UserForms/UserForm';
+import UserForm from '../../Shared/UserForms/UserForm';
 import {
   StyledFormContainer,
   StyledH1Centered,
@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import IUser from '../../../../types/user';
 import { UserInputs } from '../../../../types/utils/formInputs';
-import Loading from '../../shared/Loading';
-import ChangePasswordForm from '../../shared/UserForms/ChangePasswordForm';
-import DeleteUserSection from '../../shared/UserForms/DeleteUser';
+import Loading from '../../Shared/Loading';
+import ChangePasswordForm from '../../Shared/UserForms/ChangePasswordForm';
+import DeleteUserSection from '../../Shared/UserForms/DeleteUser';
 import useErrorHandler from '../../../custom/useErrorHandler';
 
 const EditUser = () => {

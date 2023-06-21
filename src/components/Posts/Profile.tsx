@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import IUser from '../../../types/user';
-import Follow from '../shared/Follow';
+import Follow from '../Shared/Follow';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

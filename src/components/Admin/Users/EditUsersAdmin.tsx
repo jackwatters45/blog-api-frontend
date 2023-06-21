@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import EditUsers from './EditUsers';
 import { IAdminUser } from '../../../../types/user';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 import { usePagination } from '../../../custom/usePagination';
 import useErrorHandler from '../../../custom/useErrorHandler';
 

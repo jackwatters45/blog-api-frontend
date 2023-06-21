@@ -9,7 +9,7 @@ import {
   StyledSection,
   StyledUsername,
 } from '../../../styles/styledComponents/AboutComponents';
-import { formatDate } from '../../shared/formattingHelpers';
+import { formatDate } from '../../Shared/formattingHelpers';
 import IUser, { DeletedData } from '../../../../types/user';
 import Following from '../AboutColumn/Following';
 import { Link } from 'react-router-dom';

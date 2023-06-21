@@ -3,15 +3,15 @@ import IPost from '../../../types/post';
 import { useUserContext } from '../../context/UserContext';
 import useErrorHandler from '../../custom/useErrorHandler';
 import Posts from './Posts';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 import {
   AdminContainer,
   FilterContainer,
 } from '../../styles/styledComponents/AdminCardComponents';
-import Filter from '../shared/Filter/Filter';
+import Filter from '../Shared/Filter/Filter';
 import { Pagination, usePagination } from '../../custom/usePagination';
-import { postFilterFunction } from '../shared/Filter/filterFunctions';
-import { getPostFilterOptions } from '../shared/Filter/filterOptions';
+import { postFilterFunction } from '../Shared/Filter/filterFunctions';
+import { getPostFilterOptions } from '../Shared/Filter/filterOptions';
 
 const SavedPosts = () => {
   const handleErrors = useErrorHandler();

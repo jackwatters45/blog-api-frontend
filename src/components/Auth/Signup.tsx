@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import UserForm from '../shared/UserForms/UserForm';
+import UserForm from '../Shared/UserForms/UserForm';
 import { SubmitHandler } from 'react-hook-form';
 import { useUserContext } from '../../context/UserContext';
 import { useState } from 'react';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import IUser from '../../../../../types/user';
 import { styled } from 'styled-components';
-import Follow from '../../../shared/Follow';
+import Follow from '../../../Shared/Follow';
 import { useUserContext } from '../../../../context/UserContext';
 
 const Container = styled.div`

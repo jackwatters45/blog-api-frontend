@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IPopularAuthors } from '../../../types/user';
 import { styled } from 'styled-components';
-import Follow from '../shared/Follow';
+import Follow from '../Shared/Follow';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`

@@ -1,15 +1,15 @@
 import { styled } from 'styled-components';
 import IPost, { ILike } from '../../../types/post';
-import { formatContent, formatDate } from '../shared/formattingHelpers';
+import { formatContent, formatDate } from '../Shared/formattingHelpers';
 import { Link } from 'react-router-dom';
-import Likes from '../shared/Likes';
+import Likes from '../Shared/Likes';
 import { useUserContext } from '../../context/UserContext';
 import useLikes from '../../custom/useLikes';
-import CommentsButton from '../shared/CommentsButton';
+import CommentsButton from '../Shared/CommentsButton';
 import { PostContentPreview } from '../../styles/styledComponents/PostContentComponents';
 import { useContext, useMemo } from 'react';
 import { SelectedUserNameContext } from '../../context/SelectedUserNameContext';
-import SavePost from '../shared/SavePost/SavePost';
+import SavePost from '../Shared/SavePost/SavePost';
 
 const Container = styled.div`
   padding: 2rem 0;

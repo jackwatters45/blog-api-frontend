@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Login from './components/Auth/Login.tsx';
-import Signup from './components/Auth/Signup.tsx';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
 import Dashboard from './components/Home/Dashboard';
 import Post from './components/Posts/Post/Post';
 import User from './components/User/User';
@@ -25,7 +25,7 @@ import { useUserContext } from './context/UserContext';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ViewDeletedUser from './components/User/Deleted/ViewDeletedUser';
 import { useEffect, useState } from 'react';
-import Loading from './components/shared/Loading';
+import Loading from './components/Shared/Loading';
 import SavedPosts from './components/Posts/SavedPosts';
 import SearchResults from './components/Search/SearchResults';
 

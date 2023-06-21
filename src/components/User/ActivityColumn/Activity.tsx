@@ -1,7 +1,7 @@
 import IPost from '../../../../types/post.d';
 import { styled } from 'styled-components';
 import ActivityContent from './ActivityContent';
-import MenuOptions from '../../shared/MenuOptions';
+import MenuOptions from '../../Shared/MenuOptions';
 import IComment from '../../../../types/comment.d';
 import { SelectedUserNameProvider } from '../../../context/SelectedUserNameContext';
 

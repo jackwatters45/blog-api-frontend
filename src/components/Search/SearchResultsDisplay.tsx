@@ -6,7 +6,7 @@ import {
 } from '../../styles/styledComponents/AdminCardComponents';
 import { styled } from 'styled-components';
 import { TopicButtonLarge } from '../../styles/styledComponents/HelperComponents';
-import PostPreviewCard from '../shared/PostPreviewCard';
+import PostPreviewCard from '../Shared/PostPreviewCard';
 import IPost from '../../../types/post';
 import EditUserCard from '../Admin/Users/EditUserCard';
 import useQuery from '../../custom/useQuery';

@@ -2,7 +2,7 @@ import {
   StyledFormContainer,
   StyledH1Centered,
 } from '../../../styles/styledComponents/AuthStyledComponents';
-import UserForm from '../../shared/UserForms/UserForm';
+import UserForm from '../../Shared/UserForms/UserForm';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';

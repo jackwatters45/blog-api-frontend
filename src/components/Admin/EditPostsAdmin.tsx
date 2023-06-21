@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
-import EditPostsView from '../shared/EditPostsView';
-import Loading from '../shared/Loading';
+import EditPostsView from '../Shared/EditPostsView';
+import Loading from '../Shared/Loading';
 import { usePagination } from '../../custom/usePagination';
 import useErrorHandler from '../../custom/useErrorHandler';
 

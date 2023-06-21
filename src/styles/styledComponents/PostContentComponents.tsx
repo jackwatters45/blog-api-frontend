@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import PostContent from '../../components/shared/PostContent';
+import PostContent from '../../components/Shared/PostContent';
 
 export const PostContentDefault = styled(PostContent)`
   margin: 2rem 0;

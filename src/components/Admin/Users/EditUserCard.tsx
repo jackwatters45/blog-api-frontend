@@ -7,10 +7,10 @@ import {
   StyledFollowInfo,
   StyledDeleteDate,
 } from '../../../styles/styledComponents/AdminCardComponents';
-import DeleteButton from '../../shared/ConfirmDelete/DeleteButton';
+import DeleteButton from '../../Shared/ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
-import { formatDate } from '../../shared/formattingHelpers';
+import { formatDate } from '../../Shared/formattingHelpers';
 import { IAdminUser } from '../../../../types/user';
 
 interface Props {

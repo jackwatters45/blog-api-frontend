@@ -7,7 +7,7 @@ import { useUserContext } from '../../../context/UserContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import { StyledError } from '../../../styles/styledComponents/AuthStyledComponents';
-import TinyMceEditor from '../../shared/TinyMceEditor';
+import TinyMceEditor from '../../Shared/TinyMceEditor';
 import { PostInputs } from '../../../../types/utils/formInputs';
 import useErrorHandler from '../../../custom/useErrorHandler';
 

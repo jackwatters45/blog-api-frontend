@@ -1,10 +1,6 @@
 import IPost, { ILike } from '../../../types/post';
-import { formatDate } from './formattingHelpers';
-import Likes from './Likes';
 import useLikes from '../../custom/useLikes';
-import CommentsButton from './CommentsButton';
 import { Link } from 'react-router-dom';
-import DeleteButton from './ConfirmDelete/DeleteButton';
 import Icon from '@mdi/react';
 import { mdiDelete, mdiOpenInNew, mdiPencil } from '@mdi/js';
 import { useUserContext } from '../../context/UserContext';
@@ -18,6 +14,10 @@ import {
   StyledDeletedAuthor,
 } from '../../styles/styledComponents/AdminCardComponents';
 import { useMemo } from 'react';
+import Likes from './Likes';
+import DeleteButton from './ConfirmDelete/DeleteButton';
+import CommentsButton from './CommentsButton';
+import { formatDate } from './formattingHelpers';
 
 interface Props {
   post: IPost;

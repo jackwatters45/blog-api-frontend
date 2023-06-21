@@ -1,8 +1,8 @@
 import IUser from '../../../../types/user.d';
-import { formatDate } from '../../shared/formattingHelpers';
+import { formatDate } from '../../Shared/formattingHelpers';
 import { useEffect, useState } from 'react';
 import Following from './Following';
-import Follow from '../../shared/Follow';
+import Follow from '../../Shared/Follow';
 import {
   FollowersContainer,
   RightColumn,

@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import IComment from '../../../../types/comment';
 import { Link } from 'react-router-dom';
 import IUser from '../../../../types/user';
-import { formatContent, formatDate } from '../../shared/formattingHelpers';
+import { formatContent, formatDate } from '../../Shared/formattingHelpers';
 import IPost from '../../../../types/post';
 import { useContext } from 'react';
 import { SelectedUserNameContext } from '../../../context/SelectedUserNameContext';

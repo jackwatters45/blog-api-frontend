@@ -12,7 +12,7 @@ import {
 } from '../../../styles/styledComponents/SidebarComponents';
 import IPost from '../../../../types/post';
 import { Link } from 'react-router-dom';
-import { formatDate } from '../../shared/formattingHelpers';
+import { formatDate } from '../../Shared/formattingHelpers';
 import { useSidebarContext } from '../../../context/SidebarContext';
 
 const PopularPostsSidebar = () => {

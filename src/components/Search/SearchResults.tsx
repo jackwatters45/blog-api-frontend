@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 import SearchResultsDisplay from './SearchResultsDisplay';
 import { ISearchResults } from '../../../types/utils/search';
 import useQuery from '../../custom/useQuery';

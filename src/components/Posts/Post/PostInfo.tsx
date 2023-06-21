@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { formatDate } from '../../shared/formattingHelpers';
+import { formatDate } from '../../Shared/formattingHelpers';
 import { TopicButton } from '../../../styles/styledComponents/HelperComponents';
-import Likes from '../../shared/Likes';
-import CommentsButton from '../../shared/CommentsButton';
+import Likes from '../../Shared/Likes';
+import CommentsButton from '../../Shared/CommentsButton';
 import IPost, { ILike } from '../../../../types/post';
 import useLikes from '../../../custom/useLikes';
 import { useUserContext } from '../../../context/UserContext';
-import SavePost from '../../shared/SavePost/SavePost';
+import SavePost from '../../Shared/SavePost/SavePost';
 
 const StyledPostInfoContainer = styled.div`
   display: flex;

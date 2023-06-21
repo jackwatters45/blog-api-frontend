@@ -8,7 +8,7 @@ import {
 } from '../../../styles/styledComponents/AuthStyledComponents';
 import TopicForm from './TopicForm';
 import { TopicInputs } from '../../../../types/utils/formInputs';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 import useErrorHandler from '../../../custom/useErrorHandler';
 
 const EditTopic = () => {

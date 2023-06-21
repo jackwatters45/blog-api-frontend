@@ -12,7 +12,7 @@ import useSelect, {
   timeRangeOptions,
 } from '../../custom/useSelect';
 import { usePagination, Pagination } from '../../custom/usePagination';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 
 const StyledMain = styled.main`
   display: flex;

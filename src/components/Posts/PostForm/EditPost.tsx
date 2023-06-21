@@ -3,7 +3,7 @@ import { Navigate, useLocation, useParams } from 'react-router-dom';
 import IPost from '../../../../types/post';
 import PostForm from './PostForm';
 import { useUserContext } from '../../../context/UserContext';
-import Loading from '../../shared/Loading';
+import Loading from '../../Shared/Loading';
 
 const EditPost = () => {
   const { id } = useParams();

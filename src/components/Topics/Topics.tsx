@@ -19,7 +19,7 @@ import PostSort from './PostSort';
 import { StyledTopicButton } from '../../styles/styledComponents/TopicComponents';
 import { usePagination, Pagination } from '../../custom/usePagination';
 import { styled } from 'styled-components';
-import Loading from '../shared/Loading';
+import Loading from '../Shared/Loading';
 import useErrorHandler from '../../custom/useErrorHandler';
 
 const PostsContainer = styled.div`
