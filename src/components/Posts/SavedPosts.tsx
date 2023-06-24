@@ -2,16 +2,9 @@ import { useEffect, useState } from 'react';
 import IPost from '../../../types/post';
 import { useUserContext } from '../../context/UserContext';
 import useErrorHandler from '../../custom/useErrorHandler';
-import Posts from './Posts';
 import Loading from '../Shared/Loading';
-import {
-  AdminContainer,
-  FilterContainer,
-} from '../../styles/styledComponents/AdminCardComponents';
-import Filter from '../Shared/Filter/Filter';
-import { Pagination, usePagination } from '../../custom/usePagination';
-import { postFilterFunction } from '../Shared/Filter/filterFunctions';
-import { getPostFilterOptions } from '../Shared/Filter/filterOptions';
+import { usePagination } from '../../custom/usePagination';
+import EditPostsView from '../Shared/EditPostsView';
 
 const SavedPosts = () => {
   const handleErrors = useErrorHandler();
@@ -38,13 +31,9 @@ const SavedPosts = () => {
           handleErrors(res);
           return;
         }
-
-        const {
-          savedPosts,
-          meta: { total },
-        } = await res.json();
+        const { savedPosts, savedPostsCount } = await res.json();
         setPosts(savedPosts);
-        setPostCount(total);
+        setPostCount(savedPostsCount);
         setIsFetched(true);
       } catch (err) {
         console.log(err);
@@ -53,23 +42,13 @@ const SavedPosts = () => {
     fetchPosts();
   }, [user?._id, handleErrors]);
 
-  const [filteredPosts, setFilteredPosts] = useState<IPost[]>(posts ?? []);
-
   return isFetched ? (
-    <AdminContainer>
-      <h1>Saved Posts</h1>
-      <FilterContainer>
-        <Filter<IPost>
-          data={posts as IPost[]}
-          setFilteredData={setFilteredPosts}
-          filterOptions={getPostFilterOptions(true)}
-          filterFunction={postFilterFunction}
-          placeHolder={'Filter Posts...'}
-        />
-      </FilterContainer>
-      <Posts posts={filteredPosts} />
-      <Pagination {...paginationProps} />
-    </AdminContainer>
+    <EditPostsView
+      posts={posts as IPost[]}
+      title={'Saved Posts'}
+      isAdminView={true}
+      paginationProps={paginationProps}
+    />
   ) : (
     <Loading />
   );
