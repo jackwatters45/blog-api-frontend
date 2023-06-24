@@ -8,12 +8,8 @@ import {
 } from '../../styles/styledComponents/AdminCardComponents';
 import { PaginateProps, Pagination } from '../../custom/usePagination';
 import { useSearchSingleCategory } from '../../custom/useSearchSingle';
-import { styled } from 'styled-components';
 import { useMemo } from 'react';
-
-const StyledInput = styled.input`
-  width: calc(100% - 59.25px);
-`;
+import SearchForm from './SearchForm';
 
 interface Props {
   posts: IPost[];
@@ -34,15 +30,12 @@ const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) =>
     <AdminContainer>
       <h1>{title}</h1>
       <FilterContainer>
-        <form onSubmit={onSubmit}>
-          <StyledInput
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search Users..."
-          />
-          <input type="submit" value="Search" />
-        </form>
+        <SearchForm
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          onSubmit={onSubmit}
+          placeholder="Search Posts..."
+        />
       </FilterContainer>
       <CardContainer>
         {filteredPosts?.length ? (

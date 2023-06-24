@@ -10,13 +10,8 @@ import {
 import { IAdminUser } from '../../../../types/user';
 import Loading from '../../Shared/Loading';
 import { PaginateProps, Pagination } from '../../../custom/usePagination';
-import { styled } from 'styled-components';
 import { useSearchSingleCategory } from '../../../custom/useSearchSingle';
-
-const StyledInput = styled.input`
-  width: calc(100% - 59.25px);
-`;
-
+import SearchForm from '../../Shared/SearchForm';
 interface Props {
   users: IAdminUser[];
   paginationProps: PaginateProps;
@@ -33,15 +28,12 @@ const EditUsers = ({ users, paginationProps }: Props) => {
         <StyledCreateLink to={`/admin/users/create`}>+ Create User</StyledCreateLink>
       </StyledHeader>
       <FilterContainer>
-        <form onSubmit={onSubmit}>
-          <StyledInput
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search Users..."
-          />
-          <input type="submit" value="Search" />
-        </form>
+        <SearchForm
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          onSubmit={onSubmit}
+          placeholder="Search Users..."
+        />
       </FilterContainer>
       <CardContainer>
         {filteredUsers?.length ? (
