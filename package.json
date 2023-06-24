@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
-    "@jackwatters/simple-nav": "^1.1.2",
+    "@jackwatters/simple-nav": "^1.1.3",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.11.16",
