@@ -66,7 +66,7 @@ const StyledSocialButton = styled.button`
 `;
 
 const ActiveSocialButton = styled(StyledSocialButton)`
-  background: ${({ theme }) => theme.colors.hover};
+  background: ${({ theme }) => theme.hoverStyle};
 `;
 
 interface Props {

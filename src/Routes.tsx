@@ -9,7 +9,7 @@ import Topics from './components/Topics/Topics';
 import PopularPosts from './components/Posts/PopularPosts';
 import PopularAuthors from './components/User/PopularAuthors';
 import PostForm from './components/Posts/PostForm/PostForm';
-import MyPosts from './components/Posts/MyPosts/MyPosts';
+import MyPosts from './components/Posts/MyPosts';
 import EditPost from './components/Posts/PostForm/EditPost';
 import EditPostsAdmin from './components/Admin/EditPostsAdmin';
 import Layout from './Layout';

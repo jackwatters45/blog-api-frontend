@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import IPost from '../../../../types/post';
-import { useUserContext } from '../../../context/UserContext';
-import EditPostsView from '../../Shared/EditPostsView';
-import Loading from '../../Shared/Loading';
-import { usePagination } from '../../../custom/usePagination';
-import useErrorHandler from '../../../custom/useErrorHandler';
+import IPost from '../../../types/post';
+import { useUserContext } from '../../context/UserContext';
+import EditPostsView from '../Shared/EditPostsView';
+import Loading from '../Shared/Loading';
+import { usePagination } from '../../custom/usePagination';
+import useErrorHandler from '../../custom/useErrorHandler';
 
 const MyPosts = () => {
   const { user } = useUserContext();
@@ -44,7 +44,7 @@ const MyPosts = () => {
       posts={myPosts}
       title={'My Posts'}
       paginationProps={paginationProps}
-      isAdminView={false}
+      isAdminView={true}
     />
   ) : (
     <Loading />

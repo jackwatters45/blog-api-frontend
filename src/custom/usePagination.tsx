@@ -23,7 +23,7 @@ const StyledPagination = styled(ReactPaginate)`
   }
 
   .active {
-    background: ${({ theme }) => theme.colors.hover};
+    background: ${({ theme }) => theme.hoverNoBorder};
     border-radius: 0.25rem;
     ${({ theme }) => theme.shadow};
   }

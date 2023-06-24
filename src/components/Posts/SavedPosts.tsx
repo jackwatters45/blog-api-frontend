@@ -46,7 +46,7 @@ const SavedPosts = () => {
     <EditPostsView
       posts={posts as IPost[]}
       title={'Saved Posts'}
-      isAdminView={true}
+      isAdminView={false}
       paginationProps={paginationProps}
     />
   ) : (

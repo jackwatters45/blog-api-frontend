@@ -34,7 +34,6 @@ export const darkTheme = {
     backgroundSecondary: 'rgb(47, 47, 47)',
     border: 'rgba(255, 255, 255, .3)',
     selected: 'rgb(55, 55, 55)',
-    hover: 'rgba(255, 255, 255, 0.055)',
   },
   shadow: css`
     box-shadow: rgb(15 15 15 / 15%) 0px 0px 0px 2px, rgb(15 15 15 / 15%) 0px 3px 6px;
@@ -42,14 +41,14 @@ export const darkTheme = {
 
   hoverStyle: css`
     &:hover {
-      background-color: ${({ theme }) => theme.colors.hover};
+      background-color: rgba(255, 255, 255, 0.055);
       border-radius: 4px;
     }
   `,
 
   hoverNoBorder: css`
     &:hover {
-      background-color: ${({ theme }) => theme.colors.hover};
+      background-color: rgba(255, 255, 255, 0.055);
     }
   `,
 };
