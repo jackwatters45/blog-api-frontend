@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../../context/UserContext';
 import useErrorHandler from '../../../custom/useErrorHandler';
@@ -14,33 +14,36 @@ const SavePost = ({ postId }: Props) => {
 
   const { user } = useUserContext();
 
-  const [isSaved, setIsSaved] = useState(false);
-  const handleClick = async () => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_URL}/posts/saved-posts/${id ?? postId}`,
-      {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-      },
-    );
-
-    if (!res.ok) {
-      handleErrors(res);
-      return;
-    }
-
-    setIsSaved((prev) => !prev);
-  };
-
   const savedPosts = useMemo(() => user?.savedPosts, [user]);
-  useEffect(() => {
-    setIsSaved(
-      savedPosts?.some((post) => {
-        return post === id || post === postId;
-      }) ?? false,
-    );
-  }, [savedPosts, id, postId, isSaved]);
+
+  const [isSaved, setIsSaved] = useState(
+    savedPosts?.some((post) => {
+      return post === id || post === postId;
+    }) ?? false,
+  );
+
+  const handleClick = async () => {
+    if (!user) return;
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/posts/saved-posts/${id ?? postId}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+        },
+      );
+
+      if (!res.ok) {
+        handleErrors(res);
+        return;
+      }
+
+      setIsSaved((prev) => !prev);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return <SavePostButton onClick={handleClick} isSaved={isSaved} />;
 };

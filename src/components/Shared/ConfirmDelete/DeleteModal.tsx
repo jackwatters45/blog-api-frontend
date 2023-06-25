@@ -2,6 +2,7 @@ import { useModal, useModalParams } from 'react-hook-modal-pure';
 import { styled } from 'styled-components';
 import useLogout from '../../../custom/useLogout';
 import useErrorHandler from '../../../custom/useErrorHandler';
+import { useUserContext } from '../../../context/UserContext';
 
 const StyledModal = styled.div`
   position: absolute;
@@ -10,10 +11,16 @@ const StyledModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 40px;
-  width: 120px;
+  margin-left: 2rem;
   ${({ theme }) => theme.shadow};
   cursor: pointer;
+  display: inline-block;
+`;
+
+const StyledH4 = styled.h4`
+  color: white;
+  white-space: nowrap;
+  padding: 0 0.5rem;
 `;
 
 interface Props {
@@ -23,8 +30,9 @@ interface Props {
 }
 
 const DeleteModal = ({ useModalParams, objType, id }: Props) => {
-  const modalProps = useModal(useModalParams);
+  const { ref } = useModal(useModalParams);
   const handleErrors = useErrorHandler();
+  const { user } = useUserContext();
   const { logout } = useLogout();
 
   const handleDelete = async () => {
@@ -46,14 +54,14 @@ const DeleteModal = ({ useModalParams, objType, id }: Props) => {
       return;
     }
 
-    logout();
+    if (objType === 'user' && user?._id === id) logout();
 
     window.location.reload();
   };
 
   return (
-    <StyledModal {...modalProps} onClick={handleDelete}>
-      <h4>Really Delete?</h4>
+    <StyledModal ref={ref} onClick={handleDelete}>
+      <StyledH4>Really Delete?</StyledH4>
     </StyledModal>
   );
 };

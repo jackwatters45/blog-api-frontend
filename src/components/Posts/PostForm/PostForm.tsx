@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { StyledH1, StyledMain } from '../../../styles/styledComponents/HelperComponents';
 import { useSidebarContext } from '../../../context/SidebarContext';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IPost from '../../../../types/post';
@@ -102,7 +102,12 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
     },
   });
 
-  const [isPublished, setIsPublished] = useState<boolean>(true);
+  const [isPublished, setIsPublished] = useState<boolean>(post?.published ?? false);
+  useEffect(() => {
+    register('topic', { required: isPublished });
+    register('content', { required: isPublished });
+  }, [isPublished, register]);
+
   const onSubmit = async (formData: PostInputs) => {
     if (!user) return navigate('/login', { state: { from: pathname } });
 
@@ -161,7 +166,7 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
             <StyledSelect
               id="topic"
               aria-invalid={errors.topic ? 'true' : 'false'}
-              {...register('topic', { required: true })}
+              {...register('topic')}
             >
               <option value="">Select a topic</option>
               {topics.map((topic) => (
@@ -179,16 +184,29 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
         </StyledFormSection>
         <StyledFormSection>
           <StyledLabel htmlFor="content">Content</StyledLabel>
-          <TinyMceEditor control={control} />
+          <TinyMceEditor
+            control={control}
+            required={isPublished}
+            minLengthRequired={isPublished}
+          />
         </StyledFormSection>
         <StyledPublishSection>
-          <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
+          {/* <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
             {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
           </StyleDraftButton>
 
           <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>
             Publish
-          </StyledPublishButton>
+          </StyledPublishButton> */}
+          <StyledPublishSection>
+            <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
+              {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
+            </StyleDraftButton>
+            <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>
+              Publish
+            </StyledPublishButton>
+            <button type="submit" style={{ display: 'none' }} />
+          </StyledPublishSection>
         </StyledPublishSection>
         {submitError && (
           <StyledError>

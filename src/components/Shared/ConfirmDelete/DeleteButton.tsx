@@ -7,6 +7,7 @@ const StyledContainer = styled.div`
   display: flex;
   position: relative;
 `;
+
 interface Props {
   id: string;
   objType: string;

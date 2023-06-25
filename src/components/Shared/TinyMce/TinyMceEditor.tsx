@@ -13,9 +13,11 @@ const StyledLoading = styled(Loading)`
 
 interface Props {
   control: Control<PostInputs>;
+  required?: boolean;
+  minLengthRequired?: boolean;
 }
 
-const TinyMceEditor = ({ control }: Props) => {
+const TinyMceEditor = ({ control, required = true, minLengthRequired = true }: Props) => {
   const [loading, setLoading] = useState(true);
   const { errors } = useFormState({ control });
 
@@ -28,11 +30,13 @@ const TinyMceEditor = ({ control }: Props) => {
           control={control}
           defaultValue=""
           rules={{
-            required: 'Content is required',
-            minLength: {
-              value: 250,
-              message: 'Content must be at least 250 characters long',
-            },
+            required: required ? 'Content is required' : false,
+            minLength: minLengthRequired
+              ? {
+                  value: 250,
+                  message: 'Content must be at least 250 characters long',
+                }
+              : undefined,
             maxLength: {
               value: 10000,
               message: 'Content must be less than 10000 characters long',
@@ -50,7 +54,7 @@ const TinyMceEditor = ({ control }: Props) => {
         />
         {errors.content && (
           <StyledError>
-            <li>{errors.content.message}</li>
+            <li>{errors.content.message ?? 'Content is required'}</li>
           </StyledError>
         )}
       </div>

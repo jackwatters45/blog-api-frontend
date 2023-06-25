@@ -13,13 +13,15 @@ const NavContent = () => {
     <Nav>
       {user ? (
         <>
-          <NavDropdown
-            buttonOptions={{ text: 'Admin', icon: <AdminPanelSettingsIcon /> }}
-          >
-            <NavLink to="/admin/users" text="View Users" />
-            <NavLink to="/admin/posts" text="View Posts" />
-            <NavLink to="/admin/topics" text="View Topics" />
-          </NavDropdown>
+          {user.userType === 'admin' && (
+            <NavDropdown
+              buttonOptions={{ text: 'Admin', icon: <AdminPanelSettingsIcon /> }}
+            >
+              <NavLink to="/admin/users" text="View Users" />
+              <NavLink to="/admin/posts" text="View Posts" />
+              <NavLink to="/admin/topics" text="View Topics" />
+            </NavDropdown>
+          )}
           <NavLink to="/write" text="Write" icon={<EditNoteIcon />} />
           <NavDropdown
             buttonOptions={{
