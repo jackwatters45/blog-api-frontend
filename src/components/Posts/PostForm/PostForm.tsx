@@ -139,6 +139,10 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
             aria-invalid={errors.title ? 'true' : 'false'}
             {...register('title', {
               required: 'Title is required',
+              minLength: {
+                value: 5,
+                message: 'Title must be at least 5 characters',
+              },
               maxLength: {
                 value: 100,
                 message: "First name can't exceed 100 characters",
@@ -176,11 +180,6 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
         <StyledFormSection>
           <StyledLabel htmlFor="content">Content</StyledLabel>
           <TinyMceEditor control={control} />
-          {errors.content && (
-            <StyledError>
-              <li>Content is required</li>
-            </StyledError>
-          )}
         </StyledFormSection>
         <StyledPublishSection>
           <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
