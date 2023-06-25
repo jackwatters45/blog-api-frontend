@@ -33,7 +33,7 @@ const content_style = 'body {  font-size:16px }';
 const skin_url =
   import.meta.env.NODE_ENV === 'development'
     ? '/src/components/Shared/TinyMce/blog-skin/skins/ui/blog-skin'
-    : '/blog-skin/skins/ui/blog-skin';
+    : 'public/blog-skin/skins/ui/blog-skin';
 
 export const init = {
   skin_url,
