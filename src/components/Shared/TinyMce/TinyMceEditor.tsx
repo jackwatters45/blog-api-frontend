@@ -1,9 +1,9 @@
 import { Editor } from '@tinymce/tinymce-react';
 import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
-import Loading from './Loading';
-import { init } from '../Posts/PostForm/editorOptions';
-import { PostInputs } from '../../../types/utils/formInputs';
+import Loading from '../Loading';
+import { init } from './editorOptions';
+import { PostInputs } from '../../../../types/utils/formInputs';
 import { styled } from 'styled-components';
 
 const StyledLoading = styled(Loading)`
