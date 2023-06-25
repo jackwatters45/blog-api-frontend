@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && npm run copy-assets",
-    "copy-assets": "copyfiles -u 1 \"src/styles/tinymce/blog-skin/**/*\" dist/static/",
+    "copy-assets": "copyfiles -u 4 \"src/components/Shared/TinyMce/blog-skin/**/*\" dist/public/",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier \"src/**/*.{js,jsx,ts,tsx,css,scss,md,html,json,yml}\" --write",
