@@ -22,13 +22,15 @@ import { formatDate } from './formattingHelpers';
 interface Props {
   post: IPost;
   isAdminView?: boolean;
+  isMyPostsView?: boolean;
 }
 
-const PostPreviewCard = ({ post, isAdminView }: Props) => {
+const PostPreviewCard = ({ post, isAdminView, isMyPostsView }: Props) => {
   const { user } = useUserContext();
   const { title, likes, topic, updatedAt, comments, author, _id } = post;
   const likesProps = useLikes(likes as ILike[], user?._id as string);
   const isDeleted = useMemo(() => author?.isDeleted, [author]);
+
   return (
     <AdminCard>
       <StyledTitleTopic>
@@ -51,19 +53,20 @@ const PostPreviewCard = ({ post, isAdminView }: Props) => {
         <CommentsButton postId={_id} commentsCount={comments?.length ?? 0} />
       </Buttons>
       <ButtonOptions>
-        {isAdminView && (
-          <>
-            <DeleteButton
-              StyledButton={Icon}
-              objType={'post'}
-              id={_id}
-              extraButtonProps={{ path: mdiDelete, size: 1 }}
-            />
-            <Link to={isAdminView ? `/admin/posts/${_id}/edit` : `/post/${_id}/edit`}>
-              <Icon path={mdiPencil} size={1} />
-            </Link>
-          </>
-        )}
+        {isAdminView ||
+          (isMyPostsView && (
+            <>
+              <DeleteButton
+                StyledButton={Icon}
+                objType={'post'}
+                id={_id}
+                extraButtonProps={{ path: mdiDelete, size: 1 }}
+              />
+              <Link to={isAdminView ? `/admin/posts/${_id}/edit` : `/post/${_id}/edit`}>
+                <Icon path={mdiPencil} size={1} />
+              </Link>
+            </>
+          ))}
         <Link to={`/post/${_id}`}>
           <Icon path={mdiOpenInNew} size={1} />
         </Link>

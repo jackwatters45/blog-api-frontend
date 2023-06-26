@@ -15,10 +15,17 @@ interface Props {
   posts: IPost[];
   title: string;
   isAdminView?: boolean;
+  isMyPostsView?: boolean;
   paginationProps: PaginateProps;
 }
 
-const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) => {
+const EditPostsView = ({
+  posts,
+  title,
+  isAdminView,
+  isMyPostsView,
+  paginationProps,
+}: Props) => {
   const searchRoute = useMemo(() => {
     return isAdminView ? 'admin/posts' : 'my-posts';
   }, [isAdminView]);
@@ -40,7 +47,12 @@ const EditPostsView = ({ posts, title, isAdminView, paginationProps }: Props) =>
       <CardContainer>
         {filteredPosts?.length ? (
           filteredPosts.map((post: IPost) => (
-            <EditPostCard key={post._id} post={post} isAdminView={isAdminView} />
+            <EditPostCard
+              key={post._id}
+              post={post}
+              isAdminView={isAdminView}
+              isMyPostsView={isMyPostsView}
+            />
           ))
         ) : (
           <FilterError>

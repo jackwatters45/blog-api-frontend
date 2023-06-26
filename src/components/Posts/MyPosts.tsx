@@ -44,7 +44,7 @@ const MyPosts = () => {
       posts={myPosts}
       title={'My Posts'}
       paginationProps={paginationProps}
-      isAdminView={true}
+      isMyPostsView={true}
     />
   ) : (
     <Loading />

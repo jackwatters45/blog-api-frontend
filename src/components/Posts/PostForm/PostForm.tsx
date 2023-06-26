@@ -191,13 +191,6 @@ const PostForm = ({ post, pageTitle = 'Create Post' }: Props) => {
           />
         </StyledFormSection>
         <StyledPublishSection>
-          {/* <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
-            {post?.published ? 'Save And Unpublish' : 'Save As Draft'}
-          </StyleDraftButton>
-
-          <StyledPublishButton type="submit" onClick={() => setIsPublished(true)}>
-            Publish
-          </StyledPublishButton> */}
           <StyledPublishSection>
             <StyleDraftButton type="submit" onClick={() => setIsPublished(false)}>
               {post?.published ? 'Save And Unpublish' : 'Save As Draft'}

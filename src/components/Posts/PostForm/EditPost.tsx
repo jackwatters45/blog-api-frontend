@@ -22,10 +22,12 @@ const EditPost = () => {
     fetchPost();
   }, [id]);
 
+  if (!post) return <Loading />;
+
   if (user?.userType !== 'admin' && user?._id !== post?.author._id)
     return <Navigate to={'/unauthorized'} state={{ from: pathname }} />;
 
-  return post ? <PostForm post={post} pageTitle={'Edit Post'} /> : <Loading />;
+  return <PostForm post={post} pageTitle={'Edit Post'} />;
 };
 
 export default EditPost;
