@@ -15,6 +15,8 @@ This is the frontend for a blog project with the objective of learning how to cr
 ```zsh
 git clone https://github.com/jackwatters45/blog-api-frontend.git
 
+npm install
+
 npm run dev
 ```
 
